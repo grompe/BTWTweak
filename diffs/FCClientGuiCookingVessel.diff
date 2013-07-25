@@ -1,7 +1,10 @@
 diff --git a/src/minecraft/net/minecraft/src/FCClientGuiCookingVessel.java b/src/minecraft/net/minecraft/src/FCClientGuiCookingVessel.java
-index 323700c..6a87175 100644
+index 323700c..22e4351 100644
 --- a/src/minecraft/net/minecraft/src/FCClientGuiCookingVessel.java
 +++ b/src/minecraft/net/minecraft/src/FCClientGuiCookingVessel.java
+@@ -43 +43 @@ public class FCClientGuiCookingVessel extends GuiContainer
+-        this.mc.renderEngine.bindTexture("/btwmodtex/fccauldron.png");
++        this.mc.renderEngine.bindTexture("/btwmodtex/fccauldron_small.png");
 @@ -47 +47,5 @@ public class FCClientGuiCookingVessel extends GuiContainer
 -
 +        int stoked = this.m_AssociatedTileEntity.m_iFireUnderType == 2 ? 1 : 0;
