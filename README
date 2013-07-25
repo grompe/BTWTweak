@@ -30,3 +30,8 @@ and then "git diff --unified=0 btw..HEAD" for each file to make separate patch f
 
 Oh yeah, and for the binary distribution I use bsdiff on original BTWMod.zip and patched
 BTWMod.zip, and then the patcher provided here.
+
+[********** Change Log ************]
+
+You can see it here:
+https://raw.github.com/grompe/BTWTweak/master/patcher/readme.txt
