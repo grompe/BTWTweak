@@ -1,0 +1,18 @@
+diff --git a/src/minecraft/net/minecraft/src/FCBlockHopper.java b/src/minecraft/net/minecraft/src/FCBlockHopper.java
+index 1e8c5b4..951d8be 100644
+--- a/src/minecraft/net/minecraft/src/FCBlockHopper.java
++++ b/src/minecraft/net/minecraft/src/FCBlockHopper.java
+@@ -712,0 +713,13 @@ public class FCBlockHopper extends BlockContainer implements FCIBlockMechanical,
++
++    public boolean OnBlockSawed(World world, int x, int y, int z)
++    {
++        int i;
++        for (i = 0; i < 3; ++i)
++        {
++            FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, FCBetterThanWolves.fcBlockWoodMouldingItemStubID, 0);
++        }
++        FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, FCBetterThanWolves.fcGear.itemID, 0);
++        FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, Block.pressurePlatePlanks.blockID, 0);
++        world.setBlockToAir(x, y, z);
++        return true;
++    }

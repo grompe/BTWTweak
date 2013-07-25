@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/FCBlockHandCrank.java b/src/minecraft/net/minecraft/src/FCBlockHandCrank.java
+index 8a7d2d9..3e018bf 100644
+--- a/src/minecraft/net/minecraft/src/FCBlockHandCrank.java
++++ b/src/minecraft/net/minecraft/src/FCBlockHandCrank.java
+@@ -61 +61 @@ public class FCBlockHandCrank extends Block implements FCIBlockMechanical, FCIBl
+-        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
++        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);

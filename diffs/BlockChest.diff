@@ -1,0 +1,20 @@
+diff --git a/src/minecraft/net/minecraft/src/BlockChest.java b/src/minecraft/net/minecraft/src/BlockChest.java
+index e40a7c9..52a45d3 100644
+--- a/src/minecraft/net/minecraft/src/BlockChest.java
++++ b/src/minecraft/net/minecraft/src/BlockChest.java
+@@ -570,0 +571,15 @@ public class BlockChest extends BlockContainer
++
++    public int GetItemIDDroppedOnSaw(World var1, int var2, int var3, int var4)
++    {
++        return FCBetterThanWolves.fcBlockWoodSidingItemStubID;
++    }
++
++    public int GetItemCountDroppedOnSaw(World var1, int var2, int var3, int var4)
++    {
++        return 6;
++    }
++
++    public int GetItemDamageDroppedOnSaw(World var1, int var2, int var3, int var4)
++    {
++        return 0;
++    }

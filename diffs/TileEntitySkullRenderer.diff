@@ -1,0 +1,22 @@
+diff --git a/src/minecraft/net/minecraft/src/TileEntitySkullRenderer.java b/src/minecraft/net/minecraft/src/TileEntitySkullRenderer.java
+index 648c378..0643ec0 100644
+--- a/src/minecraft/net/minecraft/src/TileEntitySkullRenderer.java
++++ b/src/minecraft/net/minecraft/src/TileEntitySkullRenderer.java
+@@ -69,0 +70,17 @@ public class TileEntitySkullRenderer extends TileEntitySpecialRenderer
++                break;
++
++            case 5:
++                this.bindTextureByName("/mob/spider_head.png");
++                break;
++
++            case 6:
++                this.bindTextureByName("/mob/enderman_head.png");
++                break;
++
++            case 7:
++                this.bindTextureByName("/mob/pigzombie_head.png");
++                break;
++
++            case 8:
++                this.bindTextureByName("/mob/fire.png");
++                break;

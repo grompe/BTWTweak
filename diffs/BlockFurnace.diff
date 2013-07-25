@@ -1,0 +1,27 @@
+diff --git a/src/minecraft/net/minecraft/src/BlockFurnace.java b/src/minecraft/net/minecraft/src/BlockFurnace.java
+index 9dc851b..f8388cc 100644
+--- a/src/minecraft/net/minecraft/src/BlockFurnace.java
++++ b/src/minecraft/net/minecraft/src/BlockFurnace.java
+@@ -21,0 +22 @@ public class BlockFurnace extends BlockContainer
++    private Icon furnaceIconFrontStuff;
+@@ -86 +87 @@ public class BlockFurnace extends BlockContainer
+-    public Icon getIcon(int par1, int par2)
++    public Icon getIcon(int side, int meta)
+@@ -88 +89,5 @@ public class BlockFurnace extends BlockContainer
+-        return par1 == 1 ? this.furnaceIconTop : (par1 == 0 ? this.furnaceIconTop : (par1 != par2 ? this.blockIcon : this.furnaceIconFront));
++        if (side <= 1) return this.furnaceIconTop;
++        int orientation = meta & 7;
++        if (side != orientation) return this.blockIcon;
++        boolean stuff = (meta & 8) != 0;
++        return stuff ? this.furnaceIconFrontStuff : this.furnaceIconFront;
+@@ -98,0 +104 @@ public class BlockFurnace extends BlockContainer
++        this.furnaceIconFrontStuff = par1IconRegister.registerIcon(this.isActive ? "furnace_front_contents_lit" : "furnace_front_contents");
+@@ -109 +115 @@ public class BlockFurnace extends BlockContainer
+-            int var6 = par1World.getBlockMetadata(par2, par3, par4);
++            int var6 = par1World.getBlockMetadata(par2, par3, par4) & 7;
+@@ -164 +170 @@ public class BlockFurnace extends BlockContainer
+-    public static void updateFurnaceBlockState(boolean par0, World par1World, int par2, int par3, int par4)
++    public static void updateFurnaceBlockState(boolean par0, World par1World, int par2, int par3, int par4, boolean stuffed)
+@@ -180 +186 @@ public class BlockFurnace extends BlockContainer
+-        par1World.setBlockMetadataWithNotify(par2, par3, par4, var5, 2);
++        par1World.setBlockMetadataWithNotify(par2, par3, par4, (var5 & 7) | (stuffed ? 8 : 0), 2);

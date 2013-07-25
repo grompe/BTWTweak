@@ -1,0 +1,32 @@
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.2 source code
+(Compatible with Better Than Wolves V4.891)
+
+NOTE: Client version only!!! (for now)
+
+[****** Installation Instructions ******]
+
+1) Unpack and setup MCP
+2) Install BTW into minecraft.jar
+3) Decompile with MCP, it will complain a bit
+4) Apply MCP fix patch using the mcp_fix.diff file
+5) Run MCP's updatemd5 script
+6) Patch the source code using ./diffs/*.diff files
+7) Recompile, reobfuscate with MCP
+8) Insert all ./reobf/minecraft/*.class files into minecraft.jar
+9) Insert all ./res/*.* files into minecraft.jar
+...
+42) Profit!
+
+[****** Hacking the source code ******]
+
+Provided you have followed installation instructions and now having
+the tweak mod source code in direct form, you can modify it to your taste.
+
+How to convert it back to patch files is your home task.
+
+I like to use "git diff --name-only btw..HEAD -- *.java" to make a list of all
+changed files (where btw is a branch with decompiled original BTW code plus MCP fixes),
+and then "git diff --unified=0 btw..HEAD" for each file to make separate patch files.
+
+Oh yeah, and for the binary distribution I use bsdiff on original BTWMod.zip and patched
+BTWMod.zip, and then the patcher provided here.

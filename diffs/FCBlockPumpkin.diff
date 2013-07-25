@@ -1,0 +1,39 @@
+diff --git a/src/minecraft/net/minecraft/src/FCBlockPumpkin.java b/src/minecraft/net/minecraft/src/FCBlockPumpkin.java
+index 61f1098..116b0c7 100644
+--- a/src/minecraft/net/minecraft/src/FCBlockPumpkin.java
++++ b/src/minecraft/net/minecraft/src/FCBlockPumpkin.java
+@@ -7,0 +8 @@ public class FCBlockPumpkin extends FCBlockGourd
++    private boolean isLantern;
+@@ -11,0 +13 @@ public class FCBlockPumpkin extends FCBlockGourd
++        this.isLantern = var2;
+@@ -114,0 +117,27 @@ public class FCBlockPumpkin extends FCBlockGourd
++    protected void Explode(World var1, double var2, double var4, double var6)
++    {
++        super.Explode(var1, var2, var4, var6);
++        if (this.isLantern)
++        {
++            int x = MathHelper.floor_double(var2);
++            int y = MathHelper.floor_double(var4);
++            int z = MathHelper.floor_double(var6);
++            if (Block.torchWood.canPlaceBlockAt(var1, x, y, z))
++            {
++                var1.setBlock(x, y, z, Block.torchWood.blockID);
++            }
++            else
++            {
++                double var11 = var2 + (var1.rand.nextDouble() - 0.5D) * 2.0D;
++                double var13 = var4 + 0.5D;
++                double var15 = var6 + (var1.rand.nextDouble() - 0.5D) * 2.0D;
++                EntityItem var17 = new EntityItem(var1, var11, var13, var15, new ItemStack(Block.torchWood, 1, 0));
++                var17.motionX = (var1.rand.nextDouble() - 0.5D) * 0.5D;
++                var17.motionY = 0.2D + var1.rand.nextDouble() * 0.3D;
++                var17.motionZ = (var1.rand.nextDouble() - 0.5D) * 0.5D;
++                var17.delayBeforeCanPickup = 10;
++                var1.spawnEntityInWorld(var17);
++            }
++        }
++    }
++
+@@ -128 +157 @@ public class FCBlockPumpkin extends FCBlockGourd
+-        this.m_IconFront = var1.registerIcon("pumpkin_face");
++        this.m_IconFront = var1.registerIcon(this.isLantern ? "pumpkin_jack" : "pumpkin_face");

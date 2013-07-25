@@ -1,0 +1,10 @@
+diff --git a/src/minecraft/net/minecraft/src/EntityPigZombie.java b/src/minecraft/net/minecraft/src/EntityPigZombie.java
+index 36e4a3d..aedafbd 100644
+--- a/src/minecraft/net/minecraft/src/EntityPigZombie.java
++++ b/src/minecraft/net/minecraft/src/EntityPigZombie.java
+@@ -233 +233,4 @@ public class EntityPigZombie extends EntityZombie
+-    protected void dropHead() {}
++    protected void dropHead()
++    {
++        this.entityDropItem(new ItemStack(Item.skull.itemID, 1, 7), 0.0F);
++    }

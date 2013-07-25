@@ -1,0 +1,10 @@
+diff --git a/src/minecraft/net/minecraft/src/BlockPressurePlate.java b/src/minecraft/net/minecraft/src/BlockPressurePlate.java
+index d98ce03..b4e132f 100644
+--- a/src/minecraft/net/minecraft/src/BlockPressurePlate.java
++++ b/src/minecraft/net/minecraft/src/BlockPressurePlate.java
+@@ -72,0 +73,5 @@ public class BlockPressurePlate extends BlockBasePressurePlate
++
++    public boolean OnBlockSawed(World var1, int var2, int var3, int var4)
++    {
++        return false;
++    }

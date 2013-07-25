@@ -1,0 +1,23 @@
+diff --git a/src/minecraft/net/minecraft/src/FCItemBlockDirtSlab.java b/src/minecraft/net/minecraft/src/FCItemBlockDirtSlab.java
+index 2162b89..5289e83 100644
+--- a/src/minecraft/net/minecraft/src/FCItemBlockDirtSlab.java
++++ b/src/minecraft/net/minecraft/src/FCItemBlockDirtSlab.java
+@@ -28,0 +29,6 @@ public class FCItemBlockDirtSlab extends FCItemBlockSlab
++            case FCBlockDirtSlab.m_iSubtypeGravel:
++                return super.getUnlocalizedName() + "." + "gravel";
++
++            case FCBlockDirtSlab.m_iSubtypeSand:
++                return super.getUnlocalizedName() + "." + "sand";
++
+@@ -42 +48 @@ public class FCItemBlockDirtSlab extends FCItemBlockSlab
+-            if (var7 != 3 && var5 != 3)
++            if (var7 < 3 && var5 < 3)
+@@ -72,0 +79,8 @@ public class FCItemBlockDirtSlab extends FCItemBlockSlab
++            else if (var8 == FCBlockDirtSlab.m_iSubtypeGravel)
++            {
++                var9 = Block.gravel.blockID;
++            }
++            else if (var8 == FCBlockDirtSlab.m_iSubtypeSand)
++            {
++                var9 = Block.sand.blockID;
++            }

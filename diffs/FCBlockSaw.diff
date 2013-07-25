@@ -1,0 +1,22 @@
+diff --git a/src/minecraft/net/minecraft/src/FCBlockSaw.java b/src/minecraft/net/minecraft/src/FCBlockSaw.java
+index 51f4f33..a332dff 100644
+--- a/src/minecraft/net/minecraft/src/FCBlockSaw.java
++++ b/src/minecraft/net/minecraft/src/FCBlockSaw.java
+@@ -796,0 +797,17 @@ public class FCBlockSaw extends Block implements FCIBlock, FCIBlockMechanical, F
++
++    public boolean OnBlockSawed(World world, int x, int y, int z)
++    {
++        int i;
++        for (i = 0; i < 2; ++i)
++        {
++            FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, FCBetterThanWolves.fcGear.itemID, 0);
++        }
++        for (i = 0; i < 3; ++i)
++        {
++            FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, Item.ingotIron.itemID, 0);
++        }
++        FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, FCBetterThanWolves.fcBlockWoodSidingItemStubID, 0);
++        FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, FCBetterThanWolves.fcBelt.itemID, 0);
++        world.setBlockToAir(x, y, z);
++        return true;
++    }

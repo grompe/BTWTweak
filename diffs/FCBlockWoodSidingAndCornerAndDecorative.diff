@@ -1,0 +1,13 @@
+diff --git a/src/minecraft/net/minecraft/src/FCBlockWoodSidingAndCornerAndDecorative.java b/src/minecraft/net/minecraft/src/FCBlockWoodSidingAndCornerAndDecorative.java
+index 1a6c7dd..a803c68 100644
+--- a/src/minecraft/net/minecraft/src/FCBlockWoodSidingAndCornerAndDecorative.java
++++ b/src/minecraft/net/minecraft/src/FCBlockWoodSidingAndCornerAndDecorative.java
+@@ -67 +67 @@ public class FCBlockWoodSidingAndCornerAndDecorative extends FCBlockSidingAndCor
+-        return var5 == 12 ? super.GetItemIDDroppedOnSaw(var1, var2, var3, var4) : (var5 == 14 ? FCBetterThanWolves.fcBlockWoodCornerItemStubID : (this.GetIsCorner(var1, var2, var3, var4) ? FCBetterThanWolves.fcGear.itemID : FCBetterThanWolves.fcBlockWoodMouldingItemStubID));
++        return var5 == 12 || var5 == 14 ? FCBetterThanWolves.fcBlockWoodCornerItemStubID : (this.GetIsCorner(var1, var2, var3, var4) ? FCBetterThanWolves.fcGear.itemID : FCBetterThanWolves.fcBlockWoodMouldingItemStubID);
+@@ -75 +75 @@ public class FCBlockWoodSidingAndCornerAndDecorative extends FCBlockSidingAndCor
+-            return var5 == 14 ? 2 : super.GetItemCountDroppedOnSaw(var1, var2, var3, var4);
++            return var5 == 12 || var5 == 14 ? 2 : super.GetItemCountDroppedOnSaw(var1, var2, var3, var4);
+@@ -88 +88 @@ public class FCBlockWoodSidingAndCornerAndDecorative extends FCBlockSidingAndCor
+-            return var5 == 14 ? this.GetWoodTypeFromBlockID() : super.GetItemDamageDroppedOnSaw(var1, var2, var3, var4);
++            return var5 == 12 || var5 == 14 ? this.GetWoodTypeFromBlockID() : super.GetItemDamageDroppedOnSaw(var1, var2, var3, var4);

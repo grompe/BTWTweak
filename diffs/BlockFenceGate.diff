@@ -1,0 +1,20 @@
+diff --git a/src/minecraft/net/minecraft/src/BlockFenceGate.java b/src/minecraft/net/minecraft/src/BlockFenceGate.java
+index 4dd892d..f6a4562 100644
+--- a/src/minecraft/net/minecraft/src/BlockFenceGate.java
++++ b/src/minecraft/net/minecraft/src/BlockFenceGate.java
+@@ -169,0 +170,15 @@ public class BlockFenceGate extends BlockDirectional
++
++    public int GetItemIDDroppedOnSaw(World var1, int var2, int var3, int var4)
++    {
++        return FCBetterThanWolves.fcBlockWoodMouldingItemStubID;
++    }
++
++    public int GetItemCountDroppedOnSaw(World var1, int var2, int var3, int var4)
++    {
++        return 3;
++    }
++
++    public int GetItemDamageDroppedOnSaw(World var1, int var2, int var3, int var4)
++    {
++        return 0;
++    }

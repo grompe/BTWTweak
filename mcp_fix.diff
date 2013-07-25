@@ -1,0 +1,63 @@
+diff -u -r nofix/EntityAnimal.java fix/EntityAnimal.java
+--- nofix/EntityAnimal.java	2013-07-25 22:50:50.016349800 +0700
++++ fix/EntityAnimal.java	2013-07-13 12:04:35.188558700 +0700
+@@ -663,9 +663,9 @@
+ 
+     public void setRevengeTarget(EntityLiving var1)
+     {
+-        this.breeding = var1;
++        entityLivingToAttack = var1;
+ 
+-        if (this.breeding != null)
++        if (entityLivingToAttack != null)
+         {
+             this.revengeTimer = 300;
+         }
+@@ -699,9 +699,9 @@
+ 
+     public void OnNearbyAnimalAttacked(EntityAnimal var1, EntityLiving var2)
+     {
+-        if (this.breeding == null)
++        if (entityLivingToAttack == null)
+         {
+-            this.breeding = var2;
++            entityLivingToAttack = var2;
+             this.revengeTimer = 150;
+         }
+         else if (this.revengeTimer < 150)
+diff -u -r nofix/RenderBlocks.java fix/RenderBlocks.java
+--- nofix/RenderBlocks.java	2013-07-25 22:50:50.286550400 +0700
++++ fix/RenderBlocks.java	2013-07-13 12:20:36.336553400 +0700
+@@ -2487,19 +2487,19 @@
+         float var21 = (float)(par2 + 1);
+         float var22 = (float)(par4 + 0);
+         float var23 = (float)(par4 + 1);
+-        boolean var24 = false;
++        int var24 = 0;
+ 
+         if ((var16 || var17) && !var18 && !var19)
+         {
+-            var24 = true;
++            var24 = 1;
+         }
+ 
+         if ((var18 || var19) && !var17 && !var16)
+         {
+-            var24 = true;
++            var24 = 2;
+         }
+ 
+-        if (!var24)
++        if (var24 == 0)
+         {
+             int var25 = 0;
+             int var26 = 0;
+@@ -2556,7 +2556,7 @@
+             var5.addVertexWithUV((double)var20, (double)par3 + 0.015625D, (double)var22, (double)var9.getInterpolatedU((double)var25), (double)var9.getInterpolatedV((double)var26));
+             var5.addVertexWithUV((double)var20, (double)par3 + 0.015625D, (double)var23, (double)var9.getInterpolatedU((double)var25), (double)var9.getInterpolatedV((double)var28));
+         }
+-        else if (var24)
++        else if (var24 == 1)
+         {
+             var5.addVertexWithUV((double)var21, (double)par3 + 0.015625D, (double)var23, (double)var8.getMaxU(), (double)var8.getMaxV());
+             var5.addVertexWithUV((double)var21, (double)par3 + 0.015625D, (double)var22, (double)var8.getMaxU(), (double)var8.getMinV());

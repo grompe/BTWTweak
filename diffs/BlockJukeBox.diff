@@ -1,0 +1,17 @@
+diff --git a/src/minecraft/net/minecraft/src/BlockJukeBox.java b/src/minecraft/net/minecraft/src/BlockJukeBox.java
+index 0823cb5..5b2ab92 100644
+--- a/src/minecraft/net/minecraft/src/BlockJukeBox.java
++++ b/src/minecraft/net/minecraft/src/BlockJukeBox.java
+@@ -141,0 +142,12 @@ public class BlockJukeBox extends BlockContainer
++
++    public boolean OnBlockSawed(World world, int x, int y, int z)
++    {
++        int i;
++        for (i = 0; i < 6; ++i)
++        {
++            FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, FCBetterThanWolves.fcBlockWoodSidingItemStubID, 0);
++        }
++        FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, Item.diamond.itemID, 0);
++        world.setBlockToAir(x, y, z);
++        return true;
++    }

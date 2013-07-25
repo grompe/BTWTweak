@@ -1,0 +1,13 @@
+diff --git a/src/minecraft/net/minecraft/src/FCItemArcaneScroll.java b/src/minecraft/net/minecraft/src/FCItemArcaneScroll.java
+index d8b4020..12daf45 100644
+--- a/src/minecraft/net/minecraft/src/FCItemArcaneScroll.java
++++ b/src/minecraft/net/minecraft/src/FCItemArcaneScroll.java
+@@ -25 +25,7 @@ public class FCItemArcaneScroll extends Item
+-        var3.add(StatCollector.translateToLocal(Enchantment.enchantmentsList[var1.getItemDamage()].getName()));
++        int i = var1.getItemDamage();
++        if (i >= Enchantment.enchantmentsList.length || Enchantment.enchantmentsList[i] == null)
++        {
++            var3.add("???");
++            return;
++        }
++        var3.add(StatCollector.translateToLocal(Enchantment.enchantmentsList[i].getName()));
