@@ -1,5 +1,5 @@
 diff --git a/src/minecraft/net/minecraft/src/FCBlockAxle.java b/src/minecraft/net/minecraft/src/FCBlockAxle.java
-index 20f0b8c..0c866db 100644
+index 20f0b8c..586b1c3 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockAxle.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockAxle.java
 @@ -10,0 +11,4 @@ public class FCBlockAxle extends Block implements FCIBlock
@@ -7,7 +7,9 @@ index 20f0b8c..0c866db 100644
 +    public Icon m_IconSideOn3;
 +    public Icon m_IconSideOn4;
 +    public Icon m_IconSideOn4f;
-@@ -535,0 +540,4 @@ public class FCBlockAxle extends Block implements FCIBlock
+@@ -535 +539,5 @@ public class FCBlockAxle extends Block implements FCIBlock
+-        this.m_IconSideOn = var1.registerIcon("fcBlockAxle_side_on");
++        this.m_IconSideOn = var1.registerIcon("fcBlockAxle_side_on1");
 +        this.m_IconSideOn2 = var1.registerIcon("fcBlockAxle_side_on2");
 +        this.m_IconSideOn3 = var1.registerIcon("fcBlockAxle_side_on3");
 +        this.m_IconSideOn4 = var1.registerIcon("fcBlockAxle_side_on4");
