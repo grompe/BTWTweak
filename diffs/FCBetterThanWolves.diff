@@ -1,5 +1,5 @@
 diff --git a/src/minecraft/net/minecraft/src/FCBetterThanWolves.java b/src/minecraft/net/minecraft/src/FCBetterThanWolves.java
-index c06e4fe..57f5aab 100644
+index c06e4fe..8368cf1 100644
 --- a/src/minecraft/net/minecraft/src/FCBetterThanWolves.java
 +++ b/src/minecraft/net/minecraft/src/FCBetterThanWolves.java
 @@ -813 +813 @@ public class FCBetterThanWolves extends FCAddOn
@@ -10,6 +10,11 @@ index c06e4fe..57f5aab 100644
 +        var1.GetTranslateTable().put(var12, "Gravel Slab");
 +        var12 = fcBlockDirtSlab.getUnlocalizedName() + ".sand" + ".name";
 +        var1.GetTranslateTable().put(var12, "Sand Slab");
-@@ -1368 +1372 @@ public class FCBetterThanWolves extends FCAddOn
+@@ -957,0 +962,4 @@ public class FCBetterThanWolves extends FCAddOn
++        var1.GetTranslateTable().put("item.skull.spider.name", "Spider head");
++        var1.GetTranslateTable().put("item.skull.enderman.name", "Enderman head");
++        var1.GetTranslateTable().put("item.skull.pigzombie.name", "Zombie Pigman head");
++        var1.GetTranslateTable().put("item.skull.fire.name", "Blaze head");
+@@ -1368 +1376 @@ public class FCBetterThanWolves extends FCAddOn
 -        fcPotash = (new Item(fcPotashID)).setUnlocalizedName("fcItemPotash");
 +        fcPotash = (new GPEItemPotash(fcPotashID)).setUnlocalizedName("fcItemPotash");
