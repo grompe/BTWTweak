@@ -1,0 +1,13 @@
+diff --git a/src/minecraft_server/net/minecraft/src/FCTileEntityCauldron.java b/src/minecraft_server/net/minecraft/src/FCTileEntityCauldron.java
+index d58dc8f..47104dc 100644
+--- a/src/minecraft_server/net/minecraft/src/FCTileEntityCauldron.java
++++ b/src/minecraft_server/net/minecraft/src/FCTileEntityCauldron.java
+@@ -131 +131 @@ public class FCTileEntityCauldron extends FCTileEntityCookingVessel
+-        for (int var1 = 0; var1 < 27; ++var1)
++        for (int var1 = 0; var1 < m_iInventorySize; ++var1)
+@@ -149 +149 @@ public class FCTileEntityCauldron extends FCTileEntityCookingVessel
+-        for (int var1 = 0; var1 < 27; ++var1)
++        for (int var1 = 0; var1 < m_iInventorySize; ++var1)
+@@ -174 +174 @@ public class FCTileEntityCauldron extends FCTileEntityCookingVessel
+-        for (int var2 = 0; var2 < 27; ++var2)
++        for (int var2 = 0; var2 < m_iInventorySize; ++var2)

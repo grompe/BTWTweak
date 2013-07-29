@@ -1,0 +1,9 @@
+diff --git a/src/minecraft_server/net/minecraft/src/BlockFlowing.java b/src/minecraft_server/net/minecraft/src/BlockFlowing.java
+index f2c398d..62a4a88 100644
+--- a/src/minecraft_server/net/minecraft/src/BlockFlowing.java
++++ b/src/minecraft_server/net/minecraft/src/BlockFlowing.java
+@@ -350 +350 @@ public class BlockFlowing extends BlockFluid
+-        if (var5 != Block.doorWood.blockID && var5 != Block.doorIron.blockID && var5 != Block.signPost.blockID && var5 != Block.ladder.blockID && var5 != Block.reed.blockID)
++        if (var5 != Block.doorWood.blockID && var5 != Block.doorIron.blockID && var5 != Block.signPost.blockID && var5 != Block.signWall.blockID && var5 != Block.ladder.blockID && var5 != Block.reed.blockID)
+@@ -363,0 +364 @@ public class BlockFlowing extends BlockFluid
++            if (this.blockMaterial == Material.lava && var5 != Block.doorIron.blockID) return false;

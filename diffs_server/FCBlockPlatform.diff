@@ -1,0 +1,20 @@
+diff --git a/src/minecraft_server/net/minecraft/src/FCBlockPlatform.java b/src/minecraft_server/net/minecraft/src/FCBlockPlatform.java
+index d765221..133a6ab 100644
+--- a/src/minecraft_server/net/minecraft/src/FCBlockPlatform.java
++++ b/src/minecraft_server/net/minecraft/src/FCBlockPlatform.java
+@@ -254,0 +255,15 @@ public class FCBlockPlatform extends Block implements FCIBlock, FCIBlockSolidTop
++
++    public boolean OnBlockSawed(World world, int x, int y, int z)
++    {
++        int i;
++        for (i = 0; i < 3; ++i)
++        {
++            FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, FCBetterThanWolves.fcBlockWoodMouldingItemStubID, 0);
++        }
++        for (i = 0; i < 2; ++i)
++        {
++            FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, FCBetterThanWolves.fcWicker.itemID, 0);
++        }
++        world.setBlockToAir(x, y, z);
++        return true;
++    }

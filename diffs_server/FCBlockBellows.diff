@@ -1,0 +1,29 @@
+diff --git a/src/minecraft_server/net/minecraft/src/FCBlockBellows.java b/src/minecraft_server/net/minecraft/src/FCBlockBellows.java
+index d76831c..aa2d795 100644
+--- a/src/minecraft_server/net/minecraft/src/FCBlockBellows.java
++++ b/src/minecraft_server/net/minecraft/src/FCBlockBellows.java
+@@ -570 +570 @@ public class FCBlockBellows extends Block implements FCIBlockMechanical, FCIBloc
+-        for (var5 = 0; var5 < 2; ++var5)
++        for (var5 = 0; var5 < 3; ++var5)
+@@ -572 +572,2 @@ public class FCBlockBellows extends Block implements FCIBlockMechanical, FCIBloc
+-            FCUtilsItem.EjectSingleItemWithRandomOffset(var1, var2, var3, var4, FCBetterThanWolves.fcTannedLeather.itemID, 0);
++            FCUtilsItem.EjectSingleItemWithRandomOffset(var1, var2, var3, var4, FCBetterThanWolves.fcItemTannedLeatherCut.itemID, 0);
++            FCUtilsItem.EjectSingleItemWithRandomOffset(var1, var2, var3, var4, FCBetterThanWolves.fcStrap.itemID, 0);
+@@ -577,0 +579,17 @@ public class FCBlockBellows extends Block implements FCIBlockMechanical, FCIBloc
++
++    public boolean OnBlockSawed(World world, int x, int y, int z)
++    {
++        int i;
++        for (i = 0; i < 2; ++i)
++        {
++            FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, FCBetterThanWolves.fcBlockWoodSidingItemStubID, 0);
++        }
++        for (i = 0; i < 3; ++i)
++        {
++            FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, FCBetterThanWolves.fcItemTannedLeatherCut.itemID, 0);
++        }
++        FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, FCBetterThanWolves.fcGear.itemID, 0);
++        FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, FCBetterThanWolves.fcBelt.itemID, 0);
++        world.setBlockToAir(x, y, z);
++        return true;
++    }

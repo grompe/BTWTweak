@@ -1,0 +1,7 @@
+diff --git a/src/minecraft_server/net/minecraft/src/Block.java b/src/minecraft_server/net/minecraft/src/Block.java
+index 28830d3..831fb6d 100644
+--- a/src/minecraft_server/net/minecraft/src/Block.java
++++ b/src/minecraft_server/net/minecraft/src/Block.java
+@@ -144 +144 @@ public class Block
+-    public static final Block pumpkinLantern = (new FCBlockJackOLantern(91, true)).setHardness(1.0F).setStepSound(soundWoodFootstep).setLightValue(1.0F).setUnlocalizedName("litpumpkin");
++    public static final Block pumpkinLantern = (new FCBlockPumpkin(91, true)).setHardness(1.0F).setStepSound(soundWoodFootstep).setLightValue(1.0F).setUnlocalizedName("litpumpkin");

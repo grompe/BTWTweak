@@ -1,0 +1,10 @@
+diff --git a/src/minecraft_server/net/minecraft/src/BlockFurnace.java b/src/minecraft_server/net/minecraft/src/BlockFurnace.java
+index 9c0f183..e863837 100644
+--- a/src/minecraft_server/net/minecraft/src/BlockFurnace.java
++++ b/src/minecraft_server/net/minecraft/src/BlockFurnace.java
+@@ -106 +106 @@ public class BlockFurnace extends BlockContainer
+-    public static void updateFurnaceBlockState(boolean par0, World par1World, int par2, int par3, int par4)
++    public static void updateFurnaceBlockState(boolean par0, World par1World, int par2, int par3, int par4, boolean stuffed)
+@@ -122 +122 @@ public class BlockFurnace extends BlockContainer
+-        par1World.setBlockMetadata(par2, par3, par4, var5, 2);
++        par1World.setBlockMetadata(par2, par3, par4, (var5 & 7) | (stuffed ? 8 : 0), 2);

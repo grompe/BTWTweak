@@ -1,0 +1,9 @@
+diff --git a/src/minecraft_server/net/minecraft/src/ItemSkull.java b/src/minecraft_server/net/minecraft/src/ItemSkull.java
+index 742e639..d573638 100644
+--- a/src/minecraft_server/net/minecraft/src/ItemSkull.java
++++ b/src/minecraft_server/net/minecraft/src/ItemSkull.java
+@@ -5,2 +5,2 @@ public class ItemSkull extends Item
+-    private static final String[] skullTypes = new String[] {"skeleton", "wither", "zombie", "char", "creeper"};
+-    public static final String[] field_94587_a = new String[] {"skull_skeleton", "skull_wither", "skull_zombie", "skull_char", "skull_creeper"};
++    private static final String[] skullTypes = new String[] {"skeleton", "wither", "zombie", "char", "creeper", "spider", "enderman", "pigzombie", "fire"};
++    public static final String[] field_94587_a = new String[] {"skull_skeleton", "skull_wither", "skull_zombie", "skull_char", "skull_creeper", "skull_spider", "skull_enderman", "skull_pigzombie", "skull_fire"};

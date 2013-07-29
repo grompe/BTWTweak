@@ -1,0 +1,10 @@
+diff --git a/src/minecraft_server/net/minecraft/src/EntityBlaze.java b/src/minecraft_server/net/minecraft/src/EntityBlaze.java
+index a16f7ea..ff90a48 100644
+--- a/src/minecraft_server/net/minecraft/src/EntityBlaze.java
++++ b/src/minecraft_server/net/minecraft/src/EntityBlaze.java
+@@ -252,0 +253,5 @@ public class EntityBlaze extends EntityMob
++
++    protected void dropHead()
++    {
++        this.entityDropItem(new ItemStack(Item.skull.itemID, 1, 8), 0.0F);
++    }

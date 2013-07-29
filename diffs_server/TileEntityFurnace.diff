@@ -1,0 +1,33 @@
+diff --git a/src/minecraft_server/net/minecraft/src/TileEntityFurnace.java b/src/minecraft_server/net/minecraft/src/TileEntityFurnace.java
+index 956f402..52c0a18 100644
+--- a/src/minecraft_server/net/minecraft/src/TileEntityFurnace.java
++++ b/src/minecraft_server/net/minecraft/src/TileEntityFurnace.java
+@@ -20,0 +21 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
++    public int currentItemID = 0;
+@@ -213,0 +215 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
++        boolean shouldUpdate = false;
+@@ -243 +245,13 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
+-            if (this.isBurning() && this.canSmelt())
++            if (this.currentItemID == 0 && this.furnaceItemStacks[0] != null)
++            {
++                shouldUpdate = true;
++                this.currentItemID = this.furnaceItemStacks[0].itemID;
++            }
++
++            if (this.currentItemID != 0 && this.furnaceItemStacks[0] == null)
++            {
++                shouldUpdate = true;
++                this.currentItemID = 0;
++            }
++
++            if (this.isBurning() && this.canSmelt() && (this.furnaceItemStacks[0].itemID == this.currentItemID))
+@@ -256,0 +271 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
++                this.currentItemID = this.furnaceItemStacks[0] == null ? 0 : this.furnaceItemStacks[0].itemID;
+@@ -262 +277,6 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
+-                BlockFurnace.updateFurnaceBlockState(this.furnaceBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
++                shouldUpdate = true;
++            }
++
++            if (shouldUpdate)
++            {
++                BlockFurnace.updateFurnaceBlockState(this.furnaceBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord, this.furnaceItemStacks[0] != null || this.furnaceItemStacks[2] != null);

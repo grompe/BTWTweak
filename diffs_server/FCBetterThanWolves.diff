@@ -1,35 +1,35 @@
-diff --git a/src/minecraft/net/minecraft/src/FCBetterThanWolves.java b/src/minecraft/net/minecraft/src/FCBetterThanWolves.java
-index c06e4fe..0c93768 100644
---- a/src/minecraft/net/minecraft/src/FCBetterThanWolves.java
-+++ b/src/minecraft/net/minecraft/src/FCBetterThanWolves.java
-@@ -17 +17 @@ public class FCBetterThanWolves extends FCAddOn
+diff --git a/src/minecraft_server/net/minecraft/src/FCBetterThanWolves.java b/src/minecraft_server/net/minecraft/src/FCBetterThanWolves.java
+index fbba695..702e837 100644
+--- a/src/minecraft_server/net/minecraft/src/FCBetterThanWolves.java
++++ b/src/minecraft_server/net/minecraft/src/FCBetterThanWolves.java
+@@ -12 +12 @@ public class FCBetterThanWolves extends FCAddOn
 -    public static final String fcVersionString = "4.891";
 +    public static final String fcVersionString = "4.891-GPE0.3";
-@@ -813 +813 @@ public class FCBetterThanWolves extends FCAddOn
+@@ -806 +806 @@ public class FCBetterThanWolves extends FCAddOn
 -        this.AddItemName(var1, Item.stick, "Shaft");
 +        this.AddItemName(var1, Item.stick, "Rod");
-@@ -951,0 +952,4 @@ public class FCBetterThanWolves extends FCAddOn
+@@ -944,0 +945,4 @@ public class FCBetterThanWolves extends FCAddOn
 +        var12 = fcBlockDirtSlab.getUnlocalizedName() + ".gravel" + ".name";
 +        var1.GetTranslateTable().put(var12, "Gravel Slab");
 +        var12 = fcBlockDirtSlab.getUnlocalizedName() + ".sand" + ".name";
 +        var1.GetTranslateTable().put(var12, "Sand Slab");
-@@ -957,0 +962,4 @@ public class FCBetterThanWolves extends FCAddOn
+@@ -950,0 +955,4 @@ public class FCBetterThanWolves extends FCAddOn
 +        var1.GetTranslateTable().put("item.skull.spider.name", "Spider head");
 +        var1.GetTranslateTable().put("item.skull.enderman.name", "Enderman head");
 +        var1.GetTranslateTable().put("item.skull.pigzombie.name", "Zombie Pigman head");
 +        var1.GetTranslateTable().put("item.skull.fire.name", "Blaze head");
-@@ -966 +974 @@ public class FCBetterThanWolves extends FCAddOn
+@@ -959 +967 @@ public class FCBetterThanWolves extends FCAddOn
 -        return "4.891";
 +        return fcVersionString;
-@@ -1368 +1376 @@ public class FCBetterThanWolves extends FCAddOn
+@@ -1358 +1366 @@ public class FCBetterThanWolves extends FCAddOn
 -        fcPotash = (new Item(fcPotashID)).setUnlocalizedName("fcItemPotash");
 +        fcPotash = (new GPEItemPotash(fcPotashID)).setUnlocalizedName("fcItemPotash");
-@@ -3216 +3224 @@ public class FCBetterThanWolves extends FCAddOn
+@@ -3206 +3214 @@ public class FCBetterThanWolves extends FCAddOn
 -            ServerSendPacket(var0, new Packet3Chat("\u00a7e" + var1.username + " connected to Better Than Wolves server V" + "4.891"));
 +            ServerSendPacket(var0, new Packet3Chat("\u00a7e" + var1.username + " connected to Better Than Wolves server V" + fcVersionString));
-@@ -3222 +3230 @@ public class FCBetterThanWolves extends FCAddOn
+@@ -3212 +3220 @@ public class FCBetterThanWolves extends FCAddOn
 -                var3.writeUTF("4.891");
 +                var3.writeUTF(fcVersionString);
-@@ -3234 +3242 @@ public class FCBetterThanWolves extends FCAddOn
+@@ -3224 +3232 @@ public class FCBetterThanWolves extends FCAddOn
 -            ServerSendPacket(var0, new Packet3Chat("\u00a7f" + "BTW V" + "4.891"));
 +            ServerSendPacket(var0, new Packet3Chat("\u00a7f" + "BTW V" + fcVersionString));

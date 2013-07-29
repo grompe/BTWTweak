@@ -1,0 +1,22 @@
+diff --git a/src/minecraft_server/net/minecraft/src/BlockDoor.java b/src/minecraft_server/net/minecraft/src/BlockDoor.java
+index 42c121d..c119ccd 100644
+--- a/src/minecraft_server/net/minecraft/src/BlockDoor.java
++++ b/src/minecraft_server/net/minecraft/src/BlockDoor.java
+@@ -372,0 +373,17 @@ public class BlockDoor extends Block
++
++    public int GetItemIDDroppedOnSaw(World var1, int var2, int var3, int var4)
++    {
++        int metadata = var1.getBlockMetadata(var2, var3, var4);
++        if ((metadata & 8) != 0) return -1;
++        return this.blockMaterial == Material.iron ? -1 : FCBetterThanWolves.fcBlockWoodSidingItemStubID;
++    }
++
++    public int GetItemCountDroppedOnSaw(World var1, int var2, int var3, int var4)
++    {
++        return 4;
++    }
++
++    public int GetItemDamageDroppedOnSaw(World var1, int var2, int var3, int var4)
++    {
++        return 0;
++    }

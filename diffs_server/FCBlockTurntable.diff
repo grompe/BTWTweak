@@ -1,0 +1,10 @@
+diff --git a/src/minecraft_server/net/minecraft/src/FCBlockTurntable.java b/src/minecraft_server/net/minecraft/src/FCBlockTurntable.java
+index e15c37f..a52bc39 100644
+--- a/src/minecraft_server/net/minecraft/src/FCBlockTurntable.java
++++ b/src/minecraft_server/net/minecraft/src/FCBlockTurntable.java
+@@ -246 +246 @@ public class FCBlockTurntable extends BlockContainer implements FCIBlockMechanic
+-        FCUtilsItem.EjectSingleItemWithRandomOffset(var1, var2, var3, var4, Item.redstone.itemID, 0);
++        FCUtilsItem.EjectSingleItemWithRandomOffset(var1, var2, var3, var4, Item.pocketSundial.itemID, 0);
+@@ -249 +249 @@ public class FCBlockTurntable extends BlockContainer implements FCIBlockMechanic
+-        for (var5 = 0; var5 < 4; ++var5)
++        for (var5 = 0; var5 < 2; ++var5)

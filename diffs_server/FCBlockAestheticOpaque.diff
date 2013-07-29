@@ -1,0 +1,55 @@
+diff --git a/src/minecraft_server/net/minecraft/src/FCBlockAestheticOpaque.java b/src/minecraft_server/net/minecraft/src/FCBlockAestheticOpaque.java
+index e90a798..4c28c50 100644
+--- a/src/minecraft_server/net/minecraft/src/FCBlockAestheticOpaque.java
++++ b/src/minecraft_server/net/minecraft/src/FCBlockAestheticOpaque.java
+@@ -39,0 +40,46 @@ public class FCBlockAestheticOpaque extends Block implements FCIBlock
++    public float getBlockHardness(World world, int x, int y, int z)
++    {
++        int meta = world.getBlockMetadata(x, y, z);
++        switch (meta)
++        {
++            case m_iSubtypeWicker: return m_fWickerHardness;
++            case m_iSubtypeDung:   return m_fDungHardness;
++            case m_iSubtypeSteel:  return m_fSteelHardness;
++            case m_iSubtypeHellfire: return m_fHellfireHardness;
++            case m_iSubtypePadding: return m_fPaddingHardness;
++            case m_iSubtypeSoap: return m_fSoapHardness;
++            case m_iSubtypeRope: return m_fRopeHardness;
++            case m_iSubtypeFlint: return m_fFilntHardness;
++            case m_iSubtypeNetherrackWithGrowth:
++            case m_iSubtypeWhiteStone:
++            case m_iSubtypeWhiteCobble:
++            case m_iSubtypeBarrel:
++            case m_iSubtypeChoppingBlockDirty:
++            case m_iSubtypeChoppingBlockClean:
++            default: return m_fDefaultHardness;
++        }
++    }
++
++    public void onFallenUpon(World world, int x, int y, int z, Entity entity, float par6)
++    {
++        int meta = world.getBlockMetadata(x, y, z);
++        if (meta == m_iSubtypePadding)
++        {
++            if (entity.fallDistance > 3.0F)
++            {
++                float vol = entity.fallDistance / 5.0F;
++                if (vol > 3.0F) vol = 3.0F;
++                world.playSoundAtEntity(entity, "step.cloth", vol, world.rand.nextFloat() * 0.4F + 0.8F);
++            }
++            if (entity.fallDistance < 9.0F) entity.fallDistance *= 0.5F;
++            entity.fallDistance *= 0.5F;
++        }
++    }
++
++    public StepSound GetStepSound(World world, int x, int y, int z)
++    {
++        int meta = world.getBlockMetadata(x, y, z);
++        if (meta == m_iSubtypePadding) return soundClothFootstep;
++        return this.stepSound;
++    }
++    
+@@ -130,0 +177 @@ public class FCBlockAestheticOpaque extends Block implements FCIBlock
++        if (var5 == 11) return FCBetterThanWolves.fcBlockWoodMouldingItemStubID;
+@@ -136,0 +184 @@ public class FCBlockAestheticOpaque extends Block implements FCIBlock
++        if (var5 == 11) return 6;

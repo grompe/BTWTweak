@@ -1,17 +1,29 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.2
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.3
 (Compatible with Better Than Wolves V4.891)
-
-NOTE: Client version only!!! (for now)
 
 [****** Installation Instructions ******]
 
-1) Place BTWMod4-891_Tweak0-2_patch.jar together with BTWMod4-891.zip
-2) Run the jar file: "java -jar BTWMod4-891_Tweak0-2_patch.jar"
-3) Proceed with usual BTW installation into your minecraft.jar
+1) Place BTWMod4-891_Tweak0-3_patch.jar together with BTWMod4-891.zip
+2) Run the jar file: "java -jar BTWMod4-891_Tweak0-3_patch.jar"
+3) Proceed with usual BTW installation from newly created
+   BTWMod4-891_Tweak0-3.zip into your minecraft.jar or minecraft_server.jar
 ...
 7) Profit!
 
 [********** Change Log ************]
+
+v0.3
+
+- New cauldron inventory GUI texture filename to support texture packs
+
+- Changed axle texture filename to support texture packs better
+
+- Added new heads names
+
+- Changed version string
+
+- Ported to Minecraft server!
+
 
 v0.2
 
