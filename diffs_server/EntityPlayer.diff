@@ -1,5 +1,5 @@
 diff --git a/src/minecraft_server/net/minecraft/src/EntityPlayer.java b/src/minecraft_server/net/minecraft/src/EntityPlayer.java
-index 2c906ea..75b4239 100644
+index 821c8d6..87d6191 100644
 --- a/src/minecraft_server/net/minecraft/src/EntityPlayer.java
 +++ b/src/minecraft_server/net/minecraft/src/EntityPlayer.java
 @@ -2083 +2083 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende

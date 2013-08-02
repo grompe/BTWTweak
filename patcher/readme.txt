@@ -1,16 +1,21 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.3
-(Compatible with Better Than Wolves V4.891)
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.3a
+(Compatible with Better Than Wolves V4.8911)
 
 [****** Installation Instructions ******]
 
-1) Place BTWMod4-891_Tweak0-3_patch.jar together with BTWMod4-891.zip
-2) Run the jar file: "java -jar BTWMod4-891_Tweak0-3_patch.jar"
+1) Place BTWMod4-8911_Tweak0-3a_patch.jar together with BTWMod4-8911.zip
+2) Run the jar file: "java -jar BTWMod4-8911_Tweak0-3a_patch.jar"
 3) Proceed with usual BTW installation from newly created
-   BTWMod4-891_Tweak0-3.zip into your minecraft.jar or minecraft_server.jar
+   BTWMod4-8911_Tweak0-3a.zip into your minecraft.jar or minecraft_server.jar
 ...
 7) Profit!
 
 [********** Change Log ************]
+
+v0.3a
+
+- Updated to BTW v4.8911
+
 
 v0.3
 

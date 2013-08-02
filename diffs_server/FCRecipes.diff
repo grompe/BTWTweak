@@ -1,5 +1,5 @@
 diff --git a/src/minecraft_server/net/minecraft/src/FCRecipes.java b/src/minecraft_server/net/minecraft/src/FCRecipes.java
-index a07bf8f..2621c5b 100644
+index 3a2ae1f..2a4d350 100644
 --- a/src/minecraft_server/net/minecraft/src/FCRecipes.java
 +++ b/src/minecraft_server/net/minecraft/src/FCRecipes.java
 @@ -168,0 +169,4 @@ public abstract class FCRecipes
