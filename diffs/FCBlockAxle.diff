@@ -1,5 +1,5 @@
 diff --git a/src/minecraft/net/minecraft/src/FCBlockAxle.java b/src/minecraft/net/minecraft/src/FCBlockAxle.java
-index 20f0b8c..586b1c3 100644
+index 20f0b8c..183c36b 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockAxle.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockAxle.java
 @@ -10,0 +11,4 @@ public class FCBlockAxle extends Block implements FCIBlock
@@ -14,9 +14,7 @@ index 20f0b8c..586b1c3 100644
 +        this.m_IconSideOn3 = var1.registerIcon("fcBlockAxle_side_on3");
 +        this.m_IconSideOn4 = var1.registerIcon("fcBlockAxle_side_on4");
 +        this.m_IconSideOn4f = var1.registerIcon("fcBlockAxle_side_on4f");
-@@ -548,0 +557 @@ public class FCBlockAxle extends Block implements FCIBlock
-+    // 0-bottom 1-top 2-5-sides
-@@ -557 +566,8 @@ public class FCBlockAxle extends Block implements FCIBlock
+@@ -557 +565,8 @@ public class FCBlockAxle extends Block implements FCIBlock
 -                return this.GetAxleSideTextureForOnState(this.m_bIsPowerOnForCurrentRender);
 +                if (!this.m_bIsPowerOnForCurrentRender) return this.m_IconSide;
 +                switch (var5)
@@ -26,7 +24,7 @@ index 20f0b8c..586b1c3 100644
 +                    case 2: return this.m_IconSideOn3;
 +                    case 4: return this.m_IconSideOn4f;
 +                }
-@@ -564 +580,8 @@ public class FCBlockAxle extends Block implements FCIBlock
+@@ -564 +579,8 @@ public class FCBlockAxle extends Block implements FCIBlock
 -                return this.GetAxleSideTextureForOnState(this.m_bIsPowerOnForCurrentRender);
 +                if (!this.m_bIsPowerOnForCurrentRender) return this.m_IconSide;
 +                switch (var5)
@@ -36,7 +34,7 @@ index 20f0b8c..586b1c3 100644
 +                    case 1: return this.m_IconSideOn3;
 +                    case 4: return this.m_IconSideOn4;
 +                }
-@@ -569 +592,8 @@ public class FCBlockAxle extends Block implements FCIBlock
+@@ -569 +591,8 @@ public class FCBlockAxle extends Block implements FCIBlock
 -            return this.GetAxleSideTextureForOnState(this.m_bIsPowerOnForCurrentRender);
 +            if (!this.m_bIsPowerOnForCurrentRender) return this.m_IconSide;
 +            switch (var5)
@@ -46,16 +44,3 @@ index 20f0b8c..586b1c3 100644
 +                case 1: return this.m_IconSideOn3;
 +                case 3: return this.m_IconSideOn4;
 +            }
-@@ -723,0 +754,12 @@ public class FCBlockAxle extends Block implements FCIBlock
-+
-+    public boolean OnBlockSawed(World world, int x, int y, int z)
-+    {
-+        int i;
-+        for (i = 0; i < 2; ++i)
-+        {
-+            FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, FCBetterThanWolves.fcBlockWoodCornerItemStubID, 0);
-+        }
-+        FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, FCBetterThanWolves.fcRopeItem.itemID, 0);
-+        world.setBlockToAir(x, y, z);
-+        return true;
-+    }

@@ -1,25 +1,7 @@
 diff --git a/src/minecraft/net/minecraft/src/FCBlockPulley.java b/src/minecraft/net/minecraft/src/FCBlockPulley.java
-index 606389f..d12109e 100644
+index 606389f..a83f8f6 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockPulley.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockPulley.java
 @@ -278 +278 @@ public class FCBlockPulley extends BlockContainer implements FCIBlockMechanical,
 -        FCUtilsItem.EjectSingleItemWithRandomOffset(var1, var2, var3, var4, Item.redstone.itemID, 0);
 +        FCUtilsItem.EjectSingleItemWithRandomOffset(var1, var2, var3, var4, FCBetterThanWolves.fcItemRedstoneLatch.itemID, 0);
-@@ -322,0 +323,17 @@ public class FCBlockPulley extends BlockContainer implements FCIBlockMechanical,
-+
-+    public boolean OnBlockSawed(World world, int x, int y, int z)
-+    {
-+        int i;
-+        for (i = 0; i < 3; ++i)
-+        {
-+            FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, FCBetterThanWolves.fcBlockWoodSidingItemStubID, 0);
-+        }
-+        for (i = 0; i < 2; ++i)
-+        {
-+            FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, Item.ingotIron.itemID, 0);
-+        }
-+        FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, FCBetterThanWolves.fcGear.itemID, 0);
-+        FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, FCBetterThanWolves.fcItemRedstoneLatch.itemID, 0);
-+        world.setBlockToAir(x, y, z);
-+        return true;
-+    }

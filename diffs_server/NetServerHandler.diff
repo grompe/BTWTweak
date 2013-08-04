@@ -1,7 +1,0 @@
-diff --git a/src/minecraft_server/net/minecraft/src/NetServerHandler.java b/src/minecraft_server/net/minecraft/src/NetServerHandler.java
-index 91163dd..b61f486 100644
---- a/src/minecraft_server/net/minecraft/src/NetServerHandler.java
-+++ b/src/minecraft_server/net/minecraft/src/NetServerHandler.java
-@@ -1010 +1010 @@ public class NetServerHandler extends NetHandler
--            this.playerEntity.playerNetServerHandler.sendPacket(new Packet3Chat("\u00a74" + "This server requires all clients to have Better Than Wolves version " + "4.8911"));
-+            this.playerEntity.playerNetServerHandler.sendPacket(new Packet3Chat("\u00a74" + "This server requires all clients to have Better Than Wolves version " + FCBetterThanWolves.fcVersionString));

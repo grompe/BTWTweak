@@ -1,11 +1,11 @@
 diff --git a/src/minecraft/net/minecraft/src/BlockSnowBlock.java b/src/minecraft/net/minecraft/src/BlockSnowBlock.java
-index b2178d3..e141232 100644
+index b2178d3..277e238 100644
 --- a/src/minecraft/net/minecraft/src/BlockSnowBlock.java
 +++ b/src/minecraft/net/minecraft/src/BlockSnowBlock.java
 @@ -33 +33 @@ public class BlockSnowBlock extends Block
 -    public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
 +    public void updateTick(World world, int x, int y, int z, Random par5Random)
-@@ -35 +35,26 @@ public class BlockSnowBlock extends Block
+@@ -35 +35,12 @@ public class BlockSnowBlock extends Block
 -        if (par1World.getSavedLightValue(EnumSkyBlock.Block, par2, par3, par4) > 11)
 +        this.checkMelting(world, x, y, z);
 +    }
@@ -19,11 +19,12 @@ index b2178d3..e141232 100644
 +          || (world.getSavedLightValue(EnumSkyBlock.Block, x, y, z - 1) > 11)
 +          || (world.getSavedLightValue(EnumSkyBlock.Block, x, y, z + 1) > 11)
 +          )
-+        {
+@@ -37,2 +48,2 @@ public class BlockSnowBlock extends Block
+-            this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
+-            par1World.setBlockToAir(par2, par3, par4);
 +            world.setBlockWithNotify(x, y, z, 0);
 +            FCUtilsMisc.PlaceNonPersistantWater(world, x, y, z);
-+        }
-+    }
+@@ -40,0 +52,22 @@ public class BlockSnowBlock extends Block
 +
 +    public void onNeighborBlockChange(World world, int x, int y, int z, int id)
 +    {
@@ -33,9 +34,7 @@ index b2178d3..e141232 100644
 +    public void onBlockAdded(World world, int x, int y, int z)
 +    {
 +        if (world.provider.isHellWorld)
-@@ -37,2 +62,7 @@ public class BlockSnowBlock extends Block
--            this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
--            par1World.setBlockToAir(par2, par3, par4);
++        {
 +            world.setBlockWithNotify(x, y, z, 0);
 +            world.playSoundEffect((double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 +
@@ -43,5 +42,8 @@ index b2178d3..e141232 100644
 +            {
 +                world.spawnParticle("largesmoke", (double)x + Math.random(), (double)y + Math.random(), (double)z + Math.random(), 0.0D, 0.0D, 0.0D);
 +            }
-@@ -39,0 +70 @@ public class BlockSnowBlock extends Block
++        }
 +        world.scheduleBlockUpdate(x, y, z, this.blockID, this.tickRate(world));
++    }
++
++    static { new GPEBTWTweak(); }
