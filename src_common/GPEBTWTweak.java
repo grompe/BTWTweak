@@ -1,11 +1,22 @@
 package net.minecraft.src;
 
-import java.util.Properties;
+import java.util.*;
+import java.io.*;
 
 public class GPEBTWTweak extends FCAddOn
 {
   public static GPEBTWTweak instance;
+  public static GPEBTWTweakProxy proxy;
   public static String tweakVersion = "0.4";
+
+  public static Block gpeBlockStone;
+
+  public static Item gpeItemLooseRock;
+
+  public static int gpeLooseRockID = 17000;
+  public static int gpeEntityRockID = 25;
+  public static int hcSpawnRadius = 2000;
+  public static int gpeEntityRockVehicleSpawnType = 120;
 
   public GPEBTWTweak()
   {
@@ -15,10 +26,57 @@ public class GPEBTWTweak extends FCAddOn
   public void Initialize()
   {
     FCAddOnHandler.LogMessage("Grom PE's BTWTweak v" + tweakVersion + " is now going to tweak the hell out of this.");
+    try
+    {
+      Class.forName("net.minecraft.client.Minecraft");
+      proxy = new GPEBTWTweakProxyClient();
+    }
+    catch(ClassNotFoundException e)
+    {
+      proxy = new GPEBTWTweakProxy();
+    }
+    File config = new File(proxy.getConfigDir(), "BTWTweak.cfg");
 
+    try
+    {
+      BufferedReader br = new BufferedReader(new FileReader(config));
+      String line, key, value;
+      while ((line = br.readLine()) != null)
+      {
+        String[] tmp = line.split("=");
+        key = tmp[0].trim();
+        value = tmp[1].trim();
+
+        if (key.equals("gpeLooseRockID")) gpeLooseRockID = Integer.parseInt(value);
+        if (key.equals("gpeEntityRockID")) gpeEntityRockID = Integer.parseInt(value);
+        if (key.equals("gpeEntityRockVehicleSpawnType")) gpeEntityRockVehicleSpawnType = Integer.parseInt(value);
+        if (key.equals("hcSpawnRadius")) hcSpawnRadius = Integer.parseInt(value);
+
+      }
+      br.close();
+    }
+    catch (FileNotFoundException e) {}
+    catch (IOException e)
+    {
+      FCAddOnHandler.LogMessage("Error while reading BTWTweak.cfg!");
+      e.printStackTrace();
+    }
+    
+    Block.blocksList[1] = null;
+    gpeBlockStone = new GPEBlockStone(1);
+    Block.blocksList[4] = null;
+    ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(new GPEBlockCobblestone(4));
+    Block.blocksList[13] = null;
+    ItemSpade.SetAllShovelsToBeEffectiveVsBlock(new GPEBlockGravel(13));
+    Block.blocksList[65] = null;
+    ItemAxe.SetAllAxesToBeEffectiveVsBlock(new GPEBlockLadder(65));
     Block.blocksList[91] = null;
     (new FCBlockPumpkin(91, true)).setHardness(1.0F).setStepSound(Block.soundWoodFootstep).setLightValue(1.0F).setUnlocalizedName("litpumpkin");
-    (new GPEItemPotash(FCBetterThanWolves.fcPotash.itemID - 256)).setUnlocalizedName("fcItemPotash").SetBellowsBlowDistance(3).setCreativeTab(CreativeTabs.tabMaterials);
+    new GPEItemPotash(FCBetterThanWolves.fcPotash.itemID - 256);
+    gpeItemLooseRock = new GPEItemLooseRock(gpeLooseRockID - 256);
+
+    EntityList.addMapping(GPEEntityRock.class, "gpeEntityRock", gpeEntityRockID);
+    proxy.addEntityRenderers();
 
     FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 4, 6), new Object[] {"##", '#', new ItemStack(Block.gravel)});
     FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 6), new Object[] {"##", '#', new ItemStack(FCBetterThanWolves.fcItemPileGravel)});
@@ -32,10 +90,21 @@ public class GPEBTWTweak extends FCAddOn
     FCRecipes.AddStokedCauldronRecipe(new ItemStack(FCBetterThanWolves.fcGlue, 1), new ItemStack[] {new ItemStack(Item.bone, 8)});
     FCRecipes.AddStokedCauldronRecipe(new ItemStack(FCBetterThanWolves.fcGlue, 1), new ItemStack[] {new ItemStack(Item.dyePowder, 24, 15)});
 
+    FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.axeStone), new Object[] {"X ", "X#", " #", '#', Item.stick, 'X', Block.cobblestone});
+    FCRecipes.AddVanillaRecipe(new ItemStack(Item.axeStone), new Object[] {"X ", "X#", " #", '#', Item.stick, 'X', gpeItemLooseRock});
+    FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.pickaxeStone), new Object[] {"XXX", " # ", " # ", '#', Item.stick, 'X', Block.cobblestone});
+    FCRecipes.AddVanillaRecipe(new ItemStack(Item.pickaxeStone), new Object[] {"XXX", " # ", " # ", '#', Item.stick, 'X', gpeItemLooseRock});
+    FCRecipes.RemoveVanillaRecipe(new ItemStack(Block.lever, 1), new Object[] {"X", "#", "r", '#', Block.cobblestone, 'X', Item.stick, 'r', Item.redstone});
+    FCRecipes.AddVanillaRecipe(new ItemStack(Block.lever, 1), new Object[] {"X", "#", "r", '#', gpeItemLooseRock, 'X', Item.stick, 'r', Item.redstone});
+    FCRecipes.AddVanillaRecipe(new ItemStack(Block.cobblestone), new Object[] {"XX", "XX", 'X', gpeItemLooseRock});
+    FCRecipes.AddVanillaRecipe(new ItemStack(Block.stoneSingleSlab, 1, 3), new Object[] {"XX", 'X', gpeItemLooseRock});
+    
+    BlockDispenser.dispenseBehaviorRegistry.putObject(gpeItemLooseRock, new GPEBehaviorRock());
+
     FCAddOnHandler.LogMessage("Grom PE's BTWTweak is done tweaking. Enjoy!");
   }
 
-  public boolean OnBlockSawed(World world, int x, int y, int z)
+  public static boolean OnBlockSawed(World world, int x, int y, int z)
   {
     int id = world.getBlockId(x, y, z);
     int meta = world.getBlockMetadata(x, y, z);
@@ -131,7 +200,7 @@ public class GPEBTWTweak extends FCAddOn
     return true;
   }
 
-  private void EjectSawProducts(World world, int x, int y, int z, int id, int meta, int count)
+  private static void EjectSawProducts(World world, int x, int y, int z, int id, int meta, int count)
   {
     for (int i = 0; i < count; ++i)
     {
@@ -149,5 +218,6 @@ public class GPEBTWTweak extends FCAddOn
     t.put("item.skull.enderman.name", "Enderman head");
     t.put("item.skull.pigzombie.name", "Zombie Pigman head");
     t.put("item.skull.fire.name", "Blaze head");
+    t.put(gpeItemLooseRock.getUnlocalizedName() + ".name", "Rock");
   }
 }
