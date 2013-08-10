@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/ServerConfigurationManager.java b/src/minecraft/net/minecraft/src/ServerConfigurationManager.java
+index caddc97..02ed356 100644
+--- a/src/minecraft/net/minecraft/src/ServerConfigurationManager.java
++++ b/src/minecraft/net/minecraft/src/ServerConfigurationManager.java
+@@ -1005 +1005 @@ public abstract class ServerConfigurationManager
+-            double var4 = var1.rand.nextDouble() * 2000.0D;
++            double var4 = var1.rand.nextDouble() * (double)GPEBTWTweak.hcSpawnRadius;

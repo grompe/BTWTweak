@@ -1,5 +1,5 @@
 diff --git a/src/minecraft/net/minecraft/src/FCBlockSaw.java b/src/minecraft/net/minecraft/src/FCBlockSaw.java
-index 51f4f33..8aa4334 100644
+index 51f4f33..4eccb54 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockSaw.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockSaw.java
 @@ -575,0 +576,5 @@ public class FCBlockSaw extends Block implements FCIBlock, FCIBlockMechanical, F
@@ -7,4 +7,4 @@ index 51f4f33..8aa4334 100644
 +            {
 +                return true;
 +            }
-+            else var12 = GPEBTWTweak.instance.OnBlockSawed(var1, var2, var3, var4);
++            else var12 = GPEBTWTweak.OnBlockSawed(var1, var2, var3, var4);

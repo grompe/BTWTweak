@@ -1,0 +1,7 @@
+diff --git a/src/minecraft_server/net/minecraft/src/ItemPickaxe.java b/src/minecraft_server/net/minecraft/src/ItemPickaxe.java
+index d3f068f..454940e 100644
+--- a/src/minecraft_server/net/minecraft/src/ItemPickaxe.java
++++ b/src/minecraft_server/net/minecraft/src/ItemPickaxe.java
+@@ -15 +15 @@ public class ItemPickaxe extends ItemTool
+-        if (var2 == Block.stone)
++        if (var2 == Block.stone || var2 == GPEBTWTweak.gpeBlockStone)

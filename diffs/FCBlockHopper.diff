@@ -1,0 +1,12 @@
+diff --git a/src/minecraft/net/minecraft/src/FCBlockHopper.java b/src/minecraft/net/minecraft/src/FCBlockHopper.java
+index 1e8c5b4..7164ad0 100644
+--- a/src/minecraft/net/minecraft/src/FCBlockHopper.java
++++ b/src/minecraft/net/minecraft/src/FCBlockHopper.java
+@@ -494,0 +495,7 @@ public class FCBlockHopper extends BlockContainer implements FCIBlockMechanical,
++                            int numflints = var20 - var1.rand.nextInt(10 * var20);
++                            if (numflints < 0) numflints = 0;
++                            ItemStack stack = new ItemStack(GPEBTWTweak.gpeItemLooseRock.itemID, var20 - numflints, 0);
++                            EntityItem rocks = new EntityItem(var1, var5.posX, var5.posY, var5.posZ, stack);
++                            rocks.delayBeforeCanPickup = 10;
++                            var1.spawnEntityInWorld(rocks);
++                            var20 = numflints;
