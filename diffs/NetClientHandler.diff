@@ -1,0 +1,9 @@
+diff --git a/src/minecraft/net/minecraft/src/NetClientHandler.java b/src/minecraft/net/minecraft/src/NetClientHandler.java
+index 79760a9..f99364f 100644
+--- a/src/minecraft/net/minecraft/src/NetClientHandler.java
++++ b/src/minecraft/net/minecraft/src/NetClientHandler.java
+@@ -293,0 +294,4 @@ public class NetClientHandler extends NetHandler
++        else if (par1Packet23VehicleSpawn.type == GPEEntityRock.getVehicleSpawnPacketType())
++        {
++            var8 = new GPEEntityRock(this.worldClient, var2, var4, var6);
++        }

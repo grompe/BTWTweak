@@ -23,10 +23,6 @@ public class GPEEntityRock extends EntityThrowable implements FCIEntityPacketHan
     {
       mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), 2);
     }
-    for (int i = 0; i < 8; i++)
-    {
-      worldObj.spawnParticle("snowballpoof", posX, posY, posZ, 0.0D, 0.0D, 0.0D);
-    }
     if (!worldObj.isRemote)
     {
       FCUtilsItem.EjectSingleItemWithRandomVelocity(worldObj, (float)posX, (float)posY, (float)posZ, GPEBTWTweak.gpeItemLooseRock.itemID, 0);

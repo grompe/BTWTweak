@@ -9,10 +9,11 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.4 source code
 4) Apply MCP fix patch using the mcp_fix.diff file
 5) Run MCP's updatemd5 script
 6) Patch the source code using ./diffs/*.diff and files
-7) Copy ./src_common/*.java files to your ./src/minecraft/net/minecraft/src/ directory
-8) Recompile, reobfuscate with MCP
-9) Insert all ./reobf/minecraft/*.class files into minecraft.jar
-10) Insert all ./res/*.* files into minecraft.jar
+7) Copy ./src/*.java files to your ./src/minecraft/net/minecraft/src/ directory
+8) Copy ./src_common/*.java files to your ./src/minecraft/net/minecraft/src/ directory
+9) Recompile, reobfuscate with MCP
+10) Insert all ./reobf/minecraft/*.class files into minecraft.jar
+11) Insert all ./res/*.* files into minecraft.jar
 ...
 42) Profit!
 
@@ -24,9 +25,10 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.4 source code
 4) Apply MCP fix patch using the mcp_fix.diff file
 5) Run MCP's updatemd5 script
 6) Patch the source code using ./diffs_server/*.diff and files
-7) Copy ./src_common/*.java files to your ./src/minecraft_server/net/minecraft/src/ directory
-8) Recompile, reobfuscate with MCP
-9) Insert all ./reobf/minecraft_server/*.class files into minecraft_server.jar
+7) Copy ./src_server/*.java files to your ./src/minecraft_server/net/minecraft/src/ directory
+8) Copy ./src_common/*.java files to your ./src/minecraft_server/net/minecraft/src/ directory
+9) Recompile, reobfuscate with MCP
+10) Insert all ./reobf/minecraft_server/*.class files into minecraft_server.jar
 ...
 42) Profit!
 
