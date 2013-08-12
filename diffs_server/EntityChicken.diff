@@ -1,0 +1,7 @@
+diff --git a/src/minecraft_server/net/minecraft/src/EntityChicken.java b/src/minecraft_server/net/minecraft/src/EntityChicken.java
+index 4ebbf01..a121d16 100644
+--- a/src/minecraft_server/net/minecraft/src/EntityChicken.java
++++ b/src/minecraft_server/net/minecraft/src/EntityChicken.java
+@@ -140 +140 @@ public class EntityChicken extends EntityAnimal
+-        int var3 = this.rand.nextInt(3) + this.rand.nextInt(1 + par2);
++        int var3 = 1 + this.rand.nextInt(3) + this.rand.nextInt(1 + par2);
