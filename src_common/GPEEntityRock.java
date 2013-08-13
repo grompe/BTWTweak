@@ -10,6 +10,7 @@ public class GPEEntityRock extends EntityThrowable implements FCIEntityPacketHan
   public GPEEntityRock(World world, EntityLiving living)
   {
     super(world, living);
+    setVelocity(motionX * 0.5D, motionY * 0.5D, motionZ * 0.5D);
   }
 
   public GPEEntityRock(World world, double x, double y, double z)
