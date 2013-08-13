@@ -1,12 +1,13 @@
 diff --git a/src/minecraft/net/minecraft/src/TileEntityFurnace.java b/src/minecraft/net/minecraft/src/TileEntityFurnace.java
-index f28d825..b3a08e7 100644
+index f28d825..4ef3705 100644
 --- a/src/minecraft/net/minecraft/src/TileEntityFurnace.java
 +++ b/src/minecraft/net/minecraft/src/TileEntityFurnace.java
-@@ -20,0 +21 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
+@@ -20,0 +21,2 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
 +    public int currentItemID = 0;
-@@ -243,0 +245 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
++    public boolean emptyResultSlot = false;
+@@ -243,0 +246 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
 +        boolean shouldUpdate = false;
-@@ -273 +275,13 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
+@@ -273 +276,19 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
 -            if (this.isBurning() && this.canSmelt())
 +            if (this.currentItemID == 0 && this.furnaceItemStacks[0] != null)
 +            {
@@ -20,10 +21,16 @@ index f28d825..b3a08e7 100644
 +                this.currentItemID = 0;
 +            }
 +
++            if (emptyResultSlot != (this.furnaceItemStacks[2] == null))
++            {
++                shouldUpdate = true;
++                emptyResultSlot = (this.furnaceItemStacks[2] == null);
++            }
++
 +            if (this.isBurning() && this.canSmelt() && (this.furnaceItemStacks[0].itemID == this.currentItemID))
-@@ -286,0 +301 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
+@@ -286,0 +308 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
 +                this.currentItemID = this.furnaceItemStacks[0] == null ? 0 : this.furnaceItemStacks[0].itemID;
-@@ -292 +307,6 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
+@@ -292 +314,6 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
 -                BlockFurnace.updateFurnaceBlockState(this.furnaceBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
 +                shouldUpdate = true;
 +            }
