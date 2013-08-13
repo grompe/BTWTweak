@@ -44,6 +44,7 @@ public class GPEBTWTweak extends FCAddOn
       while ((line = br.readLine()) != null)
       {
         String[] tmp = line.split("=");
+        if (tmp.length < 2) continue;
         key = tmp[0].trim();
         value = tmp[1].trim();
 
