@@ -1,12 +1,12 @@
 Grom PE's Better Than Wolves Total Conversion tweak mod v0.4
-(Compatible with Better Than Wolves V4.8911)
+(Compatible with Better Than Wolves V4.891123)
 
 [****** Installation Instructions ******]
 
-1) Place BTWMod4-8911_Tweak0-4_patch.jar together with BTWMod4-8911.zip
-2) Run the jar file: "java -jar BTWMod4-8911_Tweak0-4_patch.jar"
+1) Place BTWMod4-891123_Tweak0-4_patch.jar together with BTWMod4-891123.zip
+2) Run the jar file: "java -jar BTWMod4-891123_Tweak0-4_patch.jar"
 3) Proceed with usual BTW installation from newly created
-   BTWMod4-8911_Tweak0-4.zip into your minecraft.jar or minecraft_server.jar
+   BTWMod4-891123_Tweak0-4.zip into your minecraft.jar or minecraft_server.jar
 ...
 7) Profit!
 
@@ -14,7 +14,37 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.4
 
 v0.4
 
+- Added loose rocks that come from breaking stone and cobblestone;
+  they can be thrown as a basic weapon for the price of making player exhausted;
+  cobblestone can be crafted from 2x2 loose rocks and slab from 2 loose rocks
+
+- Changed gravel to give loose rocks and rarely flint when harvested or filtered
+
+- Changed stone to have a rare chance to drop flints
+
+- Let item dispenser throw loose rocks
+
+- Let block dispenser make cobblestone from loose rocks
+
+- Changed stone axe, pickaxe and lever recipes to use loose rocks instead of cobblestone blocks
+
+- Hardcore spawn radius is now configurable; use at your own risk
+
+- Fixed furnace display update when cooked item is taken out
+
+- (not in this release) Raised feather drop from chicken to 1-3 - huge chicken farms aren't hard to make, just laggy and annoying
+
 - Refactored code, smaller patch size
+
+- Updated the patch to BTW v4.891123 but not the patcher or code itself
+
+- Due to the old patcher and code based on BTW v4.8911,
+  some features are not available in this release, and work like in the original BTW:
+  - Bellows drops extra tanned leather when overpowered
+  - Player still can eat on ladder and armor/boots don't affect movement speed
+  - Chicken doesn't drop more feathers
+  - Spider doesn't drop head
+  - Zombie pigman doesn't drop head
 
 
 v0.3a
