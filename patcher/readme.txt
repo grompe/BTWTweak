@@ -1,16 +1,30 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.4
-(Compatible with Better Than Wolves V4.891123)
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.4a
+(Compatible with Better Than Wolves V4.891124)
 
 [****** Installation Instructions ******]
 
-1) Place BTWMod4-891123_Tweak0-4_patch.jar together with BTWMod4-891123.zip
-2) Run the jar file: "java -jar BTWMod4-891123_Tweak0-4_patch.jar"
+1) Place BTWMod4-891124_Tweak0-4a_patch.jar together with BTWMod4-891124.zip
+2) Run the jar file: "java -jar BTWMod4-891124_Tweak0-4a_patch.jar"
 3) Proceed with usual BTW installation from newly created
-   BTWMod4-891123_Tweak0-4.zip into your minecraft.jar or minecraft_server.jar
+   BTWMod4-891124_Tweak0-4a.zip into your minecraft.jar or minecraft_server.jar
 ...
 7) Profit!
 
 [********** Change Log ************]
+
+v0.4a
+
+- Updated to BTW v4.891124
+
+- Due to the old patcher and code based on BTW v4.8911,
+  some features are not available in this release, and work like in the original BTW:
+  - Bellows drops extra tanned leather when overpowered
+  - Player still can eat on ladder and armor/boots don't affect movement speed
+  - Chicken doesn't drop more feathers
+  - Spider doesn't drop head
+  - Zombie pigman doesn't drop head
+  - Hardcore spawn radius is not configurable in this release
+
 
 v0.4
 
