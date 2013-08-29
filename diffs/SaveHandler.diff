@@ -1,0 +1,8 @@
+diff --git a/src/minecraft/net/minecraft/src/SaveHandler.java b/src/minecraft/net/minecraft/src/SaveHandler.java
+index d4049b3..074d95c 100644
+--- a/src/minecraft/net/minecraft/src/SaveHandler.java
++++ b/src/minecraft/net/minecraft/src/SaveHandler.java
+@@ -350,0 +351 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData
++        GPEBTWTweak.loadWorldData(var1);
+@@ -369,0 +371 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData
++        GPEBTWTweak.saveWorldData(var1);

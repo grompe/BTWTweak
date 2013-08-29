@@ -17,6 +17,10 @@ public class GPEBTWTweak extends FCAddOn
   public static int gpeEntityRockID = 25;
   public static int hcSpawnRadius = 2000;
   public static int gpeEntityRockVehicleSpawnType = 120;
+  public static int gpeStrataRegenKey = 0;
+  public static String gpeStrataRegenWorldName = null;
+
+  public static Map<Long, Integer> chunkRegenInfo;
 
   public GPEBTWTweak()
   {
@@ -37,6 +41,8 @@ public class GPEBTWTweak extends FCAddOn
     }
     File config = new File(proxy.getConfigDir(), "BTWTweak.cfg");
 
+    chunkRegenInfo = new HashMap<Long, Integer>();
+
     try
     {
       BufferedReader br = new BufferedReader(new FileReader(config));
@@ -52,6 +58,8 @@ public class GPEBTWTweak extends FCAddOn
         if (key.equals("gpeEntityRockID")) gpeEntityRockID = Integer.parseInt(value);
         if (key.equals("gpeEntityRockVehicleSpawnType")) gpeEntityRockVehicleSpawnType = Integer.parseInt(value);
         if (key.equals("hcSpawnRadius")) hcSpawnRadius = Integer.parseInt(value);
+        if (key.equals("gpeStrataRegenKey")) gpeStrataRegenKey = Integer.parseInt(value);
+        if (key.equals("gpeStrataRegenWorldName")) gpeStrataRegenWorldName = value;
 
       }
       br.close();
@@ -90,6 +98,21 @@ public class GPEBTWTweak extends FCAddOn
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileGravel, 2), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 6)});
     FCRecipes.AddStokedCauldronRecipe(new ItemStack(FCBetterThanWolves.fcGlue, 1), new ItemStack[] {new ItemStack(Item.bone, 8)});
     FCRecipes.AddStokedCauldronRecipe(new ItemStack(FCBetterThanWolves.fcGlue, 1), new ItemStack[] {new ItemStack(Item.dyePowder, 24, 15)});
+
+    if (FCBetterThanWolves.fcVersionString != "4.8911")
+    {
+      int i;
+      for (i = 0; i < 16; i++)
+      {
+        FCRecipes.AddStokedCauldronRecipe(
+          new ItemStack[]
+          {
+            new ItemStack(FCBetterThanWolves.fcItemWool, 4, 15 - i),
+            new ItemStack(FCBetterThanWolves.fcAestheticOpaque, 1, 0)
+          },
+          new ItemStack[] {new ItemStack(Block.cloth, 1, i)});
+      }
+    }
 
     FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.axeStone), new Object[] {"X ", "X#", " #", '#', Item.stick, 'X', Block.cobblestone});
     FCRecipes.AddVanillaRecipe(new ItemStack(Item.axeStone), new Object[] {"X ", "X#", " #", '#', Item.stick, 'X', gpeItemLooseRock});
@@ -197,6 +220,10 @@ public class GPEBTWTweak extends FCAddOn
       EjectSawProducts(world, x, y, z, FCBetterThanWolves.fcGrate.itemID, 0, 1);
       EjectSawProducts(world, x, y, z, FCBetterThanWolves.fcItemScrew.itemID, 0, 1);
     }
+    else if (id == Block.cloth.blockID)
+    {
+      EjectSawProducts(world, x, y, z, FCBetterThanWolves.fcWoolSlab.blockID, meta, 2);
+    }
     else
     {
       return false;
@@ -224,4 +251,105 @@ public class GPEBTWTweak extends FCAddOn
     t.put("item.skull.fire.name", "Blaze head");
     t.put(gpeItemLooseRock.getUnlocalizedName() + ".name", "Rock");
   }
+
+  public static void saveWorldData(World world)
+  {
+    if (!readyForStrataRegen(world)) return;
+    File strataRegenFile = getStrataRegenFile(world);
+
+    try
+    {
+      ObjectOutputStream s = new ObjectOutputStream(new FileOutputStream(strataRegenFile));
+      s.writeObject(chunkRegenInfo);
+      s.close();
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  public static void loadWorldData(World world)
+  {
+    if (!readyForStrataRegen(world)) return;
+    FCAddOnHandler.LogMessage(String.format("BTWTweak is now going to stratify the world '%s'.", gpeStrataRegenWorldName));
+    File strataRegenFile = getStrataRegenFile(world);
+    if (!strataRegenFile.exists()) return;
+
+    try
+    {
+      ObjectInputStream s = new ObjectInputStream(new FileInputStream(strataRegenFile));
+      chunkRegenInfo = (HashMap<Long, Integer>)s.readObject();
+      s.close();
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  public static void onSaveChunk(World world, Chunk chunk)
+  {
+    if (!readyForStrataRegen(world)) return;
+    long l = (((long)chunk.xPosition) << 32) | (chunk.zPosition & 0xffffffffL);
+    chunkRegenInfo.put(l, gpeStrataRegenKey);
+  }
+
+  public static void onLoadChunk(World world, Chunk chunk)
+  {
+    if (!readyForStrataRegen(world)) return;
+    long l = (((long)chunk.xPosition) << 32) | (chunk.zPosition & 0xffffffffL);
+    Integer key = chunkRegenInfo.get(l);
+    if (key == null || key.intValue() != gpeStrataRegenKey)
+    {
+      System.out.println(String.format("Stratifying chunk at %d, %d", chunk.xPosition, chunk.zPosition));
+      stratifyChunk(world, chunk);
+    }
+  }
+
+  private static File getStrataRegenFile(World world)
+  {
+    File f;
+    f = new File(proxy.getConfigDir(), "saves");
+    f = new File(f, world.getSaveHandler().getWorldDirectoryName());
+    f = new File(f, "strataRegen.dat");
+    return f;
+  }
+
+  private static boolean readyForStrataRegen(World world)
+  {
+    if (gpeStrataRegenKey == 0) return false;
+    if (world.provider.dimensionId != 0) return false;
+    if (world.worldInfo == null) return false;
+    return world.worldInfo.getWorldName().equals(gpeStrataRegenWorldName);
+  }
+
+  private static void stratifyChunk(World world, Chunk chunk)
+  {
+    for (int x = 0; x < 16; x++)
+    {
+      for (int z = 0; z < 16; z++)
+      {
+        int y = 1;
+        int yy;
+        for (yy = 24 + world.rand.nextInt(2); y <= yy; y++) stratifyBlockInChunk(chunk, x, y, z, 2);
+        for (yy = 48 + world.rand.nextInt(2); y <= yy; y++) stratifyBlockInChunk(chunk, x, y, z, 1);
+      }
+    }
+  }
+
+  private static void stratifyBlockInChunk(Chunk chunk, int x, int y, int z, int strata)
+  {
+    int id = chunk.getBlockID(x, y, z);
+    if (id == Block.stone.blockID)
+    {
+      chunk.setBlockMetadata(x, y, z, strata);
+    }
+    else if (id != 0)
+    {
+      Block b = Block.blocksList[id];
+      if (b.HasStrata()) chunk.setBlockMetadata(x, y, z, b.GetMetadataConversionForStrataLevel(strata, 0));
+    }
+  }
+
 }
