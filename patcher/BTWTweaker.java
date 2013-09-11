@@ -32,6 +32,7 @@ public class BTWTweaker
   protected static RhinoScriptEngine engine;
 
   public static boolean onServer = false;
+  public static int failures = 0;
 
   public static String btwVersion = "unknown";
 
@@ -200,12 +201,19 @@ public class BTWTweaker
     ZipEntry entry = null;
     byte[] buf = new byte[4096];
     int len;
-    File file;
+    InputStream instream;
     while (pass <= 1)
     {
-      file = (pass == 0) ? jar : new File("GPEBTWTweak_files.zip");
-      zis = new ZipInputStream(new FileInputStream(file));
-      log("Reading " + file.toString() + "...");
+      if (pass == 0)
+      {
+        log("Reading " + jarname + "...");
+        instream = new FileInputStream(jar);
+      } else {
+        log("Reading GPEBTWTweak_files.zip...");
+        instream = MAIN_CLASS.getResourceAsStream("GPEBTWTweak_files.zip");
+      }
+      zis = new ZipInputStream(instream);
+
       while ((entry = zis.getNextEntry()) != null)
       {
         String name = entry.getName();
@@ -286,6 +294,12 @@ public class BTWTweaker
     }
     zos.close();
     log("Wrote " + outputname);
+    if (failures == 0)
+    {
+      log("All OK!");
+    } else {
+      log("%d ERRORS during the patching - review the log, test and take care!", failures);
+    }
   }
 
 }

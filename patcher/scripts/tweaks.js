@@ -2384,6 +2384,7 @@ function ObjectArray(arr)
   function recordFailure()
   {
     failures += 1;
+    __main_class__.failures += 1;
   }
 
   function CodeInserter(finder, code, message, before)
@@ -2634,6 +2635,10 @@ function ObjectArray(arr)
     if (failures > 0)
     {
       log("Warning: failed in " + failures + " patches, take care!");
+    }
+    else if (count == total)
+    {
+      log(cn.name + " OK");
     }
     failures = 0;
   };

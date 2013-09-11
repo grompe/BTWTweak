@@ -114,10 +114,10 @@ public class CliPatcher
       System.exit(2);
     } else if (choice.equals("c") && (mcbtwclient == BTWTweaker.STATUS_BTWCLIENT))
     {
-      BTWTweaker.tweak(mcname, mcbtwclient);
+      tweak(mcname, mcbtwclient);
     } else if (choice.equals("s") && (mcbtwserver == BTWTweaker.STATUS_BTWSERVER))
     {
-      BTWTweaker.tweak(mcservername, mcbtwserver);
+      tweak(mcservername, mcbtwserver);
     } /* else {
       boolean valid;
       try
@@ -137,8 +137,25 @@ public class CliPatcher
         System.exit(1);
       }
     } */
+
+    System.out.println("== Finished ==\nPress Enter to quit.");
+    input();
+    System.exit(0);
+  }
+  
+  private static void tweak(String name, int status)
+  {
+    try
+    {
+      BTWTweaker.tweak(name, status);
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
   }
 
+  /*
   private static String input()
   {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -148,5 +165,23 @@ public class CliPatcher
     }
     catch (IOException e) {}
     return null;
+  }
+  */
+
+  private static String input()
+  {
+    StringWriter sw = new StringWriter();
+    int c;
+    try
+    {
+      for (int i = 0; i < System.in.available(); i++) System.in.read();
+      while ((c = System.in.read()) > 0)
+      {
+        if (c == 10 || c == 13) break;
+        sw.write((char)c);
+      }
+    }
+    catch (IOException e) {}
+    return sw.toString();
   }
 }
