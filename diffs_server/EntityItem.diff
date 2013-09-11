@@ -1,7 +1,0 @@
-diff --git a/src/minecraft_server/net/minecraft/src/EntityItem.java b/src/minecraft_server/net/minecraft/src/EntityItem.java
-index 43731df..84e8be0 100644
---- a/src/minecraft_server/net/minecraft/src/EntityItem.java
-+++ b/src/minecraft_server/net/minecraft/src/EntityItem.java
-@@ -125 +125 @@ public class EntityItem extends Entity
--        if (!this.worldObj.isRemote && this.age >= 6000)
-+        if (!this.worldObj.isRemote && this.age >= 20*60*30)

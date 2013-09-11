@@ -1,7 +1,0 @@
-diff --git a/src/minecraft_server/net/minecraft/src/EntityCreeper.java b/src/minecraft_server/net/minecraft/src/EntityCreeper.java
-index 1d82ad6..7099d52 100644
---- a/src/minecraft_server/net/minecraft/src/EntityCreeper.java
-+++ b/src/minecraft_server/net/minecraft/src/EntityCreeper.java
-@@ -271,0 +272,2 @@ public class EntityCreeper extends EntityMob
-+            this.attackEntityFrom(DamageSource.causePlayerDamage(var1), 2);
-+

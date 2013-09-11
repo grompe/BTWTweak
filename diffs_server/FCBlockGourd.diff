@@ -1,7 +1,0 @@
-diff --git a/src/minecraft_server/net/minecraft/src/FCBlockGourd.java b/src/minecraft_server/net/minecraft/src/FCBlockGourd.java
-index d9d20f2..0dde717 100644
---- a/src/minecraft_server/net/minecraft/src/FCBlockGourd.java
-+++ b/src/minecraft_server/net/minecraft/src/FCBlockGourd.java
-@@ -77 +77 @@ public abstract class FCBlockGourd extends BlockSand
--    private void Explode(World var1, double var2, double var4, double var6)
-+    protected void Explode(World var1, double var2, double var4, double var6)

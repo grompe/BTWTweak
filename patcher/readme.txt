@@ -1,16 +1,46 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.4a
-(Compatible with Better Than Wolves V4.891124)
-
-[****** Installation Instructions ******]
-
-1) Place BTWMod4-891124_Tweak0-4a_patch.jar together with BTWMod4-891124.zip
-2) Run the jar file: "java -jar BTWMod4-891124_Tweak0-4a_patch.jar"
-3) Proceed with usual BTW installation from newly created
-   BTWMod4-891124_Tweak0-4a.zip into your minecraft.jar or minecraft_server.jar
-...
-7) Profit!
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.5
+(Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
+
+v0.5
+
+- Refactoring and a new patching method - hardcore modding!
+  Should be compatible with BTW v4.8911 and up
+
+- Because of low profit for amount of effort ratio, and belief that original
+  mod author should fix his own bugs, some tweaks were discontinued:
+  - Axle seamless texture animation change
+  - Bellows, gearbox, pulley, turntable breaking drops fixes
+  - Decorative wooden blocks such as pedestal, table, bench, column splitting in saw
+  - Arcane scroll not crashing with invalid enchantment
+  - Infernal Enchanter exploding instead of crashing with invalid enchantment
+
+- Increased item stay to 30 minutes
+
+- Wool blocks can be sawed to slabs
+
+- Wool blocks can be boiled in a stoked cauldron to retrieve components
+
+- New feature: regenerate stratification
+
+- Fixed (restored) axe effectiveness against Jack-o-lantern
+
+- Fixed gravel filtering randomness in hopper
+
+- Fixed Jack-o-lanterns replacing blocks with a torch when falling
+
+- Added a recipe to merge 2 stone brick slabs
+
+- Cobblestone and stone drop in block form if destroyed by soulforged tool
+
+- Renamed rotted arrow to rotten arrow to conform with rotten flesh
+
+- Made books craftable with cut tanned leather
+
+- Also note that Jack-o-lantern dropping like pumpkin behavior will replace
+  any new Jack-o-lantern behavior, such as going off underwater.
+
 
 v0.4a
 

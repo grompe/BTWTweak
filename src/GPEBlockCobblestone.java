@@ -12,9 +12,10 @@ public class GPEBlockCobblestone extends Block
     setStepSound(soundStoneFootstep);
     setUnlocalizedName("stonebrick");
     setCreativeTab(CreativeTabs.tabBlock);
+    ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
   }
 
-  // Client only!
+  @ClientOnly
   public void registerIcons(IconRegister r)
   {
     super.registerIcons(r);
@@ -24,6 +25,36 @@ public class GPEBlockCobblestone extends Block
   public void OnBlockDestroyedWithImproperTool(World world, EntityPlayer player, int x, int y, int z, int meta)
   {
     if (world.rand.nextInt(10) == 0) makeDrop(world, x, y, z);
+  }
+
+  public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int meta)
+  {
+    player.addStat(StatList.mineBlockStatArray[blockID], 1);
+    player.addExhaustion(0.025F);
+
+    if (canSilkHarvest(meta) && EnchantmentHelper.getSilkTouchModifier(player))
+    {
+      ItemStack stack = createStackedBlock(meta);
+
+      if (stack != null)
+      {
+        dropBlockAsItem_do(world, x, y, z, stack);
+      }
+    }
+    else
+    {
+      ItemStack tool = player.inventory.getCurrentItem();
+      if (!world.isRemote && tool != null)
+      {
+        if (tool.itemID == FCBetterThanWolves.fcMattock.itemID || tool.itemID == FCBetterThanWolves.fcRefinedPickAxe.itemID)
+        {
+          dropBlockAsItem_do(world, x, y, z, new ItemStack(Block.cobblestone.blockID, 1, 0));
+          return;
+        }
+      }
+      int fortune = EnchantmentHelper.getFortuneModifier(player);
+      dropBlockAsItem(world, x, y, z, meta, fortune);
+    }
   }
 
   public void dropBlockAsItemWithChance(World world, int x, int y, int z, int meta, float chance, int bonus)

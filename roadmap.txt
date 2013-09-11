@@ -5,88 +5,6 @@ Main goals
 - Keep the balance
 
 
-Completed
-=========
-
-- Furnace progress is reset when item currently processing is replaced
-
-- Cauldron, crucible have 9 slot inventory and indicate if the fire is stoked
-
-- Jack-o-lantern is placed, pushed by pistons and dropped just like pumpkins,
-  and if destroyed, tries to place a torch
-
-- Add missing high efficiency recipe for Nether Quartz stairs (removed as exists in BTW v4.891)
-
-- Dirt slab craftable to 2 dirt piles
-
-- Ladder, wooden door, sign and sugar cane no longer stops lava
-
-- Saw won't touch pressure plates
-
-- Chest, gearbox, note block, jukebox, door, trapdoor, fence gate, pulley,
-  bellows, ladder, table, pedestal, column, bench, bookshelf, hopper,
-  platform, barrel, axle and saw itself can be sawed with a bit of loss
-
-- Cauldron GUI fire is below the inventory slots
-
-- Chance to drop flint when gravel is broken to piles
-
-- Eating lets go off ladder
-
-- Walking is faster with boots but slower with heavy armor
-
-- Stoked cauldron can make glue from 8 bones or 24 bone meal
-
-- Allow potash as farmland or planter fertilizer
-
-- Ladders placeable on sidings
-
-- Snow blocks are no longer heat-resistant
-
-- Renamed shafts to rods just for the hell of it
-
-- Gearbox and pulley drop redstone latch instead of redstone dust when overpowered
-
-- Bellows no longer joins tanned leather when overpowered
-
-- Turntable drops clock instead of redstone when overpowered
-
-- Lower hand crank clickable height
-
-- Fixed soap, rope, padding and wicker block hardness
-
-- Using invalid scrolls results in an explosion rather than crash
-
-- Creeper is hurt when deoystered
-
-- Seamless powered axle animated texture
-
-- Block of Padding reduces fall damage
-
-- Furnace shows whether it has contents
-
-- Gravel and sand slabs
-
-- Add spider, enderman, zombie pig, blaze heads
-
-
-v0.4:
-
-- Cleanup code and separate what can be separated
-
-- Change stone and cobblestone break to loose rocks (that can be recrafted to cobblestone)
-
-- Change axe, pickaxe, shovel, lever recipes to require loose rocks
-
-- Rocks can be thrown for damage and will exhaust the user; they are also usable in dispensers
-
-- Flint is a rare drop from both stone and filtering gravel; gravel usually gives loose rocks
-
-- Hardcore spawn radius is now configurable; use at your own risk
-
-- Raised feather drop from chicken to 1-3 - huge chicken farms aren't hard to make, just laggy and annoying
-
-
 Skipped
 =======
 
@@ -108,6 +26,7 @@ Feedback
 ========
 
 - glue from bones was removed for a good reason: you're swimming in mob drops once you have a mob farm
+  [Grom] My experience is that mob farm is sufficiently late-game to allow infinite glue, so I'm keeping it
 
 
 -------------------------------------------------------------------------------
@@ -120,22 +39,34 @@ Straightforward
 
 - Make consuming by darkness actually consume the meat, complete with a burp
 
-- Craft books with cut tanned leather
-
 - Display world time converted to real time of current world played
 
 - Light blocks drop filament and redstone when broken
 
 - Prevent weapons from decreasing durability if no damage was done (clicked a red mob)
-  or reduce red time
+  or reduce red time (might have side-effects)
+
+- Make difficulty unchangeable during the gameplay, and show server difficulty there if on a server
+  (make it selected in world creation instead)
+
+- Compat with SixMod (Research Bench Addon)
+
+- Break glass and glass panes with thrown rock
+
+- Break glass and glass panes when landed on them from a height
+
+- Right-clicking with iron or gold nuggets, loose rocks (with shift) in hand converts max amount possible into ingots
+
+- Cocoa powder made from cocoa beans, replaces it in all recipes and some additional edible items
+  - Sugar, cocoa powder, 2 bowls and milk bucket -> 2 bowls of hot cocoa
 
 
 Needs more thought on implementation
 ====================================
 
-- Make ores drop loose rocks and raw ore pieces; add pure ores
+- Make seeds root themselves when dropped on farmland, as well as bone meal and potash fertilizing it when thrown
 
-- Port lava fix from MC 1.6
+- Make ores drop loose rocks and raw ore pieces; add pure ores
 
 - Cauldron having a water slot that needs refilling, indicating if the cauldron is dirty;
   dirty needs to be just mined and replaced for now
@@ -159,14 +90,22 @@ Needs more thought on implementation
 
 - Beds are made with blocks of padding instead of wool and lying in them doesn't skip time,
   just changes the camera position, makes hunger go twice slower and regeneration twice faster.
+  - Or with silk (crafted with 9 string)
+    - Silk armor?
+
+- Better fishing rods made with soulforged steel nugget
+
+- Fix axle texture in a better way
 
 
 Needs more thought on balance or fitting in
 ===========================================
 
+- Speed enchantment for boots, scroll rare drop from cats (ocelots)!
+
 - Shave chickens with shears for fun and slight increase in feathers compared to killing; they won't regrow it
 
-- Iron and gold ores giving nuggets via furnace and ingots via kiln
+- Iron and gold ores giving two nuggets via kiln
 
 - Redstone-compliant version of trapdoor (iron trapdoor)
 
@@ -189,6 +128,36 @@ Fleshing out
   - Salt could be used to make food tastier (bacon?)
     - bacon slabs %)
 
+- Hard difficulty: food spoilage
+  - each food stack has food spoilage meter that slowly increases on random tick
+    - when it reaches 50%, each random tick there's more and more chance for it to rot, with 100% chance on 100% spoilage
+    - combining stacks combines food spoilage meter
+    - cooking or making new food refreshes spoilage meter
+    - food thrown out as an item entity spoils twice faster
+    - storing in a chest surrounded by snow or ice blocks makes it spoil 4 times slower
+
+- Occasional sandstorms in deserts that lower visibility and reduce sand blocks to sand slabs to nothing and fill up space
+  with sand slabs and sand slabs to sand blocks
+
 - Gearboxes crafted with 6 axles -> gearboxes that can be used in compact designs
 
-- Do something with wooden and stone slabs against easy hand crafting
+- More uses for rope, creeper oysters(?: bait is maybe good enough), sugar
+
+
+Random info
+===========
+
+Oddities:
+- white stone & cobble makes 6 stairs instead of usual 4
+
+== weights ==
+Soulforged steel armor: 10+14+12+8=44
+Chain armor: 3+4+4+2=13
+Iron/gold/diamond armor: 5+8+7+4=24
+movement_speed *= 1.1 * (1 - (armor_weight / 220))
+
+Resulting speeds:
+Leather: 1.1
+Chain: 1.035
+Iron: 0.98
+Soulforged: 0.88

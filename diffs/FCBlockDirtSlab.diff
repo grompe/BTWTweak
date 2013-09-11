@@ -1,5 +1,5 @@
 diff --git a/src/minecraft/net/minecraft/src/FCBlockDirtSlab.java b/src/minecraft/net/minecraft/src/FCBlockDirtSlab.java
-index 0cf92e2..3458bfb 100644
+index 0cf92e2..bd98311 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockDirtSlab.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockDirtSlab.java
 @@ -12 +12,5 @@ public class FCBlockDirtSlab extends FCBlockSlab
@@ -58,6 +58,9 @@ index 0cf92e2..3458bfb 100644
 +        {
 +            var7 = FCBetterThanWolves.fcItemPileSand;
 +        }
+@@ -330 +353 @@ public class FCBlockDirtSlab extends FCBlockSlab
+-    private boolean HasValidAnchorToFacing(World var1, int var2, int var3, int var4, int var5)
++    public boolean HasValidAnchorToFacing(World var1, int var2, int var3, int var4, int var5)
 @@ -362,0 +386,2 @@ public class FCBlockDirtSlab extends FCBlockSlab
 +        this.m_IconGravel = var1.registerIcon("gravel");
 +        this.m_IconSand = var1.registerIcon("sand");

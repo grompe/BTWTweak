@@ -1,7 +1,19 @@
 diff --git a/src/minecraft/net/minecraft/src/FCBlockGourd.java b/src/minecraft/net/minecraft/src/FCBlockGourd.java
-index d9d20f2..0dde717 100644
+index d9d20f2..ac4db4c 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockGourd.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockGourd.java
-@@ -77 +77 @@ public abstract class FCBlockGourd extends BlockSand
--    private void Explode(World var1, double var2, double var4, double var6)
-+    protected void Explode(World var1, double var2, double var4, double var6)
+@@ -98,0 +99,14 @@ public abstract class FCBlockGourd extends BlockSand
++        if (blockID == 91 /* Jack-o-lantern */)
++        {
++            int x = MathHelper.floor_double(var2);
++            int y = MathHelper.floor_double(var4);
++            int z = MathHelper.floor_double(var6);
++            if ((var1.getBlockId(x, y, z) == 0) && Block.torchWood.canPlaceBlockAt(var1, x, y, z))
++            {
++                var1.setBlock(x, y, z, Block.torchWood.blockID);
++            }
++            else
++            {
++                FCUtilsItem.EjectStackWithRandomVelocity(var1, x, y, z, new ItemStack(Block.torchWood, 1, 0));
++            }
++        }

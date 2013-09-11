@@ -1,9 +1,0 @@
-diff --git a/src/minecraft_server/net/minecraft/src/FCTileEntityTurntable.java b/src/minecraft_server/net/minecraft/src/FCTileEntityTurntable.java
-index cbbe356..0f77b0f 100644
---- a/src/minecraft_server/net/minecraft/src/FCTileEntityTurntable.java
-+++ b/src/minecraft_server/net/minecraft/src/FCTileEntityTurntable.java
-@@ -542,2 +542,2 @@ public class FCTileEntityTurntable extends TileEntity
--        int var6 = FCUtilsMisc.RotateFacingAroundJ(var5, var4);
--        this.worldObj.setBlockMetadataWithNotify(var1, var2, var3, var6);
-+        int var6 = FCUtilsMisc.RotateFacingAroundJ(var5 & 7, var4);
-+        this.worldObj.setBlockMetadataWithNotify(var1, var2, var3, var6 | (var5 & 8));

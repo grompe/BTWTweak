@@ -1,31 +1,11 @@
 diff --git a/src/minecraft/net/minecraft/src/FCBlockPumpkin.java b/src/minecraft/net/minecraft/src/FCBlockPumpkin.java
-index 61f1098..2b5897e 100644
+index 61f1098..e082dc6 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockPumpkin.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockPumpkin.java
 @@ -7,0 +8 @@ public class FCBlockPumpkin extends FCBlockGourd
 +    private boolean isLantern;
 @@ -11,0 +13 @@ public class FCBlockPumpkin extends FCBlockGourd
 +        this.isLantern = var2;
-@@ -114,0 +117,19 @@ public class FCBlockPumpkin extends FCBlockGourd
-+    protected void Explode(World var1, double var2, double var4, double var6)
-+    {
-+        super.Explode(var1, var2, var4, var6);
-+        if (this.isLantern)
-+        {
-+            int x = MathHelper.floor_double(var2);
-+            int y = MathHelper.floor_double(var4);
-+            int z = MathHelper.floor_double(var6);
-+            if (Block.torchWood.canPlaceBlockAt(var1, x, y, z))
-+            {
-+                var1.setBlock(x, y, z, Block.torchWood.blockID);
-+            }
-+            else
-+            {
-+                FCUtilsItem.EjectStackWithRandomVelocity(var1, x, y, z, new ItemStack(Block.torchWood, 1, 0));
-+            }
-+        }
-+    }
-+
-@@ -128 +149 @@ public class FCBlockPumpkin extends FCBlockGourd
+@@ -128 +130 @@ public class FCBlockPumpkin extends FCBlockGourd
 -        this.m_IconFront = var1.registerIcon("pumpkin_face");
 +        this.m_IconFront = var1.registerIcon(this.isLantern ? "pumpkin_jack" : "pumpkin_face");

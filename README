@@ -1,48 +1,29 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.4 source code
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.5 source code
 (Compatible with Better Than Wolves V4.8911)
 
-[****** Installation Instructions (client) ******]
+[****** Source installation instructions ******]
 
 1) Unpack and setup MCP
-2) Install BTW into minecraft.jar
+2) Install BTW v4.8911 into minecraft.jar
 3) Decompile with MCP, it will complain a bit
 4) Apply MCP fix patch using the mcp_fix.diff file
 5) Run MCP's updatemd5 script
-6) Patch the source code using ./diffs/*.diff and files
+6) Patch the source code using ./diffs/*.diff files
 7) Copy ./src/*.java files to your ./src/minecraft/net/minecraft/src/ directory
-8) Copy ./src_common/*.java files to your ./src/minecraft/net/minecraft/src/ directory
-9) Recompile, reobfuscate with MCP
-10) Insert all ./reobf/minecraft/*.class files into minecraft.jar
-11) Insert all ./res/*.* files into minecraft.jar
 ...
 42) Profit!
 
-[****** Installation Instructions (server) ******]
+[****** Binary installation instruction ******]
 
-1) Unpack and setup MCP
-2) Install BTW into minecraft_server.jar
-3) Decompile with MCP, it will complain a bit
-4) Apply MCP fix patch using the mcp_fix.diff file
-5) Run MCP's updatemd5 script
-6) Patch the source code using ./diffs_server/*.diff and files
-7) Copy ./src_server/*.java files to your ./src/minecraft_server/net/minecraft/src/ directory
-8) Copy ./src_common/*.java files to your ./src/minecraft_server/net/minecraft/src/ directory
-9) Recompile, reobfuscate with MCP
-10) Insert all ./reobf/minecraft_server/*.class files into minecraft_server.jar
+1) Follow the Source installation instructions
+2) Recompile, reobfuscate with MCP
+3) Insert all ./reobf/minecraft/GPE*.class files into patcher/GPEBTWTweak_files.zip
+4) Insert all ./res/*.* files into patcher/GPEBTWTweak_files.zip
+5) Compile the patcher if you haven't yet: "javac BTWTweaker.java CliPatcher.java"
+6) Repackage the patcher: "jar cvfe BTWTweak.jar CliPatcher *"
+7) Use the patcher
 ...
 42) Profit!
-
-[****** Hacking the source code ******]
-
-Provided you have followed installation instructions and now having
-the tweak mod source code in direct form, you can modify it to your taste.
-
-How to convert it back to patch files is your home task.
-
-I like to use git for that, example in _gen_diffs.bat file.
-
-Oh yeah, and for the binary distribution I use bsdiff on original BTWMod.zip and patched
-BTWMod.zip, and then the patcher provided here.
 
 [********** Change Log ************]
 

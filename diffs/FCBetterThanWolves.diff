@@ -1,0 +1,6 @@
+diff --git a/src/minecraft/net/minecraft/src/FCBetterThanWolves.java b/src/minecraft/net/minecraft/src/FCBetterThanWolves.java
+index 62631d7..cf29d35 100644
+--- a/src/minecraft/net/minecraft/src/FCBetterThanWolves.java
++++ b/src/minecraft/net/minecraft/src/FCBetterThanWolves.java
+@@ -242,0 +243 @@ public class FCBetterThanWolves extends FCAddOn
++    public static Item fcItemWool;

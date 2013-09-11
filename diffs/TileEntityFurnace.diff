@@ -1,36 +1,18 @@
 diff --git a/src/minecraft/net/minecraft/src/TileEntityFurnace.java b/src/minecraft/net/minecraft/src/TileEntityFurnace.java
-index f28d825..4ef3705 100644
+index f28d825..642751d 100644
 --- a/src/minecraft/net/minecraft/src/TileEntityFurnace.java
 +++ b/src/minecraft/net/minecraft/src/TileEntityFurnace.java
 @@ -20,0 +21,2 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
 +    public int currentItemID = 0;
 +    public boolean emptyResultSlot = false;
-@@ -243,0 +246 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
-+        boolean shouldUpdate = false;
-@@ -273 +276,19 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
+@@ -273 +275,3 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
 -            if (this.isBurning() && this.canSmelt())
-+            if (this.currentItemID == 0 && this.furnaceItemStacks[0] != null)
-+            {
-+                shouldUpdate = true;
-+                this.currentItemID = this.furnaceItemStacks[0].itemID;
-+            }
-+
-+            if (this.currentItemID != 0 && this.furnaceItemStacks[0] == null)
-+            {
-+                shouldUpdate = true;
-+                this.currentItemID = 0;
-+            }
-+
-+            if (emptyResultSlot != (this.furnaceItemStacks[2] == null))
-+            {
-+                shouldUpdate = true;
-+                emptyResultSlot = (this.furnaceItemStacks[2] == null);
-+            }
++            boolean shouldUpdate = checkForChange();
 +
 +            if (this.isBurning() && this.canSmelt() && (this.furnaceItemStacks[0].itemID == this.currentItemID))
-@@ -286,0 +308 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
-+                this.currentItemID = this.furnaceItemStacks[0] == null ? 0 : this.furnaceItemStacks[0].itemID;
-@@ -292 +314,6 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
+@@ -285,0 +290 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
++                setCurrentItemID();
+@@ -292 +297,6 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
 -                BlockFurnace.updateFurnaceBlockState(this.furnaceBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
 +                shouldUpdate = true;
 +            }
@@ -38,3 +20,26 @@ index f28d825..4ef3705 100644
 +            if (shouldUpdate)
 +            {
 +                BlockFurnace.updateFurnaceBlockState(this.furnaceBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord, this.furnaceItemStacks[0] != null || this.furnaceItemStacks[2] != null);
+@@ -301,0 +312,22 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
++    private boolean checkForChange()
++    {
++        boolean shouldUpdate = false;
++        if ((currentItemID == 0) != (furnaceItemStacks[0] == null))
++        {
++            shouldUpdate = true;
++            setCurrentItemID();
++        }
++
++        if (emptyResultSlot != (furnaceItemStacks[2] == null))
++        {
++            shouldUpdate = true;
++            emptyResultSlot = (furnaceItemStacks[2] == null);
++        }
++        return shouldUpdate;
++    }
++
++    private void setCurrentItemID()
++    {
++        currentItemID = (furnaceItemStacks[0] == null) ? 0 : furnaceItemStacks[0].itemID;
++    }
++

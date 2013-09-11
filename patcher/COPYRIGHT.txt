@@ -1,45 +1,51 @@
-Apache Commons Compress
-Copyright 2002-2013 The Apache Software Foundation
+BTWTweak is by Grom PE, released under public domain except for the file
+tweaks.js, which includes a special license.
 
-This product includes software developed at
-The Apache Software Foundation (http://www.apache.org/)
-Distributed under Apache License Version 2.0:
-http://commons.apache.org/proper/commons-compress/
+---
 
-Copy of the license is provided in LICENSE-APACHE.txt.
+BTWTweak was made with help of reading decompiled Better Than Wolves
+Total Conversion version 4.8911 code, Copyright 2011, 2012, 2013 FlowerChild.
+Here is Better Than Wolves V4.8911 copyright notice:
 
+This document and the files contained in this package are Copyright
+©(2011, 2012, 2013) and are the intellectual property of the author. It may
+not be reproduced under any circumstances except for personal, private use
+as long as it remains in its unaltered, unedited form. It may not be placed
+on any web site or otherwise distributed publicly without advance written
+permission. Use of this mod on any other website is strictly prohibited,
+and a violation of copyright.
 
-Using modified version of port of bsdiff 4.3 to Java by pepoirot:
-https://github.com/pepoirot/bsdiff
+---
 
+BTWTweak uses ASM, Java bytecode manipulation and analysis framework.
+Here is ASM license:
 
-Based on bsdiff, Copyright 2003-2005 Colin Percival:
-http://www.daemonology.net/bsdiff/
-
-
-Copyright 2003-2005 Colin Percival
-All rights reserved
+Copyright (c) 2000-2011 INRIA, France Telecom
+All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
-modification, are permitted providing that the following conditions 
+modification, are permitted provided that the following conditions
 are met:
+
 1. Redistributions of source code must retain the above copyright
    notice, this list of conditions and the following disclaimer.
+
 2. Redistributions in binary form must reproduce the above copyright
    notice, this list of conditions and the following disclaimer in the
    documentation and/or other materials provided with the distribution.
 
-THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
-IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
-DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
-STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
-IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE.
+3. Neither the name of the copyright holders nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
 
-
-Better Than Wolves Total Conversion Copyright 2011, 2012, 2013 FlowerChild
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+THE POSSIBILITY OF SUCH DAMAGE.

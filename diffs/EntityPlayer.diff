@@ -1,12 +1,12 @@
 diff --git a/src/minecraft/net/minecraft/src/EntityPlayer.java b/src/minecraft/net/minecraft/src/EntityPlayer.java
-index dc30dad..c3b77d1 100644
+index dc30dad..c0906f9 100644
 --- a/src/minecraft/net/minecraft/src/EntityPlayer.java
 +++ b/src/minecraft/net/minecraft/src/EntityPlayer.java
 @@ -2249 +2249 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
 -        if (var1 >= 4)
-+        if (var1 >= 4 || this.isEating())
++        if (var1 >= 4 || getFlag(4)) // isEating()
 @@ -2406 +2406,3 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
 -        return this.GetHealthAndExhaustionModifierWithSightlessModifier();
 +        float f = this.GetHealthAndExhaustionModifierWithSightlessModifier();
-+        if (this.inventory.armorInventory[0] != null) f *= 1.1;
++        if (this.inventory.armorInventory[0] != null) f *= 1.1F;
 +        return f * (1.0F - ((float)this.GetWornArmorWeight() / 220.0F));
