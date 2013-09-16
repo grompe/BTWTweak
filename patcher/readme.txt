@@ -19,6 +19,8 @@ v0.6
   you to burn some wooden logs under the cauldron and is more
   fitting for the now permanent nature of diamond ingots.
 
+- Added silk crafted from 9 string, only for storage purposes for now
+
 
 v0.5
 
