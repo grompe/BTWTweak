@@ -13,8 +13,10 @@ public class GPEBTWTweak extends FCAddOn
   public static Block gpeBlockStone;
 
   public static Item gpeItemLooseRock;
+  public static Item gpeItemSilk;
 
   public static int gpeLooseRockID = 17000;
+  public static int gpeSilkID = 17001;
   public static int gpeEntityRockID = 25;
   public static int hcSpawnRadius = 2000;
   public static int gpeEntityRockVehicleSpawnType = 120;
@@ -77,6 +79,7 @@ public class GPEBTWTweak extends FCAddOn
         + "// **** Item IDs ****\r\n"
         + "\r\n"
         + "gpeLooseRockID=17000\r\n"
+        + "gpeSilkID=17001\r\n"
         + "\r\n"
         + "// **** Entity IDs ****\r\n"
         + "\r\n"
@@ -119,6 +122,7 @@ public class GPEBTWTweak extends FCAddOn
     ItemAxe.SetAllAxesToBeEffectiveVsBlock((new FCBlockPumpkin(91, true)).setHardness(1.0F).setStepSound(Block.soundWoodFootstep).setLightValue(1.0F).setUnlocalizedName("litpumpkin"));
     new GPEItemPotash(FCBetterThanWolves.fcPotash.itemID - 256);
     gpeItemLooseRock = new GPEItemLooseRock(gpeLooseRockID - 256);
+    gpeItemSilk = new Item(gpeSilkID - 256).setUnlocalizedName("gpeItemSilk").setCreativeTab(CreativeTabs.tabMaterials).SetBuoyancy(1.0F).SetBellowsBlowDistance(2);
 
     int id = FCBetterThanWolves.fcAestheticOpaque.blockID;
     Block.blocksList[id] = null;
@@ -170,6 +174,9 @@ public class GPEBTWTweak extends FCAddOn
     FCRecipes.AddVanillaRecipe(new ItemStack(Block.stoneSingleSlab, 1, 3), new Object[] {"XX", 'X', gpeItemLooseRock});
     FCRecipes.AddVanillaRecipe(new ItemStack(Block.cobblestone), new Object[] {"X", "X", 'X', new ItemStack(Block.stoneSingleSlab, 1, 3)});
     FCRecipes.AddVanillaRecipe(new ItemStack(Block.stoneBrick), new Object[] {"X", "X", 'X', new ItemStack(Block.stoneSingleSlab, 1, 5)});
+
+    FCRecipes.AddVanillaRecipe(new ItemStack(gpeItemSilk, 1), new Object[] {"###", "###", "###", '#', Item.silk});
+    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.silk, 9), new Object[] {new ItemStack(gpeItemSilk)});
 
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.book, 1), new Object[] {Item.paper, Item.paper, Item.paper, FCBetterThanWolves.fcItemTannedLeatherCut});
 
@@ -344,6 +351,7 @@ public class GPEBTWTweak extends FCAddOn
     t.put("item.skull.pigzombie.name", "Zombie Pigman head");
     t.put("item.skull.fire.name", "Blaze head");
     t.put(gpeItemLooseRock.getUnlocalizedName() + ".name", "Rock");
+    t.put(gpeItemSilk.getUnlocalizedName() + ".name", "Silk");
   }
 
   public static void saveWorldData(World world)
