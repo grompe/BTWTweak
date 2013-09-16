@@ -91,8 +91,9 @@ public class GPEBlockDirtSlab extends FCBlockDirtSlab
   @ClientOnly
   public Icon getIcon(int side, int meta)
   {
-    if (meta == gravel) return this.gravelIcon;
-    if (meta == sand) return this.sandIcon;
+    int subtype = GetSubtypeFromMetadata(meta);
+    if (subtype == gravel) return this.gravelIcon;
+    if (subtype == sand) return this.sandIcon;
     return super.getIcon(side, meta);
   }
 }
