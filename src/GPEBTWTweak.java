@@ -2,12 +2,13 @@ package net.minecraft.src;
 
 import java.util.*;
 import java.io.*;
+import java.lang.reflect.*;
 
 public class GPEBTWTweak extends FCAddOn
 {
   public static GPEBTWTweak instance;
   public static GPEBTWTweakProxy proxy;
-  public static String tweakVersion = "0.5";
+  public static String tweakVersion = "0.6";
 
   public static Block gpeBlockStone;
 
@@ -64,7 +65,45 @@ public class GPEBTWTweak extends FCAddOn
       }
       br.close();
     }
-    catch (FileNotFoundException e) {}
+    catch (FileNotFoundException e)
+    {
+      String defaultConfig = ""
+        + "// **** BTWTweak Settings ****\r\n"
+        + "\r\n"
+        + "// Hardcore Spawn radius, in blocks. Changing it from default 2000 may destabilize your game balance.\r\n"
+        + "\r\n"
+        + "hcSpawnRadius=2000\r\n"
+        + "\r\n"
+        + "// **** Item IDs ****\r\n"
+        + "\r\n"
+        + "gpeLooseRockID=17000\r\n"
+        + "\r\n"
+        + "// **** Entity IDs ****\r\n"
+        + "\r\n"
+        + "gpeEntityRockID=35\r\n"
+        + "\r\n"
+        + "// **** Other IDs ****\r\n"
+        + "\r\n"
+        + "gpeEntityRockVehicleSpawnType=120\r\n"
+        + "\r\n"
+        + "// **** World strata regeneration ****\r\n"
+        + "\r\n"
+        + "// To use, set key to non-zero and name of the world you want to process\r\n"
+        + "gpeStrataRegenKey=0\r\n"
+        + "gpeStrataRegenWorldName=???\r\n"
+        + "";
+      try
+      {
+        FileOutputStream fo = new FileOutputStream(config);
+        fo.write(defaultConfig.getBytes());
+        fo.close();
+      }
+      catch (IOException e2)
+      {
+        FCAddOnHandler.LogMessage("Error while writing default BTWTweak.cfg!");
+        e2.printStackTrace();
+      }
+    }
     catch (IOException e)
     {
       FCAddOnHandler.LogMessage("Error while reading BTWTweak.cfg!");
@@ -133,10 +172,53 @@ public class GPEBTWTweak extends FCAddOn
     FCRecipes.AddVanillaRecipe(new ItemStack(Block.stoneBrick), new Object[] {"X", "X", 'X', new ItemStack(Block.stoneSingleSlab, 1, 5)});
 
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.book, 1), new Object[] {Item.paper, Item.paper, Item.paper, FCBetterThanWolves.fcItemTannedLeatherCut});
+
+    FCRecipes.AddStokedCrucibleRecipe(new ItemStack[] {new ItemStack(Item.goldNugget, 3), new ItemStack(FCBetterThanWolves.fcSteel, 1)}, new ItemStack[] {new ItemStack(Block.pistonBase, 1)});
+    FCRecipes.AddStokedCrucibleRecipe(new ItemStack[] {new ItemStack(Item.goldNugget, 3), new ItemStack(FCBetterThanWolves.fcSteel, 1)}, new ItemStack[] {new ItemStack(Block.pistonStickyBase, 1)});
     
     BlockDispenser.dispenseBehaviorRegistry.putObject(gpeItemLooseRock, new GPEBehaviorRock());
 
     FCAddOnHandler.LogMessage("Grom PE's BTWTweak is done tweaking. Enjoy!");
+  }
+
+  public void PostInitialize()
+  {
+    FCAddOnHandler.LogMessage("BTWTweak now looks for BTW Research Add-On to integrate with...");
+    try
+    {
+      Class rb = Class.forName("SixModResearchBenchAddOn");
+      Method addDesc = rb.getMethod("addResearchDescription", new Class[] {String.class, String.class});
+      // addDesc.invoke(rb, "<KEY>", "<DESCRIPTION>");
+      // Where <KEY> is of the form "ID#Metadata", (i.e. "5#3" for jungle planks) 
+      // and <DESCRIPTION> is the description you want the item to have. 
+      // Try to keep the description under 300 characters or so.
+      addDesc.invoke(rb, "4", "Rough broken down stone. If arranged in a hollow square, can be crafted into a simple furnace to smelt and cook things.");
+      addDesc.invoke(rb, "13", "Fine chunks of stone and sand. Digging through it may yield a rock, or even a flint, but passing it through a fine filter is more efficient.");
+      addDesc.invoke(rb, "44#3", "A half high block of cobblestone, useful for getting up slopes without jumping. Two of them can be joined back into a single block. Many solid blocks seem to be able to be made into slabs like this.");
+      addDesc.invoke(rb, "44#5", "A half high block of stone bricks, useful for getting up slopes without jumping. Two of them can be joined back into a single block. Many solid blocks seem to be able to be made into slabs like this.");
+      addDesc.invoke(rb, "80", "This block of compacted snow seems to melt into water when placed directly nearby a heat source.");
+      addDesc.invoke(rb, "91", "The torch encased in this carved pumpkin gives off a comforting light, and is well-protected from water. The pumpkin is still fragile and if dropped from a height, breaks into seeds and leaves the torch standing in most cases.");
+      addDesc.invoke(rb, "397#5", "Spider head now silently stares at you with its all 8 eyes.");
+      addDesc.invoke(rb, "397#6", "Looks like this black person won't be teleporting anymore.");
+      addDesc.invoke(rb, "397#7", "Zombie pigman head smells rotten.");
+      addDesc.invoke(rb, "397#8", "Blaze head is one cool-looking fiery trophy.");
+      addDesc.invoke(rb, Integer.toString(gpeLooseRockID), "A rough loose rock. It could be crafted with shafts to make basic tools, one for a shovel, two for an axe or three for a pick. Heavy, but usable as a short ranged thrown weapon. Can be assembled to slabs and blocks.");
+      addDesc.invoke(rb, Integer.toString(FCBetterThanWolves.fcBlockDirtSlab.blockID) + "#6", "Gravel makes for a good road material, even in a slab form.");
+      addDesc.invoke(rb, Integer.toString(FCBetterThanWolves.fcBlockDirtSlab.blockID) + "#7", "Running and jumping is a huge drain on energy and cuts into a food supply fast. Slabs could offer a huge help in this, allowing one to walk up slopes without any jumping at all. Needs a solid surface to sit on though.");
+      addDesc.invoke(rb, Integer.toString(FCBetterThanWolves.fcPotash.itemID), "Grainy ash substance from rendered down wood. Can fertilize tilled soil. Also has a bleaching quality, so should be able to bleach coloured wool white.");
+      addDesc.invoke(rb, Integer.toString(FCBetterThanWolves.fcAestheticOpaque.blockID) + "#4", "Nice, soft and comfy. A handy way to store padding. Or to make a calming padded room. Softens the blow when landed onto.");
+      // - potash as fertilizer
+      // - block of padding reducing fall damage
+    }
+    catch (ClassNotFoundException e)
+    {
+      FCAddOnHandler.LogMessage("BTW Research Add-On not found.");
+    }
+    catch (Exception e)
+    {
+      FCAddOnHandler.LogMessage("Error while integrating with BTW Research Add-On!");
+      e.printStackTrace();
+    }    
   }
 
   public static boolean onBlockSawed(World world, int x, int y, int z)

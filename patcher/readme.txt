@@ -3,6 +3,19 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.5
 
 [********** Change Log ************]
 
+v0.6
+
+- Fixed packed earth, gravel and sand slab textures broken in v0.5
+
+- Piston can be melted down in a stoked crucible to retrieve metallic components
+
+- BTWTweak.cfg is now automatically created if doesn't exist
+
+- Shift+right-click rocks to quickly convert them to cobblestone
+
+- Support for Six's BTW Research Add-On
+
+
 v0.5
 
 - Refactoring and a new patching method - hardcore modding!
