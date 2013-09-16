@@ -15,6 +15,10 @@ v0.6
 
 - Support for Six's BTW Research Add-On
 
+- Moved diamond ingot recipe to the cauldron. Yep, this requires
+  you to burn some wooden logs under the cauldron and is more
+  fitting for the now permanent nature of diamond ingots.
+
 
 v0.5
 
