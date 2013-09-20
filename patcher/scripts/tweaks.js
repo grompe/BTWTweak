@@ -948,6 +948,7 @@ function ObjectArray(arr)
       {
         "DispenseBlockOrItem(Laab;IIILjava/util/Random;)V": function(mn)
         {
+          if (isBTWVersionOrNewer("4.89666")) return;
           check(mn, 0xB78B99F2);
           var label;
           var boundary = null;
@@ -2581,6 +2582,11 @@ function ObjectArray(arr)
   function onClient()
   {
     return !__main_class__.onServer;
+  }
+
+  function isBTWVersionOrNewer(ver)
+  {
+    return parseFloat(__main_class__.btwVersion) >= ver;
   }
 
   var ACTION_OVERWRITE = Integer(0);
