@@ -1,4 +1,4 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.5
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.6
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
@@ -20,6 +20,8 @@ v0.6
   fitting for the now permanent nature of diamond ingots.
 
 - Added silk crafted from 9 string, only for storage purposes for now
+
+- Block Dispenser no longer assembles cobblestone from loose rocks in BTW 4.89666+
 
 
 v0.5
