@@ -3,6 +3,11 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.6
 
 [********** Change Log ************]
 
+v0.6a
+
+- Fix version detection, this fixes melting pistons in particular
+
+
 v0.6
 
 - Fixed packed earth, gravel and sand slab textures broken in v0.5

@@ -182,7 +182,6 @@ public class BTWTweaker
     try
     {
       engine = new RhinoScriptEngine();
-      engine.put("__main_class__", MAIN_CLASS);
       
       execResource("scripts/opcodes.js");
       execResource("scripts/tweaks.js");

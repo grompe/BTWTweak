@@ -2385,7 +2385,7 @@ function ObjectArray(arr)
   function recordFailure()
   {
     failures += 1;
-    __main_class__.failures += 1;
+    Packages.BTWTweaker.failures += 1;
   }
 
   function CodeInserter(finder, code, message, before)
@@ -2581,14 +2581,14 @@ function ObjectArray(arr)
 
   function onClient()
   {
-    return !__main_class__.onServer;
+    return !Packages.BTWTweaker.onServer;
   }
 
   function isBTWVersionOrNewer(ver)
   {
-    return parseFloat(__main_class__.btwVersion) >= ver;
+    return parseFloat(Packages.BTWTweaker.btwVersion) >= ver;
   }
-
+  
   var ACTION_OVERWRITE = Integer(0);
   var ACTION_TWEAK = Integer(1);
   var ACTION_ADAPTSERVER = Integer(2);
