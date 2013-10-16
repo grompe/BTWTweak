@@ -2108,7 +2108,7 @@ function ObjectArray(arr)
       {
         "a_(Lsq;)Z": function(mn)
         {
-          check(mn, [0xC74B29CB, 0xC58F29C5]);
+          check(mn, [0xC74B29CB, 0xC58F29C5, 0xC7B729D7]);
           CodeInserter(
             MethodInsnFinder("ru", +1),
             [
