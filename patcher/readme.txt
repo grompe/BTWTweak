@@ -1,4 +1,4 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.6
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.6a
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
@@ -6,6 +6,8 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.6
 v0.6a
 
 - Fix version detection, this fixes melting pistons in particular
+
+- Fix crash when sawing on newer BTW versions [#1]
 
 
 v0.6

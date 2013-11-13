@@ -11,6 +11,7 @@ public class GPEBTWTweak extends FCAddOn
   public static String tweakVersion = "0.6";
 
   public static Block gpeBlockStone;
+  public static Block compatAxleBlock;
 
   public static Item gpeItemLooseRock;
   public static Item gpeItemSilk;
@@ -58,6 +59,7 @@ public class GPEBTWTweak extends FCAddOn
         value = tmp[1].trim();
 
         if (key.equals("gpeLooseRockID")) gpeLooseRockID = Integer.parseInt(value);
+        if (key.equals("gpeSilkID")) gpeSilkID = Integer.parseInt(value);
         if (key.equals("gpeEntityRockID")) gpeEntityRockID = Integer.parseInt(value);
         if (key.equals("gpeEntityRockVehicleSpawnType")) gpeEntityRockVehicleSpawnType = Integer.parseInt(value);
         if (key.equals("hcSpawnRadius")) hcSpawnRadius = Integer.parseInt(value);
@@ -192,6 +194,24 @@ public class GPEBTWTweak extends FCAddOn
     
     BlockDispenser.dispenseBehaviorRegistry.putObject(gpeItemLooseRock, new GPEBehaviorRock());
 
+    // GitHub [#1]: fcBlockAxle got changed to fcAxleBlock
+    try
+    {
+      try
+      {
+        compatAxleBlock = (Block)FCBetterThanWolves.class.getField("fcAxleBlock").get(null);
+      }
+      catch (NoSuchFieldException e)
+      {
+        compatAxleBlock = (Block)FCBetterThanWolves.class.getField("fcBlockAxle").get(null);
+      }
+    }
+    catch (Exception e)
+    {
+      FCAddOnHandler.LogMessage("Error while retrieving Axle Block, assuming ID=247");
+      compatAxleBlock = Block.blocksList[247];
+    }
+    
     FCAddOnHandler.LogMessage("Grom PE's BTWTweak is done tweaking. Enjoy!");
   }
 
@@ -275,7 +295,7 @@ public class GPEBTWTweak extends FCAddOn
     {
       EjectSawProducts(world, x, y, z, FCBetterThanWolves.fcBlockWoodSidingItemStubID, 0, 2);
     }
-    else if (id == FCBetterThanWolves.fcAxleBlock.blockID)
+    else if (id == compatAxleBlock.blockID)
     {
       EjectSawProducts(world, x, y, z, FCBetterThanWolves.fcBlockWoodCornerItemStubID, 0, 2);
       EjectSawProducts(world, x, y, z, FCBetterThanWolves.fcRopeItem.itemID, 0, 1);
