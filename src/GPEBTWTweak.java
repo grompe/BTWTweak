@@ -433,11 +433,9 @@ public class GPEBTWTweak extends FCAddOn
     }
   }
 
-  // Simply ignoring letters for now
   public static boolean isBTWVersionOrNewer(String ver)
   {
-    String current = FCBetterThanWolves.fcVersionString.replaceAll("[^\\d\\.]+", "");
-    return Double.parseDouble(current) >= Double.parseDouble(ver);
+    return ver.compareTo(FCBetterThanWolves.fcVersionString) <= 0;
   }
 
   private static File getStrataRegenFile(World world)

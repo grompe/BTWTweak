@@ -949,7 +949,7 @@ function ObjectArray(arr)
         "DispenseBlockOrItem(Laab;IIILjava/util/Random;)V": function(mn)
         {
           if (isBTWVersionOrNewer("4.89666")) return;
-          check(mn, 0xB78B99F2);
+          check(mn, 0xB78B99F2, 0x9DEF97A1);
           var label;
           var boundary = null;
           for (var i = 0; i < mn.instructions.size(); i++)
@@ -2027,7 +2027,7 @@ function ObjectArray(arr)
       {
         "AssignNewHardcoreSpawnLocation(Laab;Ljc;)Z": function(mn)
         {
-          check(mn, [0x21D136B5, 0x8CE23774]);
+          check(mn, [0x21D136B5, 0x8CE23774, 0xE88A3F80]);
           CodeInserter(
             InsnFinder(DMUL),
             [
@@ -2586,7 +2586,7 @@ function ObjectArray(arr)
 
   function isBTWVersionOrNewer(ver)
   {
-    return parseFloat(Packages.BTWTweaker.btwVersion) >= ver;
+    return Packages.BTWTweaker.btwVersion >= ver;
   }
   
   var ACTION_OVERWRITE = Integer(0);
