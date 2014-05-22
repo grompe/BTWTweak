@@ -1,7 +1,13 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.6a
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.6b
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
+
+v0.6b
+
+- Now beds are usable again and allow players to regenerate even when hungry.
+  Regeneration rate is doubled and hunger rate is halved when resting.
+
 
 v0.6a
 

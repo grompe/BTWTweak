@@ -80,11 +80,6 @@ Needs more thought on implementation
 
 - Gravestones on death (only if next respawn is affected by hardcore spawn)
 
-- Beds are made with blocks of padding instead of wool and lying in them doesn't skip time,
-  just changes the camera position, makes hunger go twice slower and regeneration twice faster.
-  - Or with silk (crafted with 9 string)
-    - Silk armor?
-
 - Better fishing rods made with soulforged steel nugget
 
 - Fix axle texture in a better way

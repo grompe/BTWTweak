@@ -967,7 +967,7 @@ function ObjectArray(arr)
     },*/
     "FCBlockBed":
     {
-      removeMethods:
+      remove:
       [
         "a(Laab;IIILsq;IFFF)Z"
       ],
@@ -1523,7 +1523,7 @@ function ObjectArray(arr)
         "<init>(Llt;LFCTileEntityCookingVessel;)V": function(mn)
         {
           check(mn, 0xE7B32136);
-          log("\t* (1/4) Adding stoked info handling and (1/2) reducing slots to 9 in " + mn.name + mn.desc, 1);
+          log("\t* (1/3) Adding stoked info handling and (1/2) reducing slots to 9 in " + mn.name + mn.desc, 1);
           var changes = 0;
           var i;
           for (i = 0; i < mn.instructions.size(); i++)
@@ -1617,13 +1617,13 @@ function ObjectArray(arr)
               FieldInsnNode(GETFIELD, "FCTileEntityCookingVessel", "m_iFireUnderType", "I"),
               MethodInsnNode(INVOKEINTERFACE, "tp", "a", "(Ltj;II)V"),
             ],
-            "\t* (2/4) Adding stoked info handling in "
+            "\t* (2/3) Adding stoked info handling in "
           ).process(mn);
         },
         "b()V": function(mn)
         {
           check(mn, 0x3F10F73);
-          log("\t* (3/4) Adding stoked info handling in " + mn.name + mn.desc, 1);
+          log("\t* (3/3) Adding stoked info handling in " + mn.name + mn.desc, 1);
           var changes = 0;
           var i;
           for (i = 0; i < mn.instructions.size(); i++)
@@ -1691,6 +1691,9 @@ function ObjectArray(arr)
             recordFailure();
           }
         },
+      },
+      tweakClientMethods:
+      {
         "b(II)V": function(mn)
         {
           check(mn, 0x9DD02F8);
@@ -1708,7 +1711,7 @@ function ObjectArray(arr)
               label,
               FrameNode(F_SAME, 0, null, 0, null),
             ],
-            "\t* (4/4) Adding stoked info handling in ",
+            "\t* (GUI) Adding stoked info handling in ",
             INSERT_BEFORE
           ).process(mn);
         },
@@ -2176,7 +2179,7 @@ function ObjectArray(arr)
       {
         "a_(Lsq;)Z": function(mn)
         {
-          check(mn, [0xC74B29CB, 0xC58F29C5, 0xC7B729D7]);
+          check(mn, [0xC74B29CB, 0xC58F29C5, 0xC7B729D7, 0xC5FB29D1]);
           CodeInserter(
             MethodInsnFinder("ru", +1),
             [
@@ -3016,7 +3019,7 @@ function ObjectArray(arr)
           count++;
         }
       }
-      if (a.removeMethods && (a.removeMethods.indexOf(mn.name + mn.desc) != -1))
+      if (a.remove && (a.remove.indexOf(mn.name + mn.desc) != -1))
       {
         toRemove.push(mn);
       }
