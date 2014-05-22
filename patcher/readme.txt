@@ -12,7 +12,9 @@ v0.6b
 
 - Thrown or dispensed rocks shatter glass
 
-- Potash fertilizes farmland if dropped on it
+- Potash fertilizes farmland or planter when dropped on it
+
+- Seeds root themselves when dropped on suitable ground
 
 
 v0.6a

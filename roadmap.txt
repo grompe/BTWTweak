@@ -54,8 +54,6 @@ Needs more thought on implementation
 
 - Make screams from cake, grinding netherrack, etc. scare away animals
 
-- Make seeds root themselves when dropped on farmland or correct planter type
-
 - Make ores drop loose rocks and raw ore pieces; add pure ores
 
 - Cauldron having a water slot that needs refilling, indicating if the cauldron is dirty;

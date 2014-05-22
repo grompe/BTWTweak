@@ -487,20 +487,56 @@ public class GPEBTWTweak extends FCAddOn
   public static void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
   {
     if (world.isRemote) return;
-    int id = world.getBlockId(x, y, z);
     if (entity instanceof EntityItem && !entity.isDead)
     {
+      int id = world.getBlockId(x, y, z);
+      int meta = world.getBlockMetadata(x, y, z);
       ItemStack item = ((EntityItem)entity).getEntityItem();
-      if (id == Block.tilledField.blockID && item.itemID == FCBetterThanWolves.fcPotash.itemID)
+
+      if (item.itemID == FCBetterThanWolves.fcPotash.itemID)
       {
-        int meta = world.getBlockMetadata(x, y, z);
-        world.setBlockAndMetadataWithNotify(x, y, z, FCBetterThanWolves.fcBlockFarmlandFertilized.blockID, meta);
-        item.stackSize--;
-        if (item.stackSize <= 0)
+        if (id == Block.tilledField.blockID)
         {
-          entity.setDead();
+          world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, "random.pop", 0.25F, world.rand.nextFloat() * 1.5F + 2.0F);
+          world.setBlockAndMetadataWithNotify(x, y, z, FCBetterThanWolves.fcBlockFarmlandFertilized.blockID, meta);
+          item.stackSize--;
+          if (item.stackSize <= 0) entity.setDead();
+        }
+        else if (id == FCBetterThanWolves.fcPlanter.blockID && meta == 1)
+        {
+          world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, "random.pop", 0.25F, world.rand.nextFloat() * 1.5F + 2.0F);
+          world.setBlockMetadataWithNotify(x, y, z, 2);
+          item.stackSize--;
+          if (item.stackSize <= 0) entity.setDead();
         }
       }
+      else if (item.itemID == Item.seeds.itemID
+               || item.itemID == Item.pumpkinSeeds.itemID
+               || item.itemID == Item.melonSeeds.itemID
+               || item.itemID == FCBetterThanWolves.fcHempSeeds.itemID
+              )
+      {
+        if ( ((EntityItem)entity).age >= 20 &&
+             (id == Block.tilledField.blockID || id == FCBetterThanWolves.fcBlockFarmlandFertilized.blockID
+               || (id == FCBetterThanWolves.fcPlanter.blockID && (meta == 1 || meta == 2))
+             )
+           )
+        {
+          if (world.isAirBlock(x, y + 1, z))
+          {
+            int plantBlock = item.itemID == Item.seeds.itemID ? Block.crops.blockID
+                           : item.itemID == Item.pumpkinSeeds.itemID ? Block.pumpkinStem.blockID
+                           : item.itemID == Item.melonSeeds.itemID ? Block.melonStem.blockID
+                           : item.itemID == FCBetterThanWolves.fcHempSeeds.itemID ? FCBetterThanWolves.fcHempCrop.blockID
+                           : FCBetterThanWolves.fcHempCrop.blockID;
+            world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, "random.pop", 0.25F, world.rand.nextFloat() * 1.5F + 2.0F);
+            world.setBlock(x, y + 1, z, plantBlock);
+            item.stackSize--;
+            if (item.stackSize <= 0) entity.setDead();
+          }
+        }
+      }
+      
     }
   }
 
