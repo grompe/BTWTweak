@@ -304,6 +304,29 @@ function ObjectArray(arr)
         log("Class " + cn.name + ": \t+ Added private Icon furnaceIconFrontStuff");
       },
     },
+    "awz": // GUISleepMP
+    {
+      tweakClientMethods:
+      {
+        "A_()V": function(mn)
+        {
+          check(mn, 0x80D809F4);
+          log("\t* Moving 'leave bed' button from obscuring the view in " + mn.name + mn.desc, 1);
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.IntInsnNode") && (n.getOpcode() == BIPUSH) && (n.operand == 40))
+            {
+              n.operand = 80;
+              log("");
+              return;
+            }
+          }
+          log(" ...failed!");
+          recordFailure();
+        }
+      }
+    },
     "anf": // BlockFlowing
     {
       tweakMethods:
