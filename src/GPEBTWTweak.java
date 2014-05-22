@@ -118,6 +118,8 @@ public class GPEBTWTweak extends FCAddOn
     Block.blocksList[1] = null;  gpeBlockStone = new GPEBlockStone(1);
     Block.blocksList[4] = null;  new GPEBlockCobblestone(4);
     Block.blocksList[13] = null; new GPEBlockGravel(13);
+    Block.blocksList[14] = null; (new GPEBlockOre(14)).setUnlocalizedName("oreGold");
+    Block.blocksList[15] = null; (new GPEBlockOre(15)).setUnlocalizedName("oreIron");
     Block.blocksList[65] = null; new GPEBlockLadder(65);
     Block.blocksList[80] = null; new GPEBlockSnowBlock(80);
     Block.blocksList[91] = null;

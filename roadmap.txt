@@ -90,8 +90,6 @@ Needs more thought on balance or fitting in
 
 - Shave chickens with shears for fun and slight increase in feathers compared to killing; they won't regrow it
 
-- Iron and gold ores giving two nuggets via kiln
-
 - Redstone-compliant version of trapdoor (iron trapdoor)
 
 - Abandoned mineshaft wood is mostly eaten by termites, is slightly easier to break and will give

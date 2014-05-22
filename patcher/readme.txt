@@ -16,6 +16,8 @@ v0.6b
 
 - Seeds root themselves when dropped on suitable ground
 
+- Kiln doubles nugget output from iron and gold ore
+
 
 v0.6a
 
