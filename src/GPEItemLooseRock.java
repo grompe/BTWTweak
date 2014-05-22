@@ -58,7 +58,7 @@ public class GPEItemLooseRock extends Item
         if (stack.stackSize > count)
         {
           stack.stackSize -= count;
-          //inventory.setInventorySlotContents(i, stack);
+          inventory.setInventorySlotContents(i, stack);
           return true;
         }
         count -= stack.stackSize;
