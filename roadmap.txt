@@ -46,19 +46,11 @@ Straightforward
 - Prevent weapons from decreasing durability if no damage was done (clicked a red mob)
   or reduce red time (might have side-effects)
 
-- Make difficulty unchangeable during the gameplay, and show server difficulty there if on a server
-  (make it selected in world creation instead)
-
-- Compat with SixMod (Research Bench Addon)
-
 - Break glass and glass panes with thrown rock
 
 - Break glass and glass panes when landed on them from a height
 
 - Right-clicking with iron or gold nuggets, loose rocks (with shift) in hand converts max amount possible into ingots
-
-- Cocoa powder made from cocoa beans, replaces it in all recipes and some additional edible items
-  - Sugar, cocoa powder, 2 bowls and milk bucket -> 2 bowls of hot cocoa
 
 
 Needs more thought on implementation
@@ -97,6 +89,8 @@ Needs more thought on implementation
 
 - Fix axle texture in a better way
 
+- Should keep furnace and cauldron progress for a few seconds without the fire
+
 
 Needs more thought on balance or fitting in
 ===========================================
@@ -108,11 +102,6 @@ Needs more thought on balance or fitting in
 - Iron and gold ores giving two nuggets via kiln
 
 - Redstone-compliant version of trapdoor (iron trapdoor)
-
-- Make diamond ingots in a cauldron instead
-  (study gameplay balance change: will force player either to burn planks/logs under the cauldron,
-   or create nether portal in the lava pool)
-  - need to keep cauldron progress for a few seconds without the fire
 
 - Abandoned mineshaft wood is mostly eaten by termites, is slightly easier to break and will give
   only sawdust and bark on destruction, regardless of methods, will break if pushed by a piston

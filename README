@@ -1,9 +1,9 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.6 source code
-(Compatible with Better Than Wolves V4.8911)
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.6a source code
+(Compatible with Better Than Wolves V4.8911+)
 
 [****** Source installation instructions ******]
 
-1) Unpack and setup MCP
+1) Unpack and setup MCP for Minecraft 1.5.2
 2) Install BTW v4.8911 into minecraft.jar
 3) Decompile with MCP, it will complain a bit
 4) Apply MCP fix patch using the mcp_fix.diff file
