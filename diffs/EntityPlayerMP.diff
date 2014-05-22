@@ -1,0 +1,12 @@
+diff --git a/src/minecraft/net/minecraft/src/EntityPlayerMP.java b/src/minecraft/net/minecraft/src/EntityPlayerMP.java
+index aa77568..f022f24 100644
+--- a/src/minecraft/net/minecraft/src/EntityPlayerMP.java
++++ b/src/minecraft/net/minecraft/src/EntityPlayerMP.java
+@@ -1064 +1064,6 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
+-        if (this.m_iExhaustionWithTimeCounter >= 600)
++        int sleepBonusModifier = 1;
++        if (this.isPlayerSleeping())
++        {
++            sleepBonusModifier = 2;
++        }
++        if (this.m_iExhaustionWithTimeCounter >= 600 * sleepBonusModifier)

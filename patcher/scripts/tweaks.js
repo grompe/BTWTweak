@@ -2071,6 +2071,44 @@ function ObjectArray(arr)
         }
       },
     },
+    "jc": // EntityPlayerMP
+    {
+      tweakMethods:
+      {
+        "UpdateExhaustionWithTime()V": function(mn)
+        {
+          check(mn, 0x617108F1);
+          log("\t* Making resting in bed less exhausting in " + mn.name + mn.desc, 1);
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.IntInsnNode") && n.operand == 600)
+            {
+              var label = LabelNode();
+              mn.instructions.insert(n, toInsnList(
+                [
+                  InsnNode(ICONST_1),
+                  VarInsnNode(ISTORE, 1),
+                  VarInsnNode(ALOAD, 0),
+                  MethodInsnNode(INVOKEVIRTUAL, "jc", "bz", "()Z"),
+                  JumpInsnNode(IFEQ, label),
+                  InsnNode(ICONST_2),
+                  VarInsnNode(ISTORE, 1),
+                  label,
+                  FrameNode(F_APPEND,1, [INTEGER], 0, null),
+                  VarInsnNode(ILOAD, 1),
+                  InsnNode(IMUL),
+                ]
+              ));
+              log("");
+              return;
+            }
+          }
+          log(" ...failed!");
+          recordFailure();
+        }
+      }
+    },
     "qi": // EntityChicken
     {
       tweakMethods:
