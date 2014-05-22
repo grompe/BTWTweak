@@ -2504,6 +2504,66 @@ function ObjectArray(arr)
         }
       },
     },
+    "ti": // FoodStats
+    {
+      tweakMethods:
+      {
+        "a(Lsq;)V": function(mn)
+        {
+          check(mn, 0x8E182F50);
+          log("\t* Adding regeneration bonus to sleeping in " + mn.name + mn.desc, 1);
+          var changes = 0;
+          var i;
+          for (i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.IntInsnNode") && (n.getOpcode() == BIPUSH) && (n.operand == 30))
+            {
+              var label = LabelNode();
+              mn.instructions.insert(n, toInsnList(
+                [
+                  InsnNode(ICONST_1),
+                  VarInsnNode(ISTORE, 3),
+                  VarInsnNode(ALOAD, 1),
+                  MethodInsnNode(INVOKEVIRTUAL, "sq", "bz", "()Z"),
+                  JumpInsnNode(IFEQ, label),
+                  InsnNode(ICONST_2),
+                  VarInsnNode(ISTORE, 3),
+                  label,
+                  FrameNode(F_APPEND,1, [INTEGER], 0, null),
+                  VarInsnNode(ILOAD, 3),
+                  InsnNode(IDIV),
+                ]
+              ));
+              changes++;
+              break;
+            }
+          }
+          for (i += 1; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.IntInsnNode") && (n.getOpcode() == SIPUSH) && (n.operand == 600))
+            {
+              mn.instructions.insert(n, toInsnList(
+                [
+                  VarInsnNode(ILOAD, 3),
+                  InsnNode(IDIV),
+                ]
+              ));
+              changes++;
+              break;
+            }
+          }
+          if (changes == 2)
+          {
+            log("");
+          } else {
+            log(" ...failed!");
+            recordFailure();
+          }
+        }
+      }
+    },
     "wu": // ItemPickaxe
     {
       tweakMethods:

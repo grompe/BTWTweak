@@ -1,0 +1,15 @@
+diff --git a/src/minecraft/net/minecraft/src/FoodStats.java b/src/minecraft/net/minecraft/src/FoodStats.java
+index cae7df8..a78e243 100644
+--- a/src/minecraft/net/minecraft/src/FoodStats.java
++++ b/src/minecraft/net/minecraft/src/FoodStats.java
+@@ -146 +146,6 @@ public class FoodStats
+-        if (this.foodLevel > 30 && par1EntityPlayer.shouldHeal())
++        int sleepBonusModifier = 1;
++        if (par1EntityPlayer.isPlayerSleeping())
++        {
++            sleepBonusModifier = 2;
++        }
++        if (this.foodLevel > 30 / sleepBonusModifier && par1EntityPlayer.shouldHeal())
+@@ -150 +155 @@ public class FoodStats
+-            if (this.foodTimer >= 600)
++            if (this.foodTimer >= 600 / sleepBonusModifier)
