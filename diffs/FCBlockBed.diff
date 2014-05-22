@@ -1,0 +1,12 @@
+diff --git a/src/minecraft/net/minecraft/src/FCBlockBed.java b/src/minecraft/net/minecraft/src/FCBlockBed.java
+index e4ac46b..3d4693f 100644
+--- a/src/minecraft/net/minecraft/src/FCBlockBed.java
++++ b/src/minecraft/net/minecraft/src/FCBlockBed.java
+@@ -15,6 +15 @@ public class FCBlockBed extends BlockBed
+-        if (var1.isRemote)
+-        {
+-            var5.addChatMessage("You are too troubled to rest.");
+-        }
+-
+-        return true;
++        return super.onBlockActivated(var1, var2, var3, var4, var5, var6, var7, var8, var9);
