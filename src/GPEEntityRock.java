@@ -28,6 +28,18 @@ public class GPEEntityRock extends EntityThrowable implements FCIEntityPacketHan
     }
     if (!worldObj.isRemote)
     {
+      if (mop.typeOfHit == EnumMovingObjectType.TILE)
+      {
+        int x = mop.blockX;
+        int y = mop.blockY;
+        int z = mop.blockZ;
+        int id = worldObj.getBlockId(x, y, z);
+        if (id == Block.glass.blockID || id == Block.thinGlass.blockID)
+        {
+          worldObj.playAuxSFX(2001, x, y, z, Block.glass.blockID);
+          worldObj.setBlockWithNotify(x, y, z, 0);
+        }
+      }
       FCUtilsItem.EjectSingleItemWithRandomVelocity(worldObj, (float)posX, (float)posY, (float)posZ, GPEBTWTweak.gpeItemLooseRock.itemID, 0);
       setDead();
     }

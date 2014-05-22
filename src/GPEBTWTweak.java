@@ -484,4 +484,24 @@ public class GPEBTWTweak extends FCAddOn
     }
   }
 
+  public static void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
+  {
+    if (world.isRemote) return;
+    int id = world.getBlockId(x, y, z);
+    if (entity instanceof EntityItem && !entity.isDead)
+    {
+      ItemStack item = ((EntityItem)entity).getEntityItem();
+      if (id == Block.tilledField.blockID && item.itemID == FCBetterThanWolves.fcPotash.itemID)
+      {
+        int meta = world.getBlockMetadata(x, y, z);
+        world.setBlockAndMetadataWithNotify(x, y, z, FCBetterThanWolves.fcBlockFarmlandFertilized.blockID, meta);
+        item.stackSize--;
+        if (item.stackSize <= 0)
+        {
+          entity.setDead();
+        }
+      }
+    }
+  }
+
 }

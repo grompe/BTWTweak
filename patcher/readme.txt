@@ -8,6 +8,12 @@ v0.6b
 - Now beds are usable again and allow players to regenerate even when hungry.
   Regeneration rate is doubled and hunger rate is halved when resting.
 
+- Fix quick rock conversion, hopefully
+
+- Thrown or dispensed rocks shatter glass
+
+- Potash fertilizes farmland if dropped on it
+
 
 v0.6a
 

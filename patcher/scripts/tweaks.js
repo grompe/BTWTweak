@@ -2137,10 +2137,70 @@ function ObjectArray(arr)
         },
       },
     },
+    "mp": // Entity
+    {
+      tweakMethods:
+      {
+        "C()V": function(mn)
+        {
+          check(mn, 0x3DAD20F8);
+          log("\t* Adding entity->block collision hook in " + mn.name + mn.desc, 1);
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner == "apa")
+            {
+              mn.instructions.insertBefore(n, toInsnList(
+                [
+                  VarInsnNode(ALOAD, 0),
+                  FieldInsnNode(GETFIELD, "mp", "q", "Laab;"),
+                  VarInsnNode(ILOAD, 7),
+                  VarInsnNode(ILOAD, 8),
+                  VarInsnNode(ILOAD, 9),
+                  VarInsnNode(ALOAD, 0),
+                  MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "onEntityCollidedWithBlock", "(Laab;IIILmp;)V"),
+                ]
+              ));
+              log("");
+              return;
+            }
+          }
+          log(" ...failed!");
+          recordFailure();
+        }
+      }
+    },
     "rh": // EntityItem
     {
       tweakMethods:
       {
+        "C()V": function(mn)
+        {
+          check(mn, 0x3EF520FC);
+          log("\t* Adding item->block collision hook in " + mn.name + mn.desc, 1);
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner == "apa")
+            {
+              mn.instructions.insertBefore(n, toInsnList(
+                [
+                  VarInsnNode(ALOAD, 0),
+                  FieldInsnNode(GETFIELD, "rh", "q", "Laab;"),
+                  VarInsnNode(ILOAD, 7),
+                  VarInsnNode(ILOAD, 8),
+                  VarInsnNode(ILOAD, 9),
+                  VarInsnNode(ALOAD, 0),
+                  MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "onEntityCollidedWithBlock", "(Laab;IIILmp;)V"),
+                ]
+              ));
+              log("");
+              return;
+            }
+          }
+          log(" ...failed!");
+          recordFailure();
+        },
         "l_()V": function(mn)
         {
           check(mn, 0x73675C9C);

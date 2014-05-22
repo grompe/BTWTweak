@@ -35,8 +35,6 @@ Feedback
 Straightforward
 ===============
 
-- Make screams from cake, grinding netherrack, etc. scare away animals
-
 - Make consuming by darkness actually consume the meat, complete with a burp
 
 - Display world time converted to real time of current world played
@@ -46,8 +44,6 @@ Straightforward
 - Prevent weapons from decreasing durability if no damage was done (clicked a red mob)
   or reduce red time (might have side-effects)
 
-- Break glass and glass panes with thrown rock
-
 - Break glass and glass panes when landed on them from a height
 
 - Right-clicking with iron or gold nuggets, loose rocks (with shift) in hand converts max amount possible into ingots
@@ -56,7 +52,9 @@ Straightforward
 Needs more thought on implementation
 ====================================
 
-- Make seeds root themselves when dropped on farmland, as well as bone meal and potash fertilizing it when thrown
+- Make screams from cake, grinding netherrack, etc. scare away animals
+
+- Make seeds root themselves when dropped on farmland or correct planter type
 
 - Make ores drop loose rocks and raw ore pieces; add pure ores
 
