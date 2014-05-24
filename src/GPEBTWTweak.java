@@ -10,7 +10,7 @@ public class GPEBTWTweak extends FCAddOn
 {
   public static GPEBTWTweak instance;
   public static GPEBTWTweakProxy proxy;
-  public static String tweakVersion = "0.6";
+  public static String tweakVersion = "0.7";
 
   public static Block gpeBlockStone;
   public static Block compatAxleBlock;
