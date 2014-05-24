@@ -34,8 +34,6 @@ Straightforward
 
 - Make consuming by darkness actually consume the meat, complete with a burp
 
-- Display world time converted to real time of current world played
-
 - Light blocks drop filament and redstone when broken
 
 - Prevent weapons from decreasing durability if no damage was done (clicked a red mob)

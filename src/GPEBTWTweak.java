@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+
 import java.util.*;
 import java.io.*;
 import java.lang.reflect.*;
@@ -400,6 +402,8 @@ public class GPEBTWTweak extends FCAddOn
 
   public static void loadWorldData(World world)
   {
+    addCommands();
+
     if (!readyForStrataRegen(world)) return;
     FCAddOnHandler.LogMessage(String.format("BTWTweak is now going to stratify the world '%s'.", gpeStrataRegenWorldName));
     File strataRegenFile = getStrataRegenFile(world);
@@ -414,6 +418,16 @@ public class GPEBTWTweak extends FCAddOn
     catch (Exception e)
     {
       e.printStackTrace();
+    }
+  }
+
+  public static void addCommands()
+  {
+    CommandHandler ch = (CommandHandler)MinecraftServer.getServer().getCommandManager();
+    // Must make sure the command is added only once
+    if (ch.getCommands().get("playtime") == null)
+    {
+      ch.registerCommand(new GPECommandPlaytime());
     }
   }
 
