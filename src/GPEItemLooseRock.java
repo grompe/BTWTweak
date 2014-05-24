@@ -29,7 +29,7 @@ public class GPEItemLooseRock extends Item
       }
       else
       {
-        if (!world.isRemote) player.addExhaustion(1.0F);
+        player.addExhaustion(1.0F);
       }
       stack.stackSize--;
     }

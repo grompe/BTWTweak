@@ -8,18 +8,15 @@ Main goals
 Skipped
 =======
 
-- Cauldron, mill stone progress reset when item currently processing is replaced
-  (too complex for its worth)
-
-- Disallow eating while breaking blocks
-  (too rare to be abused)
-
 - Make darker stone drop darker version of cobble, allow crafting from it like regular stone/cobble
   with exception of bricks: they will have darker texture; sidings, mouldings and such with it
   (addition of loose rocks is incompatible)
 
 - Get rid of punching wood, wooden pickaxe, use flints on stone to craft rough stone tools
   (addition of loose rocks made such change less meaningful)
+
+- Make screams from cake, grinding netherrack, etc. scare away animals
+  (code is too tangled for the worth of this effect)
 
 
 Feedback
@@ -46,13 +43,9 @@ Straightforward
 
 - Break glass and glass panes when landed on them from a height
 
-- Right-clicking with iron or gold nuggets, loose rocks (with shift) in hand converts max amount possible into ingots
-
 
 Needs more thought on implementation
 ====================================
-
-- Make screams from cake, grinding netherrack, etc. scare away animals
 
 - Make ores drop loose rocks and raw ore pieces; add pure ores
 
@@ -103,6 +96,7 @@ Fleshing out
 - Tan leather with salt from water found in seas only, to make an alternative for wolf poo
   Better Than Wolves it is!
   - Evaporating sea water to gain salt would require finite water
+    or a special construct to fill with water
   - Salt could be used to make food tastier (bacon?)
     - bacon slabs %)
 
