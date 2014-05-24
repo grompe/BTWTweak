@@ -71,8 +71,6 @@ Needs more thought on implementation
 
 - Fix axle texture in a better way
 
-- Should keep furnace and cauldron progress for a few seconds without the fire
-
 
 Needs more thought on balance or fitting in
 ===========================================

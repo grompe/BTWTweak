@@ -473,9 +473,46 @@ function ObjectArray(arr)
             var n = mn.instructions.get(i);
             if (isInstance(n, "org.objectweb.asm.tree.FrameNode"))
             {
+              var labelx = LabelNode();
+              var nextlabel = mn.instructions.get(i + 4);
+              /*
+              if (!isInstance(nextlabel, "org.objectweb.asm.tree.LabelNode"))
+              {
+                log("Debug: fakeinst!");
+                nextlabel = mn.instructions.get(i + 5);
+                if (!isInstance(nextlabel, "org.objectweb.asm.tree.LabelNode"))
+                {
+                  log("Debug: warning: fail!");
+                  recordFailure();
+                  return;
+                }
+              }
+              */
               mn.instructions.insertBefore(n, toInsnList(
                 [
                   FrameNode(F_APPEND, 1, [INTEGER], 0, null),
+                  VarInsnNode(ALOAD, 0),
+                  MethodInsnNode(INVOKESPECIAL, "aqg", "u", "()Z"),
+                  JumpInsnNode(IFEQ, labelx),
+                  VarInsnNode(ALOAD, 0),
+                  FieldInsnNode(GETFIELD, "aqg", "g", "[Lwm;"),
+                  InsnNode(ICONST_0),
+                  InsnNode(AALOAD),
+                  FieldInsnNode(GETFIELD, "wm", "c", "I"),
+                  VarInsnNode(ALOAD, 0),
+                  FieldInsnNode(GETFIELD, "aqg", "currentItemID", "I"),
+                  JumpInsnNode(IF_ICMPNE, labelx),
+                  VarInsnNode(ALOAD, 0),
+                  VarInsnNode(ALOAD, 0),
+                  FieldInsnNode(GETFIELD, "aqg", "c", "I"),
+                  IntInsnNode(BIPUSH, 1),
+                  InsnNode(ISUB),
+                  InsnNode(ICONST_0),
+                  MethodInsnNode(INVOKESTATIC, "java/lang/Math", "max", "(II)I"),
+                  FieldInsnNode(PUTFIELD, "aqg", "c", "I"),
+                  JumpInsnNode(GOTO, nextlabel),
+                  labelx,
+                  FrameNode(F_SAME, 0, null, 0, null),
                   VarInsnNode(ALOAD, 0),
                   MethodInsnNode(INVOKESPECIAL, "aqg", "setCurrentItemID", "()V"),
                 ]
@@ -485,7 +522,7 @@ function ObjectArray(arr)
               break;
             }
           }
-          for (i += 2; i < mn.instructions.size(); i++)
+          for (i += 24; i < mn.instructions.size(); i++)
           {
             var n = mn.instructions.get(i);
             if (isInstance(n, "org.objectweb.asm.tree.JumpInsnNode") && (n.opcode == IF_ICMPEQ))
@@ -1999,6 +2036,41 @@ function ObjectArray(arr)
             "\t* (2/2) Including anti-crash safety measure in ",
             INSERT_BEFORE
           ).process(mn);
+        },
+        "h()V": function(mn)
+        {
+          check(mn, 0x5D0638DA);
+          log("\t* Making heat dissipate slower in " + mn.name + mn.desc, 1);
+          var i;
+          var state = 0;
+          for (i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if ((state == 0) && isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && (n.name == "PerformNormalFireUpdate"))
+            {
+              state = 1;
+            }
+            if ((state == 1) && isInstance(n, "org.objectweb.asm.tree.InsnNode") && (n.getOpcode() == ICONST_0))
+            {
+              mn.instructions.insert(n, toInsnList(
+                [
+                  MethodInsnNode(INVOKESTATIC, "java/lang/Math", "max", "(II)I"),
+                ]
+              ));
+              mn.instructions.insertBefore(n, toInsnList(
+                [
+                  VarInsnNode(ALOAD, 0),
+                  FieldInsnNode(GETFIELD, "FCTileEntityCookingVessel", "m_iCookCounter", "I"),
+                  IntInsnNode(BIPUSH, 24),
+                  InsnNode(ISUB),
+                ]
+              ));
+              log("");
+              return;
+            }
+          }
+          log(" ...failed!");
+          recordFailure();
         },
       },
     },

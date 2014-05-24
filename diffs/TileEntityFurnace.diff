@@ -1,5 +1,5 @@
 diff --git a/src/minecraft/net/minecraft/src/TileEntityFurnace.java b/src/minecraft/net/minecraft/src/TileEntityFurnace.java
-index f28d825..642751d 100644
+index f28d825..80500ad 100644
 --- a/src/minecraft/net/minecraft/src/TileEntityFurnace.java
 +++ b/src/minecraft/net/minecraft/src/TileEntityFurnace.java
 @@ -20,0 +21,2 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
@@ -10,9 +10,18 @@ index f28d825..642751d 100644
 +            boolean shouldUpdate = checkForChange();
 +
 +            if (this.isBurning() && this.canSmelt() && (this.furnaceItemStacks[0].itemID == this.currentItemID))
-@@ -285,0 +290 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
-+                setCurrentItemID();
-@@ -292 +297,6 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
+@@ -286 +290,9 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
+-                this.furnaceCookTime = 0;
++                if (this.canSmelt() && (this.furnaceItemStacks[0].itemID == this.currentItemID))
++                {
++                    this.furnaceCookTime = Math.max(this.furnaceCookTime - 1, 0);
++                }
++                else
++                {
++                    setCurrentItemID();
++                    this.furnaceCookTime = 0;
++                }
+@@ -292 +304,6 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
 -                BlockFurnace.updateFurnaceBlockState(this.furnaceBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
 +                shouldUpdate = true;
 +            }
@@ -20,7 +29,7 @@ index f28d825..642751d 100644
 +            if (shouldUpdate)
 +            {
 +                BlockFurnace.updateFurnaceBlockState(this.furnaceBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord, this.furnaceItemStacks[0] != null || this.furnaceItemStacks[2] != null);
-@@ -301,0 +312,22 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
+@@ -301,0 +319,22 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
 +    private boolean checkForChange()
 +    {
 +        boolean shouldUpdate = false;

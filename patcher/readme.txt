@@ -18,6 +18,11 @@ v0.6b
 
 - Kiln doubles nugget output from iron and gold ore
 
+- New /playtime command shows age of the world in real time
+
+- Cooking progress in furnace, cauldron, etc. now reverts slowly when without
+  fire. This should make starter diamonds in cauldron more reliable to make.
+
 
 v0.6a
 
