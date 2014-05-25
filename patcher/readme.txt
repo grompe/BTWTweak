@@ -7,6 +7,8 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.7a
 
 - Spider head can now be crafted to 2 spider eyes
 
+- Glass blocks shatter when landed on from a height
+
 
 v0.7a
 

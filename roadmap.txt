@@ -19,6 +19,7 @@ Skipped
   (code is too tangled for the worth of this effect)
 
 - Shave chickens with shears for fun and slight increase in feathers compared to killing; they won't regrow it
+- Better fishing rods made with soulforged steel nugget
   (that simply isn't worth it)
 
 
@@ -41,8 +42,6 @@ Straightforward
 
 - Prevent weapons from decreasing durability if no damage was done (clicked a red mob)
   or reduce red time (might have side-effects)
-
-- Break glass and glass panes when landed on them from a height
 
 
 Needs more thought on implementation
@@ -70,8 +69,6 @@ Needs more thought on implementation
 
 - Gravestones on death (only if next respawn is affected by hardcore spawn)
 
-- Better fishing rods made with soulforged steel nugget
-
 - Fix axle texture in a better way
 
 
@@ -90,10 +87,11 @@ Fleshing out
 
 - Tan leather with salt from water found in seas only, to make an alternative for wolf poo
   Better Than Wolves it is!
-  - Evaporating sea water to gain salt would require finite water
-    or a special construct to fill with water
-  - Salt could be used to make food tastier (bacon?)
-    - bacon slabs %)
+  - Gathering water with bucket from sea gives sea water
+  - Crafting 3 glass panes in v shape makes a glass pan
+  - Glass pan with fire underneath can evaporate sea water to make salt
+  - Salt could be used to make food preserved for longer
+    - (bacon?) bacon slabs %)
 
 - Hard difficulty: food spoilage
   - each food stack has food spoilage meter that slowly increases on random tick
