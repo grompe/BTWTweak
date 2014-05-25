@@ -1,9 +1,9 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.7
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.7a
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
 
-(GitHub, unreleased)
+v0.7a
 
 - Ocelots now rarely drop arcane scroll of haste, which could be applied to
   boots for up to 30% speed boost.
