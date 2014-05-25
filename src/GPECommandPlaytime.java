@@ -29,5 +29,11 @@ public class GPECommandPlaytime extends CommandBase
   {
     long ticks = MinecraftServer.getServer().worldServers[0].getTotalWorldTime();
     sender.sendChatToPlayer("\u00a7eThis world has been in play for " + StatBase.timeStatType.format((int)ticks));
+    if (sender instanceof EntityPlayer)
+    {
+      ticks = MinecraftServer.getServer().worldServers[0].getWorldTime();
+      ticks -= ((EntityPlayer)sender).m_lTimeOfLastSpawnAssignment;
+      sender.sendChatToPlayer("\u00a7eYou've been alive for about " + StatBase.timeStatType.format((int)ticks));
+    }
   }
 }
