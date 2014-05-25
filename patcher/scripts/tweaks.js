@@ -2150,6 +2150,24 @@ function ObjectArray(arr)
     {
       tweakMethods:
       {
+        "CustomModDrops(Lmg;)V": function(mn)
+        {
+          check(mn, 0x7B4C08F5);
+          var label = LabelNode();
+          CodeInserter(
+            BeginningFinder(),
+            [
+              VarInsnNode(ALOAD, 1),
+              FieldInsnNode(GETSTATIC, "FCDamageSourceCustom", "m_DamageSourceGloom", "Lmg;"),
+              JumpInsnNode(IF_ACMPNE, label),
+              InsnNode(RETURN),
+              label,
+              FrameNode(F_SAME, 0, null, 0, null),
+            ],
+            "\t* Making gloom consume player's meat in ",
+            INSERT_BEFORE
+          ).process(mn);
+        },
         "UpdateExhaustionWithTime()V": function(mn)
         {
           check(mn, 0x617108F1);

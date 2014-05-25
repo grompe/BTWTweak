@@ -9,6 +9,9 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.7a
 
 - Glass blocks shatter when landed on from a height
 
+- Fixed FlowerChild's terrible oversight that caused
+  darkness not to consume the player's mystery meat
+
 
 v0.7a
 
