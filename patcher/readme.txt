@@ -3,6 +3,11 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.7a
 
 [********** Change Log ************]
 
+(GitHub, unreleased)
+
+- Spider head can now be crafted to 2 spider eyes
+
+
 v0.7a
 
 - Ocelots now rarely drop arcane scroll of haste, which could be applied to
