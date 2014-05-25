@@ -18,6 +18,9 @@ Skipped
 - Make screams from cake, grinding netherrack, etc. scare away animals
   (code is too tangled for the worth of this effect)
 
+- Shave chickens with shears for fun and slight increase in feathers compared to killing; they won't regrow it
+  (that simply isn't worth it)
+
 
 Feedback
 ========
@@ -75,8 +78,6 @@ Needs more thought on implementation
 Needs more thought on balance or fitting in
 ===========================================
 
-- Shave chickens with shears for fun and slight increase in feathers compared to killing; they won't regrow it
-
 - Redstone-compliant version of trapdoor (iron trapdoor)
 
 - Abandoned mineshaft wood is mostly eaten by termites, is slightly easier to break and will give
@@ -127,3 +128,4 @@ Leather: 1.1
 Chain: 1.035
 Iron: 0.98
 Soulforged: 0.88
+0.88*1.3=1.144

@@ -10,8 +10,14 @@ public class GPEBlockOre extends FCBlockOre
     setStepSound(soundStoneFootstep);
     ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
     SetCanBeCookedByKiln(true);
-  }
 
+    // CraftGuide compatibility / crash workaround
+    int itemid = 0;
+    if (id == Block.oreIron.blockID) itemid = FCBetterThanWolves.fcItemNuggetIron.itemID;
+    if (id == Block.oreGold.blockID) itemid = Item.goldNugget.itemID;
+    SetItemIndexDroppedWhenCookedByKiln(itemid);
+  }
+  
   public void OnCookedByKiln(World world, int x, int y, int z)
   {
     int id = 0;
