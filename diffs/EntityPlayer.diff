@@ -1,5 +1,5 @@
 diff --git a/src/minecraft/net/minecraft/src/EntityPlayer.java b/src/minecraft/net/minecraft/src/EntityPlayer.java
-index dc30dad..2528d77 100644
+index dc30dad..42fa487 100644
 --- a/src/minecraft/net/minecraft/src/EntityPlayer.java
 +++ b/src/minecraft/net/minecraft/src/EntityPlayer.java
 @@ -258 +258 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
@@ -74,8 +74,11 @@ index dc30dad..2528d77 100644
 @@ -2249 +2303 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
 -        if (var1 >= 4)
 +        if (var1 >= 4 || getFlag(4)) // isEating()
-@@ -2406 +2460,3 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
+@@ -2406 +2460,6 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
 -        return this.GetHealthAndExhaustionModifierWithSightlessModifier();
 +        float f = this.GetHealthAndExhaustionModifierWithSightlessModifier();
-+        if (this.inventory.armorInventory[0] != null) f *= 1.1F;
++        if (this.inventory.armorInventory[0] != null)
++        {
++          f *= 1.1F + 0.1F * EnchantmentHelper.getEnchantmentLevel(GPEBTWTweak.gpeEnchantmentHaste, this.inventory.armorInventory[0]);
++        }
 +        return f * (1.0F - ((float)this.GetWornArmorWeight() / 220.0F));

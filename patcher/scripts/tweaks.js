@@ -2242,6 +2242,41 @@ function ObjectArray(arr)
         }
       }
     },
+    "qm": // EntityOcelot
+    {
+      add: function(cn)
+      {
+        var mn = MethodNode(ACC_PUBLIC, "CheckForScrollDrop", "()V", null, null);
+        var label = LabelNode();
+        mn.instructions.add(toInsnList(
+          [
+            VarInsnNode(ALOAD, 0),
+            MethodInsnNode(INVOKEVIRTUAL, "qm", "m", "()Z"),
+            JumpInsnNode(IFNE, label),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "qm", "ab", "Ljava/util/Random;"),
+            IntInsnNode(BIPUSH, 50),
+            MethodInsnNode(INVOKEVIRTUAL, "java/util/Random", "nextInt", "(I)I"),
+            JumpInsnNode(IFNE, label),
+            VarInsnNode(ALOAD, 0),
+            TypeInsnNode(NEW, "wm"),
+            InsnNode(DUP),
+            FieldInsnNode(GETSTATIC, "FCBetterThanWolves", "fcArcaneScroll", "Lwk;"),
+            InsnNode(ICONST_1),
+            FieldInsnNode(GETSTATIC, "GPEBTWTweak", "gpeEnchantmentHaste", "I"),
+            MethodInsnNode(INVOKESPECIAL, "wm", "<init>", "(Lwk;II)V"),
+            InsnNode(FCONST_0),
+            MethodInsnNode(INVOKEVIRTUAL, "qm", "a", "(Lwm;F)Lrh;"),
+            InsnNode(POP),
+            label,
+            FrameNode(F_SAME, 0, null, 0, null),
+            InsnNode(RETURN),
+          ]
+        ));
+        cn.methods.add(mn);
+        log("Class " + cn.name + ": \t+ Adding arcane scroll drop to ocelots");
+      }
+    },
     "rh": // EntityItem
     {
       tweakMethods:
@@ -2410,6 +2445,17 @@ function ObjectArray(arr)
               JumpInsnNode(IFNULL, label),
               VarInsnNode(FLOAD, 1),
               LdcInsnNode(Float("1.1")),
+              LdcInsnNode(Float("0.1")),
+              FieldInsnNode(GETSTATIC, "GPEBTWTweak", "gpeEnchantmentHaste", "I"),
+              VarInsnNode(ALOAD, 0),
+              FieldInsnNode(GETFIELD, "sq", "bK", "Lso;"),
+              FieldInsnNode(GETFIELD, "so", "b", "[Lwm;"),
+              InsnNode(ICONST_0),
+              InsnNode(AALOAD),
+              MethodInsnNode(INVOKESTATIC, "zb", "a", "(ILwm;)I"),
+              InsnNode(I2F),
+              InsnNode(FMUL),
+              InsnNode(FADD),
               InsnNode(FMUL),
               VarInsnNode(FSTORE, 1),
               label,

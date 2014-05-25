@@ -75,8 +75,6 @@ Needs more thought on implementation
 Needs more thought on balance or fitting in
 ===========================================
 
-- Speed enchantment for boots, scroll rare drop from cats (ocelots)!
-
 - Shave chickens with shears for fun and slight increase in feathers compared to killing; they won't regrow it
 
 - Redstone-compliant version of trapdoor (iron trapdoor)

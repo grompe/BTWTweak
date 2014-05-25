@@ -3,6 +3,12 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.7
 
 [********** Change Log ************]
 
+(GitHub, unreleased)
+
+- Ocelots now rarely drop arcane scroll of haste, which could be applied to
+  boots for up to 30% speed boost.
+
+
 v0.7
 
 - Now beds are usable again and allow players to regenerate even when hungry.

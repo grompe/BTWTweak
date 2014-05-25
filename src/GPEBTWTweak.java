@@ -22,6 +22,7 @@ public class GPEBTWTweak extends FCAddOn
   public static int gpeSilkID = 17001;
   public static int gpeEntityRockID = 25;
   public static int hcSpawnRadius = 2000;
+  public static int gpeEnchantmentHaste = 70;
   public static int gpeEntityRockVehicleSpawnType = 120;
   public static int gpeStrataRegenKey = 0;
   public static String gpeStrataRegenWorldName = null;
@@ -63,6 +64,7 @@ public class GPEBTWTweak extends FCAddOn
         if (key.equals("gpeLooseRockID")) gpeLooseRockID = Integer.parseInt(value);
         if (key.equals("gpeSilkID")) gpeSilkID = Integer.parseInt(value);
         if (key.equals("gpeEntityRockID")) gpeEntityRockID = Integer.parseInt(value);
+        if (key.equals("gpeEnchantmentHaste")) gpeEnchantmentHaste = Integer.parseInt(value);
         if (key.equals("gpeEntityRockVehicleSpawnType")) gpeEntityRockVehicleSpawnType = Integer.parseInt(value);
         if (key.equals("hcSpawnRadius")) hcSpawnRadius = Integer.parseInt(value);
         if (key.equals("gpeStrataRegenKey")) gpeStrataRegenKey = Integer.parseInt(value);
@@ -91,6 +93,7 @@ public class GPEBTWTweak extends FCAddOn
         + "\r\n"
         + "// **** Other IDs ****\r\n"
         + "\r\n"
+        + "gpeEnchantmentHaste=70\r\n"
         + "gpeEntityRockVehicleSpawnType=120\r\n"
         + "\r\n"
         + "// **** World strata regeneration ****\r\n"
@@ -137,6 +140,8 @@ public class GPEBTWTweak extends FCAddOn
     id = FCBetterThanWolves.fcBlockDirtSlab.blockID;
     Block.blocksList[id] = null;
     new GPEBlockDirtSlab(id);
+
+    new GPEEnchantmentHaste(gpeEnchantmentHaste);
 
     EntityList.addMapping(GPEEntityRock.class, "gpeEntityRock", gpeEntityRockID);
     proxy.addEntityRenderers();
@@ -381,6 +386,7 @@ public class GPEBTWTweak extends FCAddOn
     t.put("item.skull.fire.name", "Blaze head");
     t.put(gpeItemLooseRock.getUnlocalizedName() + ".name", "Rock");
     t.put(gpeItemSilk.getUnlocalizedName() + ".name", "Silk");
+    t.put("enchantment.haste", "Haste");
   }
 
   public static void saveWorldData(World world)
