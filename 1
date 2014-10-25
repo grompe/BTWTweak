@@ -1,0 +1,136 @@
+diff --git a/patcher/GPEBTWTweak_files.zip b/patcher/GPEBTWTweak_files.zip
+index b8b48f4..bc26171 100644
+Binary files a/patcher/GPEBTWTweak_files.zip and b/patcher/GPEBTWTweak_files.zip differ
+diff --git a/patcher/readme.txt b/patcher/readme.txt
+index 24e8dc9..195445a 100644
+--- a/patcher/readme.txt
++++ b/patcher/readme.txt
+@@ -3,7 +3,7 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.7a
+ 
+ [********** Change Log ************]
+ 
+-(GitHub, unreleased)
++v0.7b
+ 
+ - Spider head can now be crafted to 2 spider eyes
+ 
+@@ -12,6 +12,17 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.7a
+ - Fixed FlowerChild's terrible oversight that caused
+   darkness not to consume the player's mystery meat
+ 
++- Cistern can now be crafted to Cauldron by adding
++  a bucket of water and a bone on top
++
++- For BTW version "4.99999A0D Marsupial??!!" or newer, since it
++  changed item stay to 20 minutes when dropped after death,
++  boosting item stay patch is no longer applied
++
++- For BTW version "4.99999A0D Marsupial??!!" or newer, since it
++  added gravel and sand slabs, replace corresponding BTWTweak
++  recipes and allow crafting old slabs to new slabs
++
+ 
+ v0.7a
+ 
+diff --git a/patcher/scripts/tweaks.js b/patcher/scripts/tweaks.js
+index dc58885..fdf45b4 100644
+--- a/patcher/scripts/tweaks.js
++++ b/patcher/scripts/tweaks.js
+@@ -2328,6 +2328,11 @@ function ObjectArray(arr)
+         },
+         "l_()V": function(mn)
+         {
++          if (isBTWVersionOrNewer("4.99999A0D Marsupial??!!"))
++          {
++            log("\tSkipping item stay delay boost");
++            return;
++          }
+           check(mn, 0x73675C9C);
+           log("\t* Boosting item stay delay in " + mn.name + mn.desc, 1);
+           for (var i = mn.instructions.size() - 1; i >= 0; i--)
+diff --git a/src/GPEBTWTweak.java b/src/GPEBTWTweak.java
+index b82dc2d..0b5b8d7 100644
+--- a/src/GPEBTWTweak.java
++++ b/src/GPEBTWTweak.java
+@@ -147,15 +147,24 @@ public class GPEBTWTweak extends FCAddOn
+     EntityList.addMapping(GPEEntityRock.class, "gpeEntityRock", gpeEntityRockID);
+     proxy.addEntityRenderers();
+     
+-    FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 4, 6), new Object[] {"##", '#', new ItemStack(Block.gravel)});
+-    FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 6), new Object[] {"##", '#', new ItemStack(FCBetterThanWolves.fcItemPileGravel)});
+-    FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 4, 7), new Object[] {"##", '#', new ItemStack(Block.sand)});
+-    FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 7), new Object[] {"##", '#', new ItemStack(FCBetterThanWolves.fcItemPileSand)});
++    if (isBTWVersionOrNewer("4.99999A0D Marsupial??!!"))
++    {
++      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileGravel, 2), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockSlabFalling, 1, 0)});
++      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileSand, 2), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockSlabFalling, 1, 1)});
++      // Old to new item conversion
++      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockSlabFalling, 1, 0), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 6)});
++      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockSlabFalling, 1, 1), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 7)});
++    } else {
++      FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 4, 6), new Object[] {"##", '#', new ItemStack(Block.gravel)});
++      FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 6), new Object[] {"##", '#', new ItemStack(FCBetterThanWolves.fcItemPileGravel)});
++      FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 4, 7), new Object[] {"##", '#', new ItemStack(Block.sand)});
++      FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 7), new Object[] {"##", '#', new ItemStack(FCBetterThanWolves.fcItemPileSand)});
++      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileGravel, 2), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 6)});
++      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileSand, 2), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 7)});
++    }
+     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Block.gravel), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 6), new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 6)});
+     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Block.sand), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 7), new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 7)});
+     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileDirt, 2), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab)});
+-    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileSand, 2), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 7)});
+-    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileGravel, 2), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 6)});
+     FCRecipes.AddStokedCauldronRecipe(new ItemStack(FCBetterThanWolves.fcGlue, 1), new ItemStack[] {new ItemStack(Item.bone, 8)});
+     FCRecipes.AddStokedCauldronRecipe(new ItemStack(FCBetterThanWolves.fcGlue, 1), new ItemStack[] {new ItemStack(Item.dyePowder, 24, 15)});
+ 
+@@ -205,6 +214,8 @@ public class GPEBTWTweak extends FCAddOn
+     
+     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.spiderEye, 2), new Object[] {new ItemStack(Item.skull.itemID, 1, 5)});
+ 
++    FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcCauldron, 1), new Object[] {"Y", "X", "C", 'Y', Item.bone, 'X', Item.bucketWater, 'r', Block.cauldron});
++
+     BlockDispenser.dispenseBehaviorRegistry.putObject(gpeItemLooseRock, new GPEBehaviorRock());
+ 
+     // GitHub [#1]: fcBlockAxle got changed to fcAxleBlock
+@@ -380,8 +391,14 @@ public class GPEBTWTweak extends FCAddOn
+   {
+     Properties t = st.GetTranslateTable();
+     t.put(Item.stick.getUnlocalizedName() + ".name", "Rod");
+-    t.put(FCBetterThanWolves.fcBlockDirtSlab.getUnlocalizedName() + ".gravel.name", "Gravel Slab");
+-    t.put(FCBetterThanWolves.fcBlockDirtSlab.getUnlocalizedName() + ".sand.name", "Sand Slab");
++    if (isBTWVersionOrNewer("4.99999A0D Marsupial??!!"))
++    {
++      t.put(FCBetterThanWolves.fcBlockDirtSlab.getUnlocalizedName() + ".gravel.name", "Old Gravel Slab");
++      t.put(FCBetterThanWolves.fcBlockDirtSlab.getUnlocalizedName() + ".sand.name", "Old Sand Slab");
++    } else {
++      t.put(FCBetterThanWolves.fcBlockDirtSlab.getUnlocalizedName() + ".gravel.name", "Gravel Slab");
++      t.put(FCBetterThanWolves.fcBlockDirtSlab.getUnlocalizedName() + ".sand.name", "Sand Slab");
++    }
+     t.put(FCBetterThanWolves.fcItemRottenArrow.getUnlocalizedName() + ".name", "Rotten Arrow");
+     t.put("item.skull.spider.name", "Spider head");
+     t.put("item.skull.enderman.name", "Enderman head");
+diff --git a/src/GPEBlockDirtSlab.java b/src/GPEBlockDirtSlab.java
+index 1e16441..fc90cfb 100644
+--- a/src/GPEBlockDirtSlab.java
++++ b/src/GPEBlockDirtSlab.java
+@@ -80,6 +80,20 @@ public class GPEBlockDirtSlab extends FCBlockDirtSlab
+     }
+   }
+ 
++  public boolean AttemptToCombineWithFallingEntity(World world, int x, int y, int z, EntityFallingSand entity)
++  {
++    if (entity.blockID == FCBetterThanWolves.fcBlockSlabFalling.blockID)
++    {
++      int subtype = GetSubtype(world, x, y, z);
++      if (subtype == entity.metadata + gravel)
++      {
++        world.setBlockWithNotify(x, y, z, subtype == sand ? Block.sand.blockID : Block.gravel.blockID);
++        return true;
++      }
++    }
++    return false;
++  }
++
+   @ClientOnly
+   public void registerIcons(IconRegister r)
+   {

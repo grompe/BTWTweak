@@ -2328,6 +2328,11 @@ function ObjectArray(arr)
         },
         "l_()V": function(mn)
         {
+          if (isBTWVersionOrNewer("4.99999A0D Marsupial??!!"))
+          {
+            log("\tSkipping item stay delay boost");
+            return;
+          }
           check(mn, 0x73675C9C);
           log("\t* Boosting item stay delay in " + mn.name + mn.desc, 1);
           for (var i = mn.instructions.size() - 1; i >= 0; i--)

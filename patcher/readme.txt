@@ -1,9 +1,9 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.7a
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.7b
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
 
-(GitHub, unreleased)
+v0.7b
 
 - Spider head can now be crafted to 2 spider eyes
 
@@ -11,6 +11,17 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.7a
 
 - Fixed FlowerChild's terrible oversight that caused
   darkness not to consume the player's mystery meat
+
+- Cistern can now be crafted to Cauldron by adding
+  a bucket of water and a bone on top
+
+- For BTW version "4.99999A0D Marsupial??!!" or newer, since it
+  changed item stay to 20 minutes when dropped after death,
+  boosting item stay patch is no longer applied
+
+- For BTW version "4.99999A0D Marsupial??!!" or newer, since it
+  added gravel and sand slabs, replace corresponding BTWTweak
+  recipes and allow crafting old slabs to new slabs
 
 
 v0.7a

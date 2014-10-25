@@ -80,6 +80,20 @@ public class GPEBlockDirtSlab extends FCBlockDirtSlab
     }
   }
 
+  public boolean AttemptToCombineWithFallingEntity(World world, int x, int y, int z, EntityFallingSand entity)
+  {
+    if (entity.blockID == FCBetterThanWolves.fcBlockSlabFalling.blockID)
+    {
+      int subtype = GetSubtype(world, x, y, z);
+      if (subtype == entity.metadata + gravel)
+      {
+        world.setBlockWithNotify(x, y, z, subtype == sand ? Block.sand.blockID : Block.gravel.blockID);
+        return true;
+      }
+    }
+    return false;
+  }
+
   @ClientOnly
   public void registerIcons(IconRegister r)
   {
