@@ -1,7 +1,12 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.7b
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.7c
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
+
+v0.7c
+
+- Fix bed regeneration patch for BTW "4.99999A0Eb Marsupial?!!!"
+
 
 v0.7b
 

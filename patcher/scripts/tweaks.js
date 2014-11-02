@@ -2759,7 +2759,7 @@ function ObjectArray(arr)
           for (i = 0; i < mn.instructions.size(); i++)
           {
             var n = mn.instructions.get(i);
-            if (isInstance(n, "org.objectweb.asm.tree.IntInsnNode") && (n.getOpcode() == BIPUSH) && (n.operand == 30))
+            if (isInstance(n, "org.objectweb.asm.tree.IntInsnNode") && (n.getOpcode() == BIPUSH) && (n.operand == 30 || n.operand == 24))
             {
               var label = LabelNode();
               mn.instructions.insert(n, toInsnList(
