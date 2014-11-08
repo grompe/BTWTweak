@@ -1,7 +1,11 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.7c
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.7d
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
+
+v0.7d
+
+- Fix Cistern to Cauldron recipe caused by a typo
 
 v0.7c
 
