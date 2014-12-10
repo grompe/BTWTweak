@@ -1,7 +1,13 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.7d
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.7e
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
+
+v0.7e
+
+- REALLY fix Cistern to Cauldron recipe
+- Fix quick rock conversion: had wrong cobblestone metadata,
+  causing weird stacks and non-operability in crucible
 
 v0.7d
 
