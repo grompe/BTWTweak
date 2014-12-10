@@ -79,6 +79,8 @@ Needs more thought on balance or fitting in
   only sawdust and bark on destruction, regardless of methods, will break if pushed by a piston
   - Requires a new block ID, or hack into planks unused metadata
 
+- Block of Padding beacon, with feather falling effect in range
+
 
 Fleshing out
 ============

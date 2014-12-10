@@ -8,6 +8,7 @@ v0.7e
 - REALLY fix Cistern to Cauldron recipe
 - Fix quick rock conversion: had wrong cobblestone metadata,
   causing weird stacks and non-operability in crucible
+- Fix glass not being efficiently broken by pickaxe
 
 v0.7d
 
