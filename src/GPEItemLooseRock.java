@@ -16,7 +16,7 @@ public class GPEItemLooseRock extends Item
     {
       if (!consumeInventoryRocks(player.inventory)) return stack;
       world.playSoundAtEntity(player, "dig.stone", 0.5F, 0.3F + itemRand.nextFloat() * 0.1F);
-      ItemStack cobble = new ItemStack(Block.cobblestone, 1, 1);
+      ItemStack cobble = new ItemStack(Block.cobblestone, 1, 0);
       if (!player.inventory.addItemStackToInventory(cobble)) player.dropPlayerItem(cobble);
       return stack;
     }
