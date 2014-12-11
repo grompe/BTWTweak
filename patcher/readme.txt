@@ -1,13 +1,24 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.7e
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.8
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
 
-v0.7e
+v0.8
+
+- Render sun/moon on short and tiny view distances as it is now
+  an important part of gameplay, and was becoming an artificial
+  difficulty for those with lower spec PCs
+
+- Set fog to stay minimum at normal distance (configurable),
+  for same reason as above and to see ghasts shooting at you
+
+- Tell BTW and BTWTweak version info in main menu
 
 - REALLY fix Cistern to Cauldron recipe
+
 - Fix quick rock conversion: had wrong cobblestone metadata,
   causing weird stacks and non-operability in crucible
+
 - Fix glass not being efficiently broken by pickaxe
 
 v0.7d

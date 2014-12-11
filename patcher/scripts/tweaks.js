@@ -5,7 +5,7 @@
    I'm hooking on Minecraft 1.5.2 stuff, so only change of Minecraft version
    will really break it and force me to rewrite everything.
 
-   Oh, and by the way, this file is Copyright (c) 2013 Grom PE and reading
+   Oh, and by the way, this file is Copyright (c) 2014 Grom PE and reading
    further than this comment section is strictly forbidden without an
    advance written permission.
    To anyone who is not a Better Than Wolves mod developer, permission is
@@ -21,6 +21,8 @@
    Dear user, feel free to change this file to your wishes, if you know how.
    If you're not going to ask totally noobish questions, feel free to ask me
    how stuff works here and there.
+
+   http://chat.grompe.org.ru/#mcmoddev
 
 */
 
@@ -748,7 +750,47 @@ function ObjectArray(arr)
               return;
             }
           }
-          log("...failure!");
+          log(" ...failed!");
+          recordFailure();
+        },
+      },
+    },
+    "bfq": // EntityRenderer
+    {
+      tweakMethods:
+      {
+        "a(FI)V": function(mn)
+        {
+          check(mn, 0xBD92524D);
+          CodeInserter(
+            InsnFinder(ISHR),
+            [
+              FieldInsnNode(GETSTATIC, "GPEBTWTweak", "minFogDistance", "I"),
+              MethodInsnNode(INVOKESTATIC, "java/lang/Math", "max", "(II)I"),
+            ],
+            "\t* Limiting minimum fog distance in EntityRenderer "
+          ).process(mn);
+        },
+        "a(FJ)V": function(mn)
+        {
+          check(mn, 0x13FCF28A);
+          log("\t* Ensuring sky is visible in EntityRenderer " + mn.name + mn.desc, 1);
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner.equals("avy") && n.name.equals("e"))
+            {
+              n = n.getNext();
+              if (n.getOpcode() == ICONST_2)
+              {
+                mn.instructions.set(n, InsnNode(ICONST_4));
+                log("");
+                return;
+              }
+            }
+          }
+          log(" ...failed!");
+          recordFailure();
         },
       },
     },
@@ -827,6 +869,68 @@ function ObjectArray(arr)
             log(" ...failed!");
             recordFailure();
           }
+        },
+      },
+    },
+    "bkf": // GuiMainMenu
+    {
+      tweakMethods:
+      {
+        "a(IIF)V": function(mn)
+        {
+          check(mn, 0xE0F95B5B);
+          log("\t* Improving version info detail in the main menu " + mn.name + mn.desc, 1);
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("bkf") && n.name.equals("b") && n.desc.equals("(Lawv;Ljava/lang/String;III)V"))
+            {
+              mn.instructions.insert(n, toInsnList(
+                [
+                  VarInsnNode(ALOAD, 0),
+                  VarInsnNode(ALOAD, 0),
+                  FieldInsnNode(GETFIELD, "bkf", "m", "Lawv;"),
+                  TypeInsnNode(NEW, "java/lang/StringBuilder"),
+                  InsnNode(DUP),
+                  MethodInsnNode(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "()V"),
+                  LdcInsnNode(String("BTW ")),
+                  MethodInsnNode(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;"),
+                  FieldInsnNode(GETSTATIC, "FCBetterThanWolves", "fcVersionString", "Ljava/lang/String;"),
+                  MethodInsnNode(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;"),
+                  MethodInsnNode(INVOKEVIRTUAL, "java/lang/StringBuilder", "toString", "()Ljava/lang/String;"),
+                  InsnNode(ICONST_2),
+                  VarInsnNode(ALOAD, 0),
+                  FieldInsnNode(GETFIELD, "bkf", "i", "I"),
+                  IntInsnNode(BIPUSH, 30),
+                  InsnNode(ISUB),
+                  LdcInsnNode(Integer(0xFFFF00)),
+                  MethodInsnNode(INVOKEVIRTUAL, "bkf", "b", "(Lawv;Ljava/lang/String;III)V"),
+                  VarInsnNode(ALOAD, 0),
+                  VarInsnNode(ALOAD, 0),
+                  FieldInsnNode(GETFIELD, "bkf", "m", "Lawv;"),
+                  TypeInsnNode(NEW, "java/lang/StringBuilder"),
+                  InsnNode(DUP),
+                  MethodInsnNode(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "()V"),
+                  LdcInsnNode(String("BTWTweak ")),
+                  MethodInsnNode(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;"),
+                  FieldInsnNode(GETSTATIC, "GPEBTWTweak", "tweakVersion", "Ljava/lang/String;"),
+                  MethodInsnNode(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;"),
+                  MethodInsnNode(INVOKEVIRTUAL, "java/lang/StringBuilder", "toString", "()Ljava/lang/String;"),
+                  InsnNode(ICONST_2),
+                  VarInsnNode(ALOAD, 0),
+                  FieldInsnNode(GETFIELD, "bkf", "i", "I"),
+                  IntInsnNode(BIPUSH, 20),
+                  InsnNode(ISUB),
+                  LdcInsnNode(Integer(0x55AAFF)),
+                  MethodInsnNode(INVOKEVIRTUAL, "bkf", "b", "(Lawv;Ljava/lang/String;III)V"),
+                ]
+              ));
+              log("");
+              return;
+            }
+          }
+          log(" ...failed!");
+          recordFailure();
         },
       },
     },
@@ -2700,7 +2804,7 @@ function ObjectArray(arr)
         },
         "l_()V": function(mn)
         {
-          check(mn, 0x99096FE7);
+          check(mn, [0xB4066F18, 0x99096FE7]);
           log("\t* Player will want to nap at day in " + mn.name + mn.desc, 1);
           var i;
           for (i = 0; i < mn.instructions.size(); i++)

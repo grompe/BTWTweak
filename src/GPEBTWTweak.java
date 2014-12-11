@@ -10,7 +10,7 @@ public class GPEBTWTweak extends FCAddOn
 {
   public static GPEBTWTweak instance;
   public static GPEBTWTweakProxy proxy;
-  public static String tweakVersion = "0.7";
+  public static String tweakVersion = "0.8";
 
   public static Block gpeBlockStone;
   public static Block compatAxleBlock;
@@ -18,10 +18,12 @@ public class GPEBTWTweak extends FCAddOn
   public static Item gpeItemLooseRock;
   public static Item gpeItemSilk;
 
+  public static int hcSpawnRadius = 2000;
+  public static int minFogDistance = 128;
+
   public static int gpeLooseRockID = 17000;
   public static int gpeSilkID = 17001;
   public static int gpeEntityRockID = 25;
-  public static int hcSpawnRadius = 2000;
   public static int gpeEnchantmentHaste = 70;
   public static int gpeEntityRockVehicleSpawnType = 120;
   public static int gpeStrataRegenKey = 0;
@@ -61,12 +63,14 @@ public class GPEBTWTweak extends FCAddOn
         key = tmp[0].trim();
         value = tmp[1].trim();
 
+        if (key.equals("hcSpawnRadius")) hcSpawnRadius = Integer.parseInt(value);
+        if (key.equals("minFogDistance")) minFogDistance = Math.min(256, Integer.parseInt(value));
+
         if (key.equals("gpeLooseRockID")) gpeLooseRockID = Integer.parseInt(value);
         if (key.equals("gpeSilkID")) gpeSilkID = Integer.parseInt(value);
         if (key.equals("gpeEntityRockID")) gpeEntityRockID = Integer.parseInt(value);
         if (key.equals("gpeEnchantmentHaste")) gpeEnchantmentHaste = Integer.parseInt(value);
         if (key.equals("gpeEntityRockVehicleSpawnType")) gpeEntityRockVehicleSpawnType = Integer.parseInt(value);
-        if (key.equals("hcSpawnRadius")) hcSpawnRadius = Integer.parseInt(value);
         if (key.equals("gpeStrataRegenKey")) gpeStrataRegenKey = Integer.parseInt(value);
         if (key.equals("gpeStrataRegenWorldName")) gpeStrataRegenWorldName = value;
 
@@ -81,6 +85,11 @@ public class GPEBTWTweak extends FCAddOn
         + "// Hardcore Spawn radius, in blocks. Changing it from default 2000 may destabilize your game balance.\r\n"
         + "\r\n"
         + "hcSpawnRadius=2000\r\n"
+        + "\r\n"
+        + "// Minimum fog distance, in blocks. 256 = far, 128 = normal, 64 = short, 0 to revert to original behavior.\r\n"
+        + "// 128+ keeps ghasts visible on short, 64+ keeps sun/moon visible on tiny render distance.\r\n"
+        + "\r\n"
+        + "minFogDistance=128\r\n"
         + "\r\n"
         + "// **** Item IDs ****\r\n"
         + "\r\n"
