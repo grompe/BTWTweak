@@ -30,4 +30,13 @@ public class GPEBlockOre extends FCBlockOre
       FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, id, 0);
     }
   }
+
+  // Work around GuiAchievements crash
+  @ClientOnly
+  public void registerIcons(IconRegister r)
+  {
+    super.registerIcons(r);
+    if (this.blockID == Block.oreIron.blockID) Block.oreIron.registerIcons(r);
+    if (this.blockID == Block.oreGold.blockID) Block.oreGold.registerIcons(r);
+  }
 }

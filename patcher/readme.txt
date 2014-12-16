@@ -3,6 +3,10 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.8
 
 [********** Change Log ************]
 
+v0.8a
+
+- Fix crash when attempting to view Achievements
+
 v0.8
 
 - Render sun/moon on short and tiny view distances as it is now
