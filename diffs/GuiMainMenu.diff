@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/GuiMainMenu.java b/src/minecraft/net/minecraft/src/GuiMainMenu.java
+index 2eab63c..d81206b 100644
+--- a/src/minecraft/net/minecraft/src/GuiMainMenu.java
++++ b/src/minecraft/net/minecraft/src/GuiMainMenu.java
+@@ -540,0 +541,2 @@ public class GuiMainMenu extends GuiScreen
++        this.drawString(this.fontRenderer, "BTW v" + FCBetterThanWolves.fcVersionString, 2, this.height - 30, 0xFFFF00);
++        this.drawString(this.fontRenderer, "BTWTweak v" + GPEBTWTweak.tweakVersion, 2, this.height - 20, 0x55AAFF);

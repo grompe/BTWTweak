@@ -7,6 +7,8 @@ v0.8a
 
 - Fix crash when attempting to view Achievements
 
+- Fix vanilla bug (MC-881) with boats causing fall damage when just out of water
+
 v0.8
 
 - Render sun/moon on short and tiny view distances as it is now

@@ -2399,6 +2399,34 @@ function ObjectArray(arr)
         log("Class " + cn.name + ": \t+ Adding arcane scroll drop to ocelots");
       }
     },
+    "rf": // EntityBoat
+    {
+      tweakMethods:
+      {
+        "l_()V": function(mn)
+        {
+          check(mn, 0x8C1045A2);
+          var label = LabelNode();
+          CodeInserter(
+            InsnFinder(RETURN),
+            [
+              VarInsnNode(ALOAD, 0),
+              FieldInsnNode(GETFIELD, "rf", "y", "D"),
+              InsnNode(DCONST_0),
+              InsnNode(DCMPL),
+              JumpInsnNode(IFLE, label),
+              VarInsnNode(ALOAD, 0),
+              InsnNode(FCONST_0),
+              FieldInsnNode(PUTFIELD, "rf", "T", "F"),
+              label,
+              FrameNode(F_SAME, 0, null, 0, null),
+            ],
+            "\t* Making boat safe from falling damage bug in ",
+            INSERT_BEFORE
+          ).process(mn);
+        },
+      },
+    },
     "rh": // EntityItem
     {
       tweakMethods:
@@ -3033,8 +3061,9 @@ function ObjectArray(arr)
   var classesToAdapt =
   [
     "GPEBlockCobblestone",
+    "GPEBlockDirtSlab",
+    "GPEBlockOre",
     "GPEBlockStone",
-    "GPEBlockFurnace",
   ];
 
   // Check a method for a checksum or array of checksums

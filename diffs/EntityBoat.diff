@@ -1,0 +1,6 @@
+diff --git a/src/minecraft/net/minecraft/src/EntityBoat.java b/src/minecraft/net/minecraft/src/EntityBoat.java
+index e712f23..b06f8c2 100644
+--- a/src/minecraft/net/minecraft/src/EntityBoat.java
++++ b/src/minecraft/net/minecraft/src/EntityBoat.java
+@@ -444,0 +445 @@ public class EntityBoat extends Entity
++        if (this.motionY > 0) this.fallDistance = 0;
