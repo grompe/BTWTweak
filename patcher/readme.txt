@@ -18,6 +18,9 @@ v0.8a
 
 - Make cows and sheep heal when they eat grass
 
+- Re-add the feature of sawing decorative wooden blocks
+  such as pedestal, table, bench, column
+
 
 v0.8
 

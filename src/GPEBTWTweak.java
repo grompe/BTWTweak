@@ -381,6 +381,56 @@ public class GPEBTWTweak extends FCAddOn
     {
       EjectSawProducts(world, x, y, z, FCBetterThanWolves.fcWoolSlab.blockID, meta, 2);
     }
+    // Benches (metadata = 12)
+    else if (id == FCBetterThanWolves.fcBlockWoodOakSidingAndCorner.blockID)
+    {
+      if (meta != 12) return false;
+      EjectSawProducts(world, x, y, z, FCBetterThanWolves.fcBlockWoodCornerItemStubID, 0, 2);
+    }
+    else if (id == FCBetterThanWolves.fcBlockWoodSpruceSidingAndCorner.blockID)
+    {
+      if (meta != 12) return false;
+      EjectSawProducts(world, x, y, z, FCBetterThanWolves.fcBlockWoodCornerItemStubID, 1, 2);
+    }
+    else if (id == FCBetterThanWolves.fcBlockWoodBirchSidingAndCorner.blockID)
+    {
+      if (meta != 12) return false;
+      EjectSawProducts(world, x, y, z, FCBetterThanWolves.fcBlockWoodCornerItemStubID, 2, 2);
+    }
+    else if (id == FCBetterThanWolves.fcBlockWoodJungleSidingAndCorner.blockID)
+    {
+      if (meta != 12) return false;
+      EjectSawProducts(world, x, y, z, FCBetterThanWolves.fcBlockWoodCornerItemStubID, 3, 2);
+    }
+    // Columns (metaata = 12), pedestals (13, 14), tables (15)
+    else if (id == FCBetterThanWolves.fcBlockWoodOakMouldingAndDecorative.blockID)
+    {
+      if (meta < 12) return false;
+      EjectSawProducts(world, x, y, z,
+        meta == 15 ? FCBetterThanWolves.fcBlockWoodCornerItemStubID : FCBetterThanWolves.fcBlockWoodMouldingItemStubID,
+        0, meta == 12 ? 2 : 3);
+    }
+    else if (id == FCBetterThanWolves.fcBlockWoodSpruceMouldingAndDecorative.blockID)
+    {
+      if (meta < 12) return false;
+      EjectSawProducts(world, x, y, z,
+        meta == 15 ? FCBetterThanWolves.fcBlockWoodCornerItemStubID : FCBetterThanWolves.fcBlockWoodMouldingItemStubID,
+        1, meta == 12 ? 2 : 3);
+    }
+    else if (id == FCBetterThanWolves.fcBlockWoodBirchMouldingAndDecorative.blockID)
+    {
+      if (meta < 12) return false;
+      EjectSawProducts(world, x, y, z,
+        meta == 15 ? FCBetterThanWolves.fcBlockWoodCornerItemStubID : FCBetterThanWolves.fcBlockWoodMouldingItemStubID,
+        2, meta == 12 ? 2 : 3);
+    }
+    else if (id == FCBetterThanWolves.fcBlockWoodJungleMouldingAndDecorative.blockID)
+    {
+      if (meta < 12) return false;
+      EjectSawProducts(world, x, y, z,
+        meta == 15 ? FCBetterThanWolves.fcBlockWoodCornerItemStubID : FCBetterThanWolves.fcBlockWoodMouldingItemStubID,
+        3, meta == 12 ? 2 : 3);
+    }
     else
     {
       return false;
