@@ -2401,6 +2401,65 @@ function ObjectArray(arr)
         },
       },
     },
+    "qj": // EntityCow
+    {
+      tweakMethods:
+      {
+        "OnGrazeBlock(III)V": function(mn)
+        {
+          check(mn, 0x3E6B1B99);
+          CodeInserter(
+            CustomFinder(function(n)
+            {
+              return isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.name.equals("CheckForGrazeSideEffects");
+            }),
+            [
+              VarInsnNode(ALOAD, 0),
+              InsnNode(ICONST_1),
+              MethodInsnNode(INVOKEVIRTUAL, "qj", "j", "(I)V"),
+            ],
+            "\t* Letting cows heal from eating grass in "
+          ).process(mn);
+        },
+      },
+    },
+    "qo": // EntitySheep
+    {
+      tweakMethods:
+      {
+        "aK()V": function(mn)
+        {
+          check(mn, 0x63E1B55);
+
+          log("\t* Letting sheep heal from eating grass in " + mn.name + mn.desc, 1);
+          for (var i = mn.instructions.size() - 1; i >= 0; i--)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.InsnNode") && (n.getOpcode() == RETURN))
+            {
+              var label = LabelNode();
+              mn.instructions.insertBefore(n, toInsnList(
+                [
+                  VarInsnNode(ALOAD, 0),
+                  FieldInsnNode(GETFIELD, "qo", "q", "Laab;"),
+                  FieldInsnNode(GETFIELD, "aab", "I", "Z"),
+                  JumpInsnNode(IFNE, label),
+                  VarInsnNode(ALOAD, 0),
+                  InsnNode(ICONST_1),
+                  MethodInsnNode(INVOKEVIRTUAL, "qo", "j", "(I)V"),
+                  label,
+                  FrameNode(F_SAME, 0, null, 0, null),
+                ]
+              ));
+              log("");
+              return;
+            }
+          }
+          log(" ...failed!");
+          recordFailure();
+        },
+      },
+    },
     "mp": // Entity
     {
       tweakMethods:
@@ -3219,6 +3278,25 @@ function ObjectArray(arr)
       {
         var n = instructions.get(i);
         if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals(this.owner))
+        {
+          return instructions.get(i + this.offset);
+        }
+      }
+      return null;
+    };
+  }
+
+  function CustomFinder(checkfunc, offset)
+  {
+    if (!(this instanceof CustomFinder)) return new CustomFinder(checkfunc, offset);
+    this.checkfunc = checkfunc;
+    this.offset = offset || 0;
+    this.process = function(instructions)
+    {
+      for (var i = 0; i < instructions.size(); i++)
+      {
+        var n = instructions.get(i);
+        if (this.checkfunc(n))
         {
           return instructions.get(i + this.offset);
         }

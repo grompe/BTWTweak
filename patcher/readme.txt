@@ -16,6 +16,8 @@ v0.8a
 - Change (reduce) jungle and pine tree hardness a bit for more
   variety and to signify weaker wood types
 
+- Make cows and sheep heal when they eat grass
+
 
 v0.8
 
