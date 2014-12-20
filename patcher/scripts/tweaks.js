@@ -1640,26 +1640,70 @@ function ObjectArray(arr)
         }
       },
     },
-    /* // Let's leave FlowerChild's bugs to FlowerChild.
     "FCBlockTurntable":
     {
       tweakMethods:
       {
+        "RenderBlock(Lbgf;III)Z": function(mn)
+        {
+          check(mn, 0xBBB81AF0);
+          var label = LabelNode();
+          CodeInserter(
+            BeginningFinder(),
+            [
+              VarInsnNode(ALOAD, 1),
+              VarInsnNode(ALOAD, 0),
+              VarInsnNode(ALOAD, 1),
+              VarInsnNode(ILOAD, 2),
+              VarInsnNode(ILOAD, 3),
+              VarInsnNode(ILOAD, 4),
+              MethodInsnNode(INVOKEVIRTUAL, "FCBlockTurntable", "getVisualSpin", "(Lbgf;III)I"),
+              MethodInsnNode(INVOKEVIRTUAL, "bgf", "SetUvRotateTop", "(I)V"),
+            ],
+            "\t* (1/2) using visual spin in ",
+            INSERT_BEFORE
+          ).process(mn);
+          CodeInserter(
+            InsnFinder(POP),
+            [
+              VarInsnNode(ALOAD, 1),
+              InsnNode(ICONST_0),
+              MethodInsnNode(INVOKEVIRTUAL, "bgf", "SetUvRotateTop", "(I)V"),
+            ],
+            "\t* (2/2) using visual spin in "
+          ).process(mn);
+        },
       },
-    },
-    "FCBlockWoodMouldingAndDecorative":
-    {
-      tweakMethods:
+      add: function(cn)
       {
+        var mn = MethodNode(ACC_PUBLIC, "getVisualSpin", "(Lbgf;III)I", null, null);
+        var label = LabelNode();
+        mn.instructions.add(toInsnList(
+          [
+            VarInsnNode(ALOAD, 1),
+            FieldInsnNode(GETFIELD, "bgf", "a", "Laak;"),
+            VarInsnNode(ILOAD, 2),
+            VarInsnNode(ILOAD, 3),
+            VarInsnNode(ILOAD, 4),
+            MethodInsnNode(INVOKEINTERFACE, "aak", "r", "(III)Laqp;"),
+            VarInsnNode(ASTORE, 5),
+            VarInsnNode(ALOAD, 5),
+            TypeInsnNode(INSTANCEOF, "FCTileEntityTurntable"),
+            JumpInsnNode(IFEQ, label),
+            VarInsnNode(ALOAD, 5),
+            TypeInsnNode(CHECKCAST, "FCTileEntityTurntable"),
+            FieldInsnNode(GETFIELD, "FCTileEntityTurntable", "visualSpin", "I"),
+            InsnNode(IRETURN),
+            label,
+            FrameNode(F_APPEND, 1, ["aqp"], 0, null),
+            InsnNode(ICONST_0),
+            InsnNode(IRETURN),
+          ]
+        ));
+        cn.methods.add(mn);
+        log("Class " + cn.name + ": \t+ adding visual spin function");
       },
     },
-    "FCBlockWoodSidingAndCornerAndDecorative":
-    {
-      tweakMethods:
-      {
-      },
-    },
-    */
     "FCClientGuiCookingVessel":
     {
       tweakClientMethods:
@@ -2344,7 +2388,65 @@ function ObjectArray(arr)
             recordFailure();
           }
         },
+        "<init>()V": function(mn)
+        {
+          check(mn, 0x41CA0676);
+          CodeInserter(
+            BeginningFinder(),
+            [
+              VarInsnNode(ALOAD, 0),
+              InsnNode(ICONST_0),
+              FieldInsnNode(PUTFIELD, "FCTileEntityTurntable", "visualSpin", "I"),
+            ],
+            "\t* Adding new vars init in ",
+            INSERT_BEFORE
+          ).process(mn);
+        },
+        "h()V": function(mn)
+        {
+          check(mn, 0x6AAB37DE);
+          CodeInserter(
+            JumpInsnFinder(IF_ICMPLT),
+            [
+              VarInsnNode(ALOAD, 0),
+              VarInsnNode(ALOAD, 0),
+              FieldInsnNode(GETFIELD, "FCTileEntityTurntable", "visualSpin", "I"),
+              InsnNode(ICONST_1),
+              InsnNode(ISHR),
+              InsnNode(ICONST_2),
+              InsnNode(IADD),
+              VarInsnNode(ALOAD, 0),
+              FieldInsnNode(GETFIELD, "FCTileEntityTurntable", "visualSpin", "I"),
+              InsnNode(ICONST_1),
+              InsnNode(ISHL),
+              InsnNode(ISUB),
+              InsnNode(ICONST_3),
+              InsnNode(IAND),
+              FieldInsnNode(PUTFIELD, "FCTileEntityTurntable", "visualSpin", "I"),
+              VarInsnNode(ALOAD, 0),
+              FieldInsnNode(GETFIELD, "FCTileEntityTurntable", "k", "Laab;"),
+              VarInsnNode(ALOAD, 0),
+              FieldInsnNode(GETFIELD, "FCTileEntityTurntable", "l", "I"),
+              VarInsnNode(ALOAD, 0),
+              FieldInsnNode(GETFIELD, "FCTileEntityTurntable", "m", "I"),
+              VarInsnNode(ALOAD, 0),
+              FieldInsnNode(GETFIELD, "FCTileEntityTurntable", "n", "I"),
+              VarInsnNode(ALOAD, 0),
+              FieldInsnNode(GETFIELD, "FCTileEntityTurntable", "l", "I"),
+              VarInsnNode(ALOAD, 0),
+              FieldInsnNode(GETFIELD, "FCTileEntityTurntable", "m", "I"),
+              VarInsnNode(ALOAD, 0),
+              FieldInsnNode(GETFIELD, "FCTileEntityTurntable", "n", "I"),
+              MethodInsnNode(INVOKEVIRTUAL, "aab", "g", "(IIIIII)V"),
+            ],
+            "\t* Adding visual spin support in "
+          ).process(mn);
+        },
       },
+      add: function(cn)
+      {
+        cn.fields.add(FieldNode(ACC_PUBLIC, "visualSpin", "I", null, null));
+      }
     },
     "gu": // ServerConfigurationManager
     {

@@ -1,5 +1,5 @@
 diff --git a/src/minecraft/net/minecraft/src/FCBlockTurntable.java b/src/minecraft/net/minecraft/src/FCBlockTurntable.java
-index ec88d64..287d277 100644
+index ec88d64..f453d22 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockTurntable.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockTurntable.java
 @@ -248 +248 @@ public class FCBlockTurntable extends BlockContainer implements FCIBlockMechanic
@@ -8,3 +8,18 @@ index ec88d64..287d277 100644
 @@ -251 +251 @@ public class FCBlockTurntable extends BlockContainer implements FCIBlockMechanic
 -        for (var5 = 0; var5 < 4; ++var5)
 +        for (var5 = 0; var5 < 2; ++var5)
+@@ -309,0 +310,10 @@ public class FCBlockTurntable extends BlockContainer implements FCIBlockMechanic
++    public int getVisualSpin(RenderBlocks var1, int var2, int var3, int var4)
++    {
++        TileEntity te = var1.blockAccess.getBlockTileEntity(var2, var3, var4);
++        if (te instanceof FCTileEntityTurntable)
++        {
++            return ((FCTileEntityTurntable)te).visualSpin;
++        }
++        return 0;
++    }
++    
+@@ -311,0 +322 @@ public class FCBlockTurntable extends BlockContainer implements FCIBlockMechanic
++        var1.SetUvRotateTop(getVisualSpin(var1, var2, var3, var4));
+@@ -312,0 +324 @@ public class FCBlockTurntable extends BlockContainer implements FCIBlockMechanic
++        var1.SetUvRotateTop(0);

@@ -1,8 +1,14 @@
 diff --git a/src/minecraft/net/minecraft/src/FCTileEntityTurntable.java b/src/minecraft/net/minecraft/src/FCTileEntityTurntable.java
-index cbbe356..0f77b0f 100644
+index cbbe356..90dc0be 100644
 --- a/src/minecraft/net/minecraft/src/FCTileEntityTurntable.java
 +++ b/src/minecraft/net/minecraft/src/FCTileEntityTurntable.java
-@@ -542,2 +542,2 @@ public class FCTileEntityTurntable extends TileEntity
+@@ -7,0 +8 @@ public class FCTileEntityTurntable extends TileEntity
++    public int visualSpin = 0;
+@@ -60,0 +62,3 @@ public class FCTileEntityTurntable extends TileEntity
++                    // This generates sequence 0, 2, 3, 1, [0, 2, 3, 1]...
++                    this.visualSpin = ((this.visualSpin >> 1) + 2 - (this.visualSpin << 1)) & 3;
++                    this.worldObj.markBlockRangeForRenderUpdate(this.xCoord, this.yCoord, this.zCoord, this.xCoord, this.yCoord, this.zCoord);
+@@ -542,2 +546,2 @@ public class FCTileEntityTurntable extends TileEntity
 -        int var6 = FCUtilsMisc.RotateFacingAroundJ(var5, var4);
 -        this.worldObj.setBlockMetadataWithNotify(var1, var2, var3, var6);
 +        int var6 = FCUtilsMisc.RotateFacingAroundJ(var5 & 7, var4);

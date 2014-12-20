@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/FCBlockCrucible.java b/src/minecraft/net/minecraft/src/FCBlockCrucible.java
+index 66e3b08..83f576a 100644
+--- a/src/minecraft/net/minecraft/src/FCBlockCrucible.java
++++ b/src/minecraft/net/minecraft/src/FCBlockCrucible.java
+@@ -78 +78 @@ public class FCBlockCrucible extends FCBlockCookingVessel
+-                    float var9 = (float)var8 / 27.0F;
++                    float var9 = (float)var8 / 9.0F;

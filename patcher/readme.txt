@@ -35,6 +35,8 @@ v0.8a
 - Allow grinding hellfire and sandstone back to their
   respective dust/pile form
 
+- Add visual rotation to the top surface of the turntable
+
 v0.8
 
 - Render sun/moon on short and tiny view distances as it is now
