@@ -7,7 +7,15 @@ v0.8a
 
 - Fix crash when attempting to view Achievements
 
-- Fix vanilla bug (MC-881) with boats causing fall damage when just out of water
+- Fix vanilla bug (MC-881) with boats causing fall damage when
+  just out of water, i.e. arriving on a dock made of slabs
+
+- Add "tree stumps" feature: bottommost log is much harder
+  to gather without digging it up first
+
+- Change (reduce) jungle and pine tree hardness a bit for more
+  variety and to signify weaker wood types
+
 
 v0.8
 
