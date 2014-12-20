@@ -8,19 +8,11 @@ Main goals
 Skipped
 =======
 
-- Make darker stone drop darker version of cobble, allow crafting from it like regular stone/cobble
-  with exception of bricks: they will have darker texture; sidings, mouldings and such with it
-  (addition of loose rocks is incompatible)
-
-- Get rid of punching wood, wooden pickaxe, use flints on stone to craft rough stone tools
-  (addition of loose rocks made such change less meaningful)
-
-- Make screams from cake, grinding netherrack, etc. scare away animals
-  (code is too tangled for the worth of this effect)
-
-- Shave chickens with shears for fun and slight increase in feathers compared to killing; they won't regrow it
-- Better fishing rods made with soulforged steel nugget
-  (that simply isn't worth it)
+- Make animals affected by gloom as well, to make encasing them to save from danger more difficult
+- Light blocks drop filament and redstone when broken
+  (thought against it)
+- Prevent weapons from decreasing durability if no damage was done (clicked a red mob)
+  or reduce red time (might have side-effects)
 
 
 Feedback
@@ -31,19 +23,6 @@ Feedback
 
 
 -------------------------------------------------------------------------------
-
-
-Straightforward
-===============
-
-- Light blocks drop filament and redstone when broken
-
-- Prevent weapons from decreasing durability if no damage was done (clicked a red mob)
-  or reduce red time (might have side-effects)
-
-
-Needs more thought on implementation
-====================================
 
 - Make ores drop loose rocks and raw ore pieces; add pure ores
 
@@ -59,10 +38,6 @@ Needs more thought on implementation
 - Burned wood makes ash piles (like snow layers)
   - Use ash as fertilizer
 
-- Make turntable top texture animated when it's working
-
-- Make animals affected by gloom as well, to make encasing them to save from danger more difficult
-
 - On respawn, if not affected by Hardcore Spawn, reduce the health and hunger to 50%
 
 - Gravestones on death (only if next respawn is affected by hardcore spawn)
@@ -73,9 +48,17 @@ Needs more thought on implementation
 
 - Port MultiMine
 
+- Make soap blocks slippery?
+  - hard because it shares ID with other storage blocks and
+    slipperiness is a per block ID property, not a function
 
-Needs more thought on balance or fitting in
-===========================================
+- Lightning striking sand block converts it to fulgurite (glass)
+  - but living for a while in desert could lead to too many glass blocks
+
+- Coal block
+  - will that devalue use of black stone?
+
+- Earth, grass and packed earth become slower in rain/storm
 
 - Redstone-compliant version of trapdoor (iron trapdoor)
 
@@ -118,16 +101,3 @@ Random info
 
 Oddities:
 - white stone & cobble makes 6 stairs instead of usual 4
-
-== weights ==
-Soulforged steel armor: 10+14+12+8=44
-Chain armor: 3+4+4+2=13
-Iron/gold/diamond armor: 5+8+7+4=24
-movement_speed *= 1.1 * (1 - (armor_weight / 220))
-
-Resulting speeds:
-Leather: 1.1
-Chain: 1.035
-Iron: 0.98
-Soulforged: 0.88
-0.88*1.3=1.144
