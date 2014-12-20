@@ -32,6 +32,9 @@ v0.8a
   small size and to correspond better with eye drop being
   exclusive to big spiders
 
+- Allow grinding hellfire and sandstone back to their
+  respective dust/pile form
+
 v0.8
 
 - Render sun/moon on short and tiny view distances as it is now

@@ -226,6 +226,13 @@ public class GPEBTWTweak extends FCAddOn
 
     FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcCauldron, 1), new Object[] {"Y", "X", "C", 'Y', Item.bone, 'X', Item.bucketWater, 'C', Item.cauldron});
 
+    // Allow grinding hellfire back to dust
+    FCRecipes.AddMillStoneRecipe(new ItemStack(FCBetterThanWolves.fcHellfireDust, 8), new ItemStack(FCBetterThanWolves.fcConcentratedHellfire));
+    // Sandstone is weak enough to grind back to sand
+    FCRecipes.AddMillStoneRecipe(new ItemStack(FCBetterThanWolves.fcItemPileSand, 16), new ItemStack(Block.sandStone, 1, 32767));
+    FCRecipes.AddMillStoneRecipe(new ItemStack(FCBetterThanWolves.fcItemPileSand, 12), new ItemStack(Block.stairsSandStone));
+    FCRecipes.AddMillStoneRecipe(new ItemStack(FCBetterThanWolves.fcItemPileSand, 8), new ItemStack(Block.stoneSingleSlab, 1, 1));
+
     BlockDispenser.dispenseBehaviorRegistry.putObject(gpeItemLooseRock, new GPEBehaviorRock());
 
     // GitHub [#1]: fcBlockAxle got changed to fcAxleBlock
