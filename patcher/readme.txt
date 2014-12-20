@@ -26,6 +26,8 @@ v0.8a
 - Adjust visual fullness of cauldron and crucible to 9 item
   slots to correspond better with the reduced inventory
 
+- Backport new charcoal texture
+
 v0.8
 
 - Render sun/moon on short and tiny view distances as it is now

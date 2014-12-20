@@ -142,6 +142,7 @@ public class GPEBTWTweak extends FCAddOn
     new GPEItemPotash(FCBetterThanWolves.fcPotash.itemID - 256);
     gpeItemLooseRock = new GPEItemLooseRock(gpeLooseRockID - 256);
     gpeItemSilk = new Item(gpeSilkID - 256).setUnlocalizedName("gpeItemSilk").setCreativeTab(CreativeTabs.tabMaterials).SetBuoyancy(1.0F).SetBellowsBlowDistance(2);
+    new GPEItemCoal(7);
 
     int id = FCBetterThanWolves.fcAestheticOpaque.blockID;
     Block.blocksList[id] = null;

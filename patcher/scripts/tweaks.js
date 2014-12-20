@@ -3240,6 +3240,7 @@ function ObjectArray(arr)
     "GPEBlockGlass",
     "GPEBlockOre",
     "GPEBlockStone",
+    "GPEItemCoal",
   ];
 
   // Check a method for a checksum or array of checksums
