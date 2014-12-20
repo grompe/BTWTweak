@@ -21,6 +21,7 @@ v0.8a
 - Re-add the feature of sawing decorative wooden blocks
   such as pedestal, table, bench, column
 
+- Fix missing beacon texture
 
 v0.8
 

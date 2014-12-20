@@ -3191,6 +3191,7 @@ function ObjectArray(arr)
   [
     "GPEBlockCobblestone",
     "GPEBlockDirtSlab",
+    "GPEBlockGlass",
     "GPEBlockOre",
     "GPEBlockStone",
   ];

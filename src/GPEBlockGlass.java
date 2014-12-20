@@ -22,4 +22,12 @@ public class GPEBlockGlass extends BlockGlass
       world.setBlockWithNotify(x, y, z, 0);
     }
   }
+
+  // Work around beacon missing texture
+  @ClientOnly
+  public void registerIcons(IconRegister r)
+  {
+    super.registerIcons(r);
+    Block.glass.registerIcons(r);
+  }
 }
