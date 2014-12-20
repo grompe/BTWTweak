@@ -1181,6 +1181,52 @@ function ObjectArray(arr)
         }
       },
     },
+    "FCBlockCauldron":
+    {
+      tweakMethods:
+      {
+        "RenderBlock(Lbgf;III)Z": function(mn)
+        {
+          check(mn, 0xDD0A1369);
+          log("\t* Adjusting visual fullness to 9 slots in " + mn.name + mn.desc, 1);
+          for (i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.LdcInsnNode") && isInstance(n.cst, "java.lang.Float") && (n.cst == "27.0"))
+            {
+              n.cst = Float("9.0");
+              log("");
+              return;
+            }
+          }
+          log(" ...failed!");
+          recordFailure();
+        }
+      },
+    },
+    "FCBlockCrucible":
+    {
+      tweakMethods:
+      {
+        "RenderBlock(Lbgf;III)Z": function(mn)
+        {
+          check(mn, 0xC9BA1A38);
+          log("\t* Adjusting visual fullness to 9 slots in " + mn.name + mn.desc, 1);
+          for (i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.LdcInsnNode") && isInstance(n.cst, "java.lang.Float") && (n.cst == "27.0"))
+            {
+              n.cst = Float("9.0");
+              log("");
+              return;
+            }
+          }
+          log(" ...failed!");
+          recordFailure();
+        }
+      },
+    },
     "FCBlockDirtSlab":
     {
       tweakMethods:

@@ -23,6 +23,9 @@ v0.8a
 
 - Fix missing beacon texture
 
+- Adjust visual fullness of cauldron and crucible to 9 item
+  slots to correspond better with the reduced inventory
+
 v0.8
 
 - Render sun/moon on short and tiny view distances as it is now
