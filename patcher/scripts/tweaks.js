@@ -2670,6 +2670,40 @@ function ObjectArray(arr)
         log("Class " + cn.name + ": \t+ Telling Blaze to drop head in dropHead()V");
       },
     },
+    "rt": // EntityCaveSpider
+    {
+      tweakMethods:
+      {
+      },
+      add: function(cn)
+      {
+        var mn = MethodNode(ACC_PROTECTED, "dropHead", "()V", null, null);
+        mn.instructions.add(toInsnList(
+          [
+            InsnNode(RETURN),
+          ]
+        ));
+        cn.methods.add(mn);
+        log("Class " + cn.name + ": \t+ Cave spider is too small to drop head");
+      },
+    },
+    "FCEntityJungleSpider":
+    {
+      tweakMethods:
+      {
+      },
+      add: function(cn)
+      {
+        var mn = MethodNode(ACC_PROTECTED, "dropHead", "()V", null, null);
+        mn.instructions.add(toInsnList(
+          [
+            InsnNode(RETURN),
+          ]
+        ));
+        cn.methods.add(mn);
+        log("Class " + cn.name + ": \t+ Jungle spider is too small to drop head");
+      },
+    },
     "ru": // EntityCreeper
     {
       tweakMethods:

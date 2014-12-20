@@ -28,6 +28,10 @@ v0.8a
 
 - Backport new charcoal texture
 
+- Prevent cave and jungle spiders from dropping heads due to
+  small size and to correspond better with eye drop being
+  exclusive to big spiders
+
 v0.8
 
 - Render sun/moon on short and tiny view distances as it is now
