@@ -1183,7 +1183,7 @@ function ObjectArray(arr)
     },
     "FCBlockCauldron":
     {
-      tweakMethods:
+      tweakClientMethods:
       {
         "RenderBlock(Lbgf;III)Z": function(mn)
         {
@@ -1206,7 +1206,7 @@ function ObjectArray(arr)
     },
     "FCBlockCrucible":
     {
-      tweakMethods:
+      tweakClientMethods:
       {
         "RenderBlock(Lbgf;III)Z": function(mn)
         {
@@ -1642,7 +1642,7 @@ function ObjectArray(arr)
     },
     "FCBlockTurntable":
     {
-      tweakMethods:
+      tweakClientMethods:
       {
         "RenderBlock(Lbgf;III)Z": function(mn)
         {
@@ -1676,6 +1676,7 @@ function ObjectArray(arr)
       },
       add: function(cn)
       {
+        if (!onClient()) return;
         var mn = MethodNode(ACC_PUBLIC, "getVisualSpin", "(Lbgf;III)I", null, null);
         var label = LabelNode();
         mn.instructions.add(toInsnList(
