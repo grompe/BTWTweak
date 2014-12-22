@@ -17,12 +17,14 @@ public class GPEBTWTweak extends FCAddOn
 
   public static Item gpeItemLooseRock;
   public static Item gpeItemSilk;
+  public static Item gpeItemAsh;
 
   public static int hcSpawnRadius = 2000;
   public static int minFogDistance = 128;
 
   public static int gpeLooseRockID = 17000;
   public static int gpeSilkID = 17001;
+  public static int gpeAshID = 17002;
   public static int gpeEntityRockID = 25;
   public static int gpeEnchantmentHaste = 70;
   public static int gpeEntityRockVehicleSpawnType = 120;
@@ -68,6 +70,7 @@ public class GPEBTWTweak extends FCAddOn
 
         if (key.equals("gpeLooseRockID")) gpeLooseRockID = Integer.parseInt(value);
         if (key.equals("gpeSilkID")) gpeSilkID = Integer.parseInt(value);
+        if (key.equals("gpeAshID")) gpeAshID = Integer.parseInt(value);
         if (key.equals("gpeEntityRockID")) gpeEntityRockID = Integer.parseInt(value);
         if (key.equals("gpeEnchantmentHaste")) gpeEnchantmentHaste = Integer.parseInt(value);
         if (key.equals("gpeEntityRockVehicleSpawnType")) gpeEntityRockVehicleSpawnType = Integer.parseInt(value);
@@ -95,6 +98,7 @@ public class GPEBTWTweak extends FCAddOn
         + "\r\n"
         + "gpeLooseRockID=17000\r\n"
         + "gpeSilkID=17001\r\n"
+        + "gpeAshID=17002\r\n"
         + "\r\n"
         + "// **** Entity IDs ****\r\n"
         + "\r\n"
@@ -134,6 +138,7 @@ public class GPEBTWTweak extends FCAddOn
     Block.blocksList[13] = null; new GPEBlockGravel(13);
     Block.blocksList[14] = null; (new GPEBlockOre(14)).setUnlocalizedName("oreGold");
     Block.blocksList[15] = null; (new GPEBlockOre(15)).setUnlocalizedName("oreIron");
+    Block.blocksList[17] = null; new GPEBlockLog(17);
     Block.blocksList[20] = null; new GPEBlockGlass(20);
     Block.blocksList[65] = null; new GPEBlockLadder(65);
     Block.blocksList[80] = null; new GPEBlockSnowBlock(80);
@@ -142,6 +147,7 @@ public class GPEBTWTweak extends FCAddOn
     new GPEItemPotash(FCBetterThanWolves.fcPotash.itemID - 256);
     gpeItemLooseRock = new GPEItemLooseRock(gpeLooseRockID - 256);
     gpeItemSilk = new Item(gpeSilkID - 256).setUnlocalizedName("gpeItemSilk").setCreativeTab(CreativeTabs.tabMaterials).SetBuoyancy(1.0F).SetBellowsBlowDistance(2);
+    gpeItemAsh = new GPEItemPotash(gpeAshID - 256).setUnlocalizedName("gpeItemAsh");
     new GPEItemCoal(7);
 
     int id = FCBetterThanWolves.fcAestheticOpaque.blockID;
@@ -478,6 +484,7 @@ public class GPEBTWTweak extends FCAddOn
     t.put("item.skull.fire.name", "Blaze head");
     t.put(gpeItemLooseRock.getUnlocalizedName() + ".name", "Rock");
     t.put(gpeItemSilk.getUnlocalizedName() + ".name", "Silk");
+    t.put(gpeItemAsh.getUnlocalizedName() + ".name", "Ash");
     t.put("enchantment.haste", "Haste");
   }
 
@@ -607,7 +614,7 @@ public class GPEBTWTweak extends FCAddOn
       int meta = world.getBlockMetadata(x, y, z);
       ItemStack item = ((EntityItem)entity).getEntityItem();
 
-      if (item.itemID == FCBetterThanWolves.fcPotash.itemID)
+      if (item.itemID == FCBetterThanWolves.fcPotash.itemID || item.itemID == gpeAshID)
       {
         if (id == Block.tilledField.blockID)
         {

@@ -40,6 +40,9 @@ v0.9
 - Pressing the hotbar key of already selected slot will cycle
   items in the corresponding inventory column
 
+- Make wither skeletons and logs destroyed by fire drop ash,
+  which also can be used as a fertilizer
+
 v0.8
 
 - Render sun/moon on short and tiny view distances as it is now

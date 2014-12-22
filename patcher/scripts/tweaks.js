@@ -1438,76 +1438,6 @@ function ObjectArray(arr)
         log("Class " + cn.name + ": \t+ Adding handleNewGravelTop(Laab;Lrh;II)V");
       },
     },
-    "FCBlockLog":
-    {
-      tweakMethods:
-      {
-      },
-      add: function(cn)
-      {
-        var mn = MethodNode(ACC_PUBLIC, "l", "(Laab;III)F", null, null);
-        var label1 = LabelNode();
-        var label2 = LabelNode();
-        var label3 = LabelNode();
-        mn.instructions.add(toInsnList(
-          [
-            InsnNode(FCONST_1),
-            VarInsnNode(FSTORE, 5),
-            VarInsnNode(ALOAD, 1),
-            VarInsnNode(ILOAD, 2),
-            VarInsnNode(ILOAD, 3),
-            VarInsnNode(ILOAD, 4),
-            MethodInsnNode(INVOKEVIRTUAL, "aab", "h", "(III)I"),
-            VarInsnNode(ISTORE, 6),
-            VarInsnNode(ALOAD, 1),
-            VarInsnNode(ILOAD, 2),
-            VarInsnNode(ILOAD, 3),
-            InsnNode(ICONST_1),
-            InsnNode(ISUB),
-            VarInsnNode(ILOAD, 4),
-            MethodInsnNode(INVOKEVIRTUAL, "aab", "a", "(III)I"),
-            InsnNode(ICONST_3),
-            JumpInsnNode(IF_ICMPNE, label1),
-            VarInsnNode(ILOAD, 6),
-            IntInsnNode(BIPUSH, 12),
-            InsnNode(IAND),
-            JumpInsnNode(IFNE, label1),
-            LdcInsnNode(Float("8.0")),
-            VarInsnNode(FSTORE, 5),
-            label1,
-            FrameNode(F_APPEND, 2, [FLOAT, INTEGER], 0, null),
-            VarInsnNode(ILOAD, 6),
-            InsnNode(ICONST_3),
-            InsnNode(IAND),
-            InsnNode(ICONST_1),
-            JumpInsnNode(IF_ICMPNE, label2),
-            LdcInsnNode(Float("1.3")),
-            VarInsnNode(FLOAD, 5),
-            InsnNode(FMUL),
-            InsnNode(FRETURN),
-            label2,
-            FrameNode(F_SAME, 0, null, 0, null),
-            VarInsnNode(ILOAD, 6),
-            InsnNode(ICONST_3),
-            InsnNode(IAND),
-            InsnNode(ICONST_3),
-            JumpInsnNode(IF_ICMPNE, label3),
-            LdcInsnNode(Float("1.0")),
-            VarInsnNode(FLOAD, 5),
-            InsnNode(FMUL),
-            InsnNode(FRETURN),
-            label3,
-            FrameNode(F_SAME, 0, null, 0, null),
-            LdcInsnNode(Float("1.5")),
-            VarInsnNode(FLOAD, 5),
-            InsnNode(FMUL),
-            InsnNode(FRETURN),
-          ]
-        ));
-        cn.methods.add(mn);
-        log("Class " + cn.name + ": \t+ Making tree stumps harder and jungle/pine trees a bit easier to gather");
-      },
-    },
     "FCBlockPumpkin":
     {
       tweakClientMethods:
@@ -2859,6 +2789,55 @@ function ObjectArray(arr)
         }
       },
     },
+    "sf": // EntitySkeleton
+    {
+      tweakMethods:
+      {
+        "a(ZI)V": function(mn)
+        {
+          check(mn, 0xEDE5138A);
+          var label1 = LabelNode();
+          var label2 = LabelNode();
+          CodeInserter(
+            InsnFinder(RETURN),
+            [
+              VarInsnNode(ALOAD, 0),
+              MethodInsnNode(INVOKEVIRTUAL, "sf", "o", "()I"),
+              InsnNode(ICONST_1),
+              JumpInsnNode(IF_ICMPNE, label1),
+              VarInsnNode(ALOAD, 0),
+              FieldInsnNode(GETFIELD, "sf", "ab", "Ljava/util/Random;"),
+              InsnNode(ICONST_3),
+              VarInsnNode(ILOAD, 2),
+              InsnNode(IADD),
+              MethodInsnNode(INVOKEVIRTUAL, "java/util/Random", "nextInt", "(I)I"),
+              InsnNode(ICONST_1),
+              InsnNode(ISUB),
+              VarInsnNode(ISTORE, 3),
+              InsnNode(ICONST_0),
+              VarInsnNode(ISTORE, 4),
+              label2,
+              FrameNode(F_SAME, 0, null, 0, null),
+              VarInsnNode(ILOAD, 4),
+              VarInsnNode(ILOAD, 3),
+              JumpInsnNode(IF_ICMPGE, label1),
+              VarInsnNode(ALOAD, 0),
+              FieldInsnNode(GETSTATIC, "GPEBTWTweak", "gpeItemAsh", "Lwk;"),
+              FieldInsnNode(GETFIELD, "wk", "cp", "I"),
+              InsnNode(ICONST_1),
+              MethodInsnNode(INVOKEVIRTUAL, "sf", "b", "(II)Lrh;"),
+              InsnNode(POP),
+              IincInsnNode(4, 1),
+              JumpInsnNode(GOTO, label2),
+              label1,
+              FrameNode(F_SAME, 0, null, 0, null),
+            ],
+            "\t* Making wither skeletons drop ash in ",
+            INSERT_BEFORE
+          ).process(mn);
+        },
+      },
+    },
     "sh": // EntitySpider
     {
       tweakMethods:
@@ -3404,6 +3383,7 @@ function ObjectArray(arr)
     "GPEBlockCobblestone",
     "GPEBlockDirtSlab",
     "GPEBlockGlass",
+    "GPEBlockLog",
     "GPEBlockOre",
     "GPEBlockStone",
     "GPEItemCoal",
@@ -3612,6 +3592,11 @@ function ObjectArray(arr)
   function JumpInsnNode(opcode, par2)
   {
     return new asm.tree.JumpInsnNode(opcode, par2);
+  }
+
+  function IincInsnNode(par1, par2)
+  {
+    return new asm.tree.IincInsnNode(par1, par2);
   }
 
   function LdcInsnNode(par1)

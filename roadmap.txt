@@ -35,9 +35,6 @@ Feedback
   - Also let the player occupy part of the block he intends to build in if it doesn't intersect the bounding box
   - look at FCBlockMoulding.java / onBlockPlaced()
 
-- Burned wood makes ash piles (like snow layers)
-  - Use ash as fertilizer
-
 - On respawn, if not affected by Hardcore Spawn, reduce the health and hunger to 50%
 
 - Gravestones on death (only if next respawn is affected by hardcore spawn)
