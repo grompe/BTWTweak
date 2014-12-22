@@ -10,7 +10,7 @@ public class GPEBTWTweak extends FCAddOn
 {
   public static GPEBTWTweak instance;
   public static GPEBTWTweakProxy proxy;
-  public static String tweakVersion = "0.8";
+  public static String tweakVersion = "0.9";
 
   public static Block gpeBlockStone;
   public static Block compatAxleBlock;
@@ -452,6 +452,11 @@ public class GPEBTWTweak extends FCAddOn
     {
       FCUtilsItem.EjectSingleItemWithRandomOffset(world, x, y, z, id, meta);
     }
+  }
+
+  public static void onKeyPress(int key)
+  {
+    proxy.onKeyPress(key);
   }
 
   public void OnLanguageLoaded(StringTranslate st)

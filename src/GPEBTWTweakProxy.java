@@ -11,4 +11,6 @@ public class GPEBTWTweakProxy
   }
 
   public void addEntityRenderers() {}
+
+  public void onKeyPress(int key) {}
 }

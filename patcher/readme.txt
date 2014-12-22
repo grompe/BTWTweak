@@ -1,9 +1,9 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.8
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.9
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
 
-v0.8a
+v0.9
 
 - Fix crash when attempting to view Achievements
 
@@ -36,6 +36,9 @@ v0.8a
   respective dust/pile form
 
 - Add visual rotation to the top surface of the turntable
+
+- Pressing the hotbar key of already selected slot will cycle
+  items in the corresponding inventory column
 
 v0.8
 

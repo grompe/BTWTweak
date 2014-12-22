@@ -3367,6 +3367,35 @@ function ObjectArray(arr)
         },
       },
     },
+    "net/minecraft/client/Minecraft":
+    {
+      tweakClientMethods:
+      {
+        "l()V": function(mn)
+        {
+          check(mn, 0x6F5697A8);
+          log("\t* Adding keyboard hook in " + mn.name + mn.desc, 1);
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("net/minecraft/client/Minecraft") && n.name.equals("j"))
+            {
+              while (n.getOpcode() != INVOKESTATIC) n = n.getPrevious();
+              mn.instructions.insertBefore(n, toInsnList(
+                [
+                  MethodInsnNode(INVOKESTATIC, "org/lwjgl/input/Keyboard", "getEventKey", "()I"),
+                  MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "onKeyPress", "(I)V"),
+                ]
+              ));
+              log("");
+              return;
+            }
+          }
+          log(" ...failed!");
+          recordFailure();
+        },
+      },
+    },
   };
 
   // Classes requiring removal of client-only methods on server side
