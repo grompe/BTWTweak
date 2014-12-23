@@ -1,0 +1,15 @@
+diff --git a/src/minecraft/net/minecraft/src/EntitySkeleton.java b/src/minecraft/net/minecraft/src/EntitySkeleton.java
+index 310f2c7..9d65b78 100644
+--- a/src/minecraft/net/minecraft/src/EntitySkeleton.java
++++ b/src/minecraft/net/minecraft/src/EntitySkeleton.java
+@@ -232,0 +233,10 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
++
++        if (this.getSkeletonType() == 1)
++        {
++            var3 = this.rand.nextInt(3 + par2) - 1;
++
++            for (var4 = 0; var4 < var3; ++var4)
++            {
++                this.dropItem(GPEBTWTweak.gpeItemAsh.itemID, 1);
++            }
++        }

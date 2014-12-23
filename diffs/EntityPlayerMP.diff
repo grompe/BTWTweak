@@ -1,10 +1,12 @@
 diff --git a/src/minecraft/net/minecraft/src/EntityPlayerMP.java b/src/minecraft/net/minecraft/src/EntityPlayerMP.java
-index aa77568..d9a9f41 100644
+index aa77568..2376017 100644
 --- a/src/minecraft/net/minecraft/src/EntityPlayerMP.java
 +++ b/src/minecraft/net/minecraft/src/EntityPlayerMP.java
 @@ -956,0 +957 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
 +        if (var1 == FCDamageSourceCustom.m_DamageSourceGloom) return;
-@@ -1064 +1065,6 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
+@@ -979,0 +981 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
++            GPEBTWTweak.onPlayerHardcoreDeath(this);
+@@ -1064 +1066,6 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
 -        if (this.m_iExhaustionWithTimeCounter >= 600)
 +        int sleepBonusModifier = 1;
 +        if (this.isPlayerSleeping())

@@ -43,6 +43,10 @@ v0.9
 - Make wither skeletons and logs destroyed by fire drop ash,
   which also can be used as a fertilizer
 
+- To pay tribute to death, now gravestone is placed after the
+  player's death, if terrain allows. Graves will only be
+  created if the player lived long enough to Hardcore Spawn.
+
 v0.8
 
 - Render sun/moon on short and tiny view distances as it is now

@@ -2421,6 +2421,22 @@ function ObjectArray(arr)
             INSERT_BEFORE
           ).process(mn);
         },
+        "DropMysteryMeat(I)V": function(mn)
+        {
+          check(mn, 0x5B1D190E);
+          CodeInserter(
+            CustomFinder(function(n)
+            {
+              return isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.name.equals("fcItemRawMysteryMeat");
+            }),
+            [
+              VarInsnNode(ALOAD, 0),
+              MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "onPlayerHardcoreDeath", "(Lsq;)V"),
+            ],
+            "\t* Adding player hardcore death hook in ",
+            INSERT_BEFORE
+          ).process(mn);
+        },
         "UpdateExhaustionWithTime()V": function(mn)
         {
           check(mn, 0x617108F1);

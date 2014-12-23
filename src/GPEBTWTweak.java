@@ -14,6 +14,7 @@ public class GPEBTWTweak extends FCAddOn
 
   public static Block gpeBlockStone;
   public static Block compatAxleBlock;
+  public static Block gpeBlockGravestone;
 
   public static Item gpeItemLooseRock;
   public static Item gpeItemSilk;
@@ -25,6 +26,7 @@ public class GPEBTWTweak extends FCAddOn
   public static int gpeLooseRockID = 17000;
   public static int gpeSilkID = 17001;
   public static int gpeAshID = 17002;
+  public static int gpeBlockGravestoneID = 163;
   public static int gpeEntityRockID = 25;
   public static int gpeEnchantmentHaste = 70;
   public static int gpeEntityRockVehicleSpawnType = 120;
@@ -71,6 +73,7 @@ public class GPEBTWTweak extends FCAddOn
         if (key.equals("gpeLooseRockID")) gpeLooseRockID = Integer.parseInt(value);
         if (key.equals("gpeSilkID")) gpeSilkID = Integer.parseInt(value);
         if (key.equals("gpeAshID")) gpeAshID = Integer.parseInt(value);
+        if (key.equals("gpeBlockGravestoneID")) gpeBlockGravestoneID = Integer.parseInt(value);
         if (key.equals("gpeEntityRockID")) gpeEntityRockID = Integer.parseInt(value);
         if (key.equals("gpeEnchantmentHaste")) gpeEnchantmentHaste = Integer.parseInt(value);
         if (key.equals("gpeEntityRockVehicleSpawnType")) gpeEntityRockVehicleSpawnType = Integer.parseInt(value);
@@ -99,6 +102,10 @@ public class GPEBTWTweak extends FCAddOn
         + "gpeLooseRockID=17000\r\n"
         + "gpeSilkID=17001\r\n"
         + "gpeAshID=17002\r\n"
+        + "\r\n"
+        + "// **** Block IDs ****\r\n"
+        + "\r\n"
+        + "gpeBlockGravestoneID=163\r\n"
         + "\r\n"
         + "// **** Entity IDs ****\r\n"
         + "\r\n"
@@ -158,6 +165,9 @@ public class GPEBTWTweak extends FCAddOn
     Block.blocksList[id] = null;
     new GPEBlockDirtSlab(id);
 
+    gpeBlockGravestone = new GPEBlockGravestone(gpeBlockGravestoneID);
+    FCBetterThanWolves.m_instance.CreateAssociatedItemForBlock(gpeBlockGravestone);
+    
     new GPEEnchantmentHaste(gpeEnchantmentHaste);
 
     EntityList.addMapping(GPEEntityRock.class, "gpeEntityRock", gpeEntityRockID);
@@ -460,6 +470,40 @@ public class GPEBTWTweak extends FCAddOn
     }
   }
 
+  public static void onPlayerHardcoreDeath(EntityPlayer player)
+  {
+    int x = MathHelper.floor_double(player.posX);
+    int y = MathHelper.floor_double(player.posY);
+    int z = MathHelper.floor_double(player.posZ);
+    attemptToPlaceGravestone(player.worldObj, x, y, z);
+  }
+
+  public static boolean attemptToPlaceGravestone(World  world, int x, int y, int z)
+  {
+    while (world.getBlockId(x, y - 1, z) == 0) y--;
+    if (gpeBlockGravestone.canPlaceBlockAt(world, x, y, z))
+    {
+      int side = world.rand.nextInt(4);
+      world.setBlockAndMetadataWithNotify(x, y, z, gpeBlockGravestone.blockID, side);
+      return true;
+    }
+    for (int xx = x - 1; xx <= x + 1; xx++)
+    {
+      for (int zz = z - 1; zz <= z + 1; zz++)
+      {
+        int yy = y + 1;
+        while (world.getBlockId(xx, yy - 1, zz) == 0) yy--;
+        if (gpeBlockGravestone.canPlaceBlockAt(world, xx, yy, zz))
+        {
+          int side = world.rand.nextInt(4);
+          world.setBlockAndMetadataWithNotify(xx, yy, zz, gpeBlockGravestone.blockID, side);
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   public static void onKeyPress(int key)
   {
     proxy.onKeyPress(key);
@@ -485,6 +529,7 @@ public class GPEBTWTweak extends FCAddOn
     t.put(gpeItemLooseRock.getUnlocalizedName() + ".name", "Rock");
     t.put(gpeItemSilk.getUnlocalizedName() + ".name", "Silk");
     t.put(gpeItemAsh.getUnlocalizedName() + ".name", "Ash");
+    t.put(gpeBlockGravestone.getUnlocalizedName() + ".name", "Gravestone");
     t.put("enchantment.haste", "Haste");
   }
 
