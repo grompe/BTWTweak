@@ -478,28 +478,35 @@ public class GPEBTWTweak extends FCAddOn
     attemptToPlaceGravestone(player.worldObj, x, y, z);
   }
 
-  public static boolean attemptToPlaceGravestone(World  world, int x, int y, int z)
+  public static boolean attemptToPlaceGravestone(World world, int x, int y, int z)
   {
-    while (world.getBlockId(x, y - 1, z) == 0) y--;
-    if (gpeBlockGravestone.canPlaceBlockAt(world, x, y, z))
-    {
-      int side = world.rand.nextInt(4);
-      world.setBlockAndMetadataWithNotify(x, y, z, gpeBlockGravestone.blockID, side);
-      return true;
-    }
+    while (isReplaceableBlock(world, x, y - 1, z)) y--;
+    if (placeGravestoneIfPossibleAt(world, x, y, z)) return true;
     for (int xx = x - 1; xx <= x + 1; xx++)
     {
       for (int zz = z - 1; zz <= z + 1; zz++)
       {
         int yy = y + 1;
-        while (world.getBlockId(xx, yy - 1, zz) == 0) yy--;
-        if (gpeBlockGravestone.canPlaceBlockAt(world, xx, yy, zz))
-        {
-          int side = world.rand.nextInt(4);
-          world.setBlockAndMetadataWithNotify(xx, yy, zz, gpeBlockGravestone.blockID, side);
-          return true;
-        }
+        while (isReplaceableBlock(world, xx, yy - 1, zz)) yy--;
+        if (placeGravestoneIfPossibleAt(world, xx, yy, zz)) return true;
       }
+    }
+    return false;
+  }
+
+  public static boolean isReplaceableBlock(World world, int x, int y, int z)
+  {
+    int id = world.getBlockId(x, y, z);
+    return id == 0 || Block.blocksList[id].blockMaterial.isReplaceable();
+  }
+
+  private static boolean placeGravestoneIfPossibleAt(World world, int x, int y, int z)
+  {
+    if (gpeBlockGravestone.canPlaceBlockAt(world, x, y, z) && !(world.getBlockMaterial(x, y, z) instanceof MaterialLiquid))
+    {
+      int side = world.rand.nextInt(4);
+      world.setBlockAndMetadataWithNotify(x, y, z, gpeBlockGravestone.blockID, side);
+      return true;
     }
     return false;
   }

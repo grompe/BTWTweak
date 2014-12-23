@@ -1,0 +1,11 @@
+diff --git a/src/minecraft/net/minecraft/src/ComponentMineshaftCorridor.java b/src/minecraft/net/minecraft/src/ComponentMineshaftCorridor.java
+index 3451ae6..d3b3894 100644
+--- a/src/minecraft/net/minecraft/src/ComponentMineshaftCorridor.java
++++ b/src/minecraft/net/minecraft/src/ComponentMineshaftCorridor.java
+@@ -240,2 +240,2 @@ public class ComponentMineshaftCorridor extends StructureComponent
+-                this.fillWithMetadataBlocks(par1World, par3StructureBoundingBox, 0, 0, var6, 0, 1, var6, Block.wood.blockID, 0, 0, 0, false);
+-                this.fillWithMetadataBlocks(par1World, par3StructureBoundingBox, 2, 0, var6, 2, 1, var6, Block.wood.blockID, 0, 0, 0, false);
++                this.fillWithMetadataBlocks(par1World, par3StructureBoundingBox, 0, 0, var6, 0, 1, var6, Block.wood.blockID, 12, 0, 0, false);
++                this.fillWithMetadataBlocks(par1World, par3StructureBoundingBox, 2, 0, var6, 2, 1, var6, Block.wood.blockID, 12, 0, 0, false);
+@@ -371,0 +372 @@ public class ComponentMineshaftCorridor extends StructureComponent
++        if (var1 == Block.wood.blockID) return 12;

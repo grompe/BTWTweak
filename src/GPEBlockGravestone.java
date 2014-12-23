@@ -34,9 +34,19 @@ public class GPEBlockGravestone extends Block
     return true;
   }
 
+  protected boolean canSilkHarvest()
+  {
+    return true;
+  }
+
   public int idDropped(int meta, Random random, int fortune)
   {
     return GPEBTWTweak.gpeItemLooseRock.itemID;
+  }
+
+  public boolean canPlaceBlockAt(World world, int x, int y, int z)
+  {
+    return super.canPlaceBlockAt(world, x, y, z) && world.doesBlockHaveSolidTopSurface(x, y - 1, z);
   }
 
   public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entity, ItemStack stack)
@@ -45,10 +55,14 @@ public class GPEBlockGravestone extends Block
     world.setBlockMetadataWithNotify(x, y, z, side, 2);
   }
 
+  public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
+  {
+    return side < 2 ? 2 : Direction.facingToDirection[side];
+  }
+
   @ClientOnly
   public void registerIcons(IconRegister r)
   {
-    super.registerIcons(r);
     iconFront = r.registerIcon("gpeBlockGravestone_front");
     iconFrontBlank = r.registerIcon("gpeBlockGravestone_front_blank");
     iconSide = r.registerIcon("gpeBlockGravestone_side");

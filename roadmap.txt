@@ -37,8 +37,6 @@ Feedback
 
 - On respawn, if not affected by Hardcore Spawn, reduce the health and hunger to 50%
 
-- Gravestones on death (only if next respawn is affected by hardcore spawn)
-
 - Fix axle texture in a better way
 
 - Backport slime blocks
@@ -59,9 +57,9 @@ Feedback
 
 - Redstone-compliant version of trapdoor (iron trapdoor)
 
-- Abandoned mineshaft wood is mostly eaten by termites, is slightly easier to break and will give
-  only sawdust and bark on destruction, regardless of methods, will break if pushed by a piston
-  - Requires a new block ID, or hack into planks unused metadata
+- Abandoned mineshaft rails are rusted and give less iron when melted
+  - 1 rail = 1 nugget
+  - can use metadata >= 10
 
 - Block of Padding beacon, with feather falling effect in range
 

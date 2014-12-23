@@ -150,6 +150,58 @@ function ObjectArray(arr)
         },
       },
     },
+    "aen": // ComponentMineshaftCorridor
+    {
+      tweakMethods:
+      {
+        "a(Laab;Ljava/util/Random;Laek;)Z": function(mn)
+        {
+          check(mn, 0x97797998);
+          log("\t* (1/2) Making wood in mineshafts eaten by termites in " + mn.name + mn.desc, 1);
+          var changes = 0;
+          for (i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.name.equals("N"))
+            {
+              n = n.getNext().getNext();
+              if (isInstance(n, "org.objectweb.asm.tree.InsnNode") && (n.opcode == ICONST_0))
+              {
+                mn.instructions.set(n, IntInsnNode(BIPUSH, 12));
+                changes++;
+                if (changes == 2)
+                {
+                  log("");
+                  return;
+                }
+              }
+            }
+          }
+          log(" ...failed!");
+          recordFailure();
+        },
+        "c(II)I": function(mn)
+        {
+          check(mn, 0x1ED90C99);
+          var label = LabelNode();
+          CodeInserter(
+            BeginningFinder(),
+            [
+              VarInsnNode(ILOAD, 1),
+              FieldInsnNode(GETSTATIC, "apa", "N", "Lapa;"),
+              FieldInsnNode(GETFIELD, "apa", "cz", "I"),
+              JumpInsnNode(IF_ICMPNE, label),
+              IntInsnNode(BIPUSH, 12),
+              InsnNode(IRETURN),
+              label,
+              FrameNode(F_SAME, 0, null, 0, null),
+            ],
+            "\t* (2/2) Making wood in mineshafts eaten by termites in ",
+            INSERT_BEFORE
+          ).process(mn);
+        },
+      },
+    },
     "ajt": // SaveHandler
     {
       tweakMethods:

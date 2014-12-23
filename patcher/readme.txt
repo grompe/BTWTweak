@@ -47,6 +47,9 @@ v0.9
   player's death, if terrain allows. Graves will only be
   created if the player lived long enough to Hardcore Spawn.
 
+- Logs in abandoned mineshafts are now eaten by termites and
+  will only drop a piece of sawdust when harvested
+
 v0.8
 
 - Render sun/moon on short and tiny view distances as it is now
