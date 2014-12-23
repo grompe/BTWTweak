@@ -13,6 +13,7 @@ Skipped
   (thought against it)
 - Prevent weapons from decreasing durability if no damage was done (clicked a red mob)
   or reduce red time (might have side-effects)
+- On respawn, if not affected by Hardcore Spawn, reduce the health and hunger to 50%
 
 
 Feedback
@@ -24,8 +25,6 @@ Feedback
 
 -------------------------------------------------------------------------------
 
-- Make ores drop loose rocks and raw ore pieces; add pure ores
-
 - Cauldron having a water slot that needs refilling, indicating if the cauldron is dirty;
   dirty needs to be just mined and replaced for now
 
@@ -35,33 +34,38 @@ Feedback
   - Also let the player occupy part of the block he intends to build in if it doesn't intersect the bounding box
   - look at FCBlockMoulding.java / onBlockPlaced()
 
-- On respawn, if not affected by Hardcore Spawn, reduce the health and hunger to 50%
-
 - Fix axle texture in a better way
 
-- Backport slime blocks
-
 - Port MultiMine
+
+- Lightning striking sand block converts it to fulgurite (glass)
+  - but living for a while in desert could lead to too many glass blocks
+
+- Block of Padding beacon, with feather falling effect in range
+
+
+Demands Block IDs
+=================
 
 - Make soap blocks slippery?
   - hard because it shares ID with other storage blocks and
     slipperiness is a per block ID property, not a function
 
-- Lightning striking sand block converts it to fulgurite (glass)
-  - but living for a while in desert could lead to too many glass blocks
-
 - Coal block
   - will that devalue use of black stone?
 
-- Earth, grass and packed earth become slower in rain/storm
+- Backport slime blocks
 
 - Redstone-compliant version of trapdoor (iron trapdoor)
 
 - Abandoned mineshaft rails are rusted and give less iron when melted
   - 1 rail = 1 nugget
-  - can use metadata >= 10
+  - canot hack into metadata, need block ID
 
-- Block of Padding beacon, with feather falling effect in range
+- Dirt turning to mud near water or in rain?
+
+- Make ores drop loose rocks and raw ore pieces; add pure ores
+  (block ID so it can be placed in the kiln)
 
 
 Fleshing out
@@ -88,7 +92,7 @@ Fleshing out
 
 - Gearboxes crafted with 6 axles -> gearboxes that can be used in compact designs
 
-- More uses for rope, creeper oysters(?: bait is maybe good enough), sugar
+- More uses for nether quartz or black stone
 
 
 Random info

@@ -183,17 +183,50 @@ function ObjectArray(arr)
         "c(II)I": function(mn)
         {
           check(mn, 0x1ED90C99);
-          var label = LabelNode();
+          var label1 = LabelNode();
+          var label2 = LabelNode();
+          var label3 = LabelNode();
+          var label4 = LabelNode();
+          var label5 = LabelNode();
           CodeInserter(
             BeginningFinder(),
             [
+            /*
+              VarInsnNode(ILOAD, 1),
+              FieldInsnNode(GETSTATIC, "apa", "aK", "Lapa;"),
+              FieldInsnNode(GETFIELD, "apa", "cz", "I"),
+              JumpInsnNode(IF_ICMPNE, label1),
+              VarInsnNode(ALOAD, 0),
+              FieldInsnNode(GETFIELD, "aen", "f", "I"),
+              InsnNode(ICONST_1),
+              JumpInsnNode(IF_ICMPEQ, label2),
+              VarInsnNode(ALOAD, 0),
+              FieldInsnNode(GETFIELD, "aen", "f", "I"),
+              InsnNode(ICONST_3),
+              JumpInsnNode(IF_ICMPNE, label1),
+              label2,
+              FrameNode(F_SAME, 0, null, 0, null),
+              VarInsnNode(ILOAD, 2),
+              InsnNode(ICONST_1),
+              JumpInsnNode(IF_ICMPNE, label3),
+              IntInsnNode(BIPUSH, 10),
+              JumpInsnNode(GOTO, label4),
+              label3,
+              FrameNode(F_SAME, 0, null, 0, null),
+              IntInsnNode(BIPUSH, 11),
+              label4,
+              FrameNode(F_SAME1, 0, null, 1, [INTEGER]),
+              InsnNode(IRETURN),
+              label1,
+              FrameNode(F_SAME, 0, null, 0, null),
+            */
               VarInsnNode(ILOAD, 1),
               FieldInsnNode(GETSTATIC, "apa", "N", "Lapa;"),
               FieldInsnNode(GETFIELD, "apa", "cz", "I"),
-              JumpInsnNode(IF_ICMPNE, label),
+              JumpInsnNode(IF_ICMPNE, label5),
               IntInsnNode(BIPUSH, 12),
               InsnNode(IRETURN),
-              label,
+              label5,
               FrameNode(F_SAME, 0, null, 0, null),
             ],
             "\t* (2/2) Making wood in mineshafts eaten by termites in ",
@@ -3451,6 +3484,7 @@ function ObjectArray(arr)
     "GPEBlockCobblestone",
     "GPEBlockDirtSlab",
     "GPEBlockGlass",
+    "GPEBlockGravestone",
     "GPEBlockLog",
     "GPEBlockOre",
     "GPEBlockStone",
