@@ -115,6 +115,33 @@ function ObjectArray(arr)
     ]);
   }
 
+  function fixMobToBurnOnSlabs(mn)
+  {
+    log("\t* Fixing mob not burning on slabs in " + mn.name + mn.desc, 1);
+    var count = 0;
+    for (var i = 0; i < mn.instructions.size(); i++)
+    {
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("kx") && n.name.equals("c") && n.desc.equals("(D)I"))
+      {
+        count++;
+        if (count == 2)
+        {
+          mn.instructions.insert(n, toInsnList(
+            [
+              InsnNode(ICONST_1),
+              InsnNode(IADD),
+            ]
+          ));
+          log("")
+          return;
+        }
+      }
+    }
+    log(" ...failed!");
+    recordFailure();
+  }
+  
   // Classes requiring patches
   var classesToTweak =
   {
@@ -2980,6 +3007,11 @@ function ObjectArray(arr)
             INSERT_BEFORE
           ).process(mn);
         },
+        "c()V": function(mn)
+        {
+          check(mn, 0x30572525);
+          fixMobToBurnOnSlabs(mn);
+        },
       },
     },
     "sh": // EntitySpider
@@ -2993,6 +3025,17 @@ function ObjectArray(arr)
         mn.instructions.add(dropHeadCode("sh", 5));
         cn.methods.add(mn);
         log("Class " + cn.name + ": \t+ Telling Spider to drop head in dropHead()V");
+      },
+    },
+    "sj": // EntityZombie
+    {
+      tweakMethods:
+      {
+        "c()V": function(mn)
+        {
+          check(mn, 0x4F1922DE);
+          fixMobToBurnOnSlabs(mn);
+        },
       },
     },
     "sq": // EntityPlayer
