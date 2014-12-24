@@ -3551,6 +3551,33 @@ function ObjectArray(arr)
         },
       },
     },
+    "zs": // MobSpawnerBaseLogic
+    {
+      tweakMethods:
+      {
+        "g()V": function(mn)
+        {
+          check(mn, 0x72426C61);
+          CodeInserter(
+            CustomFinder(function(n)
+            {
+              return isInstance(n, "org.objectweb.asm.tree.VarInsnNode") && (n["var"] == 11);
+            }),
+            [
+              VarInsnNode(DLOAD, 1),
+              LdcInsnNode(Double("0.5")),
+              InsnNode(DADD),
+              VarInsnNode(DSTORE, 1),
+              VarInsnNode(DLOAD, 9),
+              LdcInsnNode(Double("0.5")),
+              InsnNode(DADD),
+              VarInsnNode(DSTORE, 9),
+            ],
+            "\t* Fixing mob spawner offset in "
+          ).process(mn);
+        },
+      },
+    },
     "zu": // ChunkCoordIntPair
     {
       tweakMethods:
