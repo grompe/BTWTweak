@@ -118,6 +118,58 @@ function ObjectArray(arr)
   // Classes requiring patches
   var classesToTweak =
   {
+    "aaq": // ChunkCache
+    {
+      tweakClientMethods:
+      {
+        "a(Laam;III)I": function(mn)
+        {
+          check(mn, 0xA85525A4);
+          log("\t* Fixing upside-down slabs brightness in " + mn.name + mn.desc, 1);
+          var count = 0;
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.InsnNode") && (n.opcode == IRETURN))
+            {
+              count++;
+              if (count == 2)
+              {
+                n = n.getPrevious();
+                if (isInstance(n, "org.objectweb.asm.tree.VarInsnNode") && (n.opcode == ILOAD))
+                {
+                  var label = LabelNode();
+                  mn.instructions.insertBefore(n, toInsnList(
+                    [
+                      VarInsnNode(ALOAD, 0),
+                      VarInsnNode(ALOAD, 1),
+                      VarInsnNode(ILOAD, 2),
+                      VarInsnNode(ILOAD, 3),
+                      InsnNode(ICONST_1),
+                      InsnNode(ISUB),
+                      VarInsnNode(ILOAD, 4),
+                      MethodInsnNode(INVOKEVIRTUAL, "aaq", "b", "(Laam;III)I"),
+                      VarInsnNode(ISTORE, 10),
+                      VarInsnNode(ILOAD, 10),
+                      VarInsnNode(ILOAD, 5),
+                      JumpInsnNode(IF_ICMPLE, label),
+                      VarInsnNode(ILOAD, 10),
+                      VarInsnNode(ISTORE, 5),
+                      label,
+                      FrameNode(F_APPEND, 1, [INTEGER], 0, null),
+                    ]
+                  ));
+                  log("")
+                  return;
+                }
+              }
+            }
+          }
+          log(" ...failed!");
+          recordFailure();
+        },
+      },
+    },
     "acj": // AnvilChunkLoader
     {
       tweakMethods:

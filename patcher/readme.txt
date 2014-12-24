@@ -8,6 +8,9 @@ v0.9a
 - Fix vanilla issue (MC-12964) with chunk coordinates using
   a bad hash function
 
+- Fix vanilla issue (MC-92) with wrong lighting of partial
+  blocks when enclosed from top and sides with solid blocks
+
 v0.9
 
 - Fix crash when attempting to view Achievements
