@@ -542,15 +542,15 @@ public class GPEBTWTweak extends FCAddOn
       t.put(FCBetterThanWolves.fcBlockDirtSlab.getUnlocalizedName() + ".sand.name", "Sand Slab");
     }
     t.put(FCBetterThanWolves.fcItemRottenArrow.getUnlocalizedName() + ".name", "Rotten Arrow");
-    t.put("item.skull.spider.name", "Spider head");
-    t.put("item.skull.enderman.name", "Enderman head");
-    t.put("item.skull.pigzombie.name", "Zombie Pigman head");
-    t.put("item.skull.fire.name", "Blaze head");
+    t.put("item.skull.spider.name", "Spider Head");
+    t.put("item.skull.enderman.name", "Enderman Head");
+    t.put("item.skull.pigzombie.name", "Zombie Pigman Head");
+    t.put("item.skull.fire.name", "Blaze Head");
     t.put(gpeItemLooseRock.getUnlocalizedName() + ".name", "Rock");
     t.put(gpeItemSilk.getUnlocalizedName() + ".name", "Silk");
     t.put(gpeItemAsh.getUnlocalizedName() + ".name", "Ash");
     t.put(gpeBlockGravestone.getUnlocalizedName() + ".name", "Gravestone");
-    t.put(gpeBlockRustedRail.getUnlocalizedName() + ".name", "Rusted rail");
+    t.put(gpeBlockRustedRail.getUnlocalizedName() + ".name", "Rusted Rail");
     t.put("enchantment.haste", "Haste");
   }
 
