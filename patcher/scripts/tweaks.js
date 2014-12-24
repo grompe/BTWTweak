@@ -99,7 +99,7 @@ function ObjectArray(arr)
 
   function dropHeadCode(classname, index)
   {
-    return [
+    return toInsnList([
       VarInsnNode(ALOAD, 0),
       TypeInsnNode(NEW, "wm"),
       InsnNode(DUP),
@@ -112,7 +112,7 @@ function ObjectArray(arr)
       MethodInsnNode(INVOKEVIRTUAL, classname, "a", "(Lwm;F)Lrh;"),
       InsnNode(POP),
       InsnNode(RETURN),
-    ];
+    ]);
   }
 
   // Classes requiring patches
@@ -2794,7 +2794,7 @@ function ObjectArray(arr)
       add: function(cn)
       {
         var mn = MethodNode(ACC_PROTECTED, "dropHead", "()V", null, null);
-        mn.instructions.add(toInsnList(dropHeadCode("rs", 8)));
+        mn.instructions.add(dropHeadCode("rs", 8));
         cn.methods.add(mn);
         log("Class " + cn.name + ": \t+ Telling Blaze to drop head in dropHead()V");
       },
@@ -2863,7 +2863,7 @@ function ObjectArray(arr)
       add: function(cn)
       {
         var mn = MethodNode(ACC_PROTECTED, "dropHead", "()V", null, null);
-        mn.instructions.add(toInsnList(dropHeadCode("rv", 6)));
+        mn.instructions.add(dropHeadCode("rv", 6));
         cn.methods.add(mn);
         log("Class " + cn.name + ": \t+ Telling Enderman to drop head in dropHead()V");
       },
@@ -2874,15 +2874,11 @@ function ObjectArray(arr)
       {
         "dropHead()V": function(mn)
         {
-          // Function with only return statement. Hopefully double return is okay.
           check(mn, 0xB200B2);
-          CodeInserter(
-            BeginningFinder(),
-            dropHeadCode("sc", 7),
-            "\t* Telling PigZombie to drop head in ",
-            INSERT_BEFORE
-          ).process(mn);
-        }
+          mn.instructions.clear();
+          mn.instructions.add(dropHeadCode("sc", 7));
+          log("\t* Telling PigZombie to drop head in dropHead()V");
+        },
       },
     },
     "sf": // EntitySkeleton
@@ -2942,7 +2938,7 @@ function ObjectArray(arr)
       add: function(cn)
       {
         var mn = MethodNode(ACC_PROTECTED, "dropHead", "()V", null, null);
-        mn.instructions.add(toInsnList(dropHeadCode("sh", 5)));
+        mn.instructions.add(dropHeadCode("sh", 5));
         cn.methods.add(mn);
         log("Class " + cn.name + ": \t+ Telling Spider to drop head in dropHead()V");
       },
@@ -3439,6 +3435,43 @@ function ObjectArray(arr)
             log(" ...failed!");
             recordFailure();
           }
+        },
+      },
+    },
+    "zu": // ChunkCoordIntPair
+    {
+      tweakMethods:
+      {
+        "hashCode()I": function(mn)
+        {
+          check(mn, 0x3ADF0615);
+          mn.instructions.clear();
+          mn.instructions.add(toInsnList([
+            LdcInsnNode(Integer(1664525)),           // stack: int
+
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "zu", "a", "I"), // stack: int, int(chunkXPos)
+
+            InsnNode(IMUL),                          // stack: int
+
+            LdcInsnNode(Integer(1013904223)),        // stack: int, int
+            InsnNode(IADD),                          // stack: int(xTransform)
+
+            LdcInsnNode(Integer(1664525)),           // stack: int(xTransform), int
+
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "zu", "b", "I"), // stack: int(xTransform), int, int(chunkZPos)
+            LdcInsnNode(Integer(-559038737)),        // stack: int(xTransform), int, int(chunkZPos), int
+            InsnNode(IXOR),                          // stack: int(xTransform), int, int
+
+            InsnNode(IMUL),                          // stack: int(xTransform), int
+
+            LdcInsnNode(Integer(1013904223)),        // stack: int(xTransform), int, int
+            InsnNode(IADD),                          // stack: int(xTransform), int(zTransform)
+            InsnNode(IXOR),                          // stack: int
+            InsnNode(IRETURN),
+          ]));
+          log("\t* Replaced chunk coordinates hash by optimized version in " + mn.name + mn.desc);
         },
       },
     },

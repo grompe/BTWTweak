@@ -1,0 +1,12 @@
+diff --git a/src/minecraft/net/minecraft/src/ChunkCoordIntPair.java b/src/minecraft/net/minecraft/src/ChunkCoordIntPair.java
+index 437b2e1..1861c63 100644
+--- a/src/minecraft/net/minecraft/src/ChunkCoordIntPair.java
++++ b/src/minecraft/net/minecraft/src/ChunkCoordIntPair.java
+@@ -27,4 +27,3 @@ public class ChunkCoordIntPair
+-        long var1 = chunkXZ2Int(this.chunkXPos, this.chunkZPos);
+-        int var3 = (int)var1;
+-        int var4 = (int)(var1 >> 32);
+-        return var3 ^ var4;
++        int xTransform = 0x19660d * this.chunkXPos + 0x3c6ef35f;
++        int zTransform = 0x19660d * (this.chunkZPos ^ 0xDEADBEEF) + 0x3c6ef35f;
++        return xTransform ^ zTransform;

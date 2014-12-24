@@ -3,6 +3,11 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.9
 
 [********** Change Log ************]
 
+v0.9a
+
+- Fix vanilla issue (MC-12964) with chunk coordinates using
+  a bad hash function
+
 v0.9
 
 - Fix crash when attempting to view Achievements
