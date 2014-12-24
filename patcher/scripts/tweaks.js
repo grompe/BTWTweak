@@ -870,6 +870,24 @@ function ObjectArray(arr)
         cn.methods.add(mn);
       },
     },
+    "bbw": // ModelCreeper
+    {
+      tweakClientMethods:
+      {
+        "<init>(F)V": function(mn)
+        {
+          check(mn, 0x75A3347C);
+          CodeInserter(
+            InsnFinder(ICONST_4),
+            [
+              InsnNode(POP),
+              IntInsnNode(BIPUSH, 6),
+            ],
+            "\t* Fixing floating creeper model in "
+          ).process(mn);
+        },
+      },
+    },
     "bdk": // NetClientHandler
     {
       tweakMethods:

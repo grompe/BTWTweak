@@ -14,6 +14,9 @@ v0.9a
 - Fix vanilla issue (MC-486) with zombies and skeletons not
   burning on slabs when exposed to sun
 
+- Fix vanilla issue (MC-3631) with creeper model appearing
+  floating
+
 v0.9
 
 - Fix crash when attempting to view Achievements

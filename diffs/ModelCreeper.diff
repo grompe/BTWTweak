@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/ModelCreeper.java b/src/minecraft/net/minecraft/src/ModelCreeper.java
+index a5344ef..838d1a6 100644
+--- a/src/minecraft/net/minecraft/src/ModelCreeper.java
++++ b/src/minecraft/net/minecraft/src/ModelCreeper.java
+@@ -20 +20 @@ public class ModelCreeper extends ModelBase
+-        byte var2 = 4;
++        byte var2 = 6;
