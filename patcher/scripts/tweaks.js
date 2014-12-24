@@ -157,9 +157,9 @@ function ObjectArray(arr)
         "a(Laab;Ljava/util/Random;Laek;)Z": function(mn)
         {
           check(mn, 0x97797998);
-          log("\t* (1/2) Making wood in mineshafts eaten by termites in " + mn.name + mn.desc, 1);
+          log("\t* Making wood in mineshafts eaten by termites and rails rusted in " + mn.name + mn.desc, 1);
           var changes = 0;
-          for (i = 0; i < mn.instructions.size(); i++)
+          for (var i = 0; i < mn.instructions.size(); i++)
           {
             var n = mn.instructions.get(i);
             if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.name.equals("N"))
@@ -171,67 +171,62 @@ function ObjectArray(arr)
                 changes++;
                 if (changes == 2)
                 {
-                  log("");
-                  return;
+                  break;
                 }
               }
             }
           }
-          log(" ...failed!");
-          recordFailure();
-        },
-        "c(II)I": function(mn)
-        {
-          check(mn, 0x1ED90C99);
-          var label1 = LabelNode();
-          var label2 = LabelNode();
-          var label3 = LabelNode();
-          var label4 = LabelNode();
-          var label5 = LabelNode();
-          CodeInserter(
-            BeginningFinder(),
-            [
-            /*
-              VarInsnNode(ILOAD, 1),
-              FieldInsnNode(GETSTATIC, "apa", "aK", "Lapa;"),
-              FieldInsnNode(GETFIELD, "apa", "cz", "I"),
-              JumpInsnNode(IF_ICMPNE, label1),
-              VarInsnNode(ALOAD, 0),
-              FieldInsnNode(GETFIELD, "aen", "f", "I"),
-              InsnNode(ICONST_1),
-              JumpInsnNode(IF_ICMPEQ, label2),
-              VarInsnNode(ALOAD, 0),
-              FieldInsnNode(GETFIELD, "aen", "f", "I"),
-              InsnNode(ICONST_3),
-              JumpInsnNode(IF_ICMPNE, label1),
-              label2,
-              FrameNode(F_SAME, 0, null, 0, null),
-              VarInsnNode(ILOAD, 2),
-              InsnNode(ICONST_1),
-              JumpInsnNode(IF_ICMPNE, label3),
-              IntInsnNode(BIPUSH, 10),
-              JumpInsnNode(GOTO, label4),
-              label3,
-              FrameNode(F_SAME, 0, null, 0, null),
-              IntInsnNode(BIPUSH, 11),
-              label4,
-              FrameNode(F_SAME1, 0, null, 1, [INTEGER]),
-              InsnNode(IRETURN),
-              label1,
-              FrameNode(F_SAME, 0, null, 0, null),
-            */
-              VarInsnNode(ILOAD, 1),
-              FieldInsnNode(GETSTATIC, "apa", "N", "Lapa;"),
-              FieldInsnNode(GETFIELD, "apa", "cz", "I"),
-              JumpInsnNode(IF_ICMPNE, label5),
-              IntInsnNode(BIPUSH, 12),
-              InsnNode(IRETURN),
-              label5,
-              FrameNode(F_SAME, 0, null, 0, null),
-            ],
-            "\t* (2/2) Making wood in mineshafts eaten by termites in ",
-            INSERT_BEFORE
-          ).process(mn);
+          for (i += 1; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.VarInsnNode") && (n.opcode == ISTORE))
+            {
+              mn.instructions.insertBefore(n, toInsnList(
+                [
+                  InsnNode(POP),
+                  IntInsnNode(BIPUSH, 12),
+                ]
+              ));
+              changes++;
+              break;
+            }
+          }
+          for (i += 1; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.name.equals("aK"))
+            {
+              n.owner = "GPEBTWTweak";
+              n.name = "gpeBlockRustedRail";
+              changes++;
+              break;
+            }
+          }
+          for (i += 1; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("aen") && n.name.equals("c") && n.desc.equals("(II)I"))
+            {
+              mn.instructions.insert(n, toInsnList(
+                [
+                  InsnNode(POP),
+                  VarInsnNode(ALOAD, 0),
+                  FieldInsnNode(GETFIELD, "aen", "f", "I"),
+                  InsnNode(ICONST_1),
+                  InsnNode(IAND),
+                ]
+              ));
+              changes++;
+              break;
+            }
+          }
+          if (changes == 5)
+          {
+            log("")
+          } else {
+            log(" ...failed!");
+            recordFailure();
+          }
         },
       },
     },

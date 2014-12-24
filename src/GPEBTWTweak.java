@@ -15,6 +15,7 @@ public class GPEBTWTweak extends FCAddOn
   public static Block gpeBlockStone;
   public static Block compatAxleBlock;
   public static Block gpeBlockGravestone;
+  public static Block gpeBlockRustedRail;
 
   public static Item gpeItemLooseRock;
   public static Item gpeItemSilk;
@@ -27,6 +28,7 @@ public class GPEBTWTweak extends FCAddOn
   public static int gpeSilkID = 17001;
   public static int gpeAshID = 17002;
   public static int gpeBlockGravestoneID = 163;
+  public static int gpeBlockRustedRailID = 164;
   public static int gpeEntityRockID = 25;
   public static int gpeEnchantmentHaste = 70;
   public static int gpeEntityRockVehicleSpawnType = 120;
@@ -74,6 +76,7 @@ public class GPEBTWTweak extends FCAddOn
         if (key.equals("gpeSilkID")) gpeSilkID = Integer.parseInt(value);
         if (key.equals("gpeAshID")) gpeAshID = Integer.parseInt(value);
         if (key.equals("gpeBlockGravestoneID")) gpeBlockGravestoneID = Integer.parseInt(value);
+        if (key.equals("gpeBlockRustedRailID")) gpeBlockRustedRailID = Integer.parseInt(value);
         if (key.equals("gpeEntityRockID")) gpeEntityRockID = Integer.parseInt(value);
         if (key.equals("gpeEnchantmentHaste")) gpeEnchantmentHaste = Integer.parseInt(value);
         if (key.equals("gpeEntityRockVehicleSpawnType")) gpeEntityRockVehicleSpawnType = Integer.parseInt(value);
@@ -106,6 +109,7 @@ public class GPEBTWTweak extends FCAddOn
         + "// **** Block IDs ****\r\n"
         + "\r\n"
         + "gpeBlockGravestoneID=163\r\n"
+        + "gpeBlockRustedRailID=164\r\n"
         + "\r\n"
         + "// **** Entity IDs ****\r\n"
         + "\r\n"
@@ -165,8 +169,8 @@ public class GPEBTWTweak extends FCAddOn
     Block.blocksList[id] = null;
     new GPEBlockDirtSlab(id);
 
-    gpeBlockGravestone = new GPEBlockGravestone(gpeBlockGravestoneID);
-    FCBetterThanWolves.m_instance.CreateAssociatedItemForBlock(gpeBlockGravestone);
+    gpeBlockGravestone = Itemize(new GPEBlockGravestone(gpeBlockGravestoneID));
+    gpeBlockRustedRail = Itemize(new GPEBlockRustedRail(gpeBlockRustedRailID));
     
     new GPEEnchantmentHaste(gpeEnchantmentHaste);
 
@@ -249,6 +253,9 @@ public class GPEBTWTweak extends FCAddOn
     FCRecipes.AddMillStoneRecipe(new ItemStack(FCBetterThanWolves.fcItemPileSand, 12), new ItemStack(Block.stairsSandStone));
     FCRecipes.AddMillStoneRecipe(new ItemStack(FCBetterThanWolves.fcItemPileSand, 8), new ItemStack(Block.stoneSingleSlab, 1, 1));
 
+    // Rusted rails give 6.75 times less iron when melted
+    FCRecipes.AddStokedCrucibleRecipe(new ItemStack(FCBetterThanWolves.fcItemNuggetIron), new ItemStack[] {new ItemStack(gpeBlockRustedRail, 2)});
+
     BlockDispenser.dispenseBehaviorRegistry.putObject(gpeItemLooseRock, new GPEBehaviorRock());
 
     // GitHub [#1]: fcBlockAxle got changed to fcAxleBlock
@@ -310,6 +317,12 @@ public class GPEBTWTweak extends FCAddOn
       FCAddOnHandler.LogMessage("Error while integrating with BTW Research Add-On!");
       e.printStackTrace();
     }    
+  }
+
+  public static Block Itemize(Block block)
+  {
+    FCBetterThanWolves.m_instance.CreateAssociatedItemForBlock(block);
+    return block;
   }
 
   public static boolean onBlockSawed(World world, int x, int y, int z)
@@ -537,6 +550,7 @@ public class GPEBTWTweak extends FCAddOn
     t.put(gpeItemSilk.getUnlocalizedName() + ".name", "Silk");
     t.put(gpeItemAsh.getUnlocalizedName() + ".name", "Ash");
     t.put(gpeBlockGravestone.getUnlocalizedName() + ".name", "Gravestone");
+    t.put(gpeBlockRustedRail.getUnlocalizedName() + ".name", "Rusted rail");
     t.put("enchantment.haste", "Haste");
   }
 

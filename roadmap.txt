@@ -58,10 +58,6 @@ Demands Block IDs
 
 - Redstone-compliant version of trapdoor (iron trapdoor)
 
-- Abandoned mineshaft rails are rusted and give less iron when melted
-  - 1 rail = 1 nugget
-  - canot hack into metadata, need block ID
-
 - Dirt turning to mud near water or in rain?
 
 - Make ores drop loose rocks and raw ore pieces; add pure ores

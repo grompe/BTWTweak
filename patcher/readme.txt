@@ -50,6 +50,9 @@ v0.9
 - Logs in abandoned mineshafts are now eaten by termites and
   will only drop a piece of sawdust when harvested
 
+- Rails in abandoned mineshafts are now rusted and
+  give several times less iron when smelted
+
 v0.8
 
 - Render sun/moon on short and tiny view distances as it is now

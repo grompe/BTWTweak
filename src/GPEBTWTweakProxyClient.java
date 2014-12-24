@@ -36,7 +36,7 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
       if (!mc.thePlayer.capabilities.isCreativeMode) return;
       World world = mc.thePlayer.worldObj;
       int x = MathHelper.floor_double(mc.thePlayer.posX);
-      int y = MathHelper.floor_double(mc.thePlayer.posY);
+      int y = MathHelper.floor_double(mc.thePlayer.posY) - 1;
       int z = MathHelper.floor_double(mc.thePlayer.posZ);
       GPEBTWTweak.attemptToPlaceGravestone(world, x, y, z);
     }
