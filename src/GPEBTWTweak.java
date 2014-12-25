@@ -21,6 +21,7 @@ public class GPEBTWTweak extends FCAddOn
   public static Item gpeItemSilk;
   public static Item gpeItemAsh;
 
+  public static int hotbarCycling = 1;
   public static int hcSpawnRadius = 2000;
   public static int minFogDistance = 128;
 
@@ -69,6 +70,7 @@ public class GPEBTWTweak extends FCAddOn
         key = tmp[0].trim();
         value = tmp[1].trim();
 
+        if (key.equals("hotbarCycling")) hotbarCycling = Math.max(0, Math.min(4, Integer.parseInt(value)));
         if (key.equals("hcSpawnRadius")) hcSpawnRadius = Integer.parseInt(value);
         if (key.equals("minFogDistance")) minFogDistance = Math.min(256, Integer.parseInt(value));
 
@@ -90,6 +92,11 @@ public class GPEBTWTweak extends FCAddOn
     {
       String defaultConfig = ""
         + "// **** BTWTweak Settings ****\r\n"
+        + "\r\n"
+        + "// Inventory column cycling when pressing hotbar key twice.\r\n"
+        + "// 0 = turn off, 1 = adaptive, 2 = two slots, 3 = three slots, 4 = four slots\r\n"
+        + "\r\n"
+        + "hotbarCycling=1\r\n"
         + "\r\n"
         + "// Hardcore Spawn radius, in blocks. Changing it from default 2000 may destabilize your game balance.\r\n"
         + "\r\n"
@@ -497,7 +504,7 @@ public class GPEBTWTweak extends FCAddOn
 
   public static boolean attemptToPlaceGravestone(World world, int x, int y, int z)
   {
-    if (gpeBlockGravestoneID == 0) return;
+    if (gpeBlockGravestoneID == 0) return false;
     while (isReplaceableBlock(world, x, y - 1, z)) y--;
     if (placeGravestoneIfPossibleAt(world, x, y, z)) return true;
     for (int xx = x - 1; xx <= x + 1; xx++)

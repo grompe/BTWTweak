@@ -23,6 +23,8 @@ v0.9a
 - Add ability to turn off gravestones by setting
   gpeBlockGravestoneID to zero in BTWTweak.cfg
 
+- Add hotbar cycling configuration, now adaptive by default
+
 v0.9
 
 - Fix crash when attempting to view Achievements

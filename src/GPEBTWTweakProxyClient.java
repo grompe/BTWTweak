@@ -21,14 +21,17 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
   public void onKeyPress(int key)
   {
     // Selecting already selected hotbar slot cycles items in that inventory column
-    if (key >= 2 && key <= 10)
+    if (GPEBTWTweak.hotbarCycling != 0)
     {
-      Minecraft mc = Minecraft.getMinecraft();
-      int slot = key - 2;
-      if (mc.thePlayer.inventory.currentItem == slot)
+      if (key >= 2 && key <= 10)
       {
-        cycleVertSlots(mc, slot);
-      };
+        Minecraft mc = Minecraft.getMinecraft();
+        int slot = key - 2;
+        if (mc.thePlayer.inventory.currentItem == slot)
+        {
+          cycleVertSlots(mc, slot);
+        };
+      }
     }
     if (key == 45) // "X", for debugging!
     {
@@ -47,8 +50,26 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
     EntityClientPlayerMP player = mc.thePlayer;
     int windowId = mc.thePlayer.inventoryContainer.windowId;
     PlayerControllerMP controller = mc.playerController;
-
-    for (int i = 3; i > 0; i--)
+    int lastRow = 4 - GPEBTWTweak.hotbarCycling;
+    if (GPEBTWTweak.hotbarCycling == 1)
+    {
+      // Adaptive cycling
+      ItemStack[] inv = mc.thePlayer.inventory.mainInventory;
+      lastRow = 0;
+      if (inv[slot + 9] == null)
+      {
+        lastRow = 1;
+        if (inv[slot + 9 * 2] == null)
+        {
+          lastRow = 2;
+          if (inv[slot + 9 * 3] == null)
+          {
+            return;
+          }
+        }
+      }
+    }
+    for (int i = 3; i > lastRow; i--)
     {
       controller.windowClick(windowId, slot + i * 9, 0, 0, player);
       controller.windowClick(windowId, slot + i * 9 + 9, 0, 0, player);
