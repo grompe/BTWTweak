@@ -950,7 +950,7 @@ function ObjectArray(arr)
         },
         "a(FJ)V": function(mn)
         {
-          check(mn, 0x13FCF28A);
+          check(mn, [0x13FCF28A, 0x48CAF8B5]);
           log("\t* Ensuring sky is visible in EntityRenderer " + mn.name + mn.desc, 1);
           for (var i = 0; i < mn.instructions.size(); i++)
           {
