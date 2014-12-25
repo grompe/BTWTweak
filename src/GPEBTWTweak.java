@@ -108,6 +108,7 @@ public class GPEBTWTweak extends FCAddOn
         + "\r\n"
         + "// **** Block IDs ****\r\n"
         + "\r\n"
+        + "// gpeBlockGravestoneID can be 0 to disable placement of gravestones\r\n"
         + "gpeBlockGravestoneID=163\r\n"
         + "gpeBlockRustedRailID=164\r\n"
         + "\r\n"
@@ -169,7 +170,10 @@ public class GPEBTWTweak extends FCAddOn
     Block.blocksList[id] = null;
     new GPEBlockDirtSlab(id);
 
-    gpeBlockGravestone = Itemize(new GPEBlockGravestone(gpeBlockGravestoneID));
+    if (gpeBlockGravestoneID != 0)
+    {
+      gpeBlockGravestone = Itemize(new GPEBlockGravestone(gpeBlockGravestoneID));
+    }
     gpeBlockRustedRail = Itemize(new GPEBlockRustedRail(gpeBlockRustedRailID));
     
     new GPEEnchantmentHaste(gpeEnchantmentHaste);
@@ -493,6 +497,7 @@ public class GPEBTWTweak extends FCAddOn
 
   public static boolean attemptToPlaceGravestone(World world, int x, int y, int z)
   {
+    if (gpeBlockGravestoneID == 0) return;
     while (isReplaceableBlock(world, x, y - 1, z)) y--;
     if (placeGravestoneIfPossibleAt(world, x, y, z)) return true;
     for (int xx = x - 1; xx <= x + 1; xx++)
@@ -549,7 +554,10 @@ public class GPEBTWTweak extends FCAddOn
     t.put(gpeItemLooseRock.getUnlocalizedName() + ".name", "Rock");
     t.put(gpeItemSilk.getUnlocalizedName() + ".name", "Silk");
     t.put(gpeItemAsh.getUnlocalizedName() + ".name", "Ash");
-    t.put(gpeBlockGravestone.getUnlocalizedName() + ".name", "Gravestone");
+    if (gpeBlockGravestoneID != 0)
+    {
+      t.put(gpeBlockGravestone.getUnlocalizedName() + ".name", "Gravestone");
+    }
     t.put(gpeBlockRustedRail.getUnlocalizedName() + ".name", "Rusted Rail");
     t.put("enchantment.haste", "Haste");
   }

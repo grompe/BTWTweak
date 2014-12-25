@@ -3619,6 +3619,19 @@ function ObjectArray(arr)
     {
       tweakClientMethods:
       {
+        /*
+        "a()V": function(mn)
+        {
+          check(mn, 0xA79A9DCF);
+          CodeInserter(
+            MethodInsnFinder("ku"),
+            [
+              MethodInsnNode(INVOKESTATIC, "GPEBTWTweakIcon", "setGameIcon", "()V"),
+            ],
+            "\t* Inserting icon hook into "
+          ).process(mn);
+        },
+        */
         "l()V": function(mn)
         {
           check(mn, 0x6F5697A8);

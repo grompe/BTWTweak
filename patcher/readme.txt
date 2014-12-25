@@ -20,6 +20,9 @@ v0.9a
 - Fix vanilla issue (MC-4855) with mob spawner spawn area
   not being centered on the spawner
 
+- Add ability to turn off gravestones by setting
+  gpeBlockGravestoneID to zero in BTWTweak.cfg
+
 v0.9
 
 - Fix crash when attempting to view Achievements
