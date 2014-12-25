@@ -25,6 +25,9 @@ v0.9a
 
 - Add hotbar cycling configuration, now adaptive by default
 
+- If Deco Add-On v1.2 is found in the minecraft.jar, it
+  will be fixed and working with the latest BTW version!
+
 v0.9
 
 - Fix crash when attempting to view Achievements

@@ -3657,6 +3657,143 @@ function ObjectArray(arr)
         },
       },
     },
+    // Fix mods! Now with this mod you can fix mods for the mod for Minecraft.
+    // Fix Deco add-on
+    "Ginger":
+    {
+      tweakMethods:
+      {
+        "MakeBlocks()V": function(mn)
+        {
+          if (!isBTWVersionOrNewer("4.99999A0E")) return;
+          // Since Deco doesn't provide a version string, have to rely on checksum only
+          if (!check(mn, 0x7B7F833B))
+          {
+            log("Different Deco add-on version detected, skipping the fix. Ignore the warning.");
+            return;
+          }
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.name.equals("SetEffectByBlockType"))
+            {
+              n.name = "AddBeaconEffect";
+              break;
+            }
+          }
+          log("Fixed Deco add-on calling an outdated beacon method name");
+        },
+      },
+      optional: true,
+    },
+    "Ginger$FCItemDye_ColorPlus":
+    {
+      tweakClientMethods:
+      {
+        "a(Lly;)V": function(mn)
+        {
+          // Since Deco doesn't provide a version string, have to rely on checksum only
+          if (!check(mn, 0x66B909E1))
+          {
+            log("Different Deco add-on version detected, skipping the fix. Ignore the warning.");
+            return;
+          }
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.LdcInsnNode") && (n.cst.toString() == "ginger_dyepowder_"))
+            {
+              n.cst = String("ginger_dyePowder_");
+              break;
+            }
+          }
+          log("Fixed Deco add-on using wrong dye texture name");
+        },
+      },
+      optional: true,
+    },
+    "Ginger$Util":
+    {
+      tweakMethods:
+      {
+        "CheatBlockIDs()V": function(mn)
+        {
+          // Since Deco doesn't provide a version string, have to rely on checksum only
+          if (!check(mn, 0x35CE5784))
+          {
+            log("Different Deco add-on version detected, skipping the fix. Ignore the warning.");
+            return;
+          }
+          var changes = 0;
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.VarInsnNode") && (n.opcode == ASTORE) && (n["var"] == 7))
+            {
+              n = n.getPrevious();
+              mn.instructions.set(n, TypeInsnNode(ANEWARRAY, "java/util/ArrayList"));
+              changes++;
+              break;
+            }
+          }
+          for (i += 1; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.FrameNode"))
+            {
+              mn.instructions.set(n,
+                FrameNode(F_FULL, 11, [INTEGER, "[Z", "[Lka;", "[I", "[I", "[Ljava/lang/reflect/Field;", "java/lang/reflect/Field", "java/lang/reflect/Field", "[Ljava/util/ArrayList;", "[I", INTEGER], 0, [])
+              );
+              changes++;
+              break;
+            }
+          }
+          for (i += 1; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.InsnNode") && (n.opcode == ICONST_0))
+            {
+              var n2 = n.getNext();
+              mn.instructions.insert(n2, toInsnList(
+                [
+                  TypeInsnNode(NEW, "java/util/ArrayList"),
+                  InsnNode(DUP),
+                  MethodInsnNode(INVOKESPECIAL, "java/util/ArrayList", "<init>", "()V"),
+                  InsnNode(AASTORE),
+                ]
+              ));
+              mn.instructions.remove(n);
+              mn.instructions.remove(n2);
+              changes++;
+              break;
+            }
+          }
+          for (i += 1; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.VarInsnNode") && (n.opcode == ALOAD) && (n["var"] == 6))
+            {
+              var n2 = n.getNext();
+              var n3 = n2.getNext();
+              var n4 = n3.getNext();
+              mn.instructions.remove(n);
+              mn.instructions.remove(n2);
+              mn.instructions.remove(n3);
+              mn.instructions.remove(n4);
+              changes++;
+              break;
+            }
+          }
+          if (changes == 4)
+          {
+            log("Fixed Deco add-on extending block IDs of FCTileEntityBeacon");
+          } else {
+            log("Warning: something went wrong while fixing Deco add-on!");
+          }
+        },
+      },
+      optional: true,
+    },
   };
 
   // Classes requiring removal of client-only methods on server side
@@ -3697,8 +3834,10 @@ function ObjectArray(arr)
       if (checksum.indexOf(sum) == -1)
       {
         log("Warning: Mismatched checksum for " + mn.name + mn.desc + " (0x" + toHex(sum) + "), things may not work well");
+        return false;
       }
     }
+    return true;
   }
 
   function recordFailure()
@@ -3996,7 +4135,7 @@ function ObjectArray(arr)
     }
 
     if (a.add) a.add(cn);
-    if (count < total)
+    if ((count < total) && (!a.optional))
     {
       log("Warning: not all tweaks were made in " + cn.name + " (" + count + " of " + total + ")");
     }
