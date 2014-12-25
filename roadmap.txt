@@ -47,10 +47,6 @@ Feedback
 
 - A way to name stuff
 
-- Make item and block IDs in configuration nullable, disabling the item/block
-
-- Refine item cycling: option: turn off, full cycle, adjacent non-empty slots cycle
-
 
 Demands Block IDs
 =================

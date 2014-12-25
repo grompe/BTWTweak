@@ -5,7 +5,7 @@
    I'm hooking on Minecraft 1.5.2 stuff, so only change of Minecraft version
    will really break it and force me to rewrite everything.
 
-   Oh, and by the way, this file is Copyright (c) 2014 Grom PE and reading
+   Oh, and by the way, this file is Copyright (c) 2015 Grom PE and reading
    further than this comment section is strictly forbidden without an
    advance written permission.
    To anyone who is not a Better Than Wolves mod developer, permission is

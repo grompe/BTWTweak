@@ -1,4 +1,4 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.9
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.9a
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
