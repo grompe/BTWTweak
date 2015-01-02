@@ -1,7 +1,17 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.9a
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.9b
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
+
+v0.9b
+
+- Added a whole bunch of items to regain renaming feature:
+  Ink and Quill, crafted with glass bottle, feather and ink sac;
+  Writing Table, crafted with paper and planks;
+  Name Tags, created on the new Writing Table when there's
+  no item to rename. Those tags can be used to name entities.
+  Written Book recipe is also changed to require Ink and Quill.
+  Writing Table requires Ink and Quill, Paper and 1 experience level.
 
 v0.9a
 

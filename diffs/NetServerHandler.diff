@@ -1,0 +1,6 @@
+diff --git a/src/minecraft/net/minecraft/src/NetServerHandler.java b/src/minecraft/net/minecraft/src/NetServerHandler.java
+index 1a2c49d..6e18448 100644
+--- a/src/minecraft/net/minecraft/src/NetServerHandler.java
++++ b/src/minecraft/net/minecraft/src/NetServerHandler.java
+@@ -1174,0 +1175 @@ public class NetServerHandler extends NetHandler
++                else GPEBTWTweak.serverCustomPacketReceived(this.playerEntity, par1Packet250CustomPayload);

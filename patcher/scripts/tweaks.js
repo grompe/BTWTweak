@@ -2648,6 +2648,37 @@ function ObjectArray(arr)
         }
       }
     },
+    "jh": // NetServerHandler
+    {
+      tweakMethods:
+      {
+        "a(Ldk;)V": function(mn)
+        {
+          check(mn, 0x69CDA531);
+          log("\t* Adding client->server custom packets hook in " + mn.name + mn.desc, 1);
+          for (var i = mn.instructions.size() - 1; i >= 0; i--)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.InsnNode") && (n.getOpcode() == RETURN))
+            {
+              mn.instructions.insertBefore(n, toInsnList(
+                [
+                  VarInsnNode(ALOAD, 0),
+                  FieldInsnNode(GETFIELD, "jh", "c", "Ljc;"),
+                  VarInsnNode(ALOAD, 1),
+                  MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "serverCustomPacketReceived", "(Ljc;Ldk;)Z"),
+                  InsnNode(POP),
+                ]
+              ));
+              log("");
+              return;
+            }
+          }
+          log(" ...failed!");
+          recordFailure();
+        }
+      },
+    },
     "qi": // EntityChicken
     {
       tweakMethods:
@@ -2763,6 +2794,23 @@ function ObjectArray(arr)
           log(" ...failed!");
           recordFailure();
         }
+      }
+    },
+    "ng": // EntityLiving
+    {
+      add: function(cn)
+      {
+        var mn = MethodNode(ACC_PUBLIC, "setPersistent", "()V", null, null);
+        mn.instructions.add(toInsnList(
+          [
+            VarInsnNode(ALOAD, 0),
+            InsnNode(ICONST_1),
+            FieldInsnNode(PUTFIELD, "ng", "bW", "Z"),
+            InsnNode(RETURN),
+          ]
+        ));
+        cn.methods.add(mn);
+        log("Class " + cn.name + ": \t+ Enabling living entities to be set persistent");
       }
     },
     "qm": // EntityOcelot

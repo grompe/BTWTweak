@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
 
 import java.util.*;
@@ -10,16 +11,19 @@ public class GPEBTWTweak extends FCAddOn
 {
   public static GPEBTWTweak instance;
   public static GPEBTWTweakProxy proxy;
-  public static String tweakVersion = "0.9a";
+  public static String tweakVersion = "0.9b";
 
   public static Block gpeBlockStone;
   public static Block compatAxleBlock;
   public static Block gpeBlockGravestone;
   public static Block gpeBlockRustedRail;
+  public static Block gpeBlockRename;
 
   public static Item gpeItemLooseRock;
   public static Item gpeItemSilk;
   public static Item gpeItemAsh;
+  public static Item gpeItemQuill;
+  public static Item gpeItemNameTag;
 
   public static int hotbarCycling = 1;
   public static int hcSpawnRadius = 2000;
@@ -28,8 +32,11 @@ public class GPEBTWTweak extends FCAddOn
   public static int gpeLooseRockID = 17000;
   public static int gpeSilkID = 17001;
   public static int gpeAshID = 17002;
+  public static int gpeQuillID = 17003;
+  public static int gpeNameTagID = 17004;
   public static int gpeBlockGravestoneID = 163;
   public static int gpeBlockRustedRailID = 164;
+  public static int gpeBlockRenameID = 162;
   public static int gpeEntityRockID = 25;
   public static int gpeEnchantmentHaste = 70;
   public static int gpeEntityRockVehicleSpawnType = 120;
@@ -77,8 +84,11 @@ public class GPEBTWTweak extends FCAddOn
         if (key.equals("gpeLooseRockID")) gpeLooseRockID = Integer.parseInt(value);
         if (key.equals("gpeSilkID")) gpeSilkID = Integer.parseInt(value);
         if (key.equals("gpeAshID")) gpeAshID = Integer.parseInt(value);
+        if (key.equals("gpeQuillID")) gpeQuillID = Integer.parseInt(value);
+        if (key.equals("gpeNameTagID")) gpeNameTagID = Integer.parseInt(value);
         if (key.equals("gpeBlockGravestoneID")) gpeBlockGravestoneID = Integer.parseInt(value);
         if (key.equals("gpeBlockRustedRailID")) gpeBlockRustedRailID = Integer.parseInt(value);
+        if (key.equals("gpeBlockRenameID")) gpeBlockRenameID = Integer.parseInt(value);
         if (key.equals("gpeEntityRockID")) gpeEntityRockID = Integer.parseInt(value);
         if (key.equals("gpeEnchantmentHaste")) gpeEnchantmentHaste = Integer.parseInt(value);
         if (key.equals("gpeEntityRockVehicleSpawnType")) gpeEntityRockVehicleSpawnType = Integer.parseInt(value);
@@ -112,12 +122,15 @@ public class GPEBTWTweak extends FCAddOn
         + "gpeLooseRockID=17000\r\n"
         + "gpeSilkID=17001\r\n"
         + "gpeAshID=17002\r\n"
+        + "gpeQuillID=17003\r\n"
+        + "gpeNameTagID=17004\r\n"
         + "\r\n"
         + "// **** Block IDs ****\r\n"
         + "\r\n"
         + "// gpeBlockGravestoneID can be 0 to disable placement of gravestones\r\n"
         + "gpeBlockGravestoneID=163\r\n"
         + "gpeBlockRustedRailID=164\r\n"
+        + "gpeBlockRenameID=162\r\n"
         + "\r\n"
         + "// **** Entity IDs ****\r\n"
         + "\r\n"
@@ -167,6 +180,8 @@ public class GPEBTWTweak extends FCAddOn
     gpeItemLooseRock = new GPEItemLooseRock(gpeLooseRockID - 256);
     gpeItemSilk = new Item(gpeSilkID - 256).setUnlocalizedName("gpeItemSilk").setCreativeTab(CreativeTabs.tabMaterials).SetBuoyancy(1.0F).SetBellowsBlowDistance(2);
     gpeItemAsh = new GPEItemPotash(gpeAshID - 256).setUnlocalizedName("gpeItemAsh");
+    gpeItemQuill = new GPEItemQuill(gpeQuillID - 256);
+    gpeItemNameTag = new GPEItemNameTag(gpeNameTagID - 256);
     new GPEItemCoal(7);
 
     int id = FCBetterThanWolves.fcAestheticOpaque.blockID;
@@ -182,6 +197,7 @@ public class GPEBTWTweak extends FCAddOn
       gpeBlockGravestone = Itemize(new GPEBlockGravestone(gpeBlockGravestoneID));
     }
     gpeBlockRustedRail = Itemize(new GPEBlockRustedRail(gpeBlockRustedRailID));
+    gpeBlockRename = Itemize(new GPEBlockRename(gpeBlockRenameID));
     
     new GPEEnchantmentHaste(gpeEnchantmentHaste);
 
@@ -256,6 +272,13 @@ public class GPEBTWTweak extends FCAddOn
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.spiderEye, 2), new Object[] {new ItemStack(Item.skull.itemID, 1, 5)});
 
     FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcCauldron, 1), new Object[] {"Y", "X", "C", 'Y', Item.bone, 'X', Item.bucketWater, 'C', Item.cauldron});
+
+    // Rename station
+    FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockRename, 1), new Object[] {"#", "X", '#', Item.paper, 'X', Block.planks});
+    // Quill support
+    FCRecipes.RemoveShapelessVanillaRecipe(new ItemStack(Item.writableBook, 1), new Object[] {new ItemStack(Item.book), new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.feather)});
+    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(gpeItemQuill, 1), new Object[] {new ItemStack(Item.glassBottle), new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.feather)});
+    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.writableBook, 1), new Object[] {new ItemStack(Item.book), new ItemStack(gpeItemQuill)});
 
     // Allow grinding hellfire back to dust
     FCRecipes.AddMillStoneRecipe(new ItemStack(FCBetterThanWolves.fcHellfireDust, 8), new ItemStack(FCBetterThanWolves.fcConcentratedHellfire));
@@ -561,12 +584,16 @@ public class GPEBTWTweak extends FCAddOn
     t.put(gpeItemLooseRock.getUnlocalizedName() + ".name", "Rock");
     t.put(gpeItemSilk.getUnlocalizedName() + ".name", "Silk");
     t.put(gpeItemAsh.getUnlocalizedName() + ".name", "Ash");
+    t.put(gpeItemQuill.getUnlocalizedName() + ".name", "Ink and Quill");
+    t.put(gpeItemNameTag.getUnlocalizedName() + ".name", "Name Tag");
     if (gpeBlockGravestoneID != 0)
     {
       t.put(gpeBlockGravestone.getUnlocalizedName() + ".name", "Gravestone");
     }
     t.put(gpeBlockRustedRail.getUnlocalizedName() + ".name", "Rusted Rail");
+    t.put(gpeBlockRename.getUnlocalizedName() + ".name", "Writing Table");
     t.put("enchantment.haste", "Haste");
+    t.put("container.rename", "Rename");
   }
 
   public static void saveWorldData(World world)
@@ -742,4 +769,57 @@ public class GPEBTWTweak extends FCAddOn
     }
   }
 
+  @ClientOnly
+  public boolean ClientCustomPacketReceived(Minecraft mc, Packet250CustomPayload packet)
+  {
+    if (packet.channel.equals("GPE|OI"))
+    {
+      try
+      {
+        DataInputStream stream = new DataInputStream(new ByteArrayInputStream(packet.data));
+        int windowId = stream.readInt();
+        int containerId = stream.readInt();
+        if (containerId == 1)
+        {
+          WorldClient world = mc.theWorld;
+          EntityClientPlayerMP player = mc.thePlayer;
+          GuiContainer gui = new GPEClientGuiRename(player.inventory, world);
+          if (gui != null)
+          {
+            mc.displayGuiScreen(gui);
+            player.openContainer.windowId = windowId;
+            return true;
+          }
+        }
+      }
+      catch (IOException e)
+      {
+        e.printStackTrace();
+      }
+    }
+    return false;
+  }
+
+  public static boolean serverCustomPacketReceived(EntityPlayerMP player, Packet250CustomPayload packet)
+  {
+    if (packet.channel.equals("GPE|ItemName"))
+    {
+      if (player.openContainer instanceof GPEContainerRename)
+      {
+        GPEContainerRename container = (GPEContainerRename)player.openContainer;
+        if (packet.data != null && packet.data.length >= 1)
+        {
+          String name = ChatAllowedCharacters.filerAllowedCharacters(new String(packet.data));
+          if (name.length() <= 30)
+          {
+            container.updateItemName(name);
+          }
+        } else {
+          container.updateItemName("");
+        }
+        return true;
+      }
+    }
+    return false;
+  }
 }
