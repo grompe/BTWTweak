@@ -6,15 +6,17 @@ import org.lwjgl.opengl.GL11;
 
 public class GPEClientGuiRename extends GuiContainer implements ICrafting
 {
+  private GPETileEntityRename tile;
   private GPEContainerRename container;
   private GuiTextField itemNameField;
   private EntityPlayer thePlayer;
 
-  public GPEClientGuiRename(InventoryPlayer inventory, World world)
+  public GPEClientGuiRename(InventoryPlayer inventory, World world, GPETileEntityRename tileEntity)
   {
-    super(new GPEContainerRename(inventory, world));
+    super(new GPEContainerRename(inventory, world, tileEntity));
     thePlayer = inventory.player;
     container = (GPEContainerRename)inventorySlots;
+    tile = tileEntity;
     ySize = 168;
   }
 
@@ -66,8 +68,9 @@ public class GPEClientGuiRename extends GuiContainer implements ICrafting
 
   protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
   {
-    fontRenderer.drawString("Rename", 22, 6, 0x404040);
-    fontRenderer.drawString("Inventory", 8, ySize - 94, 0x404040);
+    String name = tile.isInvNameLocalized() ? tile.getInvName() : StatCollector.translateToLocal(tile.getInvName());
+    fontRenderer.drawString(name, 22, 6, 0x404040);
+    fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 94, 0x404040);
   }
 
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)

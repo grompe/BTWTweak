@@ -3,18 +3,20 @@ package net.minecraft.src;
 public class GPEContainerRename extends Container
 {
   private IInventory outputSlot = new InventoryCraftResult();
-  private IInventory inputSlots = new GPEInventoryRename(this, "container.rename", false, 3);
+  private GPETileEntityRename tile;
   private World theWorld;
   private String newItemName;
   private final EntityPlayer thePlayer;
 
-  public GPEContainerRename(InventoryPlayer inventory, World world)
+  public GPEContainerRename(InventoryPlayer inventory, World world, GPETileEntityRename tileEntity)
   {
     theWorld = world;
     thePlayer = inventory.player;
-    addSlotToContainer(new Slot(inputSlots, 0, 38, 46));
-    addSlotToContainer(new GPESlotRename(this, inputSlots, 1, 60, 37, 0)); // quill
-    addSlotToContainer(new GPESlotRename(this, inputSlots, 2, 60, 55, 1)); // paper
+    tile = tileEntity;
+    tile.theContainer = this;
+    addSlotToContainer(new Slot(tile, 0, 38, 46));
+    addSlotToContainer(new GPESlotRename(this, tile, 1, 60, 37, 0)); // quill
+    addSlotToContainer(new GPESlotRename(this, tile, 2, 60, 55, 1)); // paper
     addSlotToContainer(new GPESlotRename(this, outputSlot, 3, 118, 46, 2));
     int i;
     for (i = 0; i < 3; ++i)
@@ -33,7 +35,7 @@ public class GPEContainerRename extends Container
   public void onCraftMatrixChanged(IInventory inventory)
   {
     super.onCraftMatrixChanged(inventory);
-    if (inventory == inputSlots)
+    if (inventory == tile)
     {
       updateRenameOutput();
     }
@@ -41,9 +43,9 @@ public class GPEContainerRename extends Container
 
   public void updateRenameOutput()
   {
-    ItemStack stackSubj = inputSlots.getStackInSlot(0);
-    ItemStack stackInk = inputSlots.getStackInSlot(1);
-    ItemStack stackPaper = inputSlots.getStackInSlot(2);
+    ItemStack stackSubj = tile.getStackInSlot(0);
+    ItemStack stackInk = tile.getStackInSlot(1);
+    ItemStack stackPaper = tile.getStackInSlot(2);
     if (stackInk == null || stackPaper == null
       || stackInk.itemID != GPEBTWTweak.gpeItemQuill.itemID
       || stackPaper.itemID != Item.paper.itemID)
@@ -71,18 +73,7 @@ public class GPEContainerRename extends Container
     super.onCraftGuiClosed(player);
     if (!theWorld.isRemote)
     {
-      ItemStack stack = inputSlots.getStackInSlotOnClosing(0);
-      if (stack != null)
-      {
-        player.dropPlayerItem(stack);
-      }
-      // TODO Temporary until Tile Entity for storing paper and ink
-      stack = inputSlots.getStackInSlotOnClosing(1);
-      if (stack != null)
-      {
-        player.dropPlayerItem(stack);
-      }
-      stack = inputSlots.getStackInSlotOnClosing(2);
+      ItemStack stack = tile.getStackInSlotOnClosing(0);
       if (stack != null)
       {
         player.dropPlayerItem(stack);
@@ -92,7 +83,7 @@ public class GPEContainerRename extends Container
 
   public boolean canInteractWith(EntityPlayer player)
   {
-    return true;
+    return this.tile.isUseableByPlayer(player);
   }
 
   public ItemStack transferStackInSlot(EntityPlayer player, int slotNumber)
@@ -155,13 +146,13 @@ public class GPEContainerRename extends Container
 
   public void onResultTaken()
   {
-    inputSlots.setInventorySlotContents(0, (ItemStack)null);
-    ItemStack stackInk = inputSlots.getStackInSlot(1);
-    ItemStack stackPaper = inputSlots.getStackInSlot(2);
+    tile.setInventorySlotContents(0, (ItemStack)null);
+    ItemStack stackInk = tile.getStackInSlot(1);
+    ItemStack stackPaper = tile.getStackInSlot(2);
     int newDamage = stackInk.getItemDamage() + 1;
     stackInk.setItemDamage(newDamage);
-    if (newDamage >= stackInk.getMaxDamage()) inputSlots.setInventorySlotContents(1, (ItemStack)null);
-    if (--stackPaper.stackSize <= 0) inputSlots.setInventorySlotContents(2, (ItemStack)null);
+    if (newDamage >= stackInk.getMaxDamage()) tile.setInventorySlotContents(1, (ItemStack)null);
+    if (--stackPaper.stackSize <= 0) tile.setInventorySlotContents(2, (ItemStack)null);
     updateItemName(null);
   }
 }

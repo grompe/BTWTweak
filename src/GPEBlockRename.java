@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.io.*;
 
-public class GPEBlockRename extends Block
+public class GPEBlockRename extends BlockContainer
 {
   private Icon iconTop;
   private Icon iconSide;
@@ -21,6 +21,8 @@ public class GPEBlockRename extends Block
     if (world.isRemote) return true;
     if (world.isBlockNormalCube(x, y + 1, z)) return true;
 
+    GPETileEntityRename tile = (GPETileEntityRename)world.getBlockTileEntity(x, y, z);
+    if (tile == null) return true;
     try
     {
       ByteArrayOutputStream bs = new ByteArrayOutputStream();
@@ -32,7 +34,7 @@ public class GPEBlockRename extends Block
       Packet250CustomPayload packet = new Packet250CustomPayload("GPE|OI", bs.toByteArray());
       playerMP.playerNetServerHandler.sendPacketToPlayer(packet);
 
-      playerMP.openContainer = new GPEContainerRename(playerMP.inventory, world);
+      playerMP.openContainer = new GPEContainerRename(playerMP.inventory, world, tile);
       playerMP.openContainer.windowId = windowId;
       playerMP.openContainer.addCraftingToCrafters(playerMP);
     }
@@ -41,6 +43,36 @@ public class GPEBlockRename extends Block
       e.printStackTrace();
     }
     return true;
+  }
+
+  public TileEntity createNewTileEntity(World world)
+  {
+    return new GPETileEntityRename();
+  }
+
+  public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entity, ItemStack stack)
+  {
+    if (stack.hasDisplayName())
+    {
+      ((GPETileEntityRename)world.getBlockTileEntity(x, y, z)).setCustomName(stack.getDisplayName());
+    }
+  }
+
+  public void breakBlock(World world, int x, int y, int z, int par5, int par6)
+  {
+    GPETileEntityRename tile = (GPETileEntityRename)world.getBlockTileEntity(x, y, z);
+    if (tile != null)
+    {
+      for (int i = 0; i < tile.getSizeInventory(); ++i)
+      {
+        ItemStack stack = tile.getStackInSlot(i);
+        if (stack != null)
+        {
+          FCUtilsItem.EjectStackWithRandomOffset(world, x, y, z, stack);
+        }
+      }
+    }
+    super.breakBlock(world, x, y, z, par5, par6);
   }
 
   @ClientOnly

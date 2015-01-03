@@ -201,6 +201,8 @@ public class GPEBTWTweak extends FCAddOn
     
     new GPEEnchantmentHaste(gpeEnchantmentHaste);
 
+    TileEntity.addMapping(GPETileEntityRename.class, "Rename");
+
     EntityList.addMapping(GPEEntityRock.class, "gpeEntityRock", gpeEntityRockID);
     proxy.addEntityRenderers();
     
@@ -593,7 +595,7 @@ public class GPEBTWTweak extends FCAddOn
     t.put(gpeBlockRustedRail.getUnlocalizedName() + ".name", "Rusted Rail");
     t.put(gpeBlockRename.getUnlocalizedName() + ".name", "Writing Table");
     t.put("enchantment.haste", "Haste");
-    t.put("container.rename", "Rename");
+    t.put("container.rename", "Write Tags & Name");
   }
 
   public static void saveWorldData(World world)
@@ -783,7 +785,8 @@ public class GPEBTWTweak extends FCAddOn
         {
           WorldClient world = mc.theWorld;
           EntityClientPlayerMP player = mc.thePlayer;
-          GuiContainer gui = new GPEClientGuiRename(player.inventory, world);
+          GPETileEntityRename tile = new GPETileEntityRename();
+          GuiContainer gui = new GPEClientGuiRename(player.inventory, world, tile);
           if (gui != null)
           {
             mc.displayGuiScreen(gui);
