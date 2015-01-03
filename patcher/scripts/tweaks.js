@@ -3853,8 +3853,12 @@ function ObjectArray(arr)
     "GPEBlockGravestone",
     "GPEBlockLog",
     "GPEBlockOre",
+    "GPEBlockRename",
     "GPEBlockStone",
+    "GPEBTWTweak",
     "GPEItemCoal",
+    "GPEItemQuill",
+    "GPESlotRename",
   ];
 
   // Check a method for a checksum or array of checksums
