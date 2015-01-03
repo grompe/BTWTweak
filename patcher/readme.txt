@@ -15,6 +15,9 @@ v0.9b
 
 - Made Minecraft display BTW icon in the window title
 
+- Fix vanilla issue (MC-190) with misaligned textures facing
+  East and North on partial blocks
+
 v0.9a
 
 - Fix vanilla issue (MC-12964) with chunk coordinates using

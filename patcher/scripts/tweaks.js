@@ -971,6 +971,88 @@ function ObjectArray(arr)
         },
       },
     },
+    "bgf": // RenderBlocks
+    {
+      tweakClientMethods:
+      {
+        "c(Lapa;DDDLlx;)V": function(mn)
+        {
+          check(mn, 0x161179F6);
+          log("\t* Fixing north (-z) face rendering texture alignment in " + mn.name + mn.desc, 1);
+          var changes = 0;
+          var i;
+          for (i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner.equals("bgf") && n.name.equals("g"))
+            {
+              n.name = "h";
+              mn.instructions.insertBefore(n.getPrevious(), toInsnList([LdcInsnNode(Double("16.0"))]));
+              mn.instructions.insert(n.getNext().getNext(), toInsnList([InsnNode(DSUB)]));
+              changes++;
+              break;
+            }
+          }
+          for (i += 3; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner.equals("bgf") && n.name.equals("h"))
+            {
+              n.name = "g";
+              mn.instructions.insertBefore(n.getPrevious(), toInsnList([LdcInsnNode(Double("16.0"))]));
+              mn.instructions.insert(n.getNext().getNext(), toInsnList([InsnNode(DSUB)]));
+              changes++;
+              break;
+            }
+          }
+          if (changes == 2)
+          {
+            log("");
+          } else {
+            log(" ...failed!");
+            recordFailure();
+          }
+        },
+        "f(Lapa;DDDLlx;)V": function(mn)
+        {
+          check(mn, 0x161179F6);
+          log("\t* Fixing east (+x) face rendering texture alignment in " + mn.name + mn.desc, 1);
+          var changes = 0;
+          var i;
+          for (i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner.equals("bgf") && n.name.equals("k"))
+            {
+              n.name = "l";
+              mn.instructions.insertBefore(n.getPrevious(), toInsnList([LdcInsnNode(Double("16.0"))]));
+              mn.instructions.insert(n.getNext().getNext(), toInsnList([InsnNode(DSUB)]));
+              changes++;
+              break;
+            }
+          }
+          for (i += 3; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner.equals("bgf") && n.name.equals("l"))
+            {
+              n.name = "k";
+              mn.instructions.insertBefore(n.getPrevious(), toInsnList([LdcInsnNode(Double("16.0"))]));
+              mn.instructions.insert(n.getNext().getNext(), toInsnList([InsnNode(DSUB)]));
+              changes++;
+              break;
+            }
+          }
+          if (changes == 2)
+          {
+            log("");
+          } else {
+            log(" ...failed!");
+            recordFailure();
+          }
+        },
+      },
+    },
     "bjb": // TileEntitySkullRenderer
     {
       tweakMethods:

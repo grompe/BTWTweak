@@ -1,0 +1,14 @@
+diff --git a/src/minecraft/net/minecraft/src/RenderBlocks.java b/src/minecraft/net/minecraft/src/RenderBlocks.java
+index 89a4e57..9746e0a 100644
+--- a/src/minecraft/net/minecraft/src/RenderBlocks.java
++++ b/src/minecraft/net/minecraft/src/RenderBlocks.java
+@@ -6606,2 +6606,2 @@ public class RenderBlocks
+-        double var10 = (double)par8Icon.getInterpolatedU(this.renderMinX * 16.0D);
+-        double var12 = (double)par8Icon.getInterpolatedU(this.renderMaxX * 16.0D);
++        double var10 = (double)par8Icon.getInterpolatedU(16.0D - this.renderMaxX * 16.0D);
++        double var12 = (double)par8Icon.getInterpolatedU(16.0D - this.renderMinX * 16.0D);
+@@ -6936,2 +6936,2 @@ public class RenderBlocks
+-        double var10 = (double)par8Icon.getInterpolatedU(this.renderMinZ * 16.0D);
+-        double var12 = (double)par8Icon.getInterpolatedU(this.renderMaxZ * 16.0D);
++        double var10 = (double)par8Icon.getInterpolatedU(16.0D - this.renderMaxZ * 16.0D);
++        double var12 = (double)par8Icon.getInterpolatedU(16.0D - this.renderMinZ * 16.0D);
