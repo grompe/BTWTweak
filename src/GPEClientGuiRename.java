@@ -78,7 +78,7 @@ public class GPEClientGuiRename extends GuiContainer implements ICrafting
     GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     mc.renderEngine.bindTexture("/btwmodtex/rename_gui.png");
     drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-    boolean canCraft = container.getSlot(3).getHasStack();
+    boolean canCraft = container.getSlot(1).getHasStack() && container.getSlot(2).getHasStack();
     drawTexturedModalRect(guiLeft + 7, guiTop + 16, 0, ySize + (canCraft ? 0 : 16), 162, 16);
     itemNameField.setEnabled(canCraft);
   }

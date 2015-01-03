@@ -46,23 +46,25 @@ public class GPEContainerRename extends Container
     ItemStack stackSubj = tile.getStackInSlot(0);
     ItemStack stackInk = tile.getStackInSlot(1);
     ItemStack stackPaper = tile.getStackInSlot(2);
-    if (stackInk == null || stackPaper == null
-      || stackInk.itemID != GPEBTWTweak.gpeItemQuill.itemID
-      || stackPaper.itemID != Item.paper.itemID)
+    ItemStack stackResult = null;
+    if (stackInk != null
+      && stackPaper != null
+      && stackInk.itemID == GPEBTWTweak.gpeItemQuill.itemID
+      && stackPaper.itemID == Item.paper.itemID
+      && newItemName != null
+      && newItemName.length() > 0
+      )
     {
-      outputSlot.setInventorySlotContents(0, (ItemStack)null);
-      return;
-    }
-    ItemStack stackResult;
-    if (stackSubj == null)
-    {
-      stackResult = new ItemStack(GPEBTWTweak.gpeItemNameTag);
-    } else {
-      stackResult = stackSubj.copy();
-    }
-    if (newItemName != null && newItemName.length() > 0 && !newItemName.equalsIgnoreCase(thePlayer.getTranslator().translateNamedKey(stackResult.getItemName())) && !newItemName.equals(stackResult.getDisplayName()))
-    {
-      stackResult.setItemName(newItemName);
+      ItemStack stackCopyOrTag = (stackSubj == null)
+        ? new ItemStack(GPEBTWTweak.gpeItemNameTag)
+        : stackSubj.copy();
+      if (!newItemName.equalsIgnoreCase(thePlayer.getTranslator().translateNamedKey(stackCopyOrTag.getItemName()))
+        && !newItemName.equals(stackCopyOrTag.getDisplayName())
+        )
+      {
+        stackCopyOrTag.setItemName(newItemName);
+        stackResult = stackCopyOrTag;
+      }
     }
     outputSlot.setInventorySlotContents(0, stackResult);
     detectAndSendChanges();
@@ -156,3 +158,4 @@ public class GPEContainerRename extends Container
     updateItemName(null);
   }
 }
+ 
