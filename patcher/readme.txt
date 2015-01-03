@@ -13,6 +13,8 @@ v0.9b
   Written Book recipe is also changed to require Ink and Quill.
   Writing Table requires Ink and Quill, Paper and 1 experience level.
 
+- Made Minecraft display BTW icon in the window title
+
 v0.9a
 
 - Fix vanilla issue (MC-12964) with chunk coordinates using

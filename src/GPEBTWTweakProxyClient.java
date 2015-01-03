@@ -1,7 +1,9 @@
 package net.minecraft.src;
 
+import java.awt.Frame;
 import java.util.*;
 import java.io.*;
+import javax.imageio.ImageIO;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
@@ -75,5 +77,17 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
       controller.windowClick(windowId, slot + i * 9 + 9, 0, 0, player);
       controller.windowClick(windowId, slot + i * 9, 0, 0, player);
     }
+  }
+
+  public static void setAppIcon(Frame frame)
+  {
+    try
+    {
+      List images = new ArrayList();
+      images.add(ImageIO.read(FCAddOn.class.getResourceAsStream("/btwmodtex/icon16.png")));
+      images.add(ImageIO.read(FCAddOn.class.getResourceAsStream("/btwmodtex/icon32.png")));
+      frame.setIconImages(images);
+    }
+    catch(IOException e) {}
   }
 }

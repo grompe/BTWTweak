@@ -3667,19 +3667,30 @@ function ObjectArray(arr)
     {
       tweakClientMethods:
       {
-        /*
-        "a()V": function(mn)
+        "main([Ljava/lang/String;)V": function(mn)
         {
-          check(mn, 0xA79A9DCF);
-          CodeInserter(
-            MethodInsnFinder("ku"),
-            [
-              MethodInsnNode(INVOKESTATIC, "GPEBTWTweakIcon", "setGameIcon", "()V"),
-            ],
-            "\t* Inserting icon hook into "
-          ).process(mn);
+          check(mn, 0x4F527386);
+          log("\t* Adding app icons in " + mn.name + mn.desc, 1);
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.LdcInsnNode") && (n.cst.toString() == "Minecraft"))
+            {
+              var v = n.getPrevious();
+              if (isInstance(v, "org.objectweb.asm.tree.VarInsnNode") && v.opcode == ALOAD)
+              {
+                mn.instructions.insert(n.getNext(), toInsnList(
+                  [
+                    VarInsnNode(ALOAD, v["var"]),
+                    MethodInsnNode(INVOKESTATIC, "GPEBTWTweakProxyClient", "setAppIcon", "(Ljava/awt/Frame;)V"),
+                  ]
+                ));
+                log("");
+              }
+              break;
+            }
+          }
         },
-        */
         "l()V": function(mn)
         {
           check(mn, 0x6F5697A8);
