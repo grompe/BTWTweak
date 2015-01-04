@@ -15,6 +15,14 @@ public class GPEEntityRock extends EntityThrowable implements FCIEntityPacketHan
     motionZ *= 0.5D;
   }
 
+  public GPEEntityRock(World world, EntityLiving living, double strength)
+  {
+    super(world, living);
+    motionX *= strength;
+    motionY *= strength;
+    motionZ *= strength;
+  }
+
   public GPEEntityRock(World world, double x, double y, double z)
   {
     super(world, x, y, z);
@@ -24,7 +32,10 @@ public class GPEEntityRock extends EntityThrowable implements FCIEntityPacketHan
   {
     if (mop.entityHit != null)
     {
-      mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), 2);
+      // Usual sling shot velocity: weakest 0.2, strongest 1.1
+      double velocity = Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ);
+      int damage = (velocity < 0.2) ? 0 : (int)(velocity * 5);
+      mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), damage);
     }
     if (!worldObj.isRemote)
     {

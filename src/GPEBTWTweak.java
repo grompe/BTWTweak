@@ -24,6 +24,7 @@ public class GPEBTWTweak extends FCAddOn
   public static Item gpeItemAsh;
   public static Item gpeItemQuill;
   public static Item gpeItemNameTag;
+  public static Item gpeItemSling;
 
   public static int hotbarCycling = 1;
   public static int hcSpawnRadius = 2000;
@@ -34,6 +35,7 @@ public class GPEBTWTweak extends FCAddOn
   public static int gpeAshID = 17002;
   public static int gpeQuillID = 17003;
   public static int gpeNameTagID = 17004;
+  public static int gpeSlingID = 17005;
   public static int gpeBlockGravestoneID = 163;
   public static int gpeBlockRustedRailID = 164;
   public static int gpeBlockRenameID = 162;
@@ -86,6 +88,7 @@ public class GPEBTWTweak extends FCAddOn
         if (key.equals("gpeAshID")) gpeAshID = Integer.parseInt(value);
         if (key.equals("gpeQuillID")) gpeQuillID = Integer.parseInt(value);
         if (key.equals("gpeNameTagID")) gpeNameTagID = Integer.parseInt(value);
+        if (key.equals("gpeSlingID")) gpeSlingID = Integer.parseInt(value);
         if (key.equals("gpeBlockGravestoneID")) gpeBlockGravestoneID = Integer.parseInt(value);
         if (key.equals("gpeBlockRustedRailID")) gpeBlockRustedRailID = Integer.parseInt(value);
         if (key.equals("gpeBlockRenameID")) gpeBlockRenameID = Integer.parseInt(value);
@@ -124,6 +127,7 @@ public class GPEBTWTweak extends FCAddOn
         + "gpeAshID=17002\r\n"
         + "gpeQuillID=17003\r\n"
         + "gpeNameTagID=17004\r\n"
+        + "gpeSlingID=17005\r\n"
         + "\r\n"
         + "// **** Block IDs ****\r\n"
         + "\r\n"
@@ -183,6 +187,7 @@ public class GPEBTWTweak extends FCAddOn
     gpeItemAsh = new GPEItemPotash(gpeAshID - 256).setUnlocalizedName("gpeItemAsh");
     gpeItemQuill = new GPEItemQuill(gpeQuillID - 256);
     gpeItemNameTag = new GPEItemNameTag(gpeNameTagID - 256);
+    gpeItemSling = new GPEItemSling(gpeSlingID - 256);
     Item.coal = new GPEItemCoal(7);
     Item.pickaxeWood = (new GPEItemPickaxeWeak(14, EnumToolMaterial.WOOD)).setUnlocalizedName("pickaxeWood");
     Item.pickaxeStone = (new GPEItemPickaxeWeak(18, EnumToolMaterial.STONE)).setUnlocalizedName("pickaxeStone");
@@ -286,6 +291,8 @@ public class GPEBTWTweak extends FCAddOn
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(gpeItemQuill, 1), new Object[] {new ItemStack(Item.glassBottle), new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.feather)});
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.writableBook, 1), new Object[] {new ItemStack(Item.book), new ItemStack(gpeItemQuill)});
 
+    FCRecipes.AddVanillaRecipe(new ItemStack(gpeItemSling, 1), new Object[] {"RXR", 'R', FCBetterThanWolves.fcRopeItem, 'X', FCBetterThanWolves.fcItemTannedLeatherCut});
+    
     // Allow grinding hellfire back to dust
     FCRecipes.AddMillStoneRecipe(new ItemStack(FCBetterThanWolves.fcHellfireDust, 8), new ItemStack(FCBetterThanWolves.fcConcentratedHellfire));
     // Sandstone is weak enough to grind back to sand
@@ -588,10 +595,12 @@ public class GPEBTWTweak extends FCAddOn
     t.put("item.skull.pigzombie.name", "Zombie Pigman Head");
     t.put("item.skull.fire.name", "Blaze Head");
     t.put(gpeItemLooseRock.getUnlocalizedName() + ".name", "Rock");
+    t.put("entity.gpeEntityRock.name", "Rock");
     t.put(gpeItemSilk.getUnlocalizedName() + ".name", "Silk");
     t.put(gpeItemAsh.getUnlocalizedName() + ".name", "Ash");
     t.put(gpeItemQuill.getUnlocalizedName() + ".name", "Ink and Quill");
     t.put(gpeItemNameTag.getUnlocalizedName() + ".name", "Name Tag");
+    t.put(gpeItemSling.getUnlocalizedName() + ".name", "Sling");
     if (gpeBlockGravestoneID != 0)
     {
       t.put(gpeBlockGravestone.getUnlocalizedName() + ".name", "Gravestone");

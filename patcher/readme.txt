@@ -15,13 +15,22 @@ v0.9b
 
 - Made Minecraft display BTW icon in the window title
 
-- Fix vanilla issue (MC-190) with misaligned textures facing
+- Fixed vanilla issue (MC-190) with misaligned textures facing
   East and North on partial blocks
 
-- Make wooden and stone pickaxes not break instantly when attacking
+- Made wooden and stone pickaxes not break instantly when attacking
   mobs; coincidentally, this also raises their normal uses to 2 and 7
   respectively, which helps balance against random and reduced
   output from breaking stone (in terms of cobblestone blocks)
+
+- New sling weapon is now required to throw rocks. It is crafted with
+  a piece of cut tanned leather and two ropes on sides.
+
+- Thrown rocks now inflict variable damage according to their velocity.
+  This makes slings more or less viable alternative to bows, albeit
+  at the price of exhaustion and leather.
+
+- Rocks are now stackable to 64
 
 v0.9a
 

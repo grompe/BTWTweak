@@ -45,8 +45,6 @@ Feedback
 
 - Make endermen conspire against player if he killed too many
 
-- A way to name stuff
-
 
 Demands Block IDs
 =================
