@@ -18,6 +18,11 @@ v0.9b
 - Fix vanilla issue (MC-190) with misaligned textures facing
   East and North on partial blocks
 
+- Make wooden and stone pickaxes not break instantly when attacking
+  mobs; coincidentally, this also raises their normal uses to 2 and 7
+  respectively, which helps balance against random and reduced
+  output from breaking stone (in terms of cobblestone blocks)
+
 v0.9a
 
 - Fix vanilla issue (MC-12964) with chunk coordinates using

@@ -175,14 +175,18 @@ public class GPEBTWTweak extends FCAddOn
     Block.blocksList[65] = null; new GPEBlockLadder(65);
     Block.blocksList[80] = null; new GPEBlockSnowBlock(80);
     Block.blocksList[91] = null;
+    Item.m_bSuppressConflictWarnings = true;
     ItemAxe.SetAllAxesToBeEffectiveVsBlock((new FCBlockPumpkin(91, true)).setHardness(1.0F).setStepSound(Block.soundWoodFootstep).setLightValue(1.0F).setUnlocalizedName("litpumpkin"));
-    new GPEItemPotash(FCBetterThanWolves.fcPotash.itemID - 256);
+    FCBetterThanWolves.fcPotash = new GPEItemPotash(FCBetterThanWolves.fcPotash.itemID - 256);
     gpeItemLooseRock = new GPEItemLooseRock(gpeLooseRockID - 256);
     gpeItemSilk = new Item(gpeSilkID - 256).setUnlocalizedName("gpeItemSilk").setCreativeTab(CreativeTabs.tabMaterials).SetBuoyancy(1.0F).SetBellowsBlowDistance(2);
     gpeItemAsh = new GPEItemPotash(gpeAshID - 256).setUnlocalizedName("gpeItemAsh");
     gpeItemQuill = new GPEItemQuill(gpeQuillID - 256);
     gpeItemNameTag = new GPEItemNameTag(gpeNameTagID - 256);
-    new GPEItemCoal(7);
+    Item.coal = new GPEItemCoal(7);
+    Item.pickaxeWood = (new GPEItemPickaxeWeak(14, EnumToolMaterial.WOOD)).setUnlocalizedName("pickaxeWood");
+    Item.pickaxeStone = (new GPEItemPickaxeWeak(18, EnumToolMaterial.STONE)).setUnlocalizedName("pickaxeStone");
+    Item.m_bSuppressConflictWarnings = false;
 
     int id = FCBetterThanWolves.fcAestheticOpaque.blockID;
     Block.blocksList[id] = null;
