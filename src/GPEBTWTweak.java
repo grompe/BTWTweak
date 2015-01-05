@@ -197,6 +197,7 @@ public class GPEBTWTweak extends FCAddOn
     Block.blocksList[80] = null; new GPEBlockSnowBlock(80);
     Block.blocksList[91] = null;
     ItemAxe.SetAllAxesToBeEffectiveVsBlock((new FCBlockPumpkin(91, true)).setHardness(1.0F).setStepSound(Block.soundWoodFootstep).setLightValue(1.0F).setUnlocalizedName("litpumpkin"));
+    //Block.blocksList[compatAxleBlock.blockID] = null; compatAxleBlock = new GPEBlockAxle(compatAxleBlock.blockID);
 
     Item.m_bSuppressConflictWarnings = true;
     FCBetterThanWolves.fcPotash = new GPEItemPotash(FCBetterThanWolves.fcPotash.itemID - 256);
