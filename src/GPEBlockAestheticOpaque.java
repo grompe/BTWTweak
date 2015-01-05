@@ -48,7 +48,7 @@ public class GPEBlockAestheticOpaque extends FCBlockAestheticOpaque
     if (meta == padding) return soundClothFootstep;
     return stepSound;
   }
-  
+
   public int GetItemIDDroppedOnSaw(World world, int x, int y, int z)
   {
     int meta = world.getBlockMetadata(x, y, z);

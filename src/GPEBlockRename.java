@@ -6,7 +6,7 @@ public class GPEBlockRename extends BlockContainer
 {
   private Icon iconTop;
   private Icon iconSide;
- 
+
   protected GPEBlockRename(int id)
   {
     super(id, Material.wood);

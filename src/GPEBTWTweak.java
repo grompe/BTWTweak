@@ -11,7 +11,7 @@ public class GPEBTWTweak extends FCAddOn
 {
   public static GPEBTWTweak instance;
   public static GPEBTWTweakProxy proxy;
-  public static String tweakVersion = "0.9b";
+  public static String tweakVersion = "0.9c";
 
   public static Block gpeBlockStone;
   public static Block compatAxleBlock;
@@ -168,7 +168,24 @@ public class GPEBTWTweak extends FCAddOn
       FCAddOnHandler.LogMessage("Error while reading BTWTweak.cfg!");
       e.printStackTrace();
     }
-    
+    // GitHub [#1]: fcBlockAxle got changed to fcAxleBlock
+    try
+    {
+      try
+      {
+        compatAxleBlock = (Block)FCBetterThanWolves.class.getField("fcAxleBlock").get(null);
+      }
+      catch (NoSuchFieldException e)
+      {
+        compatAxleBlock = (Block)FCBetterThanWolves.class.getField("fcBlockAxle").get(null);
+      }
+    }
+    catch (Exception e)
+    {
+      FCAddOnHandler.LogMessage("Error while retrieving Axle Block, assuming ID=247");
+      compatAxleBlock = Block.blocksList[247];
+    }
+
     Block.blocksList[1] = null;  gpeBlockStone = new GPEBlockStone(1);
     Block.blocksList[4] = null;  new GPEBlockCobblestone(4);
     Block.blocksList[13] = null; new GPEBlockGravel(13);
@@ -179,8 +196,9 @@ public class GPEBTWTweak extends FCAddOn
     Block.blocksList[65] = null; new GPEBlockLadder(65);
     Block.blocksList[80] = null; new GPEBlockSnowBlock(80);
     Block.blocksList[91] = null;
-    Item.m_bSuppressConflictWarnings = true;
     ItemAxe.SetAllAxesToBeEffectiveVsBlock((new FCBlockPumpkin(91, true)).setHardness(1.0F).setStepSound(Block.soundWoodFootstep).setLightValue(1.0F).setUnlocalizedName("litpumpkin"));
+
+    Item.m_bSuppressConflictWarnings = true;
     FCBetterThanWolves.fcPotash = new GPEItemPotash(FCBetterThanWolves.fcPotash.itemID - 256);
     gpeItemLooseRock = new GPEItemLooseRock(gpeLooseRockID - 256);
     gpeItemSilk = new Item(gpeSilkID - 256).setUnlocalizedName("gpeItemSilk").setCreativeTab(CreativeTabs.tabMaterials).SetBuoyancy(1.0F).SetBellowsBlowDistance(2);
@@ -207,14 +225,14 @@ public class GPEBTWTweak extends FCAddOn
     }
     gpeBlockRustedRail = Itemize(new GPEBlockRustedRail(gpeBlockRustedRailID));
     gpeBlockRename = Itemize(new GPEBlockRename(gpeBlockRenameID));
-    
+
     new GPEEnchantmentHaste(gpeEnchantmentHaste);
 
     TileEntity.addMapping(GPETileEntityRename.class, "Rename");
 
     EntityList.addMapping(GPEEntityRock.class, "gpeEntityRock", gpeEntityRockID);
     proxy.addEntityRenderers();
-    
+
     if (isBTWVersionOrNewer("4.99999A0D Marsupial??!!"))
     {
       FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileGravel, 2), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockSlabFalling, 1, 0)});
@@ -275,11 +293,11 @@ public class GPEBTWTweak extends FCAddOn
 
     FCRecipes.RemoveShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemIngotDiamond), new Object[] {new ItemStack(Item.ingotIron), new ItemStack(Item.diamond), new ItemStack(FCBetterThanWolves.fcItemCreeperOysters)});
     FCRecipes.AddCauldronRecipe(new ItemStack(FCBetterThanWolves.fcItemIngotDiamond), new ItemStack[] {new ItemStack(Item.ingotIron), new ItemStack(Item.diamond), new ItemStack(FCBetterThanWolves.fcItemCreeperOysters)});
-    
+
     FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.bed, 1), new Object[] {"###", "XXX", '#', Block.cloth, 'X', Block.planks});
     FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.bed, 1), new Object[] {"###", "XXX", '#', FCBetterThanWolves.fcPadding, 'X', Block.planks});
     FCRecipes.AddVanillaRecipe(new ItemStack(Item.bed, 1), new Object[] {"sss", "ppp", "www", 's', gpeItemSilk, 'p', FCBetterThanWolves.fcPadding, 'w', Block.woodSingleSlab});
-    
+
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.spiderEye, 2), new Object[] {new ItemStack(Item.skull.itemID, 1, 5)});
 
     FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcCauldron, 1), new Object[] {"Y", "X", "C", 'Y', Item.bone, 'X', Item.bucketWater, 'C', Item.cauldron});
@@ -292,7 +310,7 @@ public class GPEBTWTweak extends FCAddOn
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.writableBook, 1), new Object[] {new ItemStack(Item.book), new ItemStack(gpeItemQuill)});
 
     FCRecipes.AddVanillaRecipe(new ItemStack(gpeItemSling, 1), new Object[] {"RXR", 'R', FCBetterThanWolves.fcRopeItem, 'X', FCBetterThanWolves.fcItemTannedLeatherCut});
-    
+
     // Allow grinding hellfire back to dust
     FCRecipes.AddMillStoneRecipe(new ItemStack(FCBetterThanWolves.fcHellfireDust, 8), new ItemStack(FCBetterThanWolves.fcConcentratedHellfire));
     // Sandstone is weak enough to grind back to sand
@@ -305,24 +323,6 @@ public class GPEBTWTweak extends FCAddOn
 
     BlockDispenser.dispenseBehaviorRegistry.putObject(gpeItemLooseRock, new GPEBehaviorRock());
 
-    // GitHub [#1]: fcBlockAxle got changed to fcAxleBlock
-    try
-    {
-      try
-      {
-        compatAxleBlock = (Block)FCBetterThanWolves.class.getField("fcAxleBlock").get(null);
-      }
-      catch (NoSuchFieldException e)
-      {
-        compatAxleBlock = (Block)FCBetterThanWolves.class.getField("fcBlockAxle").get(null);
-      }
-    }
-    catch (Exception e)
-    {
-      FCAddOnHandler.LogMessage("Error while retrieving Axle Block, assuming ID=247");
-      compatAxleBlock = Block.blocksList[247];
-    }
-    
     FCAddOnHandler.LogMessage("Grom PE's BTWTweak is done tweaking. Enjoy!");
   }
 
@@ -334,8 +334,8 @@ public class GPEBTWTweak extends FCAddOn
       Class rb = Class.forName("SixModResearchBenchAddOn");
       Method addDesc = rb.getMethod("addResearchDescription", new Class[] {String.class, String.class});
       // addDesc.invoke(rb, "<KEY>", "<DESCRIPTION>");
-      // Where <KEY> is of the form "ID#Metadata", (i.e. "5#3" for jungle planks) 
-      // and <DESCRIPTION> is the description you want the item to have. 
+      // Where <KEY> is of the form "ID#Metadata", (i.e. "5#3" for jungle planks)
+      // and <DESCRIPTION> is the description you want the item to have
       // Try to keep the description under 300 characters or so.
       addDesc.invoke(rb, "4", "Rough broken down stone. If arranged in a hollow square, can be crafted into a simple furnace to smelt and cook things.");
       addDesc.invoke(rb, "13", "Fine chunks of stone and sand. Digging through it may yield a rock, or even a flint, but passing it through a fine filter is more efficient.");
@@ -363,7 +363,7 @@ public class GPEBTWTweak extends FCAddOn
     {
       FCAddOnHandler.LogMessage("Error while integrating with BTW Research Add-On!");
       e.printStackTrace();
-    }    
+    }
   }
 
   public static Block Itemize(Block block)
@@ -780,7 +780,7 @@ public class GPEBTWTweak extends FCAddOn
           }
         }
       }
-      
+
     }
   }
 

@@ -17,7 +17,7 @@ public class GPEBlockOre extends FCBlockOre
     if (id == Block.oreGold.blockID) itemid = Item.goldNugget.itemID;
     SetItemIndexDroppedWhenCookedByKiln(itemid);
   }
-  
+
   public void OnCookedByKiln(World world, int x, int y, int z)
   {
     int id = 0;
