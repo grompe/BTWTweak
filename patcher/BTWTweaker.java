@@ -10,13 +10,10 @@ import static org.objectweb.asm.Opcodes.INVOKESTATIC;
 import static org.objectweb.asm.Opcodes.RETURN;
 import static org.objectweb.asm.Opcodes.ACC_PUBLIC;
 
-import sun.org.mozilla.javascript.internal.*;
-import mEScriptEngine.*;
-
 public class BTWTweaker
 {
   private static final Class MAIN_CLASS = BTWTweaker.class;
-  
+
   private static final int ACTION_OVERWRITE = 0;
   private static final int ACTION_TWEAK = 1;
   private static final int ACTION_ADAPTSERVER = 2;
@@ -29,7 +26,7 @@ public class BTWTweaker
   public static final int STATUS_TWEAKED = 4;
   public static final int STATUS_NOTFOUND = 5;
 
-  protected static RhinoScriptEngine engine;
+  protected static ScriptEngineProxy scriptProxy;
 
   public static boolean onServer = false;
   public static int failures = 0;
@@ -44,36 +41,6 @@ public class BTWTweaker
   public static void log(String s, Object... fmt)
   {
     log(String.format(s, fmt));
-  }
-
-  public static void logRhinoException(RhinoException ex)
-  {
-    log("!SE! " + getScriptStacktrace(ex));
-  }
-
-  public static String getScriptStacktrace(RhinoException ex)
-  {
-    CharArrayWriter ca = new CharArrayWriter();
-    ex.printStackTrace(new PrintWriter(ca));
-    String boring = "sun\\.org\\.mozilla\\.javascript\\.internal\\.";
-    return ca.toString().replaceAll("\tat "+boring+"[^\n]+\n", "").replaceFirst(boring, "");
-  }
-
-  public static Object execResource(String str) throws RhinoException
-  {
-    InputStream s = MAIN_CLASS.getResourceAsStream(str);
-    if (s == null)
-    {
-      log("Error: unable to find '%s' to include", str);
-      return null;
-    }
-    return execStream(new InputStreamReader(s), str);
-  }
-  
-  public static Object execStream(Reader reader, String name) throws RhinoException
-  {
-    engine.put("javax.script.filename", name);
-    return engine.eval(reader);
   }
 
   public static boolean hasResource(String name)
@@ -144,7 +111,7 @@ public class BTWTweaker
     if (status == STATUS_TWEAKED) return "BTWTweak already installed";
     return "Unknown";
   }
-  
+
   public static int checkClientServerBTWZip(String jarname) throws Exception
   {
     int status;
@@ -181,15 +148,22 @@ public class BTWTweaker
   {
     try
     {
-      engine = new RhinoScriptEngine();
-      
-      execResource("scripts/opcodes.js");
-      execResource("scripts/tweaks.js");
+      Class.forName("sun.org.mozilla.javascript.internal.Context");
+      scriptProxy = new ScriptEngineProxyInternal();
+      log("Using internal Rhino Engine for JavaScript");
     }
-    catch(RhinoException e)
+    catch(ClassNotFoundException e)
     {
-      logRhinoException(e);
+      log("Trying to use any available JavaScript engine");
+      scriptProxy = new ScriptEngineProxyExternal();
     }
+    if (!scriptProxy.isInitialized())
+    {
+      throw new IllegalArgumentException("No JavaScript engine is available");
+    }
+
+    scriptProxy.execResource("scripts/opcodes.js");
+    scriptProxy.execResource("scripts/tweaks.js");
 
     File jar = new File(jarname);
     String outputname = jarname.replaceFirst("\\.([^.]+)$", "_tweak.$1");
@@ -221,7 +195,7 @@ public class BTWTweaker
         if (name.endsWith(".class"))
         {
           classname = name.substring(0, name.length() - 6);
-          action = (Integer)engine.invokeFunction("whatToDoWithClass", classname);
+          action = (Integer)scriptProxy.invokeFunction("whatToDoWithClass", classname);
         }
         if (name.startsWith("btwmodtex") || name.startsWith("mob") || name.startsWith("textures"))
         {
@@ -245,7 +219,7 @@ public class BTWTweaker
 
           if (action == ACTION_TWEAK)
           {
-            engine.invokeFunction("tweakClass", cn);
+            scriptProxy.invokeFunction("tweakClass", cn);
           }
           else if (action == ACTION_ADAPTSERVER)
           {
@@ -272,7 +246,7 @@ public class BTWTweaker
 
           zos.write(cw.toByteArray());
           zos.closeEntry();
-          
+
           break;
         case ACTION_OVERWRITE:
         case ACTION_COPY:

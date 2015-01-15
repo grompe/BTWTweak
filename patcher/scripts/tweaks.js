@@ -61,26 +61,32 @@ function toHex(n)
 
 function Float(a)
 {
-  return java.lang.Float(a);
+  return new java.lang.Float(a);
 }
 
 function Double(a)
 {
-  return java.lang.Double(a);
+  return new java.lang.Double(a);
 }
 
 function Integer(a)
 {
-  return java.lang.Integer(a);
+  return new java.lang.Integer(a);
 }
 
 function String(a)
 {
-  return java.lang.String(a);
+  return new java.lang.String(a);
 }
 
 function JavaArray(arrtype, arr)
 {
+  // Work around Nashorn stupidity:
+  // It fails to unwrap class when passing it as a parameter
+  if (arrtype instanceof Packages.jdk.internal.dynalink.beans.StaticClass)
+  {
+    arrtype = arrtype["class"];
+  }
   var j = java.lang.reflect.Array.newInstance(arrtype, arr.length);
   for (var i = 0; i < arr.length; i++) j[i] = arr[i];
   return j;
@@ -89,6 +95,14 @@ function JavaArray(arrtype, arr)
 function ObjectArray(arr)
 {
   return JavaArray(java.lang.Object, arr);
+}
+
+// Work around another Nashorn stupidity:
+// It shadows object's "type" property by something else.
+// Not even obj["type"] works, so have to use reflection
+function getObjProperty(n, propname)
+{
+  return n["class"].getField(propname).get(n);
 }
 
 (function(){
@@ -1616,10 +1630,10 @@ function ObjectArray(arr)
               var locvar = mn.maxLocals;
               mn.instructions.insert(n, toInsnList(
                 [
-                  LdcInsnNode(new Float("0.5")),
+                  LdcInsnNode(Float("0.5")),
                   VarInsnNode(ILOAD, 16),
                   InsnNode(I2F),
-                  LdcInsnNode(new Float("0.2")),
+                  LdcInsnNode(Float("0.2")),
                   InsnNode(FMUL),
                   VarInsnNode(ALOAD, 1),
                   FieldInsnNode(GETFIELD, "aab", "s", "Ljava/util/Random;"),
@@ -2125,7 +2139,7 @@ function ObjectArray(arr)
               for (i += 1; i < mn.instructions.size(); i++)
               {
                 n = mn.instructions.get(i);
-                if (isInstance(n, "org.objectweb.asm.tree.FrameNode") && (n.type == F_SAME))
+                if (isInstance(n, "org.objectweb.asm.tree.FrameNode") && (getObjProperty(n, "type") == F_SAME))
                 {
                   var label = LabelNode();
                   mn.instructions.insert(n, toInsnList(

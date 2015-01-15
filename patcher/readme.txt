@@ -3,6 +3,13 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.9b
 
 [********** Change Log ************]
 
+(patcher update)
+
+- Removed restriction to Java 6/7 because of the way script engine was used.
+  Now the patcher can run on OpenJDK or Java 8
+
+- Script fixes related to the above update.
+
 v0.9b
 
 - Added a whole bunch of items to regain renaming feature:

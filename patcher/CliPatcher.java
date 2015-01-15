@@ -40,7 +40,7 @@ public class CliPatcher
     System.out.println("Current directory: " + System.getProperty("user.dir"));
 
     ArrayList<String> btwVersions = new ArrayList<String>();
-    
+
     /*
     File dir = new File(".");
     for (File child : dir.listFiles())
@@ -79,7 +79,7 @@ public class CliPatcher
       mcbtwserver = BTWTweaker.checkClientServerBTWZip(mcservername);
       mcstatus = "found in current directory with " + BTWTweaker.explainStatus(mcbtwserver);
     }
-    
+
     System.out.println("minecraft_server.jar: " + mcstatus);
 
     if (/*numBtw == 0 && */!(mcbtwclient == BTWTweaker.STATUS_BTWCLIENT) && !(mcbtwserver == BTWTweaker.STATUS_BTWSERVER))
@@ -88,7 +88,7 @@ public class CliPatcher
       input();
       System.exit(1);
     }
-    
+
     System.out.println("== Modes of operation ==");
 
     int i = 0;
@@ -142,7 +142,7 @@ public class CliPatcher
     input();
     System.exit(0);
   }
-  
+
   private static void tweak(String name, int status)
   {
     try
