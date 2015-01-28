@@ -3,6 +3,10 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.9b
 
 [********** Change Log ************]
 
+v0.9c
+
+- Backport correct tree tops textures
+
 (patcher update)
 
 - Removed restriction to Java 6/7 because of the way script engine was used.

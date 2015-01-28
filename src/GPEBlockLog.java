@@ -2,6 +2,11 @@ package net.minecraft.src;
 
 public class GPEBlockLog extends FCBlockLog
 {
+  public static final String[] treeSide = new String[] {"tree_side", "tree_spruce", "tree_birch", "tree_jungle"};
+  public static final String[] treeTop = new String[] {"tree_top", "tree_top_spruce", "tree_top_birch", "tree_top_jungle"};
+  private Icon[] iconsSide;
+  private Icon[] iconsTop;
+
   protected GPEBlockLog(int id)
   {
     super(id);
@@ -62,9 +67,30 @@ public class GPEBlockLog extends FCBlockLog
   }
 
   @ClientOnly
+  public Icon getIcon(int side, int meta)
+  {
+    int pos = meta & 12;
+    int typ = meta & 3;
+    return
+      (
+        (pos == 0 && (side == 1 || side == 0)) ||
+        (pos == 4 && (side == 5 || side == 4)) ||
+        (pos == 8 && (side == 2 || side == 3))
+      )
+      ? iconsTop[typ]
+      : iconsSide[typ];
+  }
+
+  @ClientOnly
   public void registerIcons(IconRegister r)
   {
-    super.registerIcons(r);
+    iconsTop = new Icon[treeSide.length];
+    iconsSide = new Icon[treeSide.length];
+    for (int i = 0; i < iconsSide.length; i++)
+    {
+      iconsTop[i] = r.registerIcon(treeTop[i]);
+      iconsSide[i] = r.registerIcon(treeSide[i]);
+    }
     Block.wood.registerIcons(r);
   }
 }
