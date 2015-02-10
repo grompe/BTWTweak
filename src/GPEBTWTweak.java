@@ -800,7 +800,7 @@ public class GPEBTWTweak extends FCAddOn
           WorldClient world = mc.theWorld;
           EntityClientPlayerMP player = mc.thePlayer;
           GPETileEntityRename tile = new GPETileEntityRename();
-          GuiContainer gui = new GPEClientGuiRename(player.inventory, world, tile);
+          GuiContainer gui = new GPEGuiRename(player.inventory, world, tile);
           if (gui != null)
           {
             mc.displayGuiScreen(gui);

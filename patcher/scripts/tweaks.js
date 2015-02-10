@@ -884,6 +884,45 @@ function getObjProperty(n, propname)
         cn.methods.add(mn);
       },
     },
+    "axj": // GuiOptions
+    {
+      tweakClientMethods:
+      {
+        "a(Lawg;)V": function(mn)
+        {
+          check(mn, 0x3789421D);
+          var changes = 0;
+          log("\t* Replacing controls GUI to a scrolling list in " + mn.name + mn.desc, 1);
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.TypeInsnNode") && n.desc.equals("awl"))
+            {
+              n.desc = "GPEGuiControls";
+              changes++;
+              break;
+            }
+          }
+          for (i += 1; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("awl"))
+            {
+              n.owner = "GPEGuiControls";
+              changes++;
+              break;
+            }
+          }
+          if (changes == 2)
+          {
+            log("");
+          } else {
+            log(" ...failed!");
+            recordFailure();
+          }
+        },
+      },
+    },
     "bbw": // ModelCreeper
     {
       tweakClientMethods:

@@ -4,14 +4,14 @@ import java.util.List;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-public class GPEClientGuiRename extends GuiContainer implements ICrafting
+public class GPEGuiRename extends GuiContainer implements ICrafting
 {
   private GPETileEntityRename tile;
   private GPEContainerRename container;
   private GuiTextField itemNameField;
   private EntityPlayer thePlayer;
 
-  public GPEClientGuiRename(InventoryPlayer inventory, World world, GPETileEntityRename tileEntity)
+  public GPEGuiRename(InventoryPlayer inventory, World world, GPETileEntityRename tileEntity)
   {
     super(new GPEContainerRename(inventory, world, tileEntity));
     thePlayer = inventory.player;
