@@ -3826,6 +3826,23 @@ function getObjProperty(n, propname)
             }
           }
         },
+        "a()V": function(mn)
+        {
+          check(mn, 0x5E5FA51F);
+          log("\t* Adding readyForInput hook in " + mn.name + mn.desc, 1);
+          for (var i = mn.instructions.size() - 1; i >= 0; i--)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.InsnNode") && (n.getOpcode() == RETURN))
+            {
+              mn.instructions.insertBefore(n, MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "readyForInput", "()V"));
+              log("");
+              return;
+            }
+          }
+          log(" ...failed!");
+          recordFailure();
+        },
         "l()V": function(mn)
         {
           check(mn, 0x6F5697A8);

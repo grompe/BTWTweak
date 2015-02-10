@@ -610,6 +610,7 @@ public class GPEBTWTweak extends FCAddOn
     t.put(gpeBlockRename.getUnlocalizedName() + ".name", "Writing Table");
     t.put("enchantment.haste", "Haste");
     t.put("container.rename", "Write Tags & Name");
+    t.put("key.sprint", "Sprint");
   }
 
   public static void saveWorldData(World world)
@@ -838,5 +839,10 @@ public class GPEBTWTweak extends FCAddOn
       }
     }
     return false;
+  }
+
+  public static void readyForInput()
+  {
+    proxy.addKeyBindings();
   }
 }

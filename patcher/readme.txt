@@ -1,18 +1,19 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.9b
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.9c
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
 
 v0.9c
 
-- Backport correct tree tops textures
-
-(patcher update)
-
 - Removed restriction to Java 6/7 because of the way script engine was used.
   Now the patcher can run on OpenJDK or Java 8
 
 - Script fixes related to the above update.
+
+- Backport correct tree tops textures
+
+- Add Sprint key, default to Left Ctrl. This required updating the settings
+  page to a scrollable list, which was borrowed from Minecraft Forge.
 
 v0.9b
 

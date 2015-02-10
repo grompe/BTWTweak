@@ -8,8 +8,12 @@ import javax.imageio.ImageIO;
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
 
+import org.lwjgl.input.Keyboard;
+
 public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
 {
+  public KeyBinding sprintKey;
+
   public File getConfigDir()
   {
     return Minecraft.getMinecraftDir();
@@ -18,6 +22,23 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
   public void addEntityRenderers()
   {
     RenderManager.AddEntityRenderer(GPEEntityRock.class, new RenderSnowball(GPEBTWTweak.gpeItemLooseRock));
+  }
+
+  public void addKeyBindings()
+  {
+    sprintKey = addKeyBinding("key.sprint", Keyboard.KEY_LCONTROL);
+  }
+
+  public KeyBinding addKeyBinding(String name, int key)
+  {
+    GameSettings settings = Minecraft.getMinecraft().gameSettings;
+    if (settings == null) throw new IllegalArgumentException("addKeyBinding() was called too early, gameSettings is null!");
+    KeyBinding keyBinding = new KeyBinding(name, key);
+    KeyBinding[] keyBindings = settings.keyBindings;
+    keyBindings = Arrays.copyOf(keyBindings, keyBindings.length + 1);
+    keyBindings[keyBindings.length - 1] = keyBinding;
+    settings.keyBindings = keyBindings;
+    return keyBinding;
   }
 
   public void onKeyPress(int key)
@@ -44,6 +65,11 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
       int y = MathHelper.floor_double(mc.thePlayer.posY) - 1;
       int z = MathHelper.floor_double(mc.thePlayer.posZ);
       GPEBTWTweak.attemptToPlaceGravestone(world, x, y, z);
+    }
+    if (sprintKey.pressed)
+    {
+      Minecraft mc = Minecraft.getMinecraft();
+      if (!mc.thePlayer.isSprinting()) mc.thePlayer.setSprinting(true);
     }
   }
 
