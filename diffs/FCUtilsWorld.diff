@@ -1,0 +1,9 @@
+diff --git a/src/minecraft/net/minecraft/src/FCUtilsWorld.java b/src/minecraft/net/minecraft/src/FCUtilsWorld.java
+index b1736df..b0d3ecc 100644
+--- a/src/minecraft/net/minecraft/src/FCUtilsWorld.java
++++ b/src/minecraft/net/minecraft/src/FCUtilsWorld.java
+@@ -248,0 +249,4 @@ public class FCUtilsWorld
++            if (var4 == Block.mycelium.blockID || var4 == Block.mushroomCapBrown.blockID || var4 == Block.mushroomCapRed.blockID)
++            {
++                return false;
++            }

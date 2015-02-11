@@ -15,6 +15,9 @@ v0.9c
 - Add Sprint key, default to Left Ctrl. This required updating the settings
   page to a scrollable list, which was borrowed from Minecraft Forge.
 
+- Fix FC's oversight that caused mycelium and huge mushroom blocks display
+  swirling True Sight particles, even though mobs cannot spawn on them
+
 v0.9b
 
 - Added a whole bunch of items to regain renaming feature:

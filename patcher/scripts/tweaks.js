@@ -2691,6 +2691,48 @@ function getObjProperty(n, propname)
         cn.fields.add(FieldNode(ACC_PUBLIC, "visualSpin", "I", null, null));
       }
     },
+    "FCUtilsWorld":
+    {
+      tweakMethods:
+      {
+        "CanMobsSpawnHere(Laab;III)Z": function(mn)
+        {
+          check(mn, 0x65EC265F);
+          var label1 = LabelNode();
+          var label2 = LabelNode();
+          CodeInserter(
+            CustomFinder(function(n)
+            {
+              return isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") &&
+                n.owner.equals("aab") && n.name.equals("a") && n.desc.equals("(III)I");
+            }),
+            [
+              VarInsnNode(ISTORE, 4),
+              VarInsnNode(ILOAD, 4),
+              FieldInsnNode(GETSTATIC, "apa", "bC", "Lann;"),
+              FieldInsnNode(GETFIELD, "ann", "cz", "I"),
+              JumpInsnNode(IF_ICMPEQ, label1),
+              VarInsnNode(ILOAD, 4),
+              FieldInsnNode(GETSTATIC, "apa", "br", "Lapa;"),
+              FieldInsnNode(GETFIELD, "apa", "cz", "I"),
+              JumpInsnNode(IF_ICMPEQ, label1),
+              VarInsnNode(ILOAD, 4),
+              FieldInsnNode(GETSTATIC, "apa", "bs", "Lapa;"),
+              FieldInsnNode(GETFIELD, "apa", "cz", "I"),
+              JumpInsnNode(IF_ICMPNE, label2),
+              label1,
+              FrameNode(F_APPEND, 1, [INTEGER], 0, null),
+              InsnNode(ICONST_0),
+              InsnNode(IRETURN),
+              label2,
+              FrameNode(F_SAME, 0, null, 0, null),
+              VarInsnNode(ILOAD, 4),
+            ],
+            "\t* Fixing True Sight wrongly marking Mycelium as mob-spawnable in "
+          ).process(mn);
+        },
+      },
+    },
     "gu": // ServerConfigurationManager
     {
       tweakMethods:
