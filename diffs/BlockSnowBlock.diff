@@ -2,6 +2,6 @@ diff --git a/src/minecraft/net/minecraft/src/BlockSnowBlock.java b/src/minecraft
 index b2178d3..ea63ab4 100644
 --- a/src/minecraft/net/minecraft/src/BlockSnowBlock.java
 +++ b/src/minecraft/net/minecraft/src/BlockSnowBlock.java
-@@ -40,0 +41,2 @@ public class BlockSnowBlock extends Block
+@@ -40,0 +41,2 @@ public void updateTick(World par1World, int par2, int par3, int par4, Random par
 +
 +    static { new GPEBTWTweak(); }

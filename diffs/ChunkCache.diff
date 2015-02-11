@@ -2,7 +2,7 @@ diff --git a/src/minecraft/net/minecraft/src/ChunkCache.java b/src/minecraft/net
 index c300321..95d31bd 100644
 --- a/src/minecraft/net/minecraft/src/ChunkCache.java
 +++ b/src/minecraft/net/minecraft/src/ChunkCache.java
-@@ -367,0 +368,7 @@ public class ChunkCache implements IBlockAccess
+@@ -367,0 +368,7 @@ public int getSkyBlockTypeBrightness(EnumSkyBlock par1EnumSkyBlock, int par2, in
 +                    // https://bugs.mojang.com/browse/MC-92
 +                    int var10 = this.getSpecialBlockBrightness(par1EnumSkyBlock, par2, par3 - 1, par4);
 +                    if (var10 > var5)

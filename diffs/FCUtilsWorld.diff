@@ -2,7 +2,7 @@ diff --git a/src/minecraft/net/minecraft/src/FCUtilsWorld.java b/src/minecraft/n
 index b1736df..b0d3ecc 100644
 --- a/src/minecraft/net/minecraft/src/FCUtilsWorld.java
 +++ b/src/minecraft/net/minecraft/src/FCUtilsWorld.java
-@@ -248,0 +249,4 @@ public class FCUtilsWorld
+@@ -248,0 +249,4 @@ else if (!var0.isBlockNormalCube(var1, var2, var3) && !var0.isBlockNormalCube(va
 +            if (var4 == Block.mycelium.blockID || var4 == Block.mushroomCapBrown.blockID || var4 == Block.mushroomCapRed.blockID)
 +            {
 +                return false;

@@ -2,5 +2,5 @@ diff --git a/src/minecraft/net/minecraft/src/EntityCow.java b/src/minecraft/net/
 index 1e95e62..b380169 100644
 --- a/src/minecraft/net/minecraft/src/EntityCow.java
 +++ b/src/minecraft/net/minecraft/src/EntityCow.java
-@@ -257,0 +258 @@ public class EntityCow extends EntityAnimal
+@@ -257,0 +258 @@ else if (!this.worldObj.isRemote && !this.GotMilk())
 +                heal(1);

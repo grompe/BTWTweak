@@ -2,10 +2,10 @@ diff --git a/src/minecraft/net/minecraft/src/FCBlockPumpkin.java b/src/minecraft
 index 61f1098..e082dc6 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockPumpkin.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockPumpkin.java
-@@ -7,0 +8 @@ public class FCBlockPumpkin extends FCBlockGourd
+@@ -7,0 +8 @@
 +    private boolean isLantern;
-@@ -11,0 +13 @@ public class FCBlockPumpkin extends FCBlockGourd
+@@ -11,0 +13 @@ protected FCBlockPumpkin(int var1, boolean var2)
 +        this.isLantern = var2;
-@@ -128 +130 @@ public class FCBlockPumpkin extends FCBlockGourd
+@@ -128 +130 @@ public void registerIcons(IconRegister var1)
 -        this.m_IconFront = var1.registerIcon("pumpkin_face");
 +        this.m_IconFront = var1.registerIcon(this.isLantern ? "pumpkin_jack" : "pumpkin_face");

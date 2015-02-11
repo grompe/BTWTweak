@@ -2,10 +2,10 @@ diff --git a/src/minecraft/net/minecraft/src/FCBetterThanWolves.java b/src/minec
 index 62631d7..52b9958 100644
 --- a/src/minecraft/net/minecraft/src/FCBetterThanWolves.java
 +++ b/src/minecraft/net/minecraft/src/FCBetterThanWolves.java
-@@ -17 +17 @@ public class FCBetterThanWolves extends FCAddOn
+@@ -17 +17 @@
 -    public static final String fcVersionString = "4.8911";
 +    public static String fcVersionString = "4.8911";
-@@ -25,0 +26 @@ public class FCBetterThanWolves extends FCAddOn
+@@ -25,0 +26 @@
 +    public static Block fcBlockSlabFalling;
-@@ -242,0 +244 @@ public class FCBetterThanWolves extends FCAddOn
+@@ -242,0 +244 @@
 +    public static Item fcItemWool;

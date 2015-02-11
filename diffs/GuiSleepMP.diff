@@ -2,6 +2,6 @@ diff --git a/src/minecraft/net/minecraft/src/GuiSleepMP.java b/src/minecraft/net
 index 3460484..a11498a 100644
 --- a/src/minecraft/net/minecraft/src/GuiSleepMP.java
 +++ b/src/minecraft/net/minecraft/src/GuiSleepMP.java
-@@ -12 +12 @@ public class GuiSleepMP extends GuiChat
+@@ -12 +12 @@ public void initGui()
 -        this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height - 40, var1.translateKey("multiplayer.stopSleeping")));
 +        this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height - 80, var1.translateKey("multiplayer.stopSleeping")));

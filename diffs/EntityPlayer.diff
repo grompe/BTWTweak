@@ -2,13 +2,13 @@ diff --git a/src/minecraft/net/minecraft/src/EntityPlayer.java b/src/minecraft/n
 index dc30dad..42fa487 100644
 --- a/src/minecraft/net/minecraft/src/EntityPlayer.java
 +++ b/src/minecraft/net/minecraft/src/EntityPlayer.java
-@@ -258 +258 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
+@@ -258 +258 @@ else if (this.worldObj.isDaytime())
 -                    this.wakeUpPlayer(false, true, true);
 +                    //this.wakeUpPlayer(false, true, true);
-@@ -1333 +1333 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
+@@ -1333 +1333 @@ public boolean func_71066_bF()
 -    public EnumStatus sleepInBedAt(int par1, int par2, int par3)
 +    public EnumStatus sleepInBedAt(int var1, int var2, int var3)
-@@ -1335 +1335,55 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
+@@ -1335 +1335,55 @@ public EnumStatus sleepInBedAt(int par1, int par2, int par3)
 -        return EnumStatus.OTHER_PROBLEM;
 +        if (!this.worldObj.isRemote)
 +        {
@@ -65,16 +65,16 @@ index dc30dad..42fa487 100644
 +        this.motionX = this.motionZ = this.motionY = 0.0D;
 +
 +        return EnumStatus.OK;
-@@ -1403 +1457 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
+@@ -1403 +1457 @@ public void wakeUpPlayer(boolean par1, boolean par2, boolean par3)
 -            this.setSpawnChunk(this.playerLocation, false);
 +            //this.setSpawnChunk(this.playerLocation, false);
-@@ -1484 +1538 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
+@@ -1484 +1538 @@ public boolean isPlayerFullyAsleep()
 -        return this.sleeping && this.sleepTimer >= 100;
 +        return false;
-@@ -2249 +2303 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
+@@ -2249 +2303 @@ public boolean isOnLadder()
 -        if (var1 >= 4)
 +        if (var1 >= 4 || getFlag(4)) // isEating()
-@@ -2406 +2460,6 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
+@@ -2406 +2460,6 @@ protected float GetLandMovementModifier()
 -        return this.GetHealthAndExhaustionModifierWithSightlessModifier();
 +        float f = this.GetHealthAndExhaustionModifierWithSightlessModifier();
 +        if (this.inventory.armorInventory[0] != null)

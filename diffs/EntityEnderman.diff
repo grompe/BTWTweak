@@ -2,7 +2,7 @@ diff --git a/src/minecraft/net/minecraft/src/EntityEnderman.java b/src/minecraft
 index 7155858..dce0f36 100644
 --- a/src/minecraft/net/minecraft/src/EntityEnderman.java
 +++ b/src/minecraft/net/minecraft/src/EntityEnderman.java
-@@ -713,0 +714,5 @@ public class EntityEnderman extends EntityMob
+@@ -713,0 +714,5 @@ public void CheckForScrollDrop()
 +    protected void dropHead()
 +    {
 +        this.entityDropItem(new ItemStack(Item.skull.itemID, 1, 6), 0.0F);

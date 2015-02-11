@@ -2,6 +2,6 @@ diff --git a/src/minecraft/net/minecraft/src/MobSpawnerBaseLogic.java b/src/mine
 index 436cb19..73c2c81 100644
 --- a/src/minecraft/net/minecraft/src/MobSpawnerBaseLogic.java
 +++ b/src/minecraft/net/minecraft/src/MobSpawnerBaseLogic.java
-@@ -122,0 +123,2 @@ public abstract class MobSpawnerBaseLogic
+@@ -122,0 +123,2 @@ public void updateSpawner()
 +                    var1 += 0.5D;
 +                    var9 += 0.5D;

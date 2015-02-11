@@ -2,7 +2,7 @@ diff --git a/src/minecraft/net/minecraft/src/EntitySpider.java b/src/minecraft/n
 index 58e2d43..53c24b9 100644
 --- a/src/minecraft/net/minecraft/src/EntitySpider.java
 +++ b/src/minecraft/net/minecraft/src/EntitySpider.java
-@@ -313,0 +314,5 @@ public class EntitySpider extends EntityMob
+@@ -313,0 +314,5 @@ public void CheckForScrollDrop()
 +    protected void dropHead()
 +    {
 +        this.entityDropItem(new ItemStack(Item.skull.itemID, 1, 5), 0.0F);

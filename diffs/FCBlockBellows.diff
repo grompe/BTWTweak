@@ -2,10 +2,10 @@ diff --git a/src/minecraft/net/minecraft/src/FCBlockBellows.java b/src/minecraft
 index 390186c..eeea39c 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockBellows.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockBellows.java
-@@ -572 +572 @@ public class FCBlockBellows extends Block implements FCIBlockMechanical, FCIBloc
+@@ -572 +572 @@ public void BreakBellows(World var1, int var2, int var3, int var4)
 -        for (var5 = 0; var5 < 2; ++var5)
 +        for (var5 = 0; var5 < 3; ++var5)
-@@ -574 +574,2 @@ public class FCBlockBellows extends Block implements FCIBlockMechanical, FCIBloc
+@@ -574 +574,2 @@ public void BreakBellows(World var1, int var2, int var3, int var4)
 -            FCUtilsItem.EjectSingleItemWithRandomOffset(var1, var2, var3, var4, FCBetterThanWolves.fcTannedLeather.itemID, 0);
 +            FCUtilsItem.EjectSingleItemWithRandomOffset(var1, var2, var3, var4, FCBetterThanWolves.fcItemTannedLeatherCut.itemID, 0);
 +            FCUtilsItem.EjectSingleItemWithRandomOffset(var1, var2, var3, var4, FCBetterThanWolves.fcStrap.itemID, 0);

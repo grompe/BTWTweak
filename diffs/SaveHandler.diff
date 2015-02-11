@@ -2,7 +2,7 @@ diff --git a/src/minecraft/net/minecraft/src/SaveHandler.java b/src/minecraft/ne
 index d4049b3..074d95c 100644
 --- a/src/minecraft/net/minecraft/src/SaveHandler.java
 +++ b/src/minecraft/net/minecraft/src/SaveHandler.java
-@@ -350,0 +351 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData
+@@ -350,0 +351 @@ public void LoadModSpecificData(World var1)
 +        GPEBTWTweak.loadWorldData(var1);
-@@ -369,0 +371 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData
+@@ -369,0 +371 @@ public void SaveModSpecificData(World var1)
 +        GPEBTWTweak.saveWorldData(var1);

@@ -2,7 +2,7 @@ diff --git a/src/minecraft/net/minecraft/src/FCBlockGourd.java b/src/minecraft/n
 index d9d20f2..ac4db4c 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockGourd.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockGourd.java
-@@ -98,0 +99,14 @@ public abstract class FCBlockGourd extends BlockSand
+@@ -98,0 +99,14 @@ private void Explode(World var1, double var2, double var4, double var6)
 +        if (blockID == 91 /* Jack-o-lantern */)
 +        {
 +            int x = MathHelper.floor_double(var2);

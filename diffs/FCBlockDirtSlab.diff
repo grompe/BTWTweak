@@ -2,42 +2,42 @@ diff --git a/src/minecraft/net/minecraft/src/FCBlockDirtSlab.java b/src/minecraf
 index 0cf92e2..bd98311 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockDirtSlab.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockDirtSlab.java
-@@ -12 +12,5 @@ public class FCBlockDirtSlab extends FCBlockSlab
+@@ -12 +12,5 @@
 -    public static final int m_iNumSubtypes = 4;
 +    public static final int m_iSubtypeBlight = 4;
 +    public static final int m_iSubtypeReserved = 5;
 +    public static final int m_iSubtypeGravel = 6;
 +    public static final int m_iSubtypeSand = 7;
 +    public static final int m_iNumSubtypes = 8;
-@@ -20,0 +25,2 @@ public class FCBlockDirtSlab extends FCBlockSlab
+@@ -20,0 +25,2 @@
 +    private Icon m_IconGravel;
 +    private Icon m_IconSand;
-@@ -143 +149 @@ public class FCBlockDirtSlab extends FCBlockSlab
+@@ -143 +149 @@ public int damageDropped(int var1)
 -        return var2 == 3 ? var2 : 0;
 +        return var2 < 3 ? 0 : var2;
-@@ -148,4 +154 @@ public class FCBlockDirtSlab extends FCBlockSlab
+@@ -148,4 +154 @@ public float GetMovementModifier(World var1, int var2, int var3, int var4)
 -        float var5 = 1.0F;
 -        int var6 = this.GetSubtype(var1, var2, var3, var4);
 -
 -        if (var6 == 3)
 +        switch (this.GetSubtype(var1, var2, var3, var4))
-@@ -153 +156,4 @@ public class FCBlockDirtSlab extends FCBlockSlab
+@@ -153 +156,4 @@ public float GetMovementModifier(World var1, int var2, int var3, int var4)
 -            var5 = 1.2F;
 +            case m_iSubtypePackedEarth:
 +            case m_iSubtypeGravel: return 1.2F;
 +            case m_iSubtypeSand: return 0.8F;
 +            default: return 1.0F;
-@@ -155,2 +160,0 @@ public class FCBlockDirtSlab extends FCBlockSlab
+@@ -155,2 +160,0 @@ public float GetMovementModifier(World var1, int var2, int var3, int var4)
 -
 -        return var5;
-@@ -162 +166,2 @@ public class FCBlockDirtSlab extends FCBlockSlab
+@@ -162 +166,2 @@ public StepSound GetStepSound(World var1, int var2, int var3, int var4)
 -        return var5 != 0 && var5 != 3 ? this.stepSound : soundGravelFootstep;
 +        if (var5 == m_iSubtypeSand) return soundSandFootstep;
 +        return var5 == 1 || var5 == 2 ? this.stepSound : soundGravelFootstep;
-@@ -173 +178 @@ public class FCBlockDirtSlab extends FCBlockSlab
+@@ -173 +178 @@ public void OnBlockDestroyedWithImproperTool(World var1, EntityPlayer var2, int
 -    public boolean canPlaceBlockOnSide(World var1, int var2, int var3, int var4, int var5)
 +    public boolean canPlaceBlockOnSide(World var1, int var2, int var3, int var4, int var5, ItemStack stack)
-@@ -174,0 +180,8 @@ public class FCBlockDirtSlab extends FCBlockSlab
+@@ -174,0 +180,8 @@ public boolean canPlaceBlockOnSide(World var1, int var2, int var3, int var4, int
 +        if (stack.getItemDamage() == m_iSubtypeGravel || stack.getItemDamage() == m_iSubtypeSand)
 +        {
 +            if (this.HasValidAnchorToFacing(var1, var2, var3, var4, 0))
@@ -46,10 +46,10 @@ index 0cf92e2..bd98311 100644
 +            }
 +            return false;
 +        }
-@@ -194,0 +208,2 @@ public class FCBlockDirtSlab extends FCBlockSlab
+@@ -194,0 +208,2 @@ public int onBlockPlaced(World var1, int var2, int var3, int var4, int var5, flo
 +        int subtype = GetSubtypeFromMetadata(var9);
 +        if (subtype == m_iSubtypeGravel || subtype == m_iSubtypeSand) return this.SetIsUpsideDownInMetadata(var9, false);
-@@ -318,0 +334,8 @@ public class FCBlockDirtSlab extends FCBlockSlab
+@@ -318,0 +334,8 @@ private void DropAsPiles(World var1, int var2, int var3, int var4, int var5, flo
 +        else if (var9 == m_iSubtypeGravel)
 +        {
 +            var7 = FCBetterThanWolves.fcItemPileGravel;
@@ -58,13 +58,13 @@ index 0cf92e2..bd98311 100644
 +        {
 +            var7 = FCBetterThanWolves.fcItemPileSand;
 +        }
-@@ -330 +353 @@ public class FCBlockDirtSlab extends FCBlockSlab
+@@ -330 +353 @@ private void DropAsPiles(World var1, int var2, int var3, int var4, int var5, flo
 -    private boolean HasValidAnchorToFacing(World var1, int var2, int var3, int var4, int var5)
 +    public boolean HasValidAnchorToFacing(World var1, int var2, int var3, int var4, int var5)
-@@ -362,0 +386,2 @@ public class FCBlockDirtSlab extends FCBlockSlab
+@@ -362,0 +386,2 @@ public void registerIcons(IconRegister var1)
 +        this.m_IconGravel = var1.registerIcon("gravel");
 +        this.m_IconSand = var1.registerIcon("sand");
-@@ -386 +411,7 @@ public class FCBlockDirtSlab extends FCBlockSlab
+@@ -386 +411,7 @@ public Icon getIcon(int var1, int var2)
 -            return var3 == 3 ? this.m_IconPackedEarth : this.blockIcon;
 +            switch (var3)
 +            {

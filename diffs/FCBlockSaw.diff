@@ -2,7 +2,7 @@ diff --git a/src/minecraft/net/minecraft/src/FCBlockSaw.java b/src/minecraft/net
 index 51f4f33..632d2b7 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockSaw.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockSaw.java
-@@ -575,0 +576,5 @@ public class FCBlockSaw extends Block implements FCIBlock, FCIBlockMechanical, F
+@@ -575,0 +576,5 @@ else if (var10 == Block.stoneSingleSlab.blockID && (var11 & 7) == 2)
 +            else if (var10 == Block.pressurePlateStone.blockID || var10 == Block.pressurePlatePlanks.blockID)
 +            {
 +                return true;

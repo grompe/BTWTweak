@@ -2,10 +2,10 @@ diff --git a/src/minecraft/net/minecraft/src/EntitySkeleton.java b/src/minecraft
 index 310f2c7..89490ec 100644
 --- a/src/minecraft/net/minecraft/src/EntitySkeleton.java
 +++ b/src/minecraft/net/minecraft/src/EntitySkeleton.java
-@@ -141 +141 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
+@@ -141 +141 @@ public void onLivingUpdate()
 -            if (var1 > 0.5F && this.rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F && this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)))
 +            if (var1 > 0.5F && this.rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F && this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY) + 1, MathHelper.floor_double(this.posZ)))
-@@ -232,0 +233,10 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
+@@ -232,0 +233,10 @@ protected void dropFewItems(boolean par1, int par2)
 +
 +        if (this.getSkeletonType() == 1)
 +        {

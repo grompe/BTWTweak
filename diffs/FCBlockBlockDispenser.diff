@@ -2,7 +2,7 @@ diff --git a/src/minecraft/net/minecraft/src/FCBlockBlockDispenser.java b/src/mi
 index 0f0a35e..7629a9d 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockBlockDispenser.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockBlockDispenser.java
-@@ -759,0 +760,10 @@ public class FCBlockBlockDispenser extends BlockContainer implements FCIBlock
+@@ -759,0 +760,10 @@ else if (var17.itemID == Item.snowball.itemID)
 +                                else if (var17.itemID == GPEBTWTweak.gpeItemLooseRock.itemID)
 +                                {
 +                                    var34 = FCUtilsInventory.CountItemsInInventory(var16, var17.itemID, 32767);

@@ -2,5 +2,5 @@ diff --git a/src/minecraft/net/minecraft/src/EntitySheep.java b/src/minecraft/ne
 index 09a8178..2a618e0 100644
 --- a/src/minecraft/net/minecraft/src/EntitySheep.java
 +++ b/src/minecraft/net/minecraft/src/EntitySheep.java
-@@ -329,0 +330 @@ public class EntitySheep extends EntityAnimal
+@@ -329,0 +330 @@ public void eatGrassBonus()
 +            if (!this.worldObj.isRemote) heal(1);

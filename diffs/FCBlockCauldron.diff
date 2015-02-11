@@ -2,6 +2,6 @@ diff --git a/src/minecraft/net/minecraft/src/FCBlockCauldron.java b/src/minecraf
 index b6dc947..db03413 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockCauldron.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockCauldron.java
-@@ -74 +74 @@ public class FCBlockCauldron extends FCBlockCookingVessel
+@@ -74 +74 @@ public boolean RenderBlock(RenderBlocks var1, int var2, int var3, int var4)
 -                float var9 = (float)var8 / 27.0F;
 +                float var9 = (float)var8 / 9.0F;

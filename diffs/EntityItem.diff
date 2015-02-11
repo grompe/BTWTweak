@@ -2,8 +2,8 @@ diff --git a/src/minecraft/net/minecraft/src/EntityItem.java b/src/minecraft/net
 index 4c55875..3cfd4ba 100644
 --- a/src/minecraft/net/minecraft/src/EntityItem.java
 +++ b/src/minecraft/net/minecraft/src/EntityItem.java
-@@ -125 +125 @@ public class EntityItem extends Entity
+@@ -125 +125 @@ public void onUpdate()
 -        if (!this.worldObj.isRemote && this.age >= 6000)
 +        if (!this.worldObj.isRemote && this.age >= 20*60*30)
-@@ -456,0 +457 @@ public class EntityItem extends Entity
+@@ -456,0 +457 @@ protected void doBlockCollisions()
 +                            GPEBTWTweak.onEntityCollidedWithBlock(this.worldObj, var7, var8, var9, this);

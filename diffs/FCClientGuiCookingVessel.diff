@@ -2,16 +2,16 @@ diff --git a/src/minecraft/net/minecraft/src/FCClientGuiCookingVessel.java b/src
 index 323700c..22e4351 100644
 --- a/src/minecraft/net/minecraft/src/FCClientGuiCookingVessel.java
 +++ b/src/minecraft/net/minecraft/src/FCClientGuiCookingVessel.java
-@@ -43 +43 @@ public class FCClientGuiCookingVessel extends GuiContainer
+@@ -43 +43 @@ protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
 -        this.mc.renderEngine.bindTexture("/btwmodtex/fccauldron.png");
 +        this.mc.renderEngine.bindTexture("/btwmodtex/fccauldron_small.png");
-@@ -47 +47,5 @@ public class FCClientGuiCookingVessel extends GuiContainer
+@@ -47 +47,5 @@ protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
 -
 +        int stoked = this.m_AssociatedTileEntity.m_iFireUnderType == 2 ? 1 : 0;
 +        if (stoked == 1)
 +        {
 +            this.drawTexturedModalRect(var4 + 61, var5 + 82, 176, 14, 54, 14);
 +        }
-@@ -51 +55 @@ public class FCClientGuiCookingVessel extends GuiContainer
+@@ -51 +55 @@ protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
 -            this.drawTexturedModalRect(var4 + 81, var5 + 19 + 12 - var6, 176, 12 - var6, 14, var6 + 2);
 +            this.drawTexturedModalRect(var4 + 61, var5 + 82 + 12 - var6, 176, stoked * 28 + 12 - var6, 54, var6 + 2);

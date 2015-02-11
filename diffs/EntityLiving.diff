@@ -2,7 +2,7 @@ diff --git a/src/minecraft/net/minecraft/src/EntityLiving.java b/src/minecraft/n
 index a2a98c4..df2f23d 100644
 --- a/src/minecraft/net/minecraft/src/EntityLiving.java
 +++ b/src/minecraft/net/minecraft/src/EntityLiving.java
-@@ -2871,0 +2872,5 @@ public abstract class EntityLiving extends Entity
+@@ -2871,0 +2872,5 @@ public boolean func_104002_bU()
 +    public void setPersistent()
 +    {
 +        this.persistenceRequired = true;

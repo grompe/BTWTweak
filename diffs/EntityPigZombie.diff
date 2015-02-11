@@ -2,7 +2,7 @@ diff --git a/src/minecraft/net/minecraft/src/EntityPigZombie.java b/src/minecraf
 index 36e4a3d..aedafbd 100644
 --- a/src/minecraft/net/minecraft/src/EntityPigZombie.java
 +++ b/src/minecraft/net/minecraft/src/EntityPigZombie.java
-@@ -233 +233,4 @@ public class EntityPigZombie extends EntityZombie
+@@ -233 +233,4 @@ public void CheckForScrollDrop()
 -    protected void dropHead() {}
 +    protected void dropHead()
 +    {

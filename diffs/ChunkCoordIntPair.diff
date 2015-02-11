@@ -2,7 +2,7 @@ diff --git a/src/minecraft/net/minecraft/src/ChunkCoordIntPair.java b/src/minecr
 index 437b2e1..1861c63 100644
 --- a/src/minecraft/net/minecraft/src/ChunkCoordIntPair.java
 +++ b/src/minecraft/net/minecraft/src/ChunkCoordIntPair.java
-@@ -27,4 +27,3 @@ public class ChunkCoordIntPair
+@@ -27,4 +27,3 @@ public int hashCode()
 -        long var1 = chunkXZ2Int(this.chunkXPos, this.chunkZPos);
 -        int var3 = (int)var1;
 -        int var4 = (int)(var1 >> 32);

@@ -2,16 +2,16 @@ diff --git a/src/minecraft/net/minecraft/src/FCBlockWoodMouldingAndDecorative.ja
 index 9be5ad5..df16e0b 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockWoodMouldingAndDecorative.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockWoodMouldingAndDecorative.java
-@@ -74 +74,3 @@ public class FCBlockWoodMouldingAndDecorative extends FCBlockMouldingAndDecorati
+@@ -74 +74,3 @@ public int GetItemIDDroppedOnSaw(World var1, int var2, int var3, int var4)
 -        return this.IsDecorative(var1, var2, var3, var4) ? super.GetItemIDDroppedOnSaw(var1, var2, var3, var4) : FCBetterThanWolves.fcBlockWoodCornerItemStubID;
 +        int metadata = var1.getBlockMetadata(var2, var3, var4);
 +        if (metadata == 12 || metadata == 13 || metadata == 14) return FCBetterThanWolves.fcBlockWoodMouldingItemStubID;
 +        return FCBetterThanWolves.fcBlockWoodCornerItemStubID;
-@@ -79 +81,3 @@ public class FCBlockWoodMouldingAndDecorative extends FCBlockMouldingAndDecorati
+@@ -79 +81,3 @@ public int GetItemCountDroppedOnSaw(World var1, int var2, int var3, int var4)
 -        return this.IsDecorative(var1, var2, var3, var4) ? super.GetItemCountDroppedOnSaw(var1, var2, var3, var4) : 2;
 +        int metadata = var1.getBlockMetadata(var2, var3, var4);
 +        if (metadata == 13 || metadata == 14 || metadata == 15) return 3;
 +        return 2;
-@@ -85 +89 @@ public class FCBlockWoodMouldingAndDecorative extends FCBlockMouldingAndDecorati
+@@ -85 +89 @@ public int GetItemDamageDroppedOnSaw(World var1, int var2, int var3, int var4)
 -        return IsDecorativeFromMetadata(var5) ? super.GetItemDamageDroppedOnSaw(var1, var2, var3, var4) : this.damageDropped(var5);
 +        return this.damageDropped(var5);

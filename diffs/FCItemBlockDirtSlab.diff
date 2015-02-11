@@ -2,17 +2,17 @@ diff --git a/src/minecraft/net/minecraft/src/FCItemBlockDirtSlab.java b/src/mine
 index 2162b89..5289e83 100644
 --- a/src/minecraft/net/minecraft/src/FCItemBlockDirtSlab.java
 +++ b/src/minecraft/net/minecraft/src/FCItemBlockDirtSlab.java
-@@ -28,0 +29,6 @@ public class FCItemBlockDirtSlab extends FCItemBlockSlab
+@@ -28,0 +29,6 @@ public String getUnlocalizedName(ItemStack var1)
 +            case FCBlockDirtSlab.m_iSubtypeGravel:
 +                return super.getUnlocalizedName() + "." + "gravel";
 +
 +            case FCBlockDirtSlab.m_iSubtypeSand:
 +                return super.getUnlocalizedName() + "." + "sand";
 +
-@@ -42 +48 @@ public class FCItemBlockDirtSlab extends FCItemBlockSlab
+@@ -42 +48 @@ public boolean canCombineWithBlock(World var1, int var2, int var3, int var4, int
 -            if (var7 != 3 && var5 != 3)
 +            if (var7 < 3 && var5 < 3)
-@@ -72,0 +79,8 @@ public class FCItemBlockDirtSlab extends FCItemBlockSlab
+@@ -72,0 +79,8 @@ public boolean convertToFullBlock(World var1, int var2, int var3, int var4)
 +            else if (var8 == FCBlockDirtSlab.m_iSubtypeGravel)
 +            {
 +                var9 = Block.gravel.blockID;

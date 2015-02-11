@@ -2,40 +2,40 @@ diff --git a/src/minecraft/net/minecraft/src/FCContainerCookingVessel.java b/src
 index 5b0a602..fb06e5f 100644
 --- a/src/minecraft/net/minecraft/src/FCContainerCookingVessel.java
 +++ b/src/minecraft/net/minecraft/src/FCContainerCookingVessel.java
-@@ -8,2 +8,2 @@ public class FCContainerCookingVessel extends Container
+@@ -8,2 +8,2 @@
 -    private final int m_iNumSlotColumns = 9;
 -    private final int m_iNumSlots = 27;
 +    private final int m_iNumSlotColumns = 3;
 +    private final int m_iNumSlots = 9;
-@@ -11,0 +12 @@ public class FCContainerCookingVessel extends Container
+@@ -11,0 +12 @@
 +    private int m_iLastFireUnderType;
-@@ -16,0 +18 @@ public class FCContainerCookingVessel extends Container
+@@ -16,0 +18 @@ public FCContainerCookingVessel(IInventory var1, FCTileEntityCookingVessel var2)
 +        this.m_iLastFireUnderType = 0;
-@@ -22 +24 @@ public class FCContainerCookingVessel extends Container
+@@ -22 +24 @@ public FCContainerCookingVessel(IInventory var1, FCTileEntityCookingVessel var2)
 -            for (var4 = 0; var4 < 9; ++var4)
 +            for (var4 = 0; var4 < 3; ++var4)
-@@ -24 +26 @@ public class FCContainerCookingVessel extends Container
+@@ -24 +26 @@ public FCContainerCookingVessel(IInventory var1, FCTileEntityCookingVessel var2)
 -                this.addSlotToContainer(new Slot(var2, var4 + var3 * 9, 8 + var4 * 18, 43 + var3 * 18));
 +                this.addSlotToContainer(new Slot(var2, var4 + var3 * 3, 62 + var4 * 18, 17 + var3 * 18));
-@@ -67 +69 @@ public class FCContainerCookingVessel extends Container
+@@ -67 +69 @@ public ItemStack transferStackInSlot(EntityPlayer var1, int var2)
 -            if (var2 < 27)
 +            if (var2 < m_iNumSlots)
-@@ -69 +71 @@ public class FCContainerCookingVessel extends Container
+@@ -69 +71 @@ public ItemStack transferStackInSlot(EntityPlayer var1, int var2)
 -                if (!this.mergeItemStack(var5, 27, this.inventorySlots.size(), true))
 +                if (!this.mergeItemStack(var5, m_iNumSlots, this.inventorySlots.size(), true))
-@@ -74 +76 @@ public class FCContainerCookingVessel extends Container
+@@ -74 +76 @@ public ItemStack transferStackInSlot(EntityPlayer var1, int var2)
 -            else if (!this.mergeItemStack(var5, 0, 27, false))
 +            else if (!this.mergeItemStack(var5, 0, m_iNumSlots, false))
-@@ -95,0 +98 @@ public class FCContainerCookingVessel extends Container
+@@ -95,0 +98 @@ public void addCraftingToCrafters(ICrafting var1)
 +        var1.sendProgressBarUpdate(this, 1, this.m_AssociatedTileEntity.m_iFireUnderType);
-@@ -113,0 +117,4 @@ public class FCContainerCookingVessel extends Container
+@@ -113,0 +117,4 @@ public void detectAndSendChanges()
 +            if (this.m_iLastFireUnderType != this.m_AssociatedTileEntity.m_iFireUnderType)
 +            {
 +                var2.sendProgressBarUpdate(this, 1, this.m_AssociatedTileEntity.m_iFireUnderType);
 +            }
-@@ -116,0 +124 @@ public class FCContainerCookingVessel extends Container
+@@ -116,0 +124 @@ public void detectAndSendChanges()
 +        this.m_iLastFireUnderType = this.m_AssociatedTileEntity.m_iFireUnderType;
-@@ -124,0 +133,4 @@ public class FCContainerCookingVessel extends Container
+@@ -124,0 +133,4 @@ public void updateProgressBar(int var1, int var2)
 +        if (var1 == 1)
 +        {
 +            this.m_AssociatedTileEntity.m_iFireUnderType = var2;

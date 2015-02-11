@@ -2,13 +2,13 @@ diff --git a/src/minecraft/net/minecraft/src/FCBlockTurntable.java b/src/minecra
 index ec88d64..f453d22 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockTurntable.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockTurntable.java
-@@ -248 +248 @@ public class FCBlockTurntable extends BlockContainer implements FCIBlockMechanic
+@@ -248 +248 @@ private void BreakTurntable(World var1, int var2, int var3, int var4)
 -        FCUtilsItem.EjectSingleItemWithRandomOffset(var1, var2, var3, var4, Item.redstone.itemID, 0);
 +        FCUtilsItem.EjectSingleItemWithRandomOffset(var1, var2, var3, var4, Item.pocketSundial.itemID, 0);
-@@ -251 +251 @@ public class FCBlockTurntable extends BlockContainer implements FCIBlockMechanic
+@@ -251 +251 @@ private void BreakTurntable(World var1, int var2, int var3, int var4)
 -        for (var5 = 0; var5 < 4; ++var5)
 +        for (var5 = 0; var5 < 2; ++var5)
-@@ -309,0 +310,10 @@ public class FCBlockTurntable extends BlockContainer implements FCIBlockMechanic
+@@ -309,0 +310,10 @@ public boolean shouldSideBeRendered(IBlockAccess var1, int var2, int var3, int v
 +    public int getVisualSpin(RenderBlocks var1, int var2, int var3, int var4)
 +    {
 +        TileEntity te = var1.blockAccess.getBlockTileEntity(var2, var3, var4);
@@ -19,7 +19,7 @@ index ec88d64..f453d22 100644
 +        return 0;
 +    }
 +    
-@@ -311,0 +322 @@ public class FCBlockTurntable extends BlockContainer implements FCIBlockMechanic
+@@ -311,0 +322 @@ public boolean RenderBlock(RenderBlocks var1, int var2, int var3, int var4)
 +        var1.SetUvRotateTop(getVisualSpin(var1, var2, var3, var4));
-@@ -312,0 +324 @@ public class FCBlockTurntable extends BlockContainer implements FCIBlockMechanic
+@@ -312,0 +324 @@ public boolean RenderBlock(RenderBlocks var1, int var2, int var3, int var4)
 +        var1.SetUvRotateTop(0);

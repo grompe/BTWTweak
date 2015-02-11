@@ -2,19 +2,19 @@ diff --git a/src/minecraft/net/minecraft/src/FCTileEntityCookingVessel.java b/sr
 index 9c70521..40900ab 100644
 --- a/src/minecraft/net/minecraft/src/FCTileEntityCookingVessel.java
 +++ b/src/minecraft/net/minecraft/src/FCTileEntityCookingVessel.java
-@@ -7 +7 @@ public abstract class FCTileEntityCookingVessel extends TileEntity implements II
+@@ -7 +7 @@
 -    protected final int m_iInventorySize = 27;
 +    protected final int m_iInventorySize = 9;
-@@ -15 +15 @@ public abstract class FCTileEntityCookingVessel extends TileEntity implements II
+@@ -15 +15 @@
 -    protected ItemStack[] m_Contents = new ItemStack[27];
 +    protected ItemStack[] m_Contents = new ItemStack[m_iInventorySize];
-@@ -148 +148 @@ public abstract class FCTileEntityCookingVessel extends TileEntity implements II
+@@ -148 +148 @@ else if (this.m_iStokedCooldownCounter > 0)
 -                        this.m_iCookCounter = 0;
 +                        this.m_iCookCounter = Math.max(this.m_iCookCounter - 24, 0);
-@@ -184 +184 @@ public abstract class FCTileEntityCookingVessel extends TileEntity implements II
+@@ -184 +184 @@ public int getSizeInventory()
 -        return 27;
 +        return m_iInventorySize;
-@@ -191,0 +192 @@ public abstract class FCTileEntityCookingVessel extends TileEntity implements II
+@@ -191,0 +192 @@ public ItemStack getStackInSlot(int var1)
 +        if (var1 >= m_iInventorySize) return null;
-@@ -226,0 +228 @@ public abstract class FCTileEntityCookingVessel extends TileEntity implements II
+@@ -226,0 +228 @@ public void setInventorySlotContents(int var1, ItemStack var2)
 +        if (var1 >= m_iInventorySize) return;

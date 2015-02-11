@@ -2,15 +2,15 @@ diff --git a/src/minecraft/net/minecraft/src/TileEntityFurnace.java b/src/minecr
 index f28d825..80500ad 100644
 --- a/src/minecraft/net/minecraft/src/TileEntityFurnace.java
 +++ b/src/minecraft/net/minecraft/src/TileEntityFurnace.java
-@@ -20,0 +21,2 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
+@@ -20,0 +21,2 @@
 +    public int currentItemID = 0;
 +    public boolean emptyResultSlot = false;
-@@ -273 +275,3 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
+@@ -273 +275,3 @@ public void updateEntity()
 -            if (this.isBurning() && this.canSmelt())
 +            boolean shouldUpdate = checkForChange();
 +
 +            if (this.isBurning() && this.canSmelt() && (this.furnaceItemStacks[0].itemID == this.currentItemID))
-@@ -286 +290,9 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
+@@ -286 +290,9 @@ public void updateEntity()
 -                this.furnaceCookTime = 0;
 +                if (this.canSmelt() && (this.furnaceItemStacks[0].itemID == this.currentItemID))
 +                {
@@ -21,7 +21,7 @@ index f28d825..80500ad 100644
 +                    setCurrentItemID();
 +                    this.furnaceCookTime = 0;
 +                }
-@@ -292 +304,6 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
+@@ -292 +304,6 @@ public void updateEntity()
 -                BlockFurnace.updateFurnaceBlockState(this.furnaceBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
 +                shouldUpdate = true;
 +            }
@@ -29,7 +29,7 @@ index f28d825..80500ad 100644
 +            if (shouldUpdate)
 +            {
 +                BlockFurnace.updateFurnaceBlockState(this.furnaceBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord, this.furnaceItemStacks[0] != null || this.furnaceItemStacks[2] != null);
-@@ -301,0 +319,22 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
+@@ -301,0 +319,22 @@ public void updateEntity()
 +    private boolean checkForChange()
 +    {
 +        boolean shouldUpdate = false;

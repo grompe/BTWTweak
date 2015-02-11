@@ -2,6 +2,6 @@ diff --git a/src/minecraft/net/minecraft/src/GuiOptions.java b/src/minecraft/net
 index 6248138..9769a60 100644
 --- a/src/minecraft/net/minecraft/src/GuiOptions.java
 +++ b/src/minecraft/net/minecraft/src/GuiOptions.java
-@@ -93 +93 @@ public class GuiOptions extends GuiScreen
+@@ -93 +93 @@ protected void actionPerformed(GuiButton par1GuiButton)
 -                this.mc.displayGuiScreen(new GuiControls(this, this.options));
 +                this.mc.displayGuiScreen(new GPEGuiControls(this, this.options));

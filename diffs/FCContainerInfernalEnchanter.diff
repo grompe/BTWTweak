@@ -2,21 +2,21 @@ diff --git a/src/minecraft/net/minecraft/src/FCContainerInfernalEnchanter.java b
 index 652c056..f60f3f3 100644
 --- a/src/minecraft/net/minecraft/src/FCContainerInfernalEnchanter.java
 +++ b/src/minecraft/net/minecraft/src/FCContainerInfernalEnchanter.java
-@@ -289 +289 @@ public class FCContainerInfernalEnchanter extends Container
+@@ -289 +289 @@ private void ComputeCurrentEnchantmentLevels()
 -                    if (this.IsEnchantmentAppropriateForItem(var4, var2) && !this.DoesEnchantmentConflictWithExistingOnes(var4, var2))
 +                    if (!this.IsEnchantmentValid(var4) || (this.IsEnchantmentAppropriateForItem(var4, var2) && !this.DoesEnchantmentConflictWithExistingOnes(var4, var2)))
-@@ -290,0 +291 @@ public class FCContainerInfernalEnchanter extends Container
+@@ -290,0 +291 @@ private void ComputeCurrentEnchantmentLevels()
 +                        if (!this.IsEnchantmentValid(var4)) var4 = Enchantment.unbreaking.effectId;
-@@ -319,0 +321,5 @@ public class FCContainerInfernalEnchanter extends Container
+@@ -319,0 +321,5 @@ private int GetMaximumNumberOfEnchantments(ItemStack var1)
 +    private boolean IsEnchantmentValid(int i)
 +    {
 +        return i < Enchantment.enchantmentsList.length && Enchantment.enchantmentsList[i] != null;
 +    }
 +
-@@ -322 +328 @@ public class FCContainerInfernalEnchanter extends Container
+@@ -322 +328 @@ private boolean IsEnchantmentAppropriateForItem(int var1, ItemStack var2)
 -        return Enchantment.enchantmentsList[var1].canApply(var2);
 +        return IsEnchantmentValid(var1) && Enchantment.enchantmentsList[var1].canApply(var2);
-@@ -381 +387,8 @@ public class FCContainerInfernalEnchanter extends Container
+@@ -381 +387,8 @@ public boolean enchantItem(EntityPlayer var1, int var2)
 -                            var6.addEnchantment(Enchantment.enchantmentsList[var7], var2 + 1);
 +                            if (this.IsEnchantmentValid(var7))
 +                            {

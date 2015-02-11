@@ -2,13 +2,13 @@ diff --git a/src/minecraft/net/minecraft/client/Minecraft.java b/src/minecraft/n
 index 60d1a40..51fea38 100644
 --- a/src/minecraft/net/minecraft/client/Minecraft.java
 +++ b/src/minecraft/net/minecraft/client/Minecraft.java
-@@ -54,0 +55,2 @@ import net.minecraft.src.GameWindowListener;
+@@ -54,0 +55,2 @@
 +import net.minecraft.src.GPEBTWTweak;
 +import net.minecraft.src.GPEBTWTweakProxyClient;
-@@ -471,0 +474,2 @@ public abstract class Minecraft implements Runnable, IPlayerUsage
+@@ -471,0 +474,2 @@ else if (this.fullscreen)
 +
 +        GPEBTWTweak.readyForInput();
-@@ -1622,0 +1627 @@ public abstract class Minecraft implements Runnable, IPlayerUsage
+@@ -1622,0 +1627 @@ else if (Keyboard.isKeyDown(46) && Keyboard.isKeyDown(61))
 +                            GPEBTWTweak.onKeyPress(Keyboard.getEventKey());
-@@ -2261,0 +2267 @@ public abstract class Minecraft implements Runnable, IPlayerUsage
+@@ -2261,0 +2267 @@ else if (var10.equals("--password") && var11 != null)
 +        GPEBTWTweakProxyClient.setAppIcon(var17);

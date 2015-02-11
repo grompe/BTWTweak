@@ -2,8 +2,8 @@ diff --git a/src/minecraft/net/minecraft/src/AnvilChunkLoader.java b/src/minecra
 index 885046e..e832e60 100644
 --- a/src/minecraft/net/minecraft/src/AnvilChunkLoader.java
 +++ b/src/minecraft/net/minecraft/src/AnvilChunkLoader.java
-@@ -84,0 +85,2 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
+@@ -84,0 +85,2 @@ else if (!par4NBTTagCompound.getCompoundTag("Level").hasKey("Sections"))
 +            GPEBTWTweak.onLoadChunk(par1World, var5);
 +
-@@ -106,0 +109 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
+@@ -106,0 +109 @@ public void saveChunk(World par1World, Chunk par2Chunk) throws MinecraftExceptio
 +            GPEBTWTweak.onSaveChunk(par1World, par2Chunk);

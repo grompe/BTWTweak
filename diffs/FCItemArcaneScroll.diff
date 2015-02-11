@@ -2,7 +2,7 @@ diff --git a/src/minecraft/net/minecraft/src/FCItemArcaneScroll.java b/src/minec
 index d8b4020..12daf45 100644
 --- a/src/minecraft/net/minecraft/src/FCItemArcaneScroll.java
 +++ b/src/minecraft/net/minecraft/src/FCItemArcaneScroll.java
-@@ -25 +25,7 @@ public class FCItemArcaneScroll extends Item
+@@ -25 +25,7 @@ public void addInformation(ItemStack var1, EntityPlayer var2, List var3, boolean
 -        var3.add(StatCollector.translateToLocal(Enchantment.enchantmentsList[var1.getItemDamage()].getName()));
 +        int i = var1.getItemDamage();
 +        if (i >= Enchantment.enchantmentsList.length || Enchantment.enchantmentsList[i] == null)
