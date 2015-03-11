@@ -27,6 +27,8 @@ v0.9c
 - Renamed Haste enchantment on boots to Velocity, not to confuse with the
   Haste beacon which increases mining speed.
 
+- Made loose rocks to cobblestone recipe shapeless
+
 v0.9b
 
 - Added a whole bunch of items to regain renaming feature:
