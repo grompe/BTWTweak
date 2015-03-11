@@ -29,6 +29,8 @@ v0.9c
 
 - Made loose rocks to cobblestone recipe shapeless
 
+- Added loose rocks and ender pearls to piston Hardcore Packing
+
 v0.9b
 
 - Added a whole bunch of items to regain renaming feature:

@@ -51,4 +51,19 @@ public class GPEItemLooseRock extends Item
     }
     return true;
   }
+
+  public boolean IsPistonPackable(ItemStack stack)
+  {
+    return true;
+  }
+
+  public int GetRequiredItemCountToPistonPack(ItemStack stack)
+  {
+    return 4;
+  }
+
+  public int GetResultingBlockIDOnPistonPack(ItemStack stack)
+  {
+    return Block.cobblestone.blockID;
+  }
 }

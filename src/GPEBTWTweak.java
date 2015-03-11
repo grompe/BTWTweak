@@ -210,6 +210,7 @@ public class GPEBTWTweak extends FCAddOn
     Item.coal = new GPEItemCoal(7);
     Item.pickaxeWood = (new GPEItemPickaxeWeak(14, EnumToolMaterial.WOOD)).setUnlocalizedName("pickaxeWood");
     Item.pickaxeStone = (new GPEItemPickaxeWeak(18, EnumToolMaterial.STONE)).setUnlocalizedName("pickaxeStone");
+    Item.enderPearl = new GPEItemEnderPearl(112);
     Item.m_bSuppressConflictWarnings = false;
 
     int id = FCBetterThanWolves.fcAestheticOpaque.blockID;
