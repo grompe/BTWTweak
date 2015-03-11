@@ -24,6 +24,9 @@ v0.9c
 
 - Fixed /playtime command for multiplayer
 
+- Renamed Haste enchantment on boots to Velocity, not to confuse with the
+  Haste beacon which increases mining speed.
+
 v0.9b
 
 - Added a whole bunch of items to regain renaming feature:

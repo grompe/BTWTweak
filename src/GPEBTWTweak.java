@@ -608,7 +608,7 @@ public class GPEBTWTweak extends FCAddOn
     }
     t.put(gpeBlockRustedRail.getUnlocalizedName() + ".name", "Rusted Rail");
     t.put(gpeBlockRename.getUnlocalizedName() + ".name", "Writing Table");
-    t.put("enchantment.haste", "Haste");
+    t.put("enchantment.haste", "Velocity");
     t.put("container.rename", "Write Tags & Name");
     t.put("key.sprint", "Sprint");
   }
