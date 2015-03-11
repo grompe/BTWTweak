@@ -20,7 +20,9 @@ v0.9c
 
 - Added some visual explanation to Gloom.
 
-- Fixed writing table causing crash when used simultaneously in multiplayer.
+- Fixed writing table causing crash when used simultaneously in multiplayer
+
+- Fixed /playtime command for multiplayer
 
 v0.9b
 
