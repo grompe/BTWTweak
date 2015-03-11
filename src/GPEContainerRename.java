@@ -148,9 +148,10 @@ public class GPEContainerRename extends Container
 
   public void onResultTaken()
   {
-    tile.setInventorySlotContents(0, (ItemStack)null);
     ItemStack stackInk = tile.getStackInSlot(1);
     ItemStack stackPaper = tile.getStackInSlot(2);
+    if (stackInk == null || stackPaper == null) return;
+    tile.setInventorySlotContents(0, (ItemStack)null);
     int newDamage = stackInk.getItemDamage() + 1;
     stackInk.setItemDamage(newDamage);
     if (newDamage >= stackInk.getMaxDamage()) tile.setInventorySlotContents(1, (ItemStack)null);

@@ -20,6 +20,8 @@ v0.9c
 
 - Added some visual explanation to Gloom.
 
+- Fixed writing table causing crash when used simultaneously in multiplayer.
+
 v0.9b
 
 - Added a whole bunch of items to regain renaming feature:
