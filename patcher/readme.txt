@@ -18,6 +18,8 @@ v0.9c
 - Fix FC's oversight that caused mycelium and huge mushroom blocks display
   swirling True Sight particles, even though mobs cannot spawn on them
 
+- Added some visual explanation to Gloom.
+
 v0.9b
 
 - Added a whole bunch of items to regain renaming feature:

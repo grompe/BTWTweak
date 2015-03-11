@@ -1,0 +1,57 @@
+diff --git a/src/minecraft/net/minecraft/src/GuiIngame.java b/src/minecraft/net/minecraft/src/GuiIngame.java
+index 1e4b83e..b44c2ff 100644
+--- a/src/minecraft/net/minecraft/src/GuiIngame.java
++++ b/src/minecraft/net/minecraft/src/GuiIngame.java
+@@ -37,0 +38,2 @@
++    private int gloomCounter = 0;
++
+@@ -70,0 +73,2 @@ public void renderGameOverlay(float par1, boolean par2, int par3, int par4)
++        checkForGloomRender(var6, var7);
++
+@@ -898,0 +903,46 @@ private void renderEnderSpectaclesBlur(int var1, int var2)
++    private void checkForGloomRender(int width, int height)
++    {
++        if (!this.mc.isGamePaused)
++        {
++            int gloomLevel = this.mc.thePlayer.GetGloomLevel();
++            if (gloomLevel > 0)
++            {
++                gloomCounter++;
++            }
++            if (gloomCounter > 0)
++            {
++                if (this.mc.gameSettings.thirdPersonView == 0)
++                {
++                    this.renderGloomBlur(width, height, gloomCounter);
++                }
++                if (gloomLevel <= 0)
++                {
++                    gloomCounter = Math.min(gloomCounter - 2, 140);
++                }
++            }
++        }
++    }
++    
++    private void renderGloomBlur(int var1, int var2, int counter)
++    {
++        float alpha = ((float)counter) / 100.0F;
++        if (alpha > 1.0F) alpha = 1.0F;
++        GL11.glDisable(GL11.GL_DEPTH_TEST);
++        GL11.glDepthMask(false);
++        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
++        GL11.glColor4f(1.0F, 1.0F, 1.0F, alpha);
++        GL11.glDisable(GL11.GL_ALPHA_TEST);
++        this.mc.renderEngine.bindTexture("%blur%/btwmodtex/gloomblur.png");
++        Tessellator t = Tessellator.instance;
++        t.startDrawingQuads();
++        t.addVertexWithUV(0.0D, (double)var2, -90.0D, 0.0D, 1.0D);
++        t.addVertexWithUV((double)var1, (double)var2, -90.0D, 1.0D, 1.0D);
++        t.addVertexWithUV((double)var1, 0.0D, -90.0D, 1.0D, 0.0D);
++        t.addVertexWithUV(0.0D, 0.0D, -90.0D, 0.0D, 0.0D);
++        t.draw();
++        GL11.glDepthMask(true);
++        GL11.glEnable(GL11.GL_DEPTH_TEST);
++        GL11.glEnable(GL11.GL_ALPHA_TEST);
++        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
++    }
++

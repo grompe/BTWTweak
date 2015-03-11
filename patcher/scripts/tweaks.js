@@ -502,6 +502,194 @@ function getObjProperty(n, propname)
         }
       }
     },
+    "aww": // GuiIngame
+    {
+      tweakClientMethods:
+      {
+        "<init>(Lnet/minecraft/client/Minecraft;)V": function(mn)
+        {
+          check(mn, 0x23BA0E5C);
+          CodeInserter(
+            BeginningFinder(),
+            [
+              VarInsnNode(ALOAD, 0),
+              InsnNode(ICONST_0),
+              FieldInsnNode(PUTFIELD, "aww", "gloomCounter", "I"),
+            ],
+            "\t* Adding new vars init to ingame GUI in ",
+            INSERT_BEFORE
+          ).process(mn);
+        },
+        "a(FZII)V": function(mn)
+        {
+          check(mn, 0x995D1671);
+          CodeInserter(
+            MethodInsnFinder("so", +1),
+            [
+              VarInsnNode(ALOAD, 0),
+              VarInsnNode(ILOAD, 6),
+              VarInsnNode(ILOAD, 7),
+              MethodInsnNode(INVOKESPECIAL, "aww", "checkForGloomRender", "(II)V"),
+            ],
+            "\t* Inserting checkForGloomRender() into "
+          ).process(mn);
+        },
+      },
+      add: function(cn)
+      {
+        if (!onClient()) return;
+        cn.fields.add(FieldNode(ACC_PRIVATE, "gloomCounter", "I", null, null));
+
+        var mn = MethodNode(ACC_PRIVATE, "checkForGloomRender", "(II)V", null, null);
+        var l0 = LabelNode();
+        var l1 = LabelNode();
+        var l2 = LabelNode();
+        mn.instructions.add(toInsnList(
+          [
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "aww", "d", "Lnet/minecraft/client/Minecraft;"),
+            FieldInsnNode(GETFIELD, "net/minecraft/client/Minecraft", "o", "Z"),
+            JumpInsnNode(IFNE, l0),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "aww", "d", "Lnet/minecraft/client/Minecraft;"),
+            FieldInsnNode(GETFIELD, "net/minecraft/client/Minecraft", "g", "Lbdv;"),
+            MethodInsnNode(INVOKEVIRTUAL, "bdv", "GetGloomLevel", "()I"),
+            VarInsnNode(ISTORE, 3),
+            VarInsnNode(ILOAD, 3),
+            JumpInsnNode(IFLE, l1),
+            VarInsnNode(ALOAD, 0),
+            InsnNode(DUP),
+            FieldInsnNode(GETFIELD, "aww", "gloomCounter", "I"),
+            InsnNode(ICONST_1),
+            InsnNode(IADD),
+            FieldInsnNode(PUTFIELD, "aww", "gloomCounter", "I"),
+            l1,
+            FrameNode(F_APPEND, 1, [INTEGER], 0, null),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "aww", "gloomCounter", "I"),
+            JumpInsnNode(IFLE, l0),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "aww", "d", "Lnet/minecraft/client/Minecraft;"),
+            FieldInsnNode(GETFIELD, "net/minecraft/client/Minecraft", "z", "Lavy;"),
+            FieldInsnNode(GETFIELD, "avy", "aa", "I"),
+            JumpInsnNode(IFNE, l2),
+            VarInsnNode(ALOAD, 0),
+            VarInsnNode(ILOAD, 1),
+            VarInsnNode(ILOAD, 2),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "aww", "gloomCounter", "I"),
+            MethodInsnNode(INVOKESPECIAL, "aww", "renderGloomBlur", "(III)V"),
+            l2,
+            FrameNode(F_SAME, 0, null, 0, null),
+            VarInsnNode(ILOAD, 3),
+            JumpInsnNode(IFGT, l0),
+            VarInsnNode(ALOAD, 0),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "aww", "gloomCounter", "I"),
+            InsnNode(ICONST_2),
+            InsnNode(ISUB),
+            IntInsnNode(SIPUSH, 140),
+            MethodInsnNode(INVOKESTATIC, "java/lang/Math", "min", "(II)I"),
+            FieldInsnNode(PUTFIELD, "aww", "gloomCounter", "I"),
+            l0,
+            FrameNode(F_CHOP, 1, null, 0, null),
+            InsnNode(RETURN),
+          ]
+        ));
+        cn.methods.add(mn);
+        mn = MethodNode(ACC_PRIVATE, "renderGloomBlur", "(III)V", null, null);
+        var l3 = LabelNode();
+        mn.instructions.add(toInsnList(
+          [
+            VarInsnNode(ILOAD, 3),
+            InsnNode(I2F),
+            LdcInsnNode(Float("100.0")),
+            InsnNode(FDIV),
+            VarInsnNode(FSTORE, 4),
+            VarInsnNode(FLOAD, 4),
+            InsnNode(FCONST_1),
+            InsnNode(FCMPL),
+            JumpInsnNode(IFLE, l3),
+            InsnNode(FCONST_1),
+            VarInsnNode(FSTORE, 4),
+            l3,
+            FrameNode(F_APPEND, 1, [FLOAT], 0, null),
+            IntInsnNode(SIPUSH, 2929),
+            MethodInsnNode(INVOKESTATIC, "org/lwjgl/opengl/GL11", "glDisable", "(I)V"),
+            InsnNode(ICONST_0),
+            MethodInsnNode(INVOKESTATIC, "org/lwjgl/opengl/GL11", "glDepthMask", "(Z)V"),
+            IntInsnNode(SIPUSH, 770),
+            IntInsnNode(SIPUSH, 771),
+            MethodInsnNode(INVOKESTATIC, "org/lwjgl/opengl/GL11", "glBlendFunc", "(II)V"),
+            InsnNode(FCONST_1),
+            InsnNode(FCONST_1),
+            InsnNode(FCONST_1),
+            VarInsnNode(FLOAD, 4),
+            MethodInsnNode(INVOKESTATIC, "org/lwjgl/opengl/GL11", "glColor4f", "(FFFF)V"),
+            IntInsnNode(SIPUSH, 3008),
+            MethodInsnNode(INVOKESTATIC, "org/lwjgl/opengl/GL11", "glDisable", "(I)V"),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "aww", "d", "Lnet/minecraft/client/Minecraft;"),
+            FieldInsnNode(GETFIELD, "net/minecraft/client/Minecraft", "p", "Lbge;"),
+            LdcInsnNode("%blur%/btwmodtex/gloomblur.png"),
+            MethodInsnNode(INVOKEVIRTUAL, "bge", "b", "(Ljava/lang/String;)V"),
+            FieldInsnNode(GETSTATIC, "bgd", "a", "Lbgd;"),
+            VarInsnNode(ASTORE, 5),
+            VarInsnNode(ALOAD, 5),
+            MethodInsnNode(INVOKEVIRTUAL, "bgd", "b", "()V"),
+            VarInsnNode(ALOAD, 5),
+            InsnNode(DCONST_0),
+            VarInsnNode(ILOAD, 2),
+            InsnNode(I2D),
+            LdcInsnNode(Double("-90.0")),
+            InsnNode(DCONST_0),
+            InsnNode(DCONST_1),
+            MethodInsnNode(INVOKEVIRTUAL, "bgd", "a", "(DDDDD)V"),
+            VarInsnNode(ALOAD, 5),
+            VarInsnNode(ILOAD, 1),
+            InsnNode(I2D),
+            VarInsnNode(ILOAD, 2),
+            InsnNode(I2D),
+            LdcInsnNode(Double("-90.0")),
+            InsnNode(DCONST_1),
+            InsnNode(DCONST_1),
+            MethodInsnNode(INVOKEVIRTUAL, "bgd", "a", "(DDDDD)V"),
+            VarInsnNode(ALOAD, 5),
+            VarInsnNode(ILOAD, 1),
+            InsnNode(I2D),
+            InsnNode(DCONST_0),
+            LdcInsnNode(Double("-90.0")),
+            InsnNode(DCONST_1),
+            InsnNode(DCONST_0),
+            MethodInsnNode(INVOKEVIRTUAL, "bgd", "a", "(DDDDD)V"),
+            VarInsnNode(ALOAD, 5),
+            InsnNode(DCONST_0),
+            InsnNode(DCONST_0),
+            LdcInsnNode(Double("-90.0")),
+            InsnNode(DCONST_0),
+            InsnNode(DCONST_0),
+            MethodInsnNode(INVOKEVIRTUAL, "bgd", "a", "(DDDDD)V"),
+            VarInsnNode(ALOAD, 5),
+            MethodInsnNode(INVOKEVIRTUAL, "bgd", "a", "()I"),
+            InsnNode(POP),
+            InsnNode(ICONST_1),
+            MethodInsnNode(INVOKESTATIC, "org/lwjgl/opengl/GL11", "glDepthMask", "(Z)V"),
+            IntInsnNode(SIPUSH, 2929),
+            MethodInsnNode(INVOKESTATIC, "org/lwjgl/opengl/GL11", "glEnable", "(I)V"),
+            IntInsnNode(SIPUSH, 3008),
+            MethodInsnNode(INVOKESTATIC, "org/lwjgl/opengl/GL11", "glEnable", "(I)V"),
+            InsnNode(FCONST_1),
+            InsnNode(FCONST_1),
+            InsnNode(FCONST_1),
+            InsnNode(FCONST_1),
+            MethodInsnNode(INVOKESTATIC, "org/lwjgl/opengl/GL11", "glColor4f", "(FFFF)V"),
+            InsnNode(RETURN),
+          ]
+        ));
+        cn.methods.add(mn);
+        log("Class " + cn.name + ": \t+ Adding gloom render to ingame GUI");
+      },
+    },
     "anf": // BlockFlowing
     {
       tweakMethods:
