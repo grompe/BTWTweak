@@ -33,6 +33,13 @@ v0.9ca
 
 - Made sign posts accept unicode characters
 
+- Improved font display for latin and cyrillic scripts when unicode font
+  is chosen. That includes a fix for wider characters.
+
+- Patcher now looks in its own directory in addition to
+  "current working directory", as on some configurations the latter was
+  defaulting to a wrong place.
+
 v0.9b
 
 - Added a whole bunch of items to regain renaming feature:

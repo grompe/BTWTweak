@@ -2,6 +2,7 @@ import java.io.*;
 import java.lang.reflect.*;
 import java.util.*;
 import java.util.zip.*;
+import java.net.*;
 //import javax.swing.JOptionPane;
 
 public class CliPatcher
@@ -36,7 +37,7 @@ public class CliPatcher
     }
 
     System.out.println("== Grom PE's BTWTweak patcher ==");
-    System.out.println("Built on: 11 Sep 2013");
+    System.out.println("Built on: 13 Mar 2015");
     System.out.println("Current directory: " + System.getProperty("user.dir"));
 
     ArrayList<String> btwVersions = new ArrayList<String>();
@@ -65,7 +66,15 @@ public class CliPatcher
 
     if (mcbtwclient != BTWTweaker.STATUS_BTWCLIENT)
     {
-      // TODO: look in appdata, etc.
+      // In case current directory is messed up, force search in BTWTweak.jar directory
+      mcname = getJarDir() + "/minecraft.jar";
+      System.out.println("BTWTweak.jar directory: " + getJarDir());
+
+      if ((new File(mcname)).exists())
+      {
+        mcbtwclient = BTWTweaker.checkClientServerBTWZip(mcname);
+        mcstatus = "found in same as BTWTweak.jar directory with " + BTWTweaker.explainStatus(mcbtwclient);
+      }
     }
 
     System.out.println("minecraft.jar: " + mcstatus);
@@ -78,6 +87,18 @@ public class CliPatcher
     {
       mcbtwserver = BTWTweaker.checkClientServerBTWZip(mcservername);
       mcstatus = "found in current directory with " + BTWTweaker.explainStatus(mcbtwserver);
+    }
+
+    if (mcbtwserver != BTWTweaker.STATUS_BTWSERVER)
+    {
+      // In case current directory is messed up, force search in BTWTweak.jar directory
+      mcservername = getJarDir() + "/minecraft_server.jar";
+
+      if ((new File(mcservername)).exists())
+      {
+        mcbtwserver = BTWTweaker.checkClientServerBTWZip(mcservername);
+        mcstatus = "found in same as BTWTweak.jar directory with " + BTWTweaker.explainStatus(mcbtwserver);
+      }
     }
 
     System.out.println("minecraft_server.jar: " + mcstatus);
@@ -167,6 +188,22 @@ public class CliPatcher
     return null;
   }
   */
+
+  private static String getJarDir()
+  {
+    String result = "";
+    try
+    {
+      result = CliPatcher.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+      result = URLDecoder.decode(result, "UTF-8");
+      result = (new File(result).getParent()).toString();
+    }
+    catch (UnsupportedEncodingException e)
+    {
+      e.printStackTrace();
+    }
+    return result;
+  }
 
   private static String input()
   {

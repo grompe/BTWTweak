@@ -196,8 +196,10 @@ public class BTWTweaker
         {
           classname = name.substring(0, name.length() - 6);
           action = (Integer)scriptProxy.invokeFunction("whatToDoWithClass", classname);
+        } else {
+          action = (Integer)scriptProxy.invokeFunction("whatToDoWithFile", name);
         }
-        if (name.startsWith("btwmodtex") || name.startsWith("mob") || name.startsWith("textures"))
+        if (name.startsWith("btwmodtex") || name.startsWith("mob") || name.startsWith("textures") || name.startsWith("font"))
         {
           if (onServer || entry.isDirectory()) continue;
         }
@@ -252,6 +254,7 @@ public class BTWTweaker
         case ACTION_COPY:
           if ((action == ACTION_COPY) || (action == ACTION_OVERWRITE) && (pass == 1))
           {
+            if (action == ACTION_OVERWRITE) log("Overwriting " + name);
             zos.putNextEntry(new ZipEntry(name));
             while ((len = zis.read(buf)) > 0)
             {

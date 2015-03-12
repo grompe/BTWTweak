@@ -479,7 +479,30 @@ function getObjProperty(n, propname)
         log("Class " + cn.name + ": \t+ Added private Icon furnaceIconFrontStuff");
       },
     },
-    "awz": // GUISleepMP
+    "awv": // FontRenderer
+    {
+      tweakClientMethods:
+      {
+        "a(C)I": function(mn)
+        {
+          check(mn);
+          log("\t* Fixing font render to allow wider characters in " + mn.name + mn.desc, 1);
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.IntInsnNode") && (n.getOpcode() == BIPUSH) && (n.operand == 7))
+            {
+              n.operand = 16;
+              log("");
+              return;
+            }
+          }
+          log(" ...failed!");
+          recordFailure();
+        },
+      }
+    },
+    "awz": // GuiSleepMP
     {
       tweakClientMethods:
       {
@@ -4150,7 +4173,7 @@ function getObjProperty(n, propname)
         },
         "a()V": function(mn)
         {
-          check(mn, 0x5E5FA51F);
+          check(mn, [0xA79A9DCF, 0x5E5FA51F]);
           log("\t* Adding readyForInput hook in " + mn.name + mn.desc, 1);
           for (var i = mn.instructions.size() - 1; i >= 0; i--)
           {
@@ -4344,6 +4367,13 @@ function getObjProperty(n, propname)
     "GPEItemCoal",
     "GPEItemQuill",
     "GPESlotRename",
+  ];
+
+  var filesToOverwrite =
+  [
+    "font/glyph_00.png",
+    "font/glyph_04.png",
+    "font/glyph_sizes.bin",
   ];
 
   // Check a method for a checksum or array of checksums
@@ -4623,6 +4653,12 @@ function getObjProperty(n, propname)
   {
     if (classname in classesToTweak) return ACTION_TWEAK;
     if (classesToAdapt.indexOf(classname) != -1) return ACTION_ADAPTSERVER;
+    return ACTION_COPY;
+  };
+
+  whatToDoWithFile = function(name)
+  {
+    if (filesToOverwrite.indexOf(name) != -1) return ACTION_OVERWRITE;
     return ACTION_COPY;
   };
 
