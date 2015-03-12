@@ -690,6 +690,55 @@ function getObjProperty(n, propname)
         log("Class " + cn.name + ": \t+ Adding gloom render to ingame GUI");
       },
     },
+    "azk": // GuiEditSign
+    {
+      tweakClientMethods:
+      {
+        "a(CI)V": function(mn)
+        {
+          check(mn, 0x7C7F25A4);
+          log("\t* Making sign accept unicode in " + mn.name + mn.desc, 1);
+          var changes = 0;
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && (n.opcode == GETSTATIC) && n.owner.equals("azk") && n.name.equals("b"))
+            {
+              mn.instructions.remove(n);
+              changes++;
+              break;
+            }
+          }
+          for (i += 1; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && (n.opcode == INVOKEVIRTUAL) && n.name.equals("indexOf"))
+            {
+              mn.instructions.set(n, MethodInsnNode(INVOKESTATIC, "v", "a", "(C)Z"));
+              changes++;
+              break;
+            }
+          }
+          for (i += 1; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.JumpInsnNode") && n.opcode == IFLT)
+            {
+              n.opcode = IFEQ;
+              changes++;
+              break;
+            }
+          }
+          if (changes == 3)
+          {
+            log("")
+          } else {
+            log(" ...failed!");
+            recordFailure();
+          }
+        },
+      },
+    },
     "anf": // BlockFlowing
     {
       tweakMethods:
@@ -3041,7 +3090,50 @@ function getObjProperty(n, propname)
           }
           log(" ...failed!");
           recordFailure();
-        }
+        },
+        "a(Lfj;)V": function(mn)
+        {
+          check(mn, 0x1C853116);
+          log("\t* Allowing unicode characters in signs in " + mn.name + mn.desc, 1);
+          var changes = 0;
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && (n.opcode == GETSTATIC) && n.owner.equals("v") && n.name.equals("a"))
+            {
+              mn.instructions.remove(n);
+              changes++;
+              break;
+            }
+          }
+          for (i += 1; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && (n.opcode == INVOKEVIRTUAL) && n.name.equals("indexOf"))
+            {
+              mn.instructions.set(n, MethodInsnNode(INVOKESTATIC, "v", "a", "(C)Z"));
+              changes++;
+              break;
+            }
+          }
+          for (i += 1; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.JumpInsnNode") && n.opcode == IFGE)
+            {
+              n.opcode = IFNE;
+              changes++;
+              break;
+            }
+          }
+          if (changes == 3)
+          {
+            log("")
+          } else {
+            log(" ...failed!");
+            recordFailure();
+          }
+        },
       },
     },
     "qi": // EntityChicken

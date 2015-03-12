@@ -31,6 +31,8 @@ v0.9ca
 
 - Added loose rocks and ender pearls to piston Hardcore Packing
 
+- Made sign posts accept unicode characters
+
 v0.9b
 
 - Added a whole bunch of items to regain renaming feature:
