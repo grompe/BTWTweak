@@ -1,9 +1,9 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.9ca
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.9cb
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
 
-v0.9ca
+v0.9cb
 
 - Removed restriction to Java 6/7 because of the way script engine was used.
   Now the patcher can run on OpenJDK or Java 8
