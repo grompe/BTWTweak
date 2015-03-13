@@ -485,7 +485,7 @@ function getObjProperty(n, propname)
       {
         "a(C)I": function(mn)
         {
-          check(mn);
+          check(mn, 0x764812C2);
           log("\t* Fixing font render to allow wider characters in " + mn.name + mn.desc, 1);
           for (var i = 0; i < mn.instructions.size(); i++)
           {
@@ -711,6 +711,58 @@ function getObjProperty(n, propname)
         ));
         cn.methods.add(mn);
         log("Class " + cn.name + ": \t+ Adding gloom render to ingame GUI");
+      },
+    },
+    "azb": // InventoryEffectRenderer
+    {
+      tweakClientMethods:
+      {
+        "A_()V": function(mn)
+        {
+          check(mn, 0x869B0A01);
+          log("\t* Removing inventory shift due to effects in " + mn.name + mn.desc, 1);
+          var changes = 0;
+          var label = LabelNode();
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.IntInsnNode") && (n.getOpcode() == SIPUSH) && (n.operand == 160))
+            {
+              mn.instructions.insertBefore(n, toInsnList(
+                [
+                  FieldInsnNode(GETFIELD, "azb", "h", "I"),
+                  IntInsnNode(SIPUSH, 424),
+                  JumpInsnNode(IF_ICMPGE, label),
+                  VarInsnNode(ALOAD, 0),
+                ]
+              ));
+              changes++;
+              break;
+            }
+          }
+          for (i += 1; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && (n.opcode == PUTFIELD) && n.owner.equals("azb") && n.name.equals("e"))
+            {
+              mn.instructions.insert(n, toInsnList(
+                [
+                  label,
+                  FrameNode(F_SAME, 0, null, 0, null),
+                ]
+              ));
+              changes++;
+              break;
+            }
+          }
+          if (changes == 2)
+          {
+            log("");
+          } else {
+            log(" ...failed!");
+            recordFailure();
+          }
+        },
       },
     },
     "azk": // GuiEditSign

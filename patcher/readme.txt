@@ -42,6 +42,9 @@ v0.9cc
 
 - Fixed problem with unicode characters when renaming
 
+- Removed the annoying inventory shift when player has effects/buffs.
+  It was getting unbearable when running in and outside of a beacon range.
+
 v0.9b
 
 - Added a whole bunch of items to regain renaming feature:

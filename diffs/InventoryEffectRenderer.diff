@@ -1,0 +1,10 @@
+diff --git a/src/minecraft/net/minecraft/src/InventoryEffectRenderer.java b/src/minecraft/net/minecraft/src/InventoryEffectRenderer.java
+index 727f7b0..4bf8090 100644
+--- a/src/minecraft/net/minecraft/src/InventoryEffectRenderer.java
++++ b/src/minecraft/net/minecraft/src/InventoryEffectRenderer.java
+@@ -25 +25,4 @@ public void initGui()
+-            this.guiLeft = 160 + (this.width - this.xSize - 200) / 2;
++            if (this.width < 424)
++            {
++                this.guiLeft = 160 + (this.width - this.xSize - 200) / 2;
++            }
