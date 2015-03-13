@@ -1,0 +1,16 @@
+diff --git a/src/minecraft/net/minecraft/src/FontRenderer.java b/src/minecraft/net/minecraft/src/FontRenderer.java
+index 6bba4bc..7cc8fc7 100644
+--- a/src/minecraft/net/minecraft/src/FontRenderer.java
++++ b/src/minecraft/net/minecraft/src/FontRenderer.java
+@@ -710,5 +710,6 @@ else if (this.glyphWidth[par1] != 0)
+-                if (var4 > 7)
+-                {
+-                    var4 = 15;
+-                    var3 = 0;
+-                }
++                // RU patch - are there any side effects?
++                //if (var4 > 7)
++                //{
++                //    var4 = 15;
++                //    var3 = 0;
++                //}

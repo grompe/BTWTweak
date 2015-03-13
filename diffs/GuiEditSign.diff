@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/GuiEditSign.java b/src/minecraft/net/minecraft/src/GuiEditSign.java
+index 4224b5c..59acd43 100644
+--- a/src/minecraft/net/minecraft/src/GuiEditSign.java
++++ b/src/minecraft/net/minecraft/src/GuiEditSign.java
+@@ -103 +103 @@ protected void keyTyped(char par1, int par2)
+-        if (allowedCharacters.indexOf(par1) >= 0 && this.entitySign.signText[this.editLine].length() < 15)
++        if (ChatAllowedCharacters.isAllowedCharacter(par1) && this.entitySign.signText[this.editLine].length() < 15)

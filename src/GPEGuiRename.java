@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import java.io.*;
 import java.util.List;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -45,7 +46,14 @@ public class GPEGuiRename extends GuiContainer implements ICrafting
     if (itemNameField.textboxKeyTyped(par1, par2))
     {
       container.updateItemName(itemNameField.getText());
-      mc.thePlayer.sendQueue.addToSendQueue(new Packet250CustomPayload("GPE|ItemName", itemNameField.getText().getBytes()));
+      try
+      {
+        byte[] name = itemNameField.getText().getBytes("UTF-8");
+        mc.thePlayer.sendQueue.addToSendQueue(new Packet250CustomPayload("GPE|ItemName", name));
+      }
+      catch (UnsupportedEncodingException e)
+      {
+      }
     }
     else
     {

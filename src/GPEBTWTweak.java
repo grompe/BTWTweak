@@ -11,7 +11,7 @@ public class GPEBTWTweak extends FCAddOn
 {
   public static GPEBTWTweak instance;
   public static GPEBTWTweakProxy proxy;
-  public static String tweakVersion = "0.9cb";
+  public static String tweakVersion = "0.9cc";
 
   public static Block gpeBlockStone;
   public static Block compatAxleBlock;
@@ -826,16 +826,20 @@ public class GPEBTWTweak extends FCAddOn
       if (player.openContainer instanceof GPEContainerRename)
       {
         GPEContainerRename container = (GPEContainerRename)player.openContainer;
-        if (packet.data != null && packet.data.length >= 1)
+        String name = "";
+        try
         {
-          String name = ChatAllowedCharacters.filerAllowedCharacters(new String(packet.data));
-          if (name.length() <= 30)
+          if (packet.data != null && packet.data.length >= 1)
           {
-            container.updateItemName(name);
+            name = ChatAllowedCharacters.filerAllowedCharacters(new String(packet.data, "UTF-8"));
+            if (name.length() > 30) name = "";
           }
-        } else {
-          container.updateItemName("");
         }
+        catch (UnsupportedEncodingException e)
+        {
+          name = "";
+        }
+        container.updateItemName(name);
         return true;
       }
     }

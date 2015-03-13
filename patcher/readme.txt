@@ -1,9 +1,9 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.9cb
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.9cc
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
 
-v0.9cb
+v0.9cc
 
 - Removed restriction to Java 6/7 because of the way script engine was used.
   Now the patcher can run on OpenJDK or Java 8
@@ -39,6 +39,8 @@ v0.9cb
 - Patcher now looks in its own directory in addition to
   "current working directory", as on some configurations the latter was
   defaulting to a wrong place.
+
+- Fixed problem with unicode characters when renaming
 
 v0.9b
 
