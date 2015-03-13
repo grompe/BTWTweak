@@ -199,7 +199,7 @@ public class BTWTweaker
         } else {
           action = (Integer)scriptProxy.invokeFunction("whatToDoWithFile", name);
         }
-        if (name.startsWith("btwmodtex") || name.startsWith("mob") || name.startsWith("textures") || name.startsWith("font"))
+        if (name.startsWith("btwmodtex") || name.startsWith("mob") || name.startsWith("textures") || name.startsWith("font/") || name.equals("font"))
         {
           if (onServer || entry.isDirectory()) continue;
         }
