@@ -80,6 +80,7 @@ public class GPEContainerRename extends Container
       {
         player.dropPlayerItem(stack);
       }
+      updateRenameOutput();
     }
   }
 
