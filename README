@@ -6,12 +6,12 @@ Minecraft Forum discussion: http://www.minecraftforum.net/forums/mapping-and-mod
 ---
 
 Grom PE's Better Than Wolves Total Conversion tweak mod source code
-(Compatible with Better Than Wolves V4.8911+)
+(Compatible with Better Than Wolves V4.8911+, although latest version is recommended)
 
 [****** Source installation instructions ******]
 
 1) Unpack and setup MCP for Minecraft 1.5.2
-2) Install BTW v4.8911 into minecraft.jar
+2) Install BTW into minecraft.jar
 3) Decompile with MCP, it will complain a bit
 4) Apply MCP fix patch using the mcp_fix.diff file
 5) Run MCP's updatemd5 script
