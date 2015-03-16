@@ -4131,6 +4131,41 @@ function getObjProperty(n, propname)
         },
       },
     },
+    "zr": // MerchantRecipeList
+    {
+      tweakMethods:
+      {
+        "a(Lzq;)V": function(mn)
+        {
+          check(mn, 0xAEAB0BC0);
+          log("\t* Putting new villager offers at the beginning rather than the end in " + mn.name + mn.desc, 1);
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("zr") && n.name.equals("add") && n.desc.equals("(Ljava/lang/Object;)Z"))
+            {
+              var n2 = n;
+              n = n.getNext();
+              if (isInstance(n, "org.objectweb.asm.tree.InsnNode") && (n.opcode == POP))
+              {
+                mn.instructions.remove(n2);
+                mn.instructions.insert(n, toInsnList(
+                  [
+                    InsnNode(ICONST_0),
+                    VarInsnNode(ALOAD, 1),
+                    MethodInsnNode(INVOKEVIRTUAL, "zr", "add", "(ILjava/lang/Object;)V"),
+                  ]
+                ));
+                log("");
+                return;
+              }
+            }
+          }
+          log(" ...failed!");
+          recordFailure();
+        },
+      },
+    },
     "zs": // MobSpawnerBaseLogic
     {
       tweakMethods:
