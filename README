@@ -4,7 +4,7 @@ Assuming BTWTweak v0.9d and Better Than Wolves 4.99999A0Fb Marsupial!?!?,
 (as of 19 Mar 2015) here is the list of changes.
 
 
-#When launching Minecraft:
+# When launching Minecraft:
 
 - (In some launchers may not work) a no-to-wolf icon for the program
 
@@ -14,7 +14,7 @@ Assuming BTWTweak v0.9d and Better Than Wolves 4.99999A0Fb Marsupial!?!?,
   sprinting (default to Left Ctrl).
 
 
-#In the early game:
+# In the early game:
 
 - The tree base block is much harder to break, and requires dirt block below it
   to be dug out. Leave it alone. This is to encourage leaving tree stumps so
@@ -74,7 +74,7 @@ Assuming BTWTweak v0.9d and Better Than Wolves 4.99999A0Fb Marsupial!?!?,
   fixes, check the changelog.
 
 
-#A bit further to the game:
+# A bit further to the game:
 
 - Seeds now root themselves when dropped on suitable ground. This makes some
   designs for farm automation possible in the mid game. Make sure not to lose
@@ -146,7 +146,7 @@ Assuming BTWTweak v0.9d and Better Than Wolves 4.99999A0Fb Marsupial!?!?,
   used as a fertilizer.
 
 
-#When you progress to the saw and tanned leather:
+# When you progress to the saw and tanned leather:
 
 - Chest, gearbox, note block, jukebox, door, trapdoor, fence gate, pulley,
   bellows, ladder, bookshelf, hopper, platform, barrel, axle and saw, as well as
@@ -185,7 +185,7 @@ Assuming BTWTweak v0.9d and Better Than Wolves 4.99999A0Fb Marsupial!?!?,
   show swirling True Sight particles, even though mobs cannot spawn on them.
   
 
-#For when you get access to stoked fire:
+# For when you get access to stoked fire:
 
 - Rails in abandoned mineshafts are rusted and won't give as much of iron
   anymore. If you need lots of iron, you need a mob trap.
@@ -206,13 +206,13 @@ Assuming BTWTweak v0.9d and Better Than Wolves 4.99999A0Fb Marsupial!?!?,
 - Charcoal texture has been backported the from newer Minecraft versions.
 
 
-#Late game has only one notable change:
+# Late game has only one notable change:
 
 - Cobblestone and stone drop in cobblestone blocks if destroyed by a soulforged
   tool. Like in good old times.
 
 
-#And finally, some general goodness:
+# And finally, some general goodness:
 
 - Pressing the hotbar key of already selected slot will cycle items in the
   corresponding inventory column. This is configurable in BTWTweak.cfg.
@@ -229,7 +229,7 @@ Assuming BTWTweak v0.9d and Better Than Wolves 4.99999A0Fb Marsupial!?!?,
   It was getting unbearable when running in and outside of a beacon range.
 
 
-#Concerns, suggestions, feedback?
+# Concerns, suggestions, feedback?
 
 Go to the chat: http://chat.grompe.org.ru/#mcmoddev
 
