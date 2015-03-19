@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/MerchantRecipeList.java b/src/minecraft/net/minecraft/src/MerchantRecipeList.java
+index 5c1e6e0..93f1618 100644
+--- a/src/minecraft/net/minecraft/src/MerchantRecipeList.java
++++ b/src/minecraft/net/minecraft/src/MerchantRecipeList.java
+@@ -63 +63 @@ public void addToListWithCheck(MerchantRecipe par1MerchantRecipe)
+-        this.add(par1MerchantRecipe);
++        this.add(0, par1MerchantRecipe);

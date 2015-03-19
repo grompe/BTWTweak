@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/BlockBed.java b/src/minecraft/net/minecraft/src/BlockBed.java
+index 21113d3..2d0f687 100644
+--- a/src/minecraft/net/minecraft/src/BlockBed.java
++++ b/src/minecraft/net/minecraft/src/BlockBed.java
+@@ -47 +47 @@ public boolean onBlockActivated(World par1World, int par2, int par3, int par4, E
+-            if (par1World.provider.canRespawnHere() && par1World.getBiomeGenForCoords(par2, par4) != BiomeGenBase.hell)
++            if (true)

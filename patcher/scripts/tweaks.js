@@ -355,6 +355,55 @@ function getObjProperty(n, propname)
         },
       }
     },
+    "ale": // BlockBed
+    {
+      tweakMethods:
+      {
+        "a(Laab;IIILsq;IFFF)Z": function(mn)
+        {
+          check(mn, 0xCBD14ADD);
+          log("\t* Stopping bed from exploding in other dimensions in " + mn.name + mn.desc, 1);
+          var changes = 0;
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("acn") && n.name.equals("e"))
+            {
+              n = n.getNext()
+              if (isInstance(n, "org.objectweb.asm.tree.JumpInsnNode"))
+              {
+                mn.instructions.set(n, InsnNode(POP));
+                changes++;
+                break;
+              }
+            }
+          }
+          if (changes != 1)
+          {
+            log(" ...failed!");
+            recordFailure();
+            return;
+          }
+          for (i += 3; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.JumpInsnNode"))
+            {
+              n.opcode = GOTO;
+              mn.instructions.insertBefore(n, InsnNode(POP2));
+              changes++;
+              break;
+            }
+          }
+          if (changes != 2)
+          {
+            log(" ...failed!");
+            recordFailure();
+            return;
+          }
+        },
+      },
+    },
     "amn": // BlockFurnace
     {
       tweakClientMethods:
