@@ -11,7 +11,7 @@ public class GPEBTWTweak extends FCAddOn
 {
   public static GPEBTWTweak instance;
   public static GPEBTWTweakProxy proxy;
-  public static String tweakVersion = "0.9d";
+  public static String tweakVersion = "0.9e";
 
   public static Block gpeBlockStone;
   public static Block compatAxleBlock;
@@ -193,6 +193,7 @@ public class GPEBTWTweak extends FCAddOn
     Block.blocksList[15] = null; (new GPEBlockOre(15)).setUnlocalizedName("oreIron");
     Block.blocksList[17] = null; new GPEBlockLog(17);
     Block.blocksList[20] = null; new GPEBlockGlass(20);
+    Block.blocksList[54] = null; new GPEBlockChest(54);
     Block.blocksList[65] = null; new GPEBlockLadder(65);
     Block.blocksList[80] = null; new GPEBlockSnowBlock(80);
     Block.blocksList[91] = null;
@@ -230,6 +231,7 @@ public class GPEBTWTweak extends FCAddOn
 
     new GPEEnchantmentHaste(gpeEnchantmentHaste);
 
+    TileEntity.ReplaceVanillaMapping(FCTileEntityChest.class, GPETileEntityChest.class, "Chest");
     TileEntity.addMapping(GPETileEntityRename.class, "Rename");
 
     EntityList.addMapping(GPEEntityRock.class, "gpeEntityRock", gpeEntityRockID);
@@ -850,4 +852,30 @@ public class GPEBTWTweak extends FCAddOn
   {
     proxy.addKeyBindings();
   }
+
+  public static boolean addItemStackToChest(TileEntityChest t, ItemStack stack)
+  {
+    World world = t.worldObj;
+    int meta = t.getBlockMetadata();
+    int x = t.xCoord;
+    int y = t.yCoord;
+    int z = t.zCoord;
+    switch (meta)
+    {
+      case 6:  // +x has a chest
+      case 7:  return FCUtilsInventory.AddItemStackToDoubleInventory(t, (TileEntityChest)world.getBlockTileEntity(x + 1, y, z), stack);
+
+      case 8:  // +z has a chest
+      case 9:  return FCUtilsInventory.AddItemStackToDoubleInventory(t, (TileEntityChest)world.getBlockTileEntity(x, y, z + 1), stack);
+
+      case 10: // -x has a chest
+      case 11: return FCUtilsInventory.AddItemStackToDoubleInventory((TileEntityChest)world.getBlockTileEntity(x - 1, y, z), t, stack);
+
+      case 12: // -z has a chest
+      case 13: return FCUtilsInventory.AddItemStackToDoubleInventory((TileEntityChest)world.getBlockTileEntity(x, y, z - 1), t, stack);
+      // single chest
+      default: return FCUtilsInventory.AddItemStackToInventory(t, stack);
+    }
+  }
+
 }

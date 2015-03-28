@@ -3,13 +3,19 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.9d
 
 [********** Change Log ************]
 
-(unreleased)
+v0.9e (unreleased)
 
 - Changed villagers to display newest offers in the beginning of the list
   rather than the end, to put an end to constant scrolling through offers.
 
 - Changed beds to not explode in other dimensions, so you can sleep in
   a bed anywhere now.
+
+- Changed chests to be placeable next to each other, regardless of any
+  adjacent double chests. Single chests will be merged to double chests as
+  before. This allows configurations (especially together with hoppers) that
+  weren't possible before. Not being able to place a chest seemed like an
+  arbitrary and awkward limitation.
 
 v0.9d
 

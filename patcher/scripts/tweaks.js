@@ -3052,6 +3052,31 @@ function getObjProperty(n, propname)
         cn.fields.add(FieldNode(ACC_PUBLIC, "visualSpin", "I", null, null));
       }
     },
+    "FCUtilsInventory":
+    {
+      tweakMethods:
+      {
+        "AddItemStackToChest(Lapy;Lwm;)Z": function(mn)
+        {
+          check(mn, 0xBBAB1C34);
+          mn.instructions.clear();
+          mn.instructions.add(toInsnList(
+            [
+              VarInsnNode(ALOAD, 0),
+              VarInsnNode(ALOAD, 1),
+              MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "addItemStackToChest", "(Lapy;Lwm;)Z"),
+              InsnNode(IRETURN),
+            ]
+          ));
+          log("\t* Replacing hopper to chest deposit function in AddItemStackToChest(Lapy;Lwm;)Z");
+        },
+        "AddItemStackToDoubleInventory(Llt;Llt;Lwm;)Z": function(mn)
+        {
+          mn.access = ACC_PUBLIC | ACC_STATIC;
+          log("\t% Made AddItemStackToDoubleInventory(Llt;Llt;Lwm;)Z public");
+        }
+      },
+    },
     "FCUtilsWorld":
     {
       tweakMethods:

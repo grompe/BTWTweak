@@ -3,6 +3,7 @@ package net.minecraft.src;
 import java.awt.Frame;
 import java.util.*;
 import java.io.*;
+import java.lang.reflect.*;
 import javax.imageio.ImageIO;
 
 import net.minecraft.client.Minecraft;
@@ -13,6 +14,7 @@ import org.lwjgl.input.Keyboard;
 public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
 {
   public KeyBinding sprintKey;
+  private Map tileEntitySpecialRendererMap;
 
   public File getConfigDir()
   {
@@ -22,6 +24,37 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
   public void addEntityRenderers()
   {
     RenderManager.AddEntityRenderer(GPEEntityRock.class, new RenderSnowball(GPEBTWTweak.gpeItemLooseRock));
+
+    try
+    {
+      Field f;
+      try
+      {
+        f = TileEntityRenderer.class.getDeclaredField("specialRendererMap");
+      }
+      catch(NoSuchFieldException e)
+      {
+        f = TileEntityRenderer.class.getDeclaredField("m");
+      }
+      f.setAccessible(true);
+      tileEntitySpecialRendererMap = (Map)f.get(TileEntityRenderer.instance);
+      FCAddOnHandler.LogMessage("Adding to tile entity special renderer map");
+    }
+    catch (Exception e)
+    {
+      FCAddOnHandler.LogMessage("Error while retrieving tile entity special renderer map");
+      tileEntitySpecialRendererMap = null;
+    }
+    addTileEntitySpecialRenderer(new GPETileEntityChestRenderer());
+  }
+
+  private void addTileEntitySpecialRenderer(TileEntitySpecialRenderer r)
+  {
+    if (tileEntitySpecialRendererMap != null)
+    {
+      tileEntitySpecialRendererMap.put(GPETileEntityChest.class, r);
+      r.setTileEntityRenderer(TileEntityRenderer.instance);
+    }
   }
 
   public void addKeyBindings()
@@ -61,10 +94,24 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
       Minecraft mc = Minecraft.getMinecraft();
       if (!mc.thePlayer.capabilities.isCreativeMode) return;
       World world = mc.thePlayer.worldObj;
+      /*
       int x = MathHelper.floor_double(mc.thePlayer.posX);
       int y = MathHelper.floor_double(mc.thePlayer.posY) - 1;
       int z = MathHelper.floor_double(mc.thePlayer.posZ);
       GPEBTWTweak.attemptToPlaceGravestone(world, x, y, z);
+      */
+      if (mc.objectMouseOver != null)
+      {
+        if (mc.objectMouseOver.typeOfHit == EnumMovingObjectType.TILE)
+        {
+          int x = mc.objectMouseOver.blockX;
+          int y = mc.objectMouseOver.blockY;
+          int z = mc.objectMouseOver.blockZ;
+          int id = world.getBlockId(x, y, z);
+          int meta = world.getBlockMetadata(x, y, z);
+          mc.thePlayer.addChatMessage(String.format("Looking at block %d:%d", id, meta));
+        }
+      }
     }
     if (sprintKey.pressed)
     {
