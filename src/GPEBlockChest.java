@@ -31,6 +31,12 @@ public class GPEBlockChest extends FCBlockChest
     AABBPool pool = AxisAlignedBB.getAABBPool();
     switch (meta)
     {
+      // A hack that allows to raytrace through just placed, but not yet
+      // rotated/merged chest and control which chest to merge with;
+      // Such chest in the world is an invalid state anyway, and this hack
+      // saves on fiddling with a chest-item class.
+      case 0: return null;
+
       case 6:  // +x has a chest
       case 7:  return pool.getAABB(x + 1/16F, y, z + 1/16F, x + 16/16F, y + 14/16F, z + 15/16F);
 
@@ -77,13 +83,73 @@ public class GPEBlockChest extends FCBlockChest
 
   public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entity, ItemStack stack)
   {
-    int side2 = 0;
     int side = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-    if (side == 0) side2 = 2;
-    if (side == 1) side2 = 5;
-    if (side == 2) side2 = 3;
-    if (side == 3) side2 = 4;
-    mergeChests(world, x, y, z, side2);
+    if (side == 3) side = 4;
+    if (side == 1) side = 5;
+    if (side == 2) side = 3;
+    if (side == 0) side = 2;
+    if (!world.isRemote && entity.isSneaking() && entity instanceof EntityPlayer)
+    {
+      // If Shift+clicking, try merge with the chest the cursor hits,
+      // else place a single chest
+      MovingObjectPosition mop = stack.getItem().getMovingObjectPositionFromPlayer(world, (EntityPlayer)entity, false);
+      if (mop != null && mop.typeOfHit == EnumMovingObjectType.TILE
+        && world.getBlockId(mop.blockX, mop.blockY, mop.blockZ) == this.blockID
+        && world.getBlockMetadata(mop.blockX, mop.blockY, mop.blockZ) <= 5
+        && mop.blockY == y
+        && ((mop.blockX == x && Math.abs(mop.blockZ - z) == 1) || (mop.blockZ == z && Math.abs(mop.blockX - x) == 1))
+        )
+      {
+        if (mop.blockZ == z - 1)
+        {
+          if (side == 5)
+          {
+            world.setBlockMetadataWithNotify(x, y, z, 13, 2);
+            world.setBlockMetadataWithNotify(x, y, z - 1, 9, 2);
+          } else {
+            world.setBlockMetadataWithNotify(x, y, z, 12, 2);
+            world.setBlockMetadataWithNotify(x, y, z - 1, 8, 2);
+          }
+        }
+        else if (mop.blockZ == z + 1)
+        {
+          if (side == 5)
+          {
+            world.setBlockMetadataWithNotify(x, y, z, 9, 2);
+            world.setBlockMetadataWithNotify(x, y, z + 1, 13, 2);
+          } else {
+            world.setBlockMetadataWithNotify(x, y, z, 8, 2);
+            world.setBlockMetadataWithNotify(x, y, z + 1, 12, 2);
+          }
+        }
+        else if (mop.blockX == x - 1)
+        {
+          if (side == 3)
+          {
+            world.setBlockMetadataWithNotify(x, y, z, 11, 2);
+            world.setBlockMetadataWithNotify(x - 1, y, z, 7, 2);
+          } else {
+            world.setBlockMetadataWithNotify(x, y, z, 10, 2);
+            world.setBlockMetadataWithNotify(x - 1, y, z, 6, 2);
+          }
+        }
+        else if (mop.blockX == x + 1)
+        {
+          if (side == 3)
+          {
+            world.setBlockMetadataWithNotify(x, y, z, 7, 2);
+            world.setBlockMetadataWithNotify(x + 1, y, z, 11, 2);
+          } else {
+            world.setBlockMetadataWithNotify(x, y, z, 6, 2);
+            world.setBlockMetadataWithNotify(x + 1, y, z, 10, 2);
+          }
+        }
+      } else {
+        world.setBlockMetadataWithNotify(x, y, z, side, 2);
+      }
+    } else {
+      mergeChests(world, x, y, z, side);
+    }
 
     GPETileEntityChest t = ((GPETileEntityChest)world.getBlockTileEntity(x, y, z));
     t.oldChecked = true;

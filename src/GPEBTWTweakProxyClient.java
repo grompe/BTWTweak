@@ -109,7 +109,7 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
           int z = mc.objectMouseOver.blockZ;
           int id = world.getBlockId(x, y, z);
           int meta = world.getBlockMetadata(x, y, z);
-          mc.thePlayer.addChatMessage(String.format("Looking at block %d:%d", id, meta));
+          mc.thePlayer.addChatMessage(String.format("Looking at block %d:%d (%d, %d, %d)", id, meta, x, y, z));
         }
       }
     }

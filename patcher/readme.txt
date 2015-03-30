@@ -15,7 +15,8 @@ v0.9e (unreleased)
   adjacent double chests. Single chests will be merged to double chests as
   before. This allows configurations (especially together with hoppers) that
   weren't possible before. Not being able to place a chest seemed like an
-  arbitrary and awkward limitation.
+  arbitrary and awkward limitation. Placing a chest while sneaking allows to
+  control which chest it combines with, or none at all.
 
 v0.9d
 
