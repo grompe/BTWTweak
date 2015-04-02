@@ -47,9 +47,11 @@ public class GPETileEntityChest extends FCTileEntityChest
 
   public void checkForVanillaChests()
   {
+    Block block = getBlockType();
+    if (block == null) return;
+
     oldChecked = true;
 
-    Block block = getBlockType();
     int meta = getBlockMetadata();
     ((GPEBlockChest)block).mergeChests(worldObj, xCoord, yCoord, zCoord, meta);
 
