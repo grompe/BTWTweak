@@ -2111,6 +2111,36 @@ function getObjProperty(n, propname)
         log("Class " + cn.name + ": \t+ Adding handleNewGravelTop(Laab;Lrh;II)V");
       },
     },
+    "FCBlockKiln":
+    {
+      tweakMethods:
+      {
+        "a(Laab;IIILjava/util/Random;)V": function(mn)
+        {
+          check(mn, 0x2DAB2AE1);
+          log("\t* Improving the crack (1/3) in " + mn.name + mn.desc, 1);
+          replaceAllMethodCalls(mn,
+            [INVOKEVIRTUAL, "aab", "f", "(IIIII)V"],
+            [INVOKESTATIC, "GPEBTWTweak", "addKilnCrackEffect", "(Laab;IIIII)V"]);
+        },
+        "a(Laab;IIIII)V": function(mn)
+        {
+          check(mn, 0x358204FD);
+          log("\t* Improving the crack (2/3) in " + mn.name + mn.desc, 1);
+          replaceAllMethodCalls(mn,
+            [INVOKEVIRTUAL, "aab", "f", "(IIIII)V"],
+            [INVOKESTATIC, "GPEBTWTweak", "addKilnCrackEffect", "(Laab;IIIII)V"]);
+        },
+        "a(Laab;IIII)V": function(mn)
+        {
+          check(mn, 0x6D780E50);
+          log("\t* Improving the crack (3/3) in " + mn.name + mn.desc, 1);
+          replaceAllMethodCalls(mn,
+            [INVOKEVIRTUAL, "aab", "f", "(IIIII)V"],
+            [INVOKESTATIC, "GPEBTWTweak", "addKilnCrackEffect", "(Laab;IIIII)V"]);
+        },
+      }
+    },
     "FCBlockPumpkin":
     {
       tweakClientMethods:
@@ -4707,6 +4737,22 @@ function getObjProperty(n, propname)
       n = n.getNext();
       mn.instructions.remove(tmp);
       if (!n) break;
+    }
+  }
+
+  function replaceAllMethodCalls(mn, def1, def2)
+  {
+    for (var i = 0; i < mn.instructions.size(); i++)
+    {
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") &&
+        (n.opcode == def1[0]) && n.owner.equals(def1[1]) && n.name.equals(def1[2]) && n.desc.equals(def1[3]))
+      {
+        n.opcode = def2[0];
+        n.owner = def2[1];
+        n.name = def2[2];
+        n.desc = def2[3];
+      }
     }
   }
   

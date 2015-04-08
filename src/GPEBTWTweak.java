@@ -878,4 +878,22 @@ public class GPEBTWTweak extends FCAddOn
     }
   }
 
+  // http://burtleburtle.net/bob/hash/integer.html
+  public static int half_avalanche(int a)
+  {
+    a = (a + 0x479ab41d) + (a << 8);
+    a = (a ^ 0xe4aa10ce) ^ (a >> 5);
+    a = (a + 0x9942f0a6) - (a << 14);
+    a = (a ^ 0x5aedd67d) ^ (a >> 3);
+    a = (a + 0x17bea992) + (a << 7);
+    return a;
+  }
+
+  public static void addKilnCrackEffect(World world, int entityId, int x, int y, int z, int damage)
+  {
+    // Fake entityId based on xyz coordinates so cracks won't conflict with each other
+    // (actually 0.03% collisions) Negative so won't conflict with existing players
+    entityId = -((half_avalanche(half_avalanche(x) + z) >>> 2) + y);
+    world.destroyBlockInWorldPartially(entityId, x, y, z, damage);
+  }
 }

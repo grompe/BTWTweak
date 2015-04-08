@@ -1,4 +1,4 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.9d
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.9e
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
@@ -19,6 +19,8 @@ v0.9e (unreleased)
   control which chest it combines with, or none at all.
 
 - Fixed chests so they display cracks while being harvested.
+
+- Fixed kiln so it is able to display multiple cracked blocks at once.
 
 v0.9d
 

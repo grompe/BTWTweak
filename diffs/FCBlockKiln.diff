@@ -1,0 +1,28 @@
+diff --git a/src/minecraft/net/minecraft/src/FCBlockKiln.java b/src/minecraft/net/minecraft/src/FCBlockKiln.java
+index d0f9b3c..a88631e 100644
+--- a/src/minecraft/net/minecraft/src/FCBlockKiln.java
++++ b/src/minecraft/net/minecraft/src/FCBlockKiln.java
+@@ -50 +50 @@ public void updateTick(World var1, int var2, int var3, int var4, Random var5)
+-                var1.destroyBlockInWorldPartially(0, var2, var3 + 1, var4, -1);
++                GPEBTWTweak.addKilnCrackEffect(var1, 0, var2, var3 + 1, var4, -1);
+@@ -77 +77 @@ public void updateTick(World var1, int var2, int var3, int var4, Random var5)
+-                        var1.destroyBlockInWorldPartially(0, var2, var3 + 1, var4, 7);
++                        GPEBTWTweak.addKilnCrackEffect(var1, 0, var2, var3 + 1, var4, 7);
+@@ -81 +81 @@ else if (var9 == 3)
+-                        var1.destroyBlockInWorldPartially(0, var2, var3 + 1, var4, 8);
++                        GPEBTWTweak.addKilnCrackEffect(var1, 0, var2, var3 + 1, var4, 8);
+@@ -85 +85 @@ else if (var9 == 5)
+-                        var1.destroyBlockInWorldPartially(0, var2, var3 + 1, var4, 9);
++                        GPEBTWTweak.addKilnCrackEffect(var1, 0, var2, var3 + 1, var4, 9);
+@@ -95 +95 @@ else if (var9 == 5)
+-                    var1.destroyBlockInWorldPartially(0, var2, var3 + 1, var4, -1);
++                    GPEBTWTweak.addKilnCrackEffect(var1, 0, var2, var3 + 1, var4, -1);
+@@ -101 +101 @@ else if (var6 != 0)
+-                var1.destroyBlockInWorldPartially(0, var2, var3 + 1, var4, -1);
++                GPEBTWTweak.addKilnCrackEffect(var1, 0, var2, var3 + 1, var4, -1);
+@@ -117 +117 @@ public void breakBlock(World var1, int var2, int var3, int var4, int var5, int v
+-            var1.destroyBlockInWorldPartially(0, var2, var3 + 1, var4, -1);
++            GPEBTWTweak.addKilnCrackEffect(var1, 0, var2, var3 + 1, var4, -1);
+@@ -141 +141 @@ public void onNeighborBlockChange(World var1, int var2, int var3, int var4, int
+-            var1.destroyBlockInWorldPartially(0, var2, var3 + 1, var4, -1);
++            GPEBTWTweak.addKilnCrackEffect(var1, 0, var2, var3 + 1, var4, -1);
