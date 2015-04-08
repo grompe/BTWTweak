@@ -129,6 +129,32 @@ function getObjProperty(n, propname)
     ]);
   }
 
+  function addRenderBlockDamageEffectMethod(cn)
+  {
+    var mn = MethodNode(ACC_PUBLIC, "RenderBlockDamageEffect", "(Lbgf;IIILlx;)V", null, null);
+    mn.instructions.add(toInsnList(
+      [
+        VarInsnNode(ALOAD, 1),
+        VarInsnNode(ALOAD, 5),
+        MethodInsnNode(INVOKEVIRTUAL, "bgf", "a", "(Llx;)V"),
+        VarInsnNode(ALOAD, 1),
+        VarInsnNode(ALOAD, 0),
+        MethodInsnNode(INVOKEVIRTUAL, "bgf", "a", "(Lapa;)V"),
+        VarInsnNode(ALOAD, 1),
+        VarInsnNode(ALOAD, 0),
+        VarInsnNode(ILOAD, 2),
+        VarInsnNode(ILOAD, 3),
+        VarInsnNode(ILOAD, 4),
+        MethodInsnNode(INVOKEVIRTUAL, "bgf", "p", "(Lapa;III)Z"),
+        InsnNode(POP),
+        VarInsnNode(ALOAD, 1),
+        MethodInsnNode(INVOKEVIRTUAL, "bgf", "a", "()V"),
+        InsnNode(RETURN),
+      ]
+    ));
+    cn.methods.add(mn);
+  }
+  
   function fixMobToBurnOnSlabs(mn)
   {
     log("\t* Fixing mob not burning on slabs in " + mn.name + mn.desc, 1);
@@ -1781,6 +1807,12 @@ function getObjProperty(n, propname)
     },*/
     "FCBlockBed":
     {
+      add: function(cn)
+      {
+        if (!onClient()) return;
+        addRenderBlockDamageEffectMethod(cn);
+        log("Class " + cn.name + ": \t+ fixed cracks on bed");
+      },
       remove:
       [
         "a(Laab;IIILsq;IFFF)Z"
@@ -2118,7 +2150,7 @@ function getObjProperty(n, propname)
         "a(Laab;IIILjava/util/Random;)V": function(mn)
         {
           check(mn, 0x2DAB2AE1);
-          log("\t* Improving the crack (1/3) in " + mn.name + mn.desc, 1);
+          log("\t* Improving the crack (1/3) in " + mn.name + mn.desc);
           replaceAllMethodCalls(mn,
             [INVOKEVIRTUAL, "aab", "f", "(IIIII)V"],
             [INVOKESTATIC, "GPEBTWTweak", "addKilnCrackEffect", "(Laab;IIIII)V"]);
@@ -2126,7 +2158,7 @@ function getObjProperty(n, propname)
         "a(Laab;IIIII)V": function(mn)
         {
           check(mn, 0x358204FD);
-          log("\t* Improving the crack (2/3) in " + mn.name + mn.desc, 1);
+          log("\t* Improving the crack (2/3) in " + mn.name + mn.desc);
           replaceAllMethodCalls(mn,
             [INVOKEVIRTUAL, "aab", "f", "(IIIII)V"],
             [INVOKESTATIC, "GPEBTWTweak", "addKilnCrackEffect", "(Laab;IIIII)V"]);
@@ -2134,7 +2166,7 @@ function getObjProperty(n, propname)
         "a(Laab;IIII)V": function(mn)
         {
           check(mn, 0x6D780E50);
-          log("\t* Improving the crack (3/3) in " + mn.name + mn.desc, 1);
+          log("\t* Improving the crack (3/3) in " + mn.name + mn.desc);
           replaceAllMethodCalls(mn,
             [INVOKEVIRTUAL, "aab", "f", "(IIIII)V"],
             [INVOKESTATIC, "GPEBTWTweak", "addKilnCrackEffect", "(Laab;IIIII)V"]);
@@ -2273,6 +2305,33 @@ function getObjProperty(n, propname)
         }
       },
     },
+    "FCBlockEnderChest":
+    {
+      add: function(cn)
+      {
+        if (!onClient()) return;
+        addRenderBlockDamageEffectMethod(cn);
+        log("Class " + cn.name + ": \t+ fixed cracks on ender chest");
+      },
+    },
+    "FCBlockBeacon":
+    {
+      add: function(cn)
+      {
+        if (!onClient()) return;
+        addRenderBlockDamageEffectMethod(cn);
+        log("Class " + cn.name + ": \t+ fixed cracks on beacon");
+      },
+    },
+    "FCBlockCocoa":
+    {
+      add: function(cn)
+      {
+        if (!onClient()) return;
+        addRenderBlockDamageEffectMethod(cn);
+        log("Class " + cn.name + ": \t+ fixed cracks on cocoa beans");
+      },
+    },
     "FCBlockSign":
     {
       add: function(cn)
@@ -2308,7 +2367,7 @@ function getObjProperty(n, propname)
           ]
         ));
         cn.methods.add(mn);
-        log("Class " + cn.name + ": \t+ added cracks on wall sign");
+        log("Class " + cn.name + ": \t+ fixed cracks on wall sign");
       },
     },
     "FCBlockTurntable":

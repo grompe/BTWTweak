@@ -18,7 +18,8 @@ v0.9e (unreleased)
   arbitrary and awkward limitation. Placing a chest while sneaking allows to
   control which chest it combines with, or none at all.
 
-- Fixed chests and wall signs so they display cracks while being harvested.
+- Fixed chests, ender chests, wall signs, beds, beacons and cocoa beans so
+  they display cracks while being harvested.
 
 - Fixed kiln so it is able to display multiple cracked blocks at once.
 
