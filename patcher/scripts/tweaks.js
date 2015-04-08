@@ -2273,6 +2273,44 @@ function getObjProperty(n, propname)
         }
       },
     },
+    "FCBlockSign":
+    {
+      add: function(cn)
+      {
+        if (!onClient()) return;
+        var label = LabelNode();
+        var mn = MethodNode(ACC_PUBLIC, "RenderBlockDamageEffect", "(Lbgf;IIILlx;)V", null, null);
+        mn.instructions.add(toInsnList(
+          [
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "FCBlockSign", "cz", "I"),
+            IntInsnNode(BIPUSH, 68),
+            JumpInsnNode(IF_ICMPEQ, label),
+            InsnNode(RETURN),
+            label,
+            FrameNode(F_SAME, 0, null, 0, null),
+            VarInsnNode(ALOAD, 1),
+            VarInsnNode(ALOAD, 5),
+            MethodInsnNode(INVOKEVIRTUAL, "bgf", "a", "(Llx;)V"),
+            VarInsnNode(ALOAD, 1),
+            VarInsnNode(ALOAD, 0),
+            MethodInsnNode(INVOKEVIRTUAL, "bgf", "a", "(Lapa;)V"),
+            VarInsnNode(ALOAD, 1),
+            VarInsnNode(ALOAD, 0),
+            VarInsnNode(ILOAD, 2),
+            VarInsnNode(ILOAD, 3),
+            VarInsnNode(ILOAD, 4),
+            MethodInsnNode(INVOKEVIRTUAL, "bgf", "p", "(Lapa;III)Z"),
+            InsnNode(POP),
+            VarInsnNode(ALOAD, 1),
+            MethodInsnNode(INVOKEVIRTUAL, "bgf", "a", "()V"),
+            InsnNode(RETURN),
+          ]
+        ));
+        cn.methods.add(mn);
+        log("Class " + cn.name + ": \t+ added cracks on wall sign");
+      },
+    },
     "FCBlockTurntable":
     {
       tweakClientMethods:

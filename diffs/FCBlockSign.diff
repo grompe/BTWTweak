@@ -1,0 +1,15 @@
+diff --git a/src/minecraft/net/minecraft/src/FCBlockSign.java b/src/minecraft/net/minecraft/src/FCBlockSign.java
+index 5dcd90e..981abea 100644
+--- a/src/minecraft/net/minecraft/src/FCBlockSign.java
++++ b/src/minecraft/net/minecraft/src/FCBlockSign.java
+@@ -18,0 +19,10 @@ public boolean RenderBlock(RenderBlocks var1, int var2, int var3, int var4)
++
++    @ClientOnly
++    public void RenderBlockDamageEffect(RenderBlocks r, int x, int y, int z, Icon icon)
++    {
++        if (blockID != 68) return; // Render cracks only on wall signs
++        r.setOverrideBlockTexture(icon);
++        r.setRenderBoundsFromBlock(this);
++        r.renderStandardBlock(this, x, y, z);
++        r.clearOverrideBlockTexture();
++    }
