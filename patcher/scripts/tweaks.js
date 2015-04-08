@@ -4516,6 +4516,7 @@ function getObjProperty(n, propname)
   // Classes requiring removal of client-only methods on server side
   var classesToAdapt =
   [
+    "GPEBlockChest",
     "GPEBlockCobblestone",
     "GPEBlockDirtSlab",
     "GPEBlockGlass",

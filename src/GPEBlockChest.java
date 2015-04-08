@@ -312,6 +312,7 @@ public class GPEBlockChest extends FCBlockChest
     return new GPETileEntityChest();
   }
 
+  @ClientOnly
   public void RenderBlockDamageEffect(RenderBlocks r, int x, int y, int z, Icon icon)
   {
     r.setOverrideBlockTexture(icon);
