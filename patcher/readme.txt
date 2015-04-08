@@ -18,6 +18,8 @@ v0.9e (unreleased)
   arbitrary and awkward limitation. Placing a chest while sneaking allows to
   control which chest it combines with, or none at all.
 
+- Fixed chests so they display cracks while being harvested.
+
 v0.9d
 
 - Removed restriction to Java 6/7 because of the way script engine was used.
