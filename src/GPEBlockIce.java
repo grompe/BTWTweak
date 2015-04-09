@@ -2,16 +2,16 @@ package net.minecraft.src;
 
 import java.util.Random;
 
-public class GPEBlockSnowBlock extends BlockSnowBlock
+public class GPEBlockIce extends FCBlockIce
 {
-  protected GPEBlockSnowBlock(int id)
+  protected GPEBlockIce(int id)
   {
     super(id);
-    setHardness(0.2F);
-    setLightOpacity(11);
-    setStepSound(soundSnowFootstep);
-    setUnlocalizedName("snow");
-    ItemSpade.SetAllShovelsToBeEffectiveVsBlock(this);
+    setHardness(0.5F);
+    setLightOpacity(3);
+    setStepSound(soundGlassFootstep);
+    setUnlocalizedName("ice");
+    ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
   }
 
   public void updateTick(World world, int x, int y, int z, Random random)
@@ -22,17 +22,19 @@ public class GPEBlockSnowBlock extends BlockSnowBlock
   private void checkMelting(World world, int x, int y, int z)
   {
     if (!FCUtilsMisc.IsIKInColdBiome(world, x, z)
-      && (world.getBlockLightValue(x, y, z) > 0)
-      || (world.getSavedLightValue(EnumSkyBlock.Block, x, y, z) > 0)
+      && (world.getBlockLightValue(x, y, z) > 8)
+      || (world.getSavedLightValue(EnumSkyBlock.Block, x, y, z) > 8)
       )
     {
-      FCUtilsMisc.PlaceNonPersistantWater(world, x, y, z);
+      if (IsNonSourceIce(world, x, y, z))
+      {
+        FCUtilsMisc.PlaceNonPersistantWater(world, x, y, z);
+      }
+      else
+      {
+        world.setBlockWithNotify(x, y, z, Block.waterMoving.blockID);
+      }
     }
-  }
-
-  public void onNeighborBlockChange(World world, int x, int y, int z, int id)
-  {
-    world.scheduleBlockUpdate(x, y, z, this.blockID, this.tickRate(world));
   }
 
   public void onBlockAdded(World world, int x, int y, int z)

@@ -46,6 +46,10 @@ v0.9f (unreleased)
 - Added item tooltips to see different unfired pottery and planter types
   more clearly
 
+- Made snow and ice blocks melt in more consistent manner: stay in dark,
+  melt in light (skylight is ignored in cold biomes). Coincidentally, this
+  also makes snow blocks let a little bit of light through.
+
 v0.9d
 
 - Removed restriction to Java 6/7 because of the way script engine was used.

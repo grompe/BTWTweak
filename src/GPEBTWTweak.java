@@ -205,6 +205,7 @@ public class GPEBTWTweak extends FCAddOn
     Block.blocksList[20] = null; new GPEBlockGlass(20);
     Block.blocksList[54] = null; new GPEBlockChest(54);
     Block.blocksList[65] = null; new GPEBlockLadder(65);
+    Block.blocksList[79] = null; new GPEBlockIce(79);
     Block.blocksList[80] = null; new GPEBlockSnowBlock(80);
     Block.blocksList[91] = null;
     ItemAxe.SetAllAxesToBeEffectiveVsBlock((new FCBlockPumpkin(91, true)).setHardness(1.0F).setStepSound(Block.soundWoodFootstep).setLightValue(1.0F).setUnlocalizedName("litpumpkin"));
