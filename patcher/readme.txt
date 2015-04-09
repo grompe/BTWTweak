@@ -27,6 +27,8 @@ v0.9e (unreleased)
   (MC-8662); framed maps now occupy full block, and label of a renamed item
   is displayed when looking at the frame.
 
+- Greatly reduced chance for scroll drop from ocelots, for balance
+
 v0.9d
 
 - Removed restriction to Java 6/7 because of the way script engine was used.

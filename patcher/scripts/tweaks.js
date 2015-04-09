@@ -3559,7 +3559,7 @@ function getObjProperty(n, propname)
             JumpInsnNode(IFNE, label),
             VarInsnNode(ALOAD, 0),
             FieldInsnNode(GETFIELD, "qm", "ab", "Ljava/util/Random;"),
-            IntInsnNode(BIPUSH, 50),
+            IntInsnNode(SIPUSH, 1000),
             MethodInsnNode(INVOKEVIRTUAL, "java/util/Random", "nextInt", "(I)I"),
             JumpInsnNode(IFNE, label),
             VarInsnNode(ALOAD, 0),
