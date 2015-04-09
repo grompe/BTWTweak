@@ -25,6 +25,7 @@ public class GPEBTWTweak extends FCAddOn
   public static Item gpeItemQuill;
   public static Item gpeItemNameTag;
   public static Item gpeItemSling;
+  public static Item gpeItemHardBoiledEgg;
 
   public static int hotbarCycling = 1;
   public static int hcSpawnRadius = 2000;
@@ -37,6 +38,7 @@ public class GPEBTWTweak extends FCAddOn
   public static int gpeQuillID = 17003;
   public static int gpeNameTagID = 17004;
   public static int gpeSlingID = 17005;
+  public static int gpeHardBoiledEggID = 17006;
   public static int gpeBlockGravestoneID = 163;
   public static int gpeBlockRustedRailID = 164;
   public static int gpeBlockRenameID = 162;
@@ -91,6 +93,7 @@ public class GPEBTWTweak extends FCAddOn
         if (key.equals("gpeQuillID")) gpeQuillID = Integer.parseInt(value);
         if (key.equals("gpeNameTagID")) gpeNameTagID = Integer.parseInt(value);
         if (key.equals("gpeSlingID")) gpeSlingID = Integer.parseInt(value);
+        if (key.equals("gpeHardBoiledEggID")) gpeHardBoiledEggID = Integer.parseInt(value);
         if (key.equals("gpeBlockGravestoneID")) gpeBlockGravestoneID = Integer.parseInt(value);
         if (key.equals("gpeBlockRustedRailID")) gpeBlockRustedRailID = Integer.parseInt(value);
         if (key.equals("gpeBlockRenameID")) gpeBlockRenameID = Integer.parseInt(value);
@@ -134,6 +137,7 @@ public class GPEBTWTweak extends FCAddOn
         + "gpeQuillID=17003\r\n"
         + "gpeNameTagID=17004\r\n"
         + "gpeSlingID=17005\r\n"
+        + "gpeHardBoiledEggID=17006\r\n"
         + "\r\n"
         + "// **** Block IDs ****\r\n"
         + "\r\n"
@@ -214,6 +218,7 @@ public class GPEBTWTweak extends FCAddOn
     gpeItemQuill = new GPEItemQuill(gpeQuillID - 256);
     gpeItemNameTag = new GPEItemNameTag(gpeNameTagID - 256);
     gpeItemSling = new GPEItemSling(gpeSlingID - 256);
+    gpeItemHardBoiledEgg = new FCItemFood(gpeHardBoiledEggID - 256, 3, 0.25F, false, "gpeItemHardBoiledEgg");
     Item.coal = new GPEItemCoal(7);
     Item.pickaxeWood = (new GPEItemPickaxeWeak(14, EnumToolMaterial.WOOD)).setUnlocalizedName("pickaxeWood");
     Item.pickaxeStone = (new GPEItemPickaxeWeak(18, EnumToolMaterial.STONE)).setUnlocalizedName("pickaxeStone");
@@ -330,6 +335,10 @@ public class GPEBTWTweak extends FCAddOn
 
     // Rusted rails give 6.75 times less iron when melted
     FCRecipes.AddStokedCrucibleRecipe(new ItemStack(FCBetterThanWolves.fcItemNuggetIron), new ItemStack[] {new ItemStack(gpeBlockRustedRail, 2)});
+
+    // Real hard-boiled eggs!
+    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemHamAndEggs, 2), new Object[] {new ItemStack(gpeItemHardBoiledEgg), new ItemStack(Item.porkCooked)});
+    FCRecipes.AddCauldronRecipe(new ItemStack(gpeItemHardBoiledEgg), new ItemStack[] {new ItemStack(Item.egg)});
 
     BlockDispenser.dispenseBehaviorRegistry.putObject(gpeItemLooseRock, new GPEBehaviorRock());
 
@@ -618,6 +627,7 @@ public class GPEBTWTweak extends FCAddOn
     t.put(gpeItemQuill.getUnlocalizedName() + ".name", "Ink and Quill");
     t.put(gpeItemNameTag.getUnlocalizedName() + ".name", "Name Tag");
     t.put(gpeItemSling.getUnlocalizedName() + ".name", "Sling");
+    t.put(gpeItemHardBoiledEgg.getUnlocalizedName() + ".name", "Hard-Boiled Egg");
     if (gpeBlockGravestoneID != 0)
     {
       t.put(gpeBlockGravestone.getUnlocalizedName() + ".name", "Gravestone");
@@ -778,7 +788,7 @@ public class GPEBTWTweak extends FCAddOn
                || item.itemID == FCBetterThanWolves.fcHempSeeds.itemID
               )
       {
-        if ( ((EntityItem)entity).age >= 20 &&
+        if ( ((EntityItem)entity).age >= 40 &&
              (id == Block.tilledField.blockID || id == FCBetterThanWolves.fcBlockFarmlandFertilized.blockID
                || (id == FCBetterThanWolves.fcPlanter.blockID && (meta == 1 || meta == 2))
              )
@@ -798,7 +808,22 @@ public class GPEBTWTweak extends FCAddOn
           }
         }
       }
-
+      else if (item.itemID == Item.egg.itemID)
+      {
+        if (id == FCBetterThanWolves.fcAestheticOpaque.blockID && meta == 4) // Block of Padding
+        {
+          if (((EntityItem)entity).age > 5400 && world.getBlockId(x, y + 2, z) == FCBetterThanWolves.fcLightBulbOn.blockID)
+          {
+            world.playSoundAtEntity(entity, "random.pop", 0.25F, world.rand.nextFloat() * 1.5F + 1.0F);
+            EntityChicken chick = new EntityChicken(world);
+            chick.setGrowingAge(-24000);
+            chick.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, 0F, 0F);
+            world.spawnEntityInWorld(chick);
+            item.stackSize--;
+            if (item.stackSize <= 0) entity.setDead();
+          }
+        }
+      }
     }
   }
 

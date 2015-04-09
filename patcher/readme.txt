@@ -34,6 +34,10 @@ v0.9f (unreleased)
   no animals and wolves left for kilometers around. This feature can be
   turned off in BTWTweak.cfg.
 
+- Added hard-boiled eggs, made from raw eggs in a cauldron, and ability to
+  hatch chicks from eggs placed on a padding block and immediately below an
+  active light block.
+
 v0.9d
 
 - Removed restriction to Java 6/7 because of the way script engine was used.
