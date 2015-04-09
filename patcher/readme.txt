@@ -40,6 +40,9 @@ v0.9f (unreleased)
 
 - Increased delay for seeds rooting themselves to 2 seconds
 
+- Changed explosion of stone and cobblestone so there is a small chance
+  to drop a pile of gravel
+
 v0.9d
 
 - Removed restriction to Java 6/7 because of the way script engine was used.

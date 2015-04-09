@@ -25,6 +25,21 @@ public class GPEBlockStone extends FCBlockStone
     if (world.rand.nextInt(10) == 0) makeDrop(world, x, y, z);
   }
 
+  public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion explosion)
+  {
+    float chance = 1.0F;
+    if (explosion != null) chance = 1.0F / explosion.explosionSize;
+    dropPiles(world, x, y, z, chance);
+  }
+
+  private void dropPiles(World world, int x, int y, int z, float chance)
+  {
+    if (world.rand.nextFloat() > chance) return;
+    Item drop = FCBetterThanWolves.fcItemPileGravel;
+    if (world.rand.nextInt(40) == 0) drop = GPEBTWTweak.gpeItemLooseRock;
+    this.dropBlockAsItem_do(world, x, y, z, new ItemStack(drop));
+  }
+
   public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int meta)
   {
     player.addStat(StatList.mineBlockStatArray[blockID], 1);
