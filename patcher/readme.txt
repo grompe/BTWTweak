@@ -23,6 +23,10 @@ v0.9e (unreleased)
 
 - Fixed kiln so it is able to display multiple cracked blocks at once.
 
+- Improved item frames: fixed items being dark (MC-7001), or off-center
+  (MC-8662); framed maps now occupy full block, and label of a renamed item
+  is displayed when looking at the frame.
+
 v0.9d
 
 - Removed restriction to Java 6/7 because of the way script engine was used.
