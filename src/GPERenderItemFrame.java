@@ -121,6 +121,7 @@ public class GPERenderItemFrame extends RenderItemFrame
       MapData mapData = Item.map.getMapData(itemFrame.getDisplayedItem(), itemFrame.worldObj);
       if (mapData != null)
       {
+        GL11.glTranslatef(0F, 0F, -1F);
         renderManager.itemRenderer.mapItemRenderer.renderMap((EntityPlayer)null, renderManager.renderEngine, mapData);
       }
     } else {
