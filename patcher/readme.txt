@@ -3,7 +3,7 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.9f
 
 [********** Change Log ************]
 
-v0.9f (unreleased)
+v0.9f
 
 - Changed villagers to display newest offers in the beginning of the list
   rather than the end, to put an end to constant scrolling through offers.
