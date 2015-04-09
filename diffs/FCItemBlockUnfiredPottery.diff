@@ -1,0 +1,24 @@
+diff --git a/src/minecraft/net/minecraft/src/FCItemBlockUnfiredPottery.java b/src/minecraft/net/minecraft/src/FCItemBlockUnfiredPottery.java
+index 7ab4a94..37667c3 100644
+--- a/src/minecraft/net/minecraft/src/FCItemBlockUnfiredPottery.java
++++ b/src/minecraft/net/minecraft/src/FCItemBlockUnfiredPottery.java
+@@ -2,0 +3,2 @@
++import java.util.List;
++
+@@ -19,0 +22,16 @@ public int getMetadata(int var1)
++
++    @ClientOnly
++    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean adv)
++    {
++        String info = "???";
++        switch(stack.getItemDamage())
++        {
++            case 0: info = "pottery.crucible"; break;
++            case 1: info = "pottery.planter"; break;
++            case 2: info = "pottery.vase"; break;
++            case 3: info = "pottery.urn"; break;
++            case 4: info = "pottery.mould"; break;
++            default: return;
++        }
++        list.add(StatCollector.translateToLocal(info));
++    }

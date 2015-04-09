@@ -637,6 +637,16 @@ public class GPEBTWTweak extends FCAddOn
     t.put("enchantment.haste", "Velocity");
     t.put("container.rename", "Write Tags & Name");
     t.put("key.sprint", "Sprint");
+
+    t.put("pottery.crucible", "Crucible");
+    t.put("pottery.planter", "Planter");
+    t.put("pottery.vase", "Vase");
+    t.put("pottery.urn", "Urn");
+    t.put("pottery.mould", "Mould");
+    t.put("planter.soil", "Soil");
+    t.put("planter.fertilizedSoil", "Fertilized Soil");
+    t.put("planter.soulsand", "Soul Sand");
+    t.put("planter.grass", "Grass");
   }
 
   public static void saveWorldData(World world)

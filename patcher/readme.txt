@@ -43,6 +43,9 @@ v0.9f (unreleased)
 - Changed explosion of stone and cobblestone so there is a small chance
   to drop a pile of gravel
 
+- Added item tooltips to see different unfired pottery and planter types
+  more clearly
+
 v0.9d
 
 - Removed restriction to Java 6/7 because of the way script engine was used.

@@ -2915,6 +2915,124 @@ function getObjProperty(n, propname)
         },
       },
     },
+    "FCItemBlockPlanter":
+    {
+      add: function(cn)
+      {
+        if (!onClient()) return;
+        var mn = MethodNode(ACC_PUBLIC, "a", "(Lwm;Lsq;Ljava/util/List;Z)V", null, null);
+        var label0 = LabelNode();
+        var label1 = LabelNode();
+        var label2 = LabelNode();
+        var label3 = LabelNode();
+        var label4 = LabelNode();
+        var label5 = LabelNode();
+        mn.instructions.add(toInsnList(
+          [
+            LdcInsnNode("???"),
+            VarInsnNode(ASTORE, 5),
+            VarInsnNode(ALOAD, 1),
+            MethodInsnNode(INVOKEVIRTUAL, "wm", "k", "()I"),
+            TableSwitchInsnNode(1, 9, label2, [label0, label1, label2, label2, label2, label2, label2, label3, label4]),
+            label0,
+            FrameNode(F_APPEND, 1, ["java/lang/String"], 0, null),
+            LdcInsnNode("planter.soil"),
+            VarInsnNode(ASTORE, 5),
+            JumpInsnNode(GOTO, label5),
+            label1,
+            FrameNode(F_SAME, 0, null, 0, null),
+            LdcInsnNode("planter.fertilizedSoil"),
+            VarInsnNode(ASTORE, 5),
+            JumpInsnNode(GOTO, label5),
+            label3,
+            FrameNode(F_SAME, 0, null, 0, null),
+            LdcInsnNode("planter.soulsand"),
+            VarInsnNode(ASTORE, 5),
+            JumpInsnNode(GOTO, label5),
+            label4,
+            FrameNode(F_SAME, 0, null, 0, null),
+            LdcInsnNode("planter.grass"),
+            VarInsnNode(ASTORE, 5),
+            JumpInsnNode(GOTO, label5),
+            label2,
+            FrameNode(F_SAME, 0, null, 0, null),
+            InsnNode(RETURN),
+            label5,
+            FrameNode(F_SAME, 0, null, 0, null),
+            VarInsnNode(ALOAD, 3),
+            VarInsnNode(ALOAD, 5),
+            MethodInsnNode(INVOKESTATIC, "bo", "a", "(Ljava/lang/String;)Ljava/lang/String;"),
+            MethodInsnNode(INVOKEINTERFACE, "java/util/List", "add", "(Ljava/lang/Object;)Z"),
+            InsnNode(POP),
+            InsnNode(RETURN),
+          ]
+        ));
+        cn.methods.add(mn);
+        log("Class " + cn.name + ": \t+ adding tooltip item info");
+      },
+    },
+    "FCItemBlockUnfiredPottery":
+    {
+      add: function(cn)
+      {
+        if (!onClient()) return;
+        var mn = MethodNode(ACC_PUBLIC, "a", "(Lwm;Lsq;Ljava/util/List;Z)V", null, null);
+        var label0 = LabelNode();
+        var label1 = LabelNode();
+        var label2 = LabelNode();
+        var label3 = LabelNode();
+        var label4 = LabelNode();
+        var label5 = LabelNode();
+        var label6 = LabelNode();
+        mn.instructions.add(toInsnList(
+          [
+            LdcInsnNode("???"),
+            VarInsnNode(ASTORE, 5),
+            VarInsnNode(ALOAD, 1),
+            MethodInsnNode(INVOKEVIRTUAL, "wm", "k", "()I"),
+            TableSwitchInsnNode(0, 4, label5, [label0, label1, label2, label3, label4]),
+            label0,
+            FrameNode(F_APPEND, 1, ["java/lang/String"], 0, null),
+            LdcInsnNode("pottery.crucible"),
+            VarInsnNode(ASTORE, 5),
+            JumpInsnNode(GOTO, label6),
+            label1,
+            FrameNode(F_SAME, 0, null, 0, null),
+            LdcInsnNode("pottery.planter"),
+            VarInsnNode(ASTORE, 5),
+            JumpInsnNode(GOTO, label6),
+            label2,
+            FrameNode(F_SAME, 0, null, 0, null),
+            LdcInsnNode("pottery.vase"),
+            VarInsnNode(ASTORE, 5),
+            JumpInsnNode(GOTO, label6),
+            label3,
+            FrameNode(F_SAME, 0, null, 0, null),
+            LdcInsnNode("pottery.urn"),
+            VarInsnNode(ASTORE, 5),
+            JumpInsnNode(GOTO, label6),
+            label4,
+            FrameNode(F_SAME, 0, null, 0, null),
+            LdcInsnNode("pottery.mould"),
+            VarInsnNode(ASTORE, 5),
+            JumpInsnNode(GOTO, label6),
+            label5,
+            FrameNode(F_SAME, 0, null, 0, null),
+            InsnNode(RETURN),
+            label6,
+            FrameNode(F_SAME, 0, null, 0, null),
+            VarInsnNode(ALOAD, 3),
+            VarInsnNode(ALOAD, 5),
+            MethodInsnNode(INVOKESTATIC, "bo", "a", "(Ljava/lang/String;)Ljava/lang/String;"),
+            MethodInsnNode(INVOKEINTERFACE, "java/util/List", "add", "(Ljava/lang/Object;)Z"),
+            InsnNode(POP),
+            InsnNode(RETURN),
+          ]
+        ));
+        cn.methods.add(mn);
+        log("Class " + cn.name + ": \t+ adding tooltip item info");
+      },
+    },
     "FCTileEntityCauldron":
     {
       tweakMethods:

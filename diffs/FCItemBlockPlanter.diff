@@ -1,0 +1,23 @@
+diff --git a/src/minecraft/net/minecraft/src/FCItemBlockPlanter.java b/src/minecraft/net/minecraft/src/FCItemBlockPlanter.java
+index 0ebde6f..5365f13 100644
+--- a/src/minecraft/net/minecraft/src/FCItemBlockPlanter.java
++++ b/src/minecraft/net/minecraft/src/FCItemBlockPlanter.java
+@@ -2,0 +3,2 @@
++import java.util.List;
++
+@@ -19,0 +22,15 @@ public int getMetadata(int var1)
++
++    @ClientOnly
++    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean adv)
++    {
++        String info = "???";
++        switch(stack.getItemDamage())
++        {
++            case 1: info = "planter.soil"; break;
++            case 2: info = "planter.fertilizedSoil"; break;
++            case 8: info = "planter.soulsand"; break;
++            case 9: info = "planter.grass"; break;
++            default: return;
++        }
++        list.add(StatCollector.translateToLocal(info));
++    }
