@@ -1,11 +1,11 @@
 diff --git a/src/minecraft/net/minecraft/src/EntityOcelot.java b/src/minecraft/net/minecraft/src/EntityOcelot.java
-index 8373ef9..27b7ad1 100644
+index 8373ef9..c37188c 100644
 --- a/src/minecraft/net/minecraft/src/EntityOcelot.java
 +++ b/src/minecraft/net/minecraft/src/EntityOcelot.java
 @@ -387,0 +388,8 @@ public void initCreature()
 +    public void CheckForScrollDrop()
 +    {
-+        if (!this.isTamed() && this.rand.nextInt(50) == 0)
++        if (!this.isTamed() && this.rand.nextInt(1000) == 0)
 +        {
 +            this.entityDropItem(new ItemStack(FCBetterThanWolves.fcArcaneScroll, 1, GPEBTWTweak.gpeEnchantmentHaste), 0.0F);
 +        }
