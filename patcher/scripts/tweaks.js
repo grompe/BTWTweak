@@ -3581,6 +3581,140 @@ function getObjProperty(n, propname)
         log("Class " + cn.name + ": \t+ Adding arcane scroll drop to ocelots");
       }
     },
+    "qu": // EntityWolf
+    {
+      tweakMethods:
+      {
+        "bm()Z": function(mn)
+        {
+          check(mn, 0xB400B0);
+          mn.instructions.clear();
+          var label0 = LabelNode();
+          var label1 = LabelNode();
+          var label2 = LabelNode();
+          mn.instructions.add(toInsnList(
+            [
+              FieldInsnNode(GETSTATIC, "GPEBTWTweak", "spawnWolvesInForests", "Z"),
+              JumpInsnNode(IFNE, label0),
+              InsnNode(ICONST_0),
+              InsnNode(IRETURN),
+              label0,
+              FrameNode(F_SAME, 0, null, 0, null),
+              VarInsnNode(ALOAD, 0),
+              MethodInsnNode(INVOKEVIRTUAL, "qu", "m", "()Z"),
+              JumpInsnNode(IFEQ, label1),
+              InsnNode(ICONST_0),
+              InsnNode(IRETURN),
+              label1,
+              FrameNode(F_SAME, 0, null, 0, null),
+              VarInsnNode(ALOAD, 0),
+              FieldInsnNode(GETFIELD, "qu", "u", "D"),
+              MethodInsnNode(INVOKESTATIC, "kx", "c", "(D)I"),
+              VarInsnNode(ISTORE, 1),
+              VarInsnNode(ALOAD, 0),
+              FieldInsnNode(GETFIELD, "qu", "w", "D"),
+              MethodInsnNode(INVOKESTATIC, "kx", "c", "(D)I"),
+              VarInsnNode(ISTORE, 2),
+              VarInsnNode(ALOAD, 0),
+              FieldInsnNode(GETFIELD, "qu", "q", "Laab;"),
+              VarInsnNode(ILOAD, 1),
+              VarInsnNode(ILOAD, 2),
+              MethodInsnNode(INVOKEVIRTUAL, "aab", "a", "(II)Laav;"),
+              FieldInsnNode(GETSTATIC, "aav", "f", "Laav;"),
+              JumpInsnNode(IF_ACMPNE, label2),
+              InsnNode(ICONST_1),
+              InsnNode(IRETURN),
+              label2,
+              FrameNode(F_APPEND, 2, [INTEGER, INTEGER], 0, null),
+              InsnNode(ICONST_0),
+              InsnNode(IRETURN),
+            ]
+          ));
+          log("\t* Making wild wolves despawn in forest biome in bm()Z");
+        },
+      },
+      add: function(cn)
+      {
+        var mn = MethodNode(ACC_PUBLIC, "bv", "()Z", null, null);
+        var label0 = LabelNode();
+        var label1 = LabelNode();
+        var label2 = LabelNode();
+        var label3 = LabelNode();
+        mn.instructions.add(toInsnList(
+          [
+            FieldInsnNode(GETSTATIC, "GPEBTWTweak", "spawnWolvesInForests", "Z"),
+            JumpInsnNode(IFNE, label0),
+            VarInsnNode(ALOAD, 0),
+            MethodInsnNode(INVOKESPECIAL, "nu", "bv", "()Z"),
+            InsnNode(IRETURN),
+            label0,
+            FrameNode(F_SAME, 0, null, 0, null),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "qu", "u", "D"),
+            MethodInsnNode(INVOKESTATIC, "kx", "c", "(D)I"),
+            VarInsnNode(ISTORE, 1),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "qu", "E", "Laqx;"),
+            FieldInsnNode(GETFIELD, "aqx", "b", "D"),
+            MethodInsnNode(INVOKESTATIC, "kx", "c", "(D)I"),
+            VarInsnNode(ISTORE, 2),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "qu", "w", "D"),
+            MethodInsnNode(INVOKESTATIC, "kx", "c", "(D)I"),
+            VarInsnNode(ISTORE, 3),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "qu", "q", "Laab;"),
+            VarInsnNode(ILOAD, 1),
+            VarInsnNode(ILOAD, 3),
+            MethodInsnNode(INVOKEVIRTUAL, "aab", "a", "(II)Laav;"),
+            FieldInsnNode(GETSTATIC, "aav", "f", "Laav;"),
+            JumpInsnNode(IF_ACMPNE, label1),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "qu", "q", "Laab;"),
+            VarInsnNode(ILOAD, 1),
+            VarInsnNode(ILOAD, 2),
+            VarInsnNode(ILOAD, 3),
+            MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "canWildWolfSpawnHere", "(Laab;III)Z"),
+            JumpInsnNode(IFEQ, label2),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "qu", "q", "Laab;"),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "qu", "E", "Laqx;"),
+            MethodInsnNode(INVOKEVIRTUAL, "aab", "b", "(Laqx;)Z"),
+            JumpInsnNode(IFEQ, label2),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "qu", "q", "Laab;"),
+            VarInsnNode(ALOAD, 0),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "qu", "E", "Laqx;"),
+            MethodInsnNode(INVOKEVIRTUAL, "aab", "a", "(Lmp;Laqx;)Ljava/util/List;"),
+            MethodInsnNode(INVOKEINTERFACE, "java/util/List", "isEmpty", "()Z"),
+            JumpInsnNode(IFEQ, label2),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "qu", "q", "Laab;"),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "qu", "E", "Laqx;"),
+            MethodInsnNode(INVOKEVIRTUAL, "aab", "d", "(Laqx;)Z"),
+            JumpInsnNode(IFNE, label2),
+            InsnNode(ICONST_1),
+            JumpInsnNode(GOTO, label3),
+            label2,
+            FrameNode(F_APPEND, 3, [INTEGER, INTEGER, INTEGER], 0, null),
+            InsnNode(ICONST_0),
+            label3,
+            FrameNode(F_SAME1, 0, null, 1, [INTEGER]),
+            InsnNode(IRETURN),
+            label1,
+            FrameNode(F_SAME, 0, null, 0, null),
+            VarInsnNode(ALOAD, 0),
+            MethodInsnNode(INVOKESPECIAL, "nu", "bv", "()Z"),
+            InsnNode(IRETURN),
+          ]
+        ));
+        cn.methods.add(mn);
+        log("Class " + cn.name + ": \t+ Making wild wolves respawn in forest biome");
+      }
+    },
     "rf": // EntityBoat
     {
       tweakMethods:

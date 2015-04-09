@@ -11,7 +11,7 @@ public class GPEBTWTweak extends FCAddOn
 {
   public static GPEBTWTweak instance;
   public static GPEBTWTweakProxy proxy;
-  public static String tweakVersion = "0.9e";
+  public static String tweakVersion = "0.9f";
 
   public static Block gpeBlockStone;
   public static Block compatAxleBlock;
@@ -29,6 +29,7 @@ public class GPEBTWTweak extends FCAddOn
   public static int hotbarCycling = 1;
   public static int hcSpawnRadius = 2000;
   public static int minFogDistance = 128;
+  public static boolean spawnWolvesInForests = isBTWVersionOrNewer("4.99999A0F");
 
   public static int gpeLooseRockID = 17000;
   public static int gpeSilkID = 17001;
@@ -82,6 +83,7 @@ public class GPEBTWTweak extends FCAddOn
         if (key.equals("hotbarCycling")) hotbarCycling = Math.max(0, Math.min(4, Integer.parseInt(value)));
         if (key.equals("hcSpawnRadius")) hcSpawnRadius = Integer.parseInt(value);
         if (key.equals("minFogDistance")) minFogDistance = Math.min(256, Integer.parseInt(value));
+        if (key.equals("spawnWolvesInForests")) spawnWolvesInForests = Integer.parseInt(value) > 0;
 
         if (key.equals("gpeLooseRockID")) gpeLooseRockID = Integer.parseInt(value);
         if (key.equals("gpeSilkID")) gpeSilkID = Integer.parseInt(value);
@@ -119,6 +121,10 @@ public class GPEBTWTweak extends FCAddOn
         + "// 128+ keeps ghasts visible on short, 64+ keeps sun/moon visible on tiny render distance.\r\n"
         + "\r\n"
         + "minFogDistance=128\r\n"
+        + "\r\n"
+        + "// Spawn (and despawn) wild wolves in forest biome, to balance them being subject to Hardcore Hunger.\r\n"
+        + "\r\n"
+        + (isBTWVersionOrNewer("4.99999A0F") ? "spawnWolvesInForests=1\r\n" : "spawnWolvesInForests=0\r\n")
         + "\r\n"
         + "// **** Item IDs ****\r\n"
         + "\r\n"
@@ -327,6 +333,13 @@ public class GPEBTWTweak extends FCAddOn
 
     BlockDispenser.dispenseBehaviorRegistry.putObject(gpeItemLooseRock, new GPEBehaviorRock());
 
+    // Balance Hardcore Hunger Wolves by adding wolves spawning in the forest
+    // Patch also changes spawn and despawn in forests
+    if (spawnWolvesInForests)
+    {
+      BiomeGenBase.forest.spawnableMonsterList.add(new SpawnListEntry(EntityWolf.class, 1, 1, 1));
+    }
+    
     FCAddOnHandler.LogMessage("Grom PE's BTWTweak is done tweaking. Enjoy!");
   }
 
@@ -895,5 +908,17 @@ public class GPEBTWTweak extends FCAddOn
     // (actually 0.03% collisions) Negative so won't conflict with existing players
     entityId = -((half_avalanche(half_avalanche(x) + z) >>> 2) + y);
     world.destroyBlockInWorldPartially(entityId, x, y, z, damage);
+  }
+
+  public static boolean canWildWolfSpawnHere(World world, int x, int y, int z)
+  {
+    int light = world.getBlockLightValue(x, y, z);
+    if (world.getBlockId(x, y - 1, z) == Block.grass.blockID
+      && world.getBlockId(x, y + 1, z) == Block.leaves.blockID
+      && light >= 2
+      && light <= 8
+      )
+      return true;
+    return false;
   }
 }

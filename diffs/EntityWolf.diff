@@ -1,0 +1,27 @@
+diff --git a/src/minecraft/net/minecraft/src/EntityWolf.java b/src/minecraft/net/minecraft/src/EntityWolf.java
+index 44b90a2..9bc1796 100644
+--- a/src/minecraft/net/minecraft/src/EntityWolf.java
++++ b/src/minecraft/net/minecraft/src/EntityWolf.java
+@@ -155,0 +156,5 @@ protected boolean canDespawn()
++        if (!GPEBTWTweak.spawnWolvesInForests) return false;
++        if (isTamed()) return false;
++        int x = MathHelper.floor_double(this.posX);
++        int z = MathHelper.floor_double(this.posZ);
++        if (worldObj.getBiomeGenForCoords(x, z) == BiomeGenBase.forest) return true;
+@@ -158,0 +164,16 @@ protected boolean canDespawn()
++    public boolean getCanSpawnHere()
++    {
++        if (!GPEBTWTweak.spawnWolvesInForests) return super.getCanSpawnHere();
++        int x = MathHelper.floor_double(this.posX);
++        int y = MathHelper.floor_double(this.boundingBox.minY);
++        int z = MathHelper.floor_double(this.posZ);
++        if (worldObj.getBiomeGenForCoords(x, z) == BiomeGenBase.forest)
++        {
++          return GPEBTWTweak.canWildWolfSpawnHere(worldObj, x, y, z)
++            && worldObj.checkNoEntityCollision(boundingBox)
++            && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty()
++            && !worldObj.isAnyLiquid(boundingBox);
++        }
++        return super.getCanSpawnHere();
++    }
++

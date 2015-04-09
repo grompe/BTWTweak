@@ -1,9 +1,9 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.9e
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.9f
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
 
-v0.9e (unreleased)
+v0.9f (unreleased)
 
 - Changed villagers to display newest offers in the beginning of the list
   rather than the end, to put an end to constant scrolling through offers.
@@ -28,6 +28,11 @@ v0.9e (unreleased)
   is displayed when looking at the frame.
 
 - Greatly reduced chance for scroll drop from ocelots, for balance
+
+- Added ability for wolves to respawn in forest biome (but not forest hills)
+  like hostile mobs. This is mainly done to support long term servers, where
+  no animals and wolves left for kilometers around. This feature can be
+  turned off in BTWTweak.cfg.
 
 v0.9d
 

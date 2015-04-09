@@ -95,12 +95,13 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
       Minecraft mc = Minecraft.getMinecraft();
       if (!mc.thePlayer.capabilities.isCreativeMode) return;
       World world = mc.thePlayer.worldObj;
-      /*
       int x = MathHelper.floor_double(mc.thePlayer.posX);
       int y = MathHelper.floor_double(mc.thePlayer.posY) - 1;
       int z = MathHelper.floor_double(mc.thePlayer.posZ);
-      GPEBTWTweak.attemptToPlaceGravestone(world, x, y, z);
-      */
+      int bl = world.getBlockLightValue(x, y, z);
+      mc.thePlayer.addChatMessage(String.format("(%d, %d, %d): blockLight %d", x, y, z, bl));
+      //GPEBTWTweak.attemptToPlaceGravestone(world, x, y, z);
+      /*
       if (mc.objectMouseOver != null)
       {
         if (mc.objectMouseOver.typeOfHit == EnumMovingObjectType.TILE)
@@ -113,6 +114,7 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
           mc.thePlayer.addChatMessage(String.format("Looking at block %d:%d (%d, %d, %d)", id, meta, x, y, z));
         }
       }
+      */
     }
     if (sprintKey.pressed)
     {
