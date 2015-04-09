@@ -38,6 +38,8 @@ v0.9f (unreleased)
   hatch chicks from eggs placed on a padding block and immediately below an
   active light block.
 
+- Increased delay for seeds rooting themselves to 2 seconds
+
 v0.9d
 
 - Removed restriction to Java 6/7 because of the way script engine was used.
