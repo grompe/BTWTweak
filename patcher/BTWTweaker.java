@@ -55,18 +55,6 @@ public class BTWTweaker
     return true;
   }
 
-  public static String stream2String(InputStream stream) throws IOException
-  {
-    int len;
-    byte[] buffer = new byte[2048];
-    StringWriter sw = new StringWriter();
-    while ((len = stream.read(buffer, 0, 2048)) > 0)
-    {
-      sw.write(new String(buffer).toCharArray(), 0, len);
-    }
-    return sw.toString();
-  }
-
   public static void main(final String args[]) throws Exception
   {
     if (args.length == 0 || args.length == 1 && args[0].equals("--help"))
@@ -131,13 +119,18 @@ public class BTWTweaker
     if (btwentry != null && status != STATUS_TWEAKED)
     {
       InputStream stream = zip.getInputStream(btwentry);
-      String s = stream2String(stream);
-      // Possible todo: use ASM for more reliable version detection
-      stream.close();
-      int p = s.indexOf("4.");
-      if (p != -1)
+      ClassReader cr = new ClassReader(stream);
+      ClassNode cn = new ClassNode();
+      cr.accept(cn, 0);
+      Iterator<FieldNode> fields = cn.fields.iterator();
+      while (fields.hasNext())
       {
-        btwVersion = s.substring(p, p + (byte)s.charAt(p-1));
+        FieldNode field = fields.next();
+        if (field.name.equals("fcVersionString"))
+        {
+          btwVersion = (String)field.value;
+          break;
+        }
       }
     }
     zip.close();
