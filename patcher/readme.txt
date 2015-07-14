@@ -3,6 +3,11 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.9f
 
 [********** Change Log ************]
 
+v0.9f (patcher fix)
+
+- Changed the way BTW version is detected when patching to be more reliable,
+  and also to fix an odd error
+
 v0.9f
 
 - Changed villagers to display newest offers in the beginning of the list
