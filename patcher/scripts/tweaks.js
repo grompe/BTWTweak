@@ -1949,7 +1949,7 @@ function getObjProperty(n, propname)
       {
         "Explode(Laab;DDD)V": function(mn)
         {
-          check(mn, 0x20A72147);
+          check(mn, [0x20A72147, 0x55EA249F]);
           log("\t* Exploding Jack-O-Lanterns with torches in " + mn.name + mn.desc);
           var label1 = LabelNode();
           var label2 = LabelNode();
