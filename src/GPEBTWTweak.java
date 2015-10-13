@@ -82,7 +82,7 @@ public class GPEBTWTweak extends FCAddOn
         key = tmp[0].trim();
         value = tmp[1].trim();
 
-        if (key.equals("hotbarCycling")) hotbarCycling = Math.max(0, Math.min(4, Integer.parseInt(value)));
+        if (key.equals("hotbarCycling")) hotbarCycling = Math.max(0, Math.min(5, Integer.parseInt(value)));
         if (key.equals("hcSpawnRadius")) hcSpawnRadius = Integer.parseInt(value);
         if (key.equals("minFogDistance")) minFogDistance = Math.min(256, Integer.parseInt(value));
         if (key.equals("spawnWolvesInForests")) spawnWolvesInForests = Integer.parseInt(value) > 0;
@@ -112,7 +112,7 @@ public class GPEBTWTweak extends FCAddOn
         + "// **** BTWTweak Settings ****\r\n"
         + "\r\n"
         + "// Inventory column cycling when pressing hotbar key twice.\r\n"
-        + "// 0 = turn off, 1 = adaptive, 2 = two slots, 3 = three slots, 4 = four slots\r\n"
+        + "// 0 = turn off, 1 = adaptive, 2 = two slots, 3 = three slots, 4 = four slots, 5 = only fill empty slot\r\n"
         + "\r\n"
         + "hotbarCycling=1\r\n"
         + "\r\n"

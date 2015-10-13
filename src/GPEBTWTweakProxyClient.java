@@ -87,7 +87,7 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
         if (mc.thePlayer.inventory.currentItem == slot)
         {
           cycleVertSlots(mc, slot);
-        };
+        }
       }
     }
     if (key == 45) // "X", for debugging!
@@ -125,14 +125,37 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
 
   private void cycleVertSlots(Minecraft mc, int slot)
   {
+    // Inventory layout:
+    //  9 10 11 12 13 14 15 16 17
+    // 18 19 20 21 22 23 24 25 26
+    // 27 28 29 30 31 32 33 34 35
+    // --------------------------
+    //  0  1  2  3  4  5  6  7  8
     EntityClientPlayerMP player = mc.thePlayer;
     int windowId = mc.thePlayer.inventoryContainer.windowId;
     PlayerControllerMP controller = mc.playerController;
+    ItemStack[] inv = mc.thePlayer.inventory.mainInventory;
+
+    if (GPEBTWTweak.hotbarCycling == 5)
+    {
+      // Only fill empty slot
+      if (inv[slot] != null) return;
+      for (int i = 3; i > 0; i--)
+      {
+        if (inv[slot + 9 * i] != null)
+        {
+          controller.windowClick(windowId, slot + 9 * i, 0, 0, player);
+          controller.windowClick(windowId, slot, 0, 0, player);
+          return;
+        }
+      }
+      return;
+    }
+
     int lastRow = 4 - GPEBTWTweak.hotbarCycling;
     if (GPEBTWTweak.hotbarCycling == 1)
     {
       // Adaptive cycling
-      ItemStack[] inv = mc.thePlayer.inventory.mainInventory;
       lastRow = 0;
       if (inv[slot + 9] == null)
       {
