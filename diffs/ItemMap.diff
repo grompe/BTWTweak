@@ -1,0 +1,10 @@
+diff --git a/src/minecraft/net/minecraft/src/ItemMap.java b/src/minecraft/net/minecraft/src/ItemMap.java
+index 5068a83..d02ac31 100644
+--- a/src/minecraft/net/minecraft/src/ItemMap.java
++++ b/src/minecraft/net/minecraft/src/ItemMap.java
+@@ -87 +87 @@ public void updateMapData(World par1World, Entity par2Entity, MapData par3MapDat
+-                            int[] var24 = new int[256];
++                            int[] var24 = new int[4096];
+@@ -183 +183 @@ else if (var33 > 0 && var34 > 0 && Block.blocksList[var34].blockMaterial.materia
+-                                for (var33 = 0; var33 < 256; ++var33)
++                                for (var33 = 0; var33 < 4096; ++var33)

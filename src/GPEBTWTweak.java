@@ -11,13 +11,17 @@ public class GPEBTWTweak extends FCAddOn
 {
   public static GPEBTWTweak instance;
   public static GPEBTWTweakProxy proxy;
-  public static String tweakVersion = "0.9f";
+  public static String tweakVersion = "0.9g";
+
+  public static boolean isDecoPresent;
 
   public static Block gpeBlockStone;
   public static Block compatAxleBlock;
   public static Block gpeBlockGravestone;
   public static Block gpeBlockRustedRail;
   public static Block gpeBlockRename;
+  public static Block gpeBlockDiamondIngot;
+  public static Block gpeBlockHayBale;
 
   public static Item gpeItemLooseRock;
   public static Item gpeItemSilk;
@@ -41,6 +45,8 @@ public class GPEBTWTweak extends FCAddOn
   public static int gpeHardBoiledEggID = 17006;
   public static int gpeBlockGravestoneID = 163;
   public static int gpeBlockRustedRailID = 164;
+  public static int gpeBlockDiamondIngotID = 3007;
+  public static int gpeBlockHayBaleID = 3025;
   public static int gpeBlockRenameID = 162;
   public static int gpeEntityRockID = 25;
   public static int gpeEnchantmentHaste = 70;
@@ -97,6 +103,8 @@ public class GPEBTWTweak extends FCAddOn
         if (key.equals("gpeBlockGravestoneID")) gpeBlockGravestoneID = Integer.parseInt(value);
         if (key.equals("gpeBlockRustedRailID")) gpeBlockRustedRailID = Integer.parseInt(value);
         if (key.equals("gpeBlockRenameID")) gpeBlockRenameID = Integer.parseInt(value);
+        if (key.equals("gpeBlockDiamondIngotID")) gpeBlockDiamondIngotID = Integer.parseInt(value);
+        if (key.equals("gpeBlockHayBaleID")) gpeBlockHayBaleID = Integer.parseInt(value);
         if (key.equals("gpeEntityRockID")) gpeEntityRockID = Integer.parseInt(value);
         if (key.equals("gpeEnchantmentHaste")) gpeEnchantmentHaste = Integer.parseInt(value);
         if (key.equals("gpeEntityRockVehicleSpawnType")) gpeEntityRockVehicleSpawnType = Integer.parseInt(value);
@@ -145,6 +153,8 @@ public class GPEBTWTweak extends FCAddOn
         + "gpeBlockGravestoneID=163\r\n"
         + "gpeBlockRustedRailID=164\r\n"
         + "gpeBlockRenameID=162\r\n"
+        + "gpeBlockDiamondIngotID=3007\r\n"
+        + "gpeBlockHayBaleID=3025\r\n"
         + "\r\n"
         + "// **** Entity IDs ****\r\n"
         + "\r\n"
@@ -196,6 +206,18 @@ public class GPEBTWTweak extends FCAddOn
       compatAxleBlock = Block.blocksList[247];
     }
 
+    try
+    {
+      Class.forName("Ginger");
+      isDecoPresent = true;
+    }
+    catch(ClassNotFoundException e)
+    {
+      isDecoPresent = false;
+    }
+
+    if (!isDecoPresent) extendBlockIDs();
+
     Block.blocksList[1] = null;  gpeBlockStone = new GPEBlockStone(1);
     Block.blocksList[4] = null;  new GPEBlockCobblestone(4);
     Block.blocksList[13] = null; new GPEBlockGravel(13);
@@ -240,6 +262,11 @@ public class GPEBTWTweak extends FCAddOn
     }
     gpeBlockRustedRail = Itemize(new GPEBlockRustedRail(gpeBlockRustedRailID));
     gpeBlockRename = Itemize(new GPEBlockRename(gpeBlockRenameID));
+    if (!isDecoPresent)
+    {
+      gpeBlockDiamondIngot = Itemize(new GPEBlockDiamondIngot(gpeBlockDiamondIngotID));
+      gpeBlockHayBale = Itemize(new GPEBlockHayBale(gpeBlockHayBaleID));
+    }
 
     new GPEEnchantmentHaste(gpeEnchantmentHaste);
 
@@ -346,6 +373,14 @@ public class GPEBTWTweak extends FCAddOn
     // Real hard-boiled eggs!
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemHamAndEggs, 2), new Object[] {new ItemStack(gpeItemHardBoiledEgg), new ItemStack(Item.porkCooked)});
     FCRecipes.AddCauldronRecipe(new ItemStack(gpeItemHardBoiledEgg), new ItemStack[] {new ItemStack(Item.egg)});
+
+    if (!isDecoPresent)
+    {
+      FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockDiamondIngot, 1), new Object[] {"###", "###", "###", '#', FCBetterThanWolves.fcItemIngotDiamond});
+      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemIngotDiamond, 9), new Object[] {new ItemStack(gpeBlockDiamondIngot)});
+      FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockHayBale, 1), new Object[] {"###", "###", "###", '#', Item.wheat});
+      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.wheat, 9), new Object[] {new ItemStack(gpeBlockHayBale)});
+    }
 
     BlockDispenser.dispenseBehaviorRegistry.putObject(gpeItemLooseRock, new GPEBehaviorRock());
 
@@ -641,6 +676,8 @@ public class GPEBTWTweak extends FCAddOn
     }
     t.put(gpeBlockRustedRail.getUnlocalizedName() + ".name", "Rusted Rail");
     t.put(gpeBlockRename.getUnlocalizedName() + ".name", "Writing Table");
+    t.put(gpeBlockDiamondIngot.getUnlocalizedName() + ".name", "Block of Processed Diamond");
+    t.put(gpeBlockHayBale.getUnlocalizedName() + ".name", "Hay Bale");
     t.put("enchantment.haste", "Velocity");
     t.put("container.rename", "Write Tags & Name");
     t.put("key.sprint", "Sprint");
@@ -962,5 +999,102 @@ public class GPEBTWTweak extends FCAddOn
       )
       return true;
     return false;
+  }
+
+  // Taken from Deco Add-on by Yhetti
+  private static void extendBlockIDs()
+  {
+    boolean[] NEW_m_bBlocksPotentialFluidSources = new boolean[4096];
+    for (int i = 0; i < 256; ++i)
+    {
+      NEW_m_bBlocksPotentialFluidSources[i] = FCBetterThanWolves.m_bBlocksPotentialFluidSources[i];
+    }
+    FCBetterThanWolves.m_bBlocksPotentialFluidSources = NEW_m_bBlocksPotentialFluidSources;
+    for (int i = 256; i < 4096; ++i)
+    {
+      Block block = Block.blocksList[i];
+      FCBetterThanWolves.m_bBlocksPotentialFluidSources[i] = block != null && block instanceof FCIBlockFluidSource;
+    }
+
+    StatBase[] NEW_mineBlockStatArray = new StatBase[4096];
+    for (int i = 0; i < 256; ++i)
+    {
+      NEW_mineBlockStatArray[i] = StatList.mineBlockStatArray[i];
+    }
+    for (int i = 256; i < 4096; ++i)
+    {
+      if (Block.blocksList[i] == null || !Block.blocksList[i].getEnableStats()) continue;
+      String s = StatCollector.translateToLocalFormatted("stat.mineBlock", Block.blocksList[i].getLocalizedName());
+      NEW_mineBlockStatArray[i] = new StatCrafting(0x1000000 + i, s, i).registerStat();
+      StatList.objectMineStats.add((StatCrafting)NEW_mineBlockStatArray[i]);
+    }
+    StatList.mineBlockStatArray = NEW_mineBlockStatArray;
+
+    int[] NEW_chanceToEncourageFire = new int[4096];
+    int[] NEW_abilityToCatchFire = new int[4096];
+    for (int i = 0; i < 256; ++i)
+    {
+      NEW_chanceToEncourageFire[i] = BlockFire.chanceToEncourageFire[i];
+      NEW_abilityToCatchFire[i] = BlockFire.abilityToCatchFire[i];
+    }
+    BlockFire.chanceToEncourageFire = NEW_chanceToEncourageFire;
+    BlockFire.abilityToCatchFire = NEW_abilityToCatchFire;
+
+    try
+    {
+      Field carriableBlocksField = EntityEnderman.class.getDeclaredFields()[0];
+      carriableBlocksField.setAccessible(true);
+      boolean[] NEW_carriableBlocks = new boolean[4096];
+      boolean[] OLD_carriableBlocks = (boolean[])carriableBlocksField.get(EntityEnderman.class);
+      for (int i = 0; i < 256; ++i)
+      {
+        NEW_carriableBlocks[i] = OLD_carriableBlocks[i];
+      }
+      carriableBlocksField.set(EntityEnderman.class, NEW_carriableBlocks);
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
+
+    Field[] BeaconFields = FCTileEntityBeacon.class.getDeclaredFields();
+    Field Beacon__m_iEffectsByBlockID = BeaconFields[4];
+    Beacon__m_iEffectsByBlockID.setAccessible(true);
+    if (isBTWVersionOrNewer("4.99999A0Eb Marsupial?!!!"))
+    {
+      ArrayList[] NEW_EffectsByBlockID = new ArrayList[4096];
+      for (int i = 256; i < 4096; ++i)
+      {
+        NEW_EffectsByBlockID[i] = new ArrayList();
+      }
+      try
+      {
+        Beacon__m_iEffectsByBlockID.set(FCTileEntityBeacon.class, NEW_EffectsByBlockID);
+      }
+      catch (Exception e)
+      {
+        e.printStackTrace();
+      }
+    } else {
+      Field Beacon__m_iValidMetadataForBlockID = BeaconFields[5];
+      Beacon__m_iValidMetadataForBlockID.setAccessible(true);
+      int NEW_EffectsByBlockID[] = new int[4096];
+      int[] NEW_ValidMetadataForBlockID = new int[4096];
+      for (int i = 256; i < 4096; ++i)
+      {
+        NEW_EffectsByBlockID[i] = 0;
+        NEW_ValidMetadataForBlockID[i] = -1;
+      }
+      try
+      {
+        Beacon__m_iEffectsByBlockID.set(FCTileEntityBeacon.class, NEW_EffectsByBlockID);
+        Beacon__m_iValidMetadataForBlockID.set(FCTileEntityBeacon.class, NEW_ValidMetadataForBlockID);
+      }
+      catch (Exception e)
+      {
+        e.printStackTrace();
+      }
+    }
+    FCTileEntityBeacon.InitializeEffectsByBlockID();
   }
 }

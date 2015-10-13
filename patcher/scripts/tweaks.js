@@ -4467,6 +4467,35 @@ function getObjProperty(n, propname)
         }
       }
     },
+    "wo": // ItemMap
+    {
+      tweakMethods:
+      {
+        "a(Laab;Lmp;Lajl;)V": function(mn)
+        {
+          check(mn, 0x420DA13F);
+          log("\t* Extending BlockIDs for ItemMap in " + mn.name + mn.desc, 1);
+          var changes = 0;
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.IntInsnNode") && (n.getOpcode() == SIPUSH) && (n.operand == 256))
+            {
+              n.operand = 4096;
+              changes++;
+              if (changes == 2) break;
+            }
+          }
+          if (changes == 2)
+          {
+            log("");
+          } else {
+            log(" ...failed!");
+            recordFailure();
+          }
+        }
+      }
+    },
     "wu": // ItemPickaxe
     {
       tweakMethods:
