@@ -8,7 +8,7 @@ public class GPEBlockHayBale extends Block
   public GPEBlockHayBale(int id)
   {
     super(id, Material.cloth);
-    setHardness(0.5F);
+    setHardness(0.3F);
     setStepSound(soundClothFootstep);
     setUnlocalizedName("gpeBlockHayBale");
     setCreativeTab(CreativeTabs.tabBlock);

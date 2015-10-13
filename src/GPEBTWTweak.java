@@ -23,6 +23,8 @@ public class GPEBTWTweak extends FCAddOn
   public static Block gpeBlockDiamondIngot;
   public static Block gpeBlockHayBale;
   public static Block gpeBlockSoap;
+  public static Block gpeBlockStorage;
+  public static Block gpeBlockFlesh;
 
   public static Item gpeItemLooseRock;
   public static Item gpeItemSilk;
@@ -31,6 +33,7 @@ public class GPEBTWTweak extends FCAddOn
   public static Item gpeItemNameTag;
   public static Item gpeItemSling;
   public static Item gpeItemHardBoiledEgg;
+  public static Item gpeItemBlockStorage;
 
   public static int hotbarCycling = 1;
   public static int hcSpawnRadius = 2000;
@@ -50,6 +53,8 @@ public class GPEBTWTweak extends FCAddOn
   public static int gpeBlockDiamondIngotID = 3007;
   public static int gpeBlockHayBaleID = 3025;
   public static int gpeBlockSoapID = 1700;
+  public static int gpeBlockStorageID = 1701;
+  public static int gpeBlockFleshID = 1702;
   public static int gpeEntityRockID = 25;
   public static int gpeEnchantmentHaste = 70;
   public static int gpeEntityRockVehicleSpawnType = 120;
@@ -108,6 +113,8 @@ public class GPEBTWTweak extends FCAddOn
         if (key.equals("gpeBlockDiamondIngotID")) gpeBlockDiamondIngotID = Integer.parseInt(value);
         if (key.equals("gpeBlockHayBaleID")) gpeBlockHayBaleID = Integer.parseInt(value);
         if (key.equals("gpeBlockSoapID")) gpeBlockSoapID = Integer.parseInt(value);
+        if (key.equals("gpeBlockStorageID")) gpeBlockStorageID = Integer.parseInt(value);
+        if (key.equals("gpeBlockFleshID")) gpeBlockFleshID = Integer.parseInt(value);
         if (key.equals("gpeEntityRockID")) gpeEntityRockID = Integer.parseInt(value);
         if (key.equals("gpeEnchantmentHaste")) gpeEnchantmentHaste = Integer.parseInt(value);
         if (key.equals("gpeEntityRockVehicleSpawnType")) gpeEntityRockVehicleSpawnType = Integer.parseInt(value);
@@ -159,6 +166,8 @@ public class GPEBTWTweak extends FCAddOn
         + "gpeBlockDiamondIngotID=3007\r\n"
         + "gpeBlockHayBaleID=3025\r\n"
         + "gpeBlockSoapID=1700\r\n"
+        + "gpeBlockStorageID=1701\r\n"
+        + "gpeBlockFleshID=1702\r\n"
         + "\r\n"
         + "// **** Entity IDs ****\r\n"
         + "\r\n"
@@ -249,7 +258,6 @@ public class GPEBTWTweak extends FCAddOn
     Item.coal = new GPEItemCoal(7);
     Item.pickaxeWood = (new GPEItemPickaxeWeak(14, EnumToolMaterial.WOOD)).setUnlocalizedName("pickaxeWood");
     Item.pickaxeStone = (new GPEItemPickaxeWeak(18, EnumToolMaterial.STONE)).setUnlocalizedName("pickaxeStone");
-    Item.enderPearl = new GPEItemEnderPearl(112);
     Item.m_bSuppressConflictWarnings = false;
 
     int id = FCBetterThanWolves.fcAestheticOpaque.blockID;
@@ -272,6 +280,9 @@ public class GPEBTWTweak extends FCAddOn
       gpeBlockHayBale = Itemize(new GPEBlockHayBale(gpeBlockHayBaleID));
     }
     gpeBlockSoap = Itemize(new GPEBlockSoap(gpeBlockSoapID));
+    gpeBlockStorage = new GPEBlockStorage(gpeBlockStorageID);
+    gpeItemBlockStorage = new GPEItemBlockStorage(gpeBlockStorageID - 256, gpeBlockStorage);
+    gpeBlockFlesh = Itemize(new GPEBlockFlesh(gpeBlockFleshID));
 
     new GPEEnchantmentHaste(gpeEnchantmentHaste);
 
@@ -353,7 +364,7 @@ public class GPEBTWTweak extends FCAddOn
     FCRecipes.AddVanillaRecipe(new ItemStack(Item.bed, 1), new Object[] {"sss", "ppp", "www", 's', gpeItemSilk, 'p', FCBetterThanWolves.fcPadding, 'w', Block.woodSingleSlab});
 
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.spiderEye, 2), new Object[] {new ItemStack(Item.skull.itemID, 1, 5)});
-
+	
     FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcCauldron, 1), new Object[] {"Y", "X", "C", 'Y', Item.bone, 'X', Item.bucketWater, 'C', Item.cauldron});
 
     // Rename station
@@ -388,6 +399,34 @@ public class GPEBTWTweak extends FCAddOn
     }
     FCRecipes.RemoveVanillaRecipe(new ItemStack(FCBetterThanWolves.fcAestheticOpaque, 1, 5), new Object[] {"###", "###", "###", '#', FCBetterThanWolves.fcSoap});
     FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockSoap, 1), new Object[] {"###", "###", "###", '#', FCBetterThanWolves.fcSoap});
+    FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockStorage, 1, 0), new Object[] {"###", "###", "###", '#', new ItemStack(Item.coal, 1, 0)});
+    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.coal, 9, 0), new Object[] {new ItemStack(gpeBlockStorage, 1, 0)});
+    FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockStorage, 1, 1), new Object[] {"###", "###", "###", '#', new ItemStack(Item.coal, 1, 1)});
+    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.coal, 9, 1), new Object[] {new ItemStack(gpeBlockStorage, 1, 1)});
+    FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockStorage, 1, 2), new Object[] {"###", "###", "###", '#', FCBetterThanWolves.fcCoalDust});
+    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcCoalDust, 9), new Object[] {new ItemStack(gpeBlockStorage, 1, 2)});
+    FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockStorage, 1, 3), new Object[] {"###", "###", "###", '#', FCBetterThanWolves.fcNethercoal});
+    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcNethercoal, 9), new Object[] {new ItemStack(gpeBlockStorage, 1, 3)});
+    FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockStorage, 1, 4), new Object[] {"###", "###", "###", '#', Item.sugar});
+    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.sugar, 9), new Object[] {new ItemStack(gpeBlockStorage, 1, 4)});
+    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.bone, 9), new Object[] {new ItemStack(gpeBlockStorage, 1, 5)});
+    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcSawDust, 16), new Object[] {new ItemStack(gpeBlockStorage, 1, 6)});
+    FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockStorage, 1, 7), new Object[] {"###", "###", "###", '#', FCBetterThanWolves.fcItemNitre});
+    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemNitre, 9), new Object[] {new ItemStack(gpeBlockStorage, 1, 7)});
+    FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockStorage, 1, 8), new Object[] {"###", "###", "###", '#', FCBetterThanWolves.fcPotash});
+    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcPotash, 9), new Object[] {new ItemStack(gpeBlockStorage, 1, 8)});
+    FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockStorage, 1, 9), new Object[] {"###", "###", "###", '#', gpeItemAsh});
+    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(gpeItemAsh, 9), new Object[] {new ItemStack(gpeBlockStorage, 1, 9)});
+    FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockStorage, 1, 10), new Object[] {"###", "###", "###", '#', FCBetterThanWolves.fcFlour});
+    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcFlour, 9), new Object[] {new ItemStack(gpeBlockStorage, 1, 10)});
+    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.rottenFlesh, 9), new Object[] {new ItemStack(gpeBlockFlesh)});
+    // Make those craftable if Hardcore Packing is not available
+    if (!isBTWVersionOrNewer("4.89666"))
+    {
+      FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockStorage, 1, 5), new Object[] {"###", "###", "###", '#', Item.bone});
+      FCRecipes.AddAnvilRecipe(new ItemStack(gpeBlockStorage, 1, 6), new Object[] {"####", "####", "####", "####", '#', FCBetterThanWolves.fcSawDust});
+      FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockFlesh), new Object[] {"###", "###", "###", '#', Item.rottenFlesh});
+    }
 
     BlockDispenser.dispenseBehaviorRegistry.putObject(gpeItemLooseRock, new GPEBehaviorRock());
 
@@ -687,6 +726,18 @@ public class GPEBTWTweak extends FCAddOn
     t.put(gpeBlockHayBale.getUnlocalizedName() + ".name", "Hay Bale");
     t.put("tile.fcBlockAestheticOpaque.soap.name", "Old Block of Soap");
     t.put(gpeBlockSoap.getUnlocalizedName() + ".name", "Block of Soap");
+    t.put(gpeBlockFlesh.getUnlocalizedName() + ".name", "Block of Flesh");
+    t.put(gpeBlockStorage.getUnlocalizedName() + ".coal.name", "Block of Coal");
+    t.put(gpeBlockStorage.getUnlocalizedName() + ".charcoal.name", "Block of Charcoal");
+    t.put(gpeBlockStorage.getUnlocalizedName() + ".coaldust.name", "Block of Coal Dust");
+    t.put(gpeBlockStorage.getUnlocalizedName() + ".nethercoal.name", "Block of Nethercoal");
+    t.put(gpeBlockStorage.getUnlocalizedName() + ".sugar.name", "Block of Sugar");
+    t.put(gpeBlockStorage.getUnlocalizedName() + ".bone.name", "Block of Bone");
+    t.put(gpeBlockStorage.getUnlocalizedName() + ".sawdust.name", "Block of Sawdust");
+    t.put(gpeBlockStorage.getUnlocalizedName() + ".nitre.name", "Block of Nitre");
+    t.put(gpeBlockStorage.getUnlocalizedName() + ".potash.name", "Block of Potash");
+    t.put(gpeBlockStorage.getUnlocalizedName() + ".ash.name", "Block of Ash");
+    t.put(gpeBlockStorage.getUnlocalizedName() + ".flour.name", "Block of Flour");
     t.put("enchantment.haste", "Velocity");
     t.put("container.rename", "Write Tags & Name");
     t.put("key.sprint", "Sprint");
@@ -1008,6 +1059,67 @@ public class GPEBTWTweak extends FCAddOn
       )
       return true;
     return false;
+  }
+
+  public static boolean isPistonPackable(ItemStack stack)
+  {
+    int id = stack.itemID;
+    int meta = stack.getItemDamage();
+    if (id == Item.redstone.itemID) return true;
+    if (id == Item.rottenFlesh.itemID) return true;
+    if (id == Item.enderPearl.itemID) return true;
+    if (id == FCBetterThanWolves.fcSoap.itemID) return true;
+    if (id == Item.wheat.itemID) return true;
+    if (id == FCBetterThanWolves.fcCoalDust.itemID) return true;
+    if (id == FCBetterThanWolves.fcNethercoal.itemID) return true;
+    if (id == Item.sugar.itemID) return true;
+    if (id == Item.bone.itemID) return true;
+    if (id == FCBetterThanWolves.fcSawDust.itemID) return true;
+    if (id == FCBetterThanWolves.fcItemNitre.itemID) return true;
+    if (id == FCBetterThanWolves.fcFlour.itemID) return true;
+    if (id == Item.dyePowder.itemID && meta == 4) return true;
+    return false;
+  }
+
+  public static int getRequiredItemCountToPistonPack(ItemStack stack)
+  {
+    int id = stack.itemID;
+    if (id == FCBetterThanWolves.fcSawDust.itemID) return 16;
+    return 9;
+  }
+
+  public static int getResultingBlockIDOnPistonPack(ItemStack stack)
+  {
+    int id = stack.itemID;
+    int meta = stack.getItemDamage();
+    if (id == Item.redstone.itemID) return Block.blockRedstone.blockID;
+    if (id == Item.rottenFlesh.itemID) return gpeBlockFleshID;
+    if (id == Item.enderPearl.itemID) return FCBetterThanWolves.fcAestheticOpaque.blockID;
+    if (id == FCBetterThanWolves.fcSoap.itemID) return gpeBlockSoapID;
+    if (id == Item.wheat.itemID) return gpeBlockHayBaleID;
+    if (id == FCBetterThanWolves.fcCoalDust.itemID) return gpeBlockStorageID;
+    if (id == FCBetterThanWolves.fcNethercoal.itemID) return gpeBlockStorageID;
+    if (id == Item.sugar.itemID) return gpeBlockStorageID;
+    if (id == Item.bone.itemID) return gpeBlockStorageID;
+    if (id == FCBetterThanWolves.fcSawDust.itemID) return gpeBlockStorageID;
+    if (id == FCBetterThanWolves.fcItemNitre.itemID) return gpeBlockStorageID;
+    if (id == FCBetterThanWolves.fcFlour.itemID) return gpeBlockStorageID;
+    if (id == Item.dyePowder.itemID && meta == 4) return Block.blockLapis.blockID;
+    return 0;
+  }
+
+  public static int getResultingBlockMetadataOnPistonPack(ItemStack stack)
+  {
+    int id = stack.itemID;
+    if (id == Item.enderPearl.itemID) return 14;
+    if (id == FCBetterThanWolves.fcCoalDust.itemID) return 2;
+    if (id == FCBetterThanWolves.fcNethercoal.itemID) return 3;
+    if (id == Item.sugar.itemID) return 4;
+    if (id == Item.bone.itemID) return 5;
+    if (id == FCBetterThanWolves.fcSawDust.itemID) return 6;
+    if (id == FCBetterThanWolves.fcItemNitre.itemID) return 7;
+    if (id == FCBetterThanWolves.fcFlour.itemID) return 10;
+    return 0;
   }
 
   // Taken from Deco Add-on by Yhetti

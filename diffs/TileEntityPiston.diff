@@ -1,0 +1,33 @@
+diff --git a/src/minecraft/net/minecraft/src/TileEntityPiston.java b/src/minecraft/net/minecraft/src/TileEntityPiston.java
+index 800252b..2d08e80 100644
+--- a/src/minecraft/net/minecraft/src/TileEntityPiston.java
++++ b/src/minecraft/net/minecraft/src/TileEntityPiston.java
+@@ -210,0 +211,28 @@ public void writeToNBT(NBTTagCompound par1NBTTagCompound)
++
++    private boolean IsPackableItem(ItemStack stack)
++    {
++        if (GPEBTWTweak.isPistonPackable(stack)) return true;
++        return stack.getItem().IsPistonPackable(stack);
++    }
++
++    private int GetItemCountToPack(ItemStack stack)
++    {
++        if (GPEBTWTweak.isPistonPackable(stack)) return GPEBTWTweak.getRequiredItemCountToPistonPack(stack);
++        return stack.getItem().GetRequiredItemCountToPistonPack(stack);
++    }
++
++    private void CreateBlockOfTypeAtLocation(ItemStack stack, int x, int y, int z)
++    {
++        int id;
++        int meta;
++        if (GPEBTWTweak.isPistonPackable(stack))
++        {
++          id = GPEBTWTweak.getResultingBlockIDOnPistonPack(stack);
++          meta = GPEBTWTweak.getResultingBlockMetadataOnPistonPack(stack);
++        } else {
++          id = stack.getItem().GetResultingBlockIDOnPistonPack(stack);
++          meta = stack.getItem().GetResultingBlockMetadataOnPistonPack(stack);
++        }
++        worldObj.setBlockAndMetadataWithNotify(x, y, z, id, meta);
++        worldObj.playAuxSFX(2236, x, y, z, id);
++    }

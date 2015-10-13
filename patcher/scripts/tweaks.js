@@ -1271,6 +1271,113 @@ function getObjProperty(n, propname)
         cn.methods.add(mn);
       },
     },
+    "aqw": // TileEntityPiston
+    {
+      tweakMethods:
+      {
+        "IsPackableItem(Lwm;)Z": function(mn)
+        {
+          check(mn, 0x5BD024B);
+          mn.instructions.clear();
+          var label = LabelNode();
+          mn.instructions.add(toInsnList(
+            [
+              VarInsnNode(ALOAD, 1),
+              MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "isPistonPackable", "(Lwm;)Z"),
+              JumpInsnNode(IFEQ, label),
+              InsnNode(ICONST_1),
+              InsnNode(IRETURN),
+              label,
+              FrameNode(F_SAME, 0, null, 0, null),
+              VarInsnNode(ALOAD, 1),
+              MethodInsnNode(INVOKEVIRTUAL, "wm", "b", "()Lwk;"),
+              VarInsnNode(ALOAD, 1),
+              MethodInsnNode(INVOKEVIRTUAL, "wk", "IsPistonPackable", "(Lwm;)Z"),
+              InsnNode(IRETURN),
+            ]
+          ));
+          log("\t* Hooked piston's IsPackableItem()");
+        },
+        "GetItemCountToPack(Lwm;)I": function(mn)
+        {
+          check(mn, 0x5BD024B);
+          mn.instructions.clear();
+          var label = LabelNode();
+          mn.instructions.add(toInsnList(
+            [
+              VarInsnNode(ALOAD, 1),
+              MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "isPistonPackable", "(Lwm;)Z"),
+              JumpInsnNode(IFEQ, label),
+              VarInsnNode(ALOAD, 1),
+              MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "getRequiredItemCountToPistonPack", "(Lwm;)I"),
+              InsnNode(IRETURN),
+              label,
+              FrameNode(F_SAME, 0, null, 0, null),
+              VarInsnNode(ALOAD, 1),
+              MethodInsnNode(INVOKEVIRTUAL, "wm", "b", "()Lwk;"),
+              VarInsnNode(ALOAD, 1),
+              MethodInsnNode(INVOKEVIRTUAL, "wk", "GetRequiredItemCountToPistonPack", "(Lwm;)I"),
+              InsnNode(IRETURN),
+            ]
+          ));
+          log("\t* Hooked piston's GetItemCountToPack()");
+        },
+        "CreateBlockOfTypeAtLocation(Lwm;III)V": function(mn)
+        {
+          check(mn, 0x7ECF0885);
+          mn.instructions.clear();
+          var label0 = LabelNode();
+          var label1 = LabelNode();
+          mn.instructions.add(toInsnList(
+            [
+              VarInsnNode(ALOAD, 1),
+              MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "isPistonPackable", "(Lwm;)Z"),
+              JumpInsnNode(IFEQ, label0),
+              VarInsnNode(ALOAD, 1),
+              MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "getResultingBlockIDOnPistonPack", "(Lwm;)I"),
+              VarInsnNode(ISTORE, 5),
+              VarInsnNode(ALOAD, 1),
+              MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "getResultingBlockMetadataOnPistonPack", "(Lwm;)I"),
+              VarInsnNode(ISTORE, 6),
+              JumpInsnNode(GOTO, label1),
+              label0,
+              FrameNode(F_SAME, 0, null, 0, null),
+              VarInsnNode(ALOAD, 1),
+              MethodInsnNode(INVOKEVIRTUAL, "wm", "b", "()Lwk;"),
+              VarInsnNode(ALOAD, 1),
+              MethodInsnNode(INVOKEVIRTUAL, "wk", "GetResultingBlockIDOnPistonPack", "(Lwm;)I"),
+              VarInsnNode(ISTORE, 5),
+              VarInsnNode(ALOAD, 1),
+              MethodInsnNode(INVOKEVIRTUAL, "wm", "b", "()Lwk;"),
+              VarInsnNode(ALOAD, 1),
+              MethodInsnNode(INVOKEVIRTUAL, "wk", "GetResultingBlockMetadataOnPistonPack", "(Lwm;)I"),
+              VarInsnNode(ISTORE, 6),
+              label1,
+              FrameNode(F_APPEND, 2, [INTEGER, INTEGER], 0, null),
+              VarInsnNode(ALOAD, 0),
+              FieldInsnNode(GETFIELD, "aqw", "k", "Laab;"),
+              VarInsnNode(ILOAD, 2),
+              VarInsnNode(ILOAD, 3),
+              VarInsnNode(ILOAD, 4),
+              VarInsnNode(ILOAD, 5),
+              VarInsnNode(ILOAD, 6),
+              MethodInsnNode(INVOKEVIRTUAL, "aab", "setBlockAndMetadataWithNotify", "(IIIII)Z"),
+              InsnNode(POP),
+              VarInsnNode(ALOAD, 0),
+              FieldInsnNode(GETFIELD, "aqw", "k", "Laab;"),
+              IntInsnNode(SIPUSH, 2236),
+              VarInsnNode(ILOAD, 2),
+              VarInsnNode(ILOAD, 3),
+              VarInsnNode(ILOAD, 4),
+              VarInsnNode(ILOAD, 5),
+              MethodInsnNode(INVOKEVIRTUAL, "aab", "e", "(IIIII)V"),
+              InsnNode(RETURN),
+            ]
+          ));
+          log("\t* Hooked piston's CreateBlockOfTypeAtLocation()");
+        },
+      }
+    },
     "axj": // GuiOptions
     {
       tweakClientMethods:
@@ -4921,24 +5028,6 @@ function getObjProperty(n, propname)
     },
   };
 
-  // Classes requiring removal of client-only methods on server side
-  var classesToAdapt =
-  [
-    "GPEBlockChest",
-    "GPEBlockCobblestone",
-    "GPEBlockDirtSlab",
-    "GPEBlockGlass",
-    "GPEBlockGravestone",
-    "GPEBlockLog",
-    "GPEBlockOre",
-    "GPEBlockRename",
-    "GPEBlockStone",
-    "GPEBTWTweak",
-    "GPEItemCoal",
-    "GPEItemQuill",
-    "GPESlotRename",
-  ];
-
   var filesToOverwrite =
   [
     "font/glyph_00.png",
@@ -5238,7 +5327,7 @@ function getObjProperty(n, propname)
   whatToDoWithClass = function(classname)
   {
     if (classname in classesToTweak) return ACTION_TWEAK;
-    if (classesToAdapt.indexOf(classname) != -1) return ACTION_ADAPTSERVER;
+    if ((classname.length >= 3) && classname.startsWith("GPE")) return ACTION_ADAPTSERVER;
     return ACTION_COPY;
   };
 

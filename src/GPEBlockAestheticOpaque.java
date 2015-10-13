@@ -11,7 +11,8 @@ public class GPEBlockAestheticOpaque extends FCBlockAestheticOpaque
 
   private static final float[] hardness =
   {
-    1.5F, 0.6F, 7.5F, 2.0F, 0.6F, 0.6F, 0.6F, 0.6F, 2.0F, 2.0F, 2.0F, 1.5F, 2.0F, 2.0F, 2.0F, 2.0F, 2.0F
+    1.5F, 0.6F, 7.5F, 2.0F, 0.6F, 0.6F, 0.6F, 0.6F,
+    2.0F, 2.0F, 2.0F, 1.5F, 2.0F, 2.0F, 2.0F, 2.0F
   };
 
   public GPEBlockAestheticOpaque(int id)

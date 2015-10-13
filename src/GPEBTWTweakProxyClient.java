@@ -146,6 +146,7 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
         {
           controller.windowClick(windowId, slot + 9 * i, 0, 0, player);
           controller.windowClick(windowId, slot, 0, 0, player);
+          // FIXME: item gets stuck in hand
           return;
         }
       }

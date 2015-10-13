@@ -1,0 +1,25 @@
+diff --git a/src/minecraft/net/minecraft/src/Item.java b/src/minecraft/net/minecraft/src/Item.java
+index 337c513..9bc1325 100644
+--- a/src/minecraft/net/minecraft/src/Item.java
++++ b/src/minecraft/net/minecraft/src/Item.java
+@@ -776,0 +777,20 @@ public Item SetDefaultFurnaceBurnTime(int var1)
++    public boolean IsPistonPackable(ItemStack stack)
++    {
++        return false;
++    }
++
++    public int GetRequiredItemCountToPistonPack(ItemStack stack)
++    {
++        return 0;
++    }
++
++    public int GetResultingBlockIDOnPistonPack(ItemStack stack)
++    {
++        return 0;
++    }
++
++    public int GetResultingBlockMetadataOnPistonPack(ItemStack stack)
++    {
++        return 0;
++    }
++

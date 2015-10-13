@@ -38,4 +38,24 @@ public class GPEItemPotash extends Item
     int meta = world.getBlockMetadata(x, y, z);
     return id == Block.tilledField.blockID || id == FCBetterThanWolves.fcPlanter.blockID && meta == 1;
   }
+
+  public boolean IsPistonPackable(ItemStack stack)
+  {
+    return true;
+  }
+
+  public int GetRequiredItemCountToPistonPack(ItemStack stack)
+  {
+    return 9;
+  }
+
+  public int GetResultingBlockIDOnPistonPack(ItemStack stack)
+  {
+    return GPEBTWTweak.gpeBlockStorage.blockID;
+  }
+
+  public int GetResultingBlockMetadataOnPistonPack(ItemStack stack)
+  {
+    return itemID == GPEBTWTweak.gpeItemAsh.itemID ? 9 : 8;
+  }
 }
