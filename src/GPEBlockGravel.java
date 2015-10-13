@@ -16,8 +16,8 @@ public class GPEBlockGravel extends FCBlockGravel
   public int idDropped(int meta, Random random, int fortune)
   {
     if (fortune > 3) fortune = 3;
-    if (random.nextInt(10 - fortune * 3) != 0) return this.blockID;
-    if (random.nextInt(10 - fortune * 3) != 0) return GPEBTWTweak.gpeItemLooseRock.itemID;
+    if (random.nextInt(7 - fortune * 2) != 0) return this.blockID;
+    if (random.nextInt(7 - fortune * 2) != 0) return GPEBTWTweak.gpeItemLooseRock.itemID;
     return Item.flint.itemID;
   }
 
@@ -35,12 +35,12 @@ public class GPEBlockGravel extends FCBlockGravel
 
   private void dropPiles(World world, int x, int y, int z, float chance)
   {
-    if (world.rand.nextInt(10) == 0)
+    if (world.rand.nextInt(7) == 0)
     {
       if (world.rand.nextFloat() <= chance)
       {
         Item drop = GPEBTWTweak.gpeItemLooseRock;
-        if (world.rand.nextInt(10) == 0) drop = Item.flint;
+        if (world.rand.nextInt(7) == 0) drop = Item.flint;
         this.dropBlockAsItem_do(world, x, y, z, new ItemStack(drop));
       }
       return;

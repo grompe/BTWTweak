@@ -1,5 +1,5 @@
 diff --git a/src/minecraft/net/minecraft/src/FCBlockHopper.java b/src/minecraft/net/minecraft/src/FCBlockHopper.java
-index 1e8c5b4..65a6529 100644
+index 1e8c5b4..54559c5 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockHopper.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockHopper.java
 @@ -495,4 +495,3 @@ private void OnEntityItemCollidedWithBlock(World var1, int var2, int var3, int v
@@ -7,7 +7,7 @@ index 1e8c5b4..65a6529 100644
 -                            EntityItem var18 = new EntityItem(var1, var5.posX, var5.posY, var5.posZ, var17);
 -                            var18.delayBeforeCanPickup = 10;
 -                            var1.spawnEntityInWorld(var18);
-+                            int numflints = (int)(0.5f + var20 * 0.2f * var1.rand.nextFloat());
++                            int numflints = (int)(0.5f + var20 * 0.3f * var1.rand.nextFloat());
 +                            handleNewGravelTop(var1, var5, GPEBTWTweak.gpeItemLooseRock.itemID, var20 - numflints);
 +                            handleNewGravelTop(var1, var5, Item.flint.itemID, numflints);
 @@ -538,0 +538,8 @@ else if (FCUtilsInventory.AddItemStackToInventoryInSlotRange(var9, var5.getEntit

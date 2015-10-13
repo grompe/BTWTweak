@@ -2065,7 +2065,7 @@ function getObjProperty(n, propname)
                   LdcInsnNode(Float("0.5")),
                   VarInsnNode(ILOAD, 16),
                   InsnNode(I2F),
-                  LdcInsnNode(Float("0.2")),
+                  LdcInsnNode(Float("0.3")),
                   InsnNode(FMUL),
                   VarInsnNode(ALOAD, 1),
                   FieldInsnNode(GETFIELD, "aab", "s", "Ljava/util/Random;"),
