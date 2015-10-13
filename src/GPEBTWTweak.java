@@ -22,6 +22,7 @@ public class GPEBTWTweak extends FCAddOn
   public static Block gpeBlockRename;
   public static Block gpeBlockDiamondIngot;
   public static Block gpeBlockHayBale;
+  public static Block gpeBlockSoap;
 
   public static Item gpeItemLooseRock;
   public static Item gpeItemSilk;
@@ -45,9 +46,10 @@ public class GPEBTWTweak extends FCAddOn
   public static int gpeHardBoiledEggID = 17006;
   public static int gpeBlockGravestoneID = 163;
   public static int gpeBlockRustedRailID = 164;
+  public static int gpeBlockRenameID = 162;
   public static int gpeBlockDiamondIngotID = 3007;
   public static int gpeBlockHayBaleID = 3025;
-  public static int gpeBlockRenameID = 162;
+  public static int gpeBlockSoapID = 1700;
   public static int gpeEntityRockID = 25;
   public static int gpeEnchantmentHaste = 70;
   public static int gpeEntityRockVehicleSpawnType = 120;
@@ -105,6 +107,7 @@ public class GPEBTWTweak extends FCAddOn
         if (key.equals("gpeBlockRenameID")) gpeBlockRenameID = Integer.parseInt(value);
         if (key.equals("gpeBlockDiamondIngotID")) gpeBlockDiamondIngotID = Integer.parseInt(value);
         if (key.equals("gpeBlockHayBaleID")) gpeBlockHayBaleID = Integer.parseInt(value);
+        if (key.equals("gpeBlockSoapID")) gpeBlockSoapID = Integer.parseInt(value);
         if (key.equals("gpeEntityRockID")) gpeEntityRockID = Integer.parseInt(value);
         if (key.equals("gpeEnchantmentHaste")) gpeEnchantmentHaste = Integer.parseInt(value);
         if (key.equals("gpeEntityRockVehicleSpawnType")) gpeEntityRockVehicleSpawnType = Integer.parseInt(value);
@@ -155,6 +158,7 @@ public class GPEBTWTweak extends FCAddOn
         + "gpeBlockRenameID=162\r\n"
         + "gpeBlockDiamondIngotID=3007\r\n"
         + "gpeBlockHayBaleID=3025\r\n"
+        + "gpeBlockSoapID=1700\r\n"
         + "\r\n"
         + "// **** Entity IDs ****\r\n"
         + "\r\n"
@@ -267,6 +271,7 @@ public class GPEBTWTweak extends FCAddOn
       gpeBlockDiamondIngot = Itemize(new GPEBlockDiamondIngot(gpeBlockDiamondIngotID));
       gpeBlockHayBale = Itemize(new GPEBlockHayBale(gpeBlockHayBaleID));
     }
+    gpeBlockSoap = Itemize(new GPEBlockSoap(gpeBlockSoapID));
 
     new GPEEnchantmentHaste(gpeEnchantmentHaste);
 
@@ -381,6 +386,8 @@ public class GPEBTWTweak extends FCAddOn
       FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockHayBale, 1), new Object[] {"###", "###", "###", '#', Item.wheat});
       FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.wheat, 9), new Object[] {new ItemStack(gpeBlockHayBale)});
     }
+    FCRecipes.RemoveVanillaRecipe(new ItemStack(FCBetterThanWolves.fcAestheticOpaque, 1, 5), new Object[] {"###", "###", "###", '#', FCBetterThanWolves.fcSoap});
+    FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockSoap, 1), new Object[] {"###", "###", "###", '#', FCBetterThanWolves.fcSoap});
 
     BlockDispenser.dispenseBehaviorRegistry.putObject(gpeItemLooseRock, new GPEBehaviorRock());
 
@@ -678,6 +685,8 @@ public class GPEBTWTweak extends FCAddOn
     t.put(gpeBlockRename.getUnlocalizedName() + ".name", "Writing Table");
     t.put(gpeBlockDiamondIngot.getUnlocalizedName() + ".name", "Block of Processed Diamond");
     t.put(gpeBlockHayBale.getUnlocalizedName() + ".name", "Hay Bale");
+    t.put("tile.fcBlockAestheticOpaque.soap.name", "Old Block of Soap");
+    t.put(gpeBlockSoap.getUnlocalizedName() + ".name", "Block of Soap");
     t.put("enchantment.haste", "Velocity");
     t.put("container.rename", "Write Tags & Name");
     t.put("key.sprint", "Sprint");
