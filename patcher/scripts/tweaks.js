@@ -5327,7 +5327,8 @@ function getObjProperty(n, propname)
   whatToDoWithClass = function(classname)
   {
     if (classname in classesToTweak) return ACTION_TWEAK;
-    if ((classname.length >= 3) && classname.startsWith("GPE")) return ACTION_ADAPTSERVER;
+    var s = classname + "";
+    if (s.startsWith("GPE")) return ACTION_ADAPTSERVER;
     return ACTION_COPY;
   };
 
