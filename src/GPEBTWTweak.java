@@ -829,7 +829,7 @@ public class GPEBTWTweak extends FCAddOn
       {
         if (id == FCBetterThanWolves.fcAestheticOpaque.blockID && meta == 4) // Block of Padding
         {
-          if (((EntityItem)entity).age > 5400 && world.getBlockId(x, y + 2, z) == FCBetterThanWolves.fcLightBulbOn.blockID)
+          if (item.stackSize == 1 && ((EntityItem)entity).age > 5400 && world.getBlockId(x, y + 2, z) == FCBetterThanWolves.fcLightBulbOn.blockID)
           {
             world.playSoundAtEntity(entity, "random.pop", 0.25F, world.rand.nextFloat() * 1.5F + 1.0F);
             EntityChicken chick = new EntityChicken(world);
