@@ -25,6 +25,7 @@ public class GPEBTWTweak extends FCAddOn
   public static Block gpeBlockSoap;
   public static Block gpeBlockStorage;
   public static Block gpeBlockFlesh;
+  public static Block gpeBlockSlime;
 
   public static Item gpeItemLooseRock;
   public static Item gpeItemSilk;
@@ -55,6 +56,7 @@ public class GPEBTWTweak extends FCAddOn
   public static int gpeBlockSoapID = 1700;
   public static int gpeBlockStorageID = 1701;
   public static int gpeBlockFleshID = 1702;
+  public static int gpeBlockSlimeID = 1703;
   public static int gpeEntityRockID = 25;
   public static int gpeEnchantmentHaste = 70;
   public static int gpeEntityRockVehicleSpawnType = 120;
@@ -115,6 +117,7 @@ public class GPEBTWTweak extends FCAddOn
         if (key.equals("gpeBlockSoapID")) gpeBlockSoapID = Integer.parseInt(value);
         if (key.equals("gpeBlockStorageID")) gpeBlockStorageID = Integer.parseInt(value);
         if (key.equals("gpeBlockFleshID")) gpeBlockFleshID = Integer.parseInt(value);
+        if (key.equals("gpeBlockSlimeID")) gpeBlockSlimeID = Integer.parseInt(value);
         if (key.equals("gpeEntityRockID")) gpeEntityRockID = Integer.parseInt(value);
         if (key.equals("gpeEnchantmentHaste")) gpeEnchantmentHaste = Integer.parseInt(value);
         if (key.equals("gpeEntityRockVehicleSpawnType")) gpeEntityRockVehicleSpawnType = Integer.parseInt(value);
@@ -168,6 +171,7 @@ public class GPEBTWTweak extends FCAddOn
         + "gpeBlockSoapID=1700\r\n"
         + "gpeBlockStorageID=1701\r\n"
         + "gpeBlockFleshID=1702\r\n"
+        + "gpeBlockSlimeID=1703\r\n"
         + "\r\n"
         + "// **** Entity IDs ****\r\n"
         + "\r\n"
@@ -283,6 +287,7 @@ public class GPEBTWTweak extends FCAddOn
     gpeBlockStorage = new GPEBlockStorage(gpeBlockStorageID);
     gpeItemBlockStorage = new GPEItemBlockStorage(gpeBlockStorageID - 256, gpeBlockStorage);
     gpeBlockFlesh = Itemize(new GPEBlockFlesh(gpeBlockFleshID));
+    gpeBlockSlime = Itemize(new GPEBlockSlime(gpeBlockSlimeID));
 
     new GPEEnchantmentHaste(gpeEnchantmentHaste);
 
@@ -420,6 +425,8 @@ public class GPEBTWTweak extends FCAddOn
     FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockStorage, 1, 10), new Object[] {"###", "###", "###", '#', FCBetterThanWolves.fcFlour});
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcFlour, 9), new Object[] {new ItemStack(gpeBlockStorage, 1, 10)});
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.rottenFlesh, 9), new Object[] {new ItemStack(gpeBlockFlesh)});
+    FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockSlime), new Object[] {"###", "###", "###", '#', Item.slimeBall});
+    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.slimeBall, 9), new Object[] {new ItemStack(gpeBlockSlime)});
     // Make those craftable if Hardcore Packing is not available
     if (!isBTWVersionOrNewer("4.89666"))
     {
@@ -727,6 +734,7 @@ public class GPEBTWTweak extends FCAddOn
     t.put("tile.fcBlockAestheticOpaque.soap.name", "Old Block of Soap");
     t.put(gpeBlockSoap.getUnlocalizedName() + ".name", "Block of Soap");
     t.put(gpeBlockFlesh.getUnlocalizedName() + ".name", "Block of Flesh");
+    t.put(gpeBlockSlime.getUnlocalizedName() + ".name", "Block of Slime");
     t.put(gpeBlockStorage.getUnlocalizedName() + ".coal.name", "Block of Coal");
     t.put(gpeBlockStorage.getUnlocalizedName() + ".charcoal.name", "Block of Charcoal");
     t.put(gpeBlockStorage.getUnlocalizedName() + ".coaldust.name", "Block of Coal Dust");
