@@ -31,4 +31,25 @@ public class GPEBlockHayBale extends Block
   {
     return (side >> 1 == meta) ? iconTop : iconSide;
   }
+
+  @ClientOnly
+  public boolean RenderBlock(RenderBlocks r, int x, int y, int z)
+  {
+    int meta = r.blockAccess.getBlockMetadata(x, y, z);
+    if (meta == 1)
+    {
+      r.SetUvRotateSouth(1);
+      r.SetUvRotateNorth(1);
+    } else if (meta == 2) {
+      r.SetUvRotateEast(1);
+      r.SetUvRotateWest(1);
+      r.SetUvRotateTop(1);
+      r.SetUvRotateBottom(1);
+    }
+    setBlockBoundsBasedOnState(r.blockAccess, x, y, z);
+    r.setRenderBoundsFromBlock(this);
+    boolean result = r.renderStandardBlock(this, x, y, z);
+    r.ClearUvRotation();
+    return result;
+  }
 }
