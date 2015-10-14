@@ -1,6 +1,7 @@
 package net.minecraft.src;
 
 import java.util.Random;
+import java.util.List;
 
 public class GPEBlockStone extends FCBlockStone
 {
@@ -88,5 +89,12 @@ public class GPEBlockStone extends FCBlockStone
     int id = GPEBTWTweak.gpeItemLooseRock.itemID;
     if (world.rand.nextInt(512) == 0) id = Item.flint.itemID;
     dropBlockAsItem_do(world, x, y, z, new ItemStack(id, 1, 0));
+  }
+
+  public void getSubBlocks(int id, CreativeTabs tabs, List list)
+  {
+    list.add(new ItemStack(id, 1, 0));
+    list.add(new ItemStack(id, 1, 1));
+    list.add(new ItemStack(id, 1, 2));
   }
 }

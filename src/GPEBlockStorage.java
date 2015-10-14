@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import java.util.List;
+
 public class GPEBlockStorage extends Block
 {
   private static final int coal = 0;
@@ -60,6 +62,21 @@ public class GPEBlockStorage extends Block
     int meta = world.getBlockMetadata(x, y, z);
     if (meta == sawdust) return 16;
     return 0;
+  }
+
+  public void getSubBlocks(int id, CreativeTabs tabs, List list)
+  {
+    list.add(new ItemStack(id, 1, 0));
+    list.add(new ItemStack(id, 1, 1));
+    list.add(new ItemStack(id, 1, 2));
+    list.add(new ItemStack(id, 1, 3));
+    list.add(new ItemStack(id, 1, 4));
+    list.add(new ItemStack(id, 1, 5));
+    list.add(new ItemStack(id, 1, 6));
+    list.add(new ItemStack(id, 1, 7));
+    list.add(new ItemStack(id, 1, 8));
+    list.add(new ItemStack(id, 1, 9));
+    list.add(new ItemStack(id, 1, 10));
   }
 
   @ClientOnly
