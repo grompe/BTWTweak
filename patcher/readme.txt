@@ -22,7 +22,7 @@ v0.9g
 
 - Added storage blocks for Wheat, Diamond Ingot, Coal, Charcoal, Coal Dust,
   Nethercoal, Sugar, Bone, Nitre, Potash, Ash, Flour (requires 9 of each).
-  All of them can be retrieved by crafted back to items.
+  All of them can be retrieved by crafting back to items.
   Block of Bone can be only crafted by Hardcore Packing.
 
 - Added Block of Flesh, squishy block made of 9 Rotten Flesh by Hardcore
