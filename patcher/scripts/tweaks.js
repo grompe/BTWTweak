@@ -1498,8 +1498,10 @@ function getObjProperty(n, propname)
         "a(FJ)V": function(mn)
         {
           check(mn, [0x13FCF28A, 0x48CAF8B5]);
-          log("\t* Ensuring sky is visible in EntityRenderer " + mn.name + mn.desc, 1);
-          for (var i = 0; i < mn.instructions.size(); i++)
+          log("\t* Ensuring sky is visible and adding microblock preview hook in EntityRenderer " + mn.name + mn.desc, 1);
+          var changes = 0;
+          var i;
+          for (i = 0; i < mn.instructions.size(); i++)
           {
             var n = mn.instructions.get(i);
             if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner.equals("avy") && n.name.equals("e"))
@@ -1508,13 +1510,33 @@ function getObjProperty(n, propname)
               if (n.getOpcode() == ICONST_2)
               {
                 mn.instructions.set(n, InsnNode(ICONST_4));
-                log("");
-                return;
+                changes++;
+                break;
               }
             }
           }
-          log(" ...failed!");
-          recordFailure();
+          for (i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("bfy") && n.name.equals("b"))
+            {
+              mn.instructions.insert(n, toInsnList(
+                [
+                  VarInsnNode(FLOAD, 1),
+                  MethodInsnNode(INVOKESTATIC, "GPEBTWTweakProxyClient", "drawMicroblockTarget", "(F)V"),
+                ]
+              ));
+              changes++;
+              if (changes == 3) break;
+            }
+          }
+          if (changes == 3)
+          {
+            log("");
+          } else {
+            log(" ...failed!");
+            recordFailure();
+          }
         },
       },
     },
