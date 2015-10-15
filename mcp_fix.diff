@@ -1,7 +1,7 @@
-diff -u -r nofix/EntityAnimal.java fix/EntityAnimal.java
---- nofix/EntityAnimal.java	2013-07-25 22:50:50.016349800 +0700
-+++ fix/EntityAnimal.java	2013-07-13 12:04:35.188558700 +0700
-@@ -663,9 +663,9 @@
+diff -u -r broken/src/minecraft/net/minecraft/src/EntityAnimal.java fixed/src/minecraft/net/minecraft/src/EntityAnimal.java
+--- broken/src/minecraft/net/minecraft/src/EntityAnimal.java
++++ fixed/src/minecraft/net/minecraft/src/EntityAnimal.java
+@@ -547,9 +547,9 @@
  
      public void setRevengeTarget(EntityLiving var1)
      {
@@ -13,7 +13,7 @@ diff -u -r nofix/EntityAnimal.java fix/EntityAnimal.java
          {
              this.revengeTimer = 300;
          }
-@@ -699,9 +699,9 @@
+@@ -583,9 +583,9 @@
  
      public void OnNearbyAnimalAttacked(EntityAnimal var1, EntityLiving var2)
      {
@@ -25,9 +25,33 @@ diff -u -r nofix/EntityAnimal.java fix/EntityAnimal.java
              this.revengeTimer = 150;
          }
          else if (this.revengeTimer < 150)
-diff -u -r nofix/RenderBlocks.java fix/RenderBlocks.java
---- nofix/RenderBlocks.java	2013-07-25 22:50:50.286550400 +0700
-+++ fix/RenderBlocks.java	2013-07-13 12:20:36.336553400 +0700
+@@ -606,9 +606,9 @@
+ 
+     protected void OnNearbyPlayerStartles(EntityPlayer var1)
+     {
+-        if (this.breeding == null)
++        if (entityLivingToAttack == null)
+         {
+-            this.breeding = var1;
++            entityLivingToAttack = var1;
+             this.revengeTimer = 150;
+         }
+         else if (this.revengeTimer < 150)
+diff -u -r broken/src/minecraft/net/minecraft/src/EntityGhast.java fixed/src/minecraft/net/minecraft/src/EntityGhast.java
+--- broken/src/minecraft/net/minecraft/src/EntityGhast.java
++++ fixed/src/minecraft/net/minecraft/src/EntityGhast.java
+@@ -123,7 +123,7 @@
+                 long var10 = var9.m_lTimeOfLastDimensionSwitch;
+                 long var12 = this.worldObj.getWorldTime();
+ 
+-                if (var12 > var10 && var12 - var10 <= 600L && var9 != this.waypointZ)
++                if (var12 > var10 && var12 - var10 <= 600L && var9 != this.entityLivingToAttack)
+                 {
+                     this.targetedEntity = null;
+                 }
+diff -u -r broken/src/minecraft/net/minecraft/src/RenderBlocks.java fixed/src/minecraft/net/minecraft/src/RenderBlocks.java
+--- broken/src/minecraft/net/minecraft/src/RenderBlocks.java
++++ fixed/src/minecraft/net/minecraft/src/RenderBlocks.java
 @@ -2487,19 +2487,19 @@
          float var21 = (float)(par2 + 1);
          float var22 = (float)(par4 + 0);

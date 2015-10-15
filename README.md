@@ -235,35 +235,50 @@ Go to the chat: http://chat.grompe.org.ru/#mcmoddev
 
 Minecraft Forum discussion: http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1290803-better-than-wolves-btwtweak-v0-9b-with-slings-and
 
+# Useful links
+
+Changelog: https://raw.github.com/grompe/BTWTweak/master/patcher/readme.txt
+
 MCP 7.51 download link: http://www.mediafire.com/download/95vlzp1a4n4wjqw/mcp751.zip
+
+BTW download link: http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1272992-btw
+(first MediaFire link in the post)
+
+Minecraft 1.5.2 download link: http://s3.amazonaws.com/Minecraft.Download/versions/1.5.2/1.5.2.jar
 
 ---
 
-[****** Source installation instructions ******]
+# Source installation instructions
 
-1) Unpack and setup MCP 7.51 for Minecraft 1.5.2
-2) Install BTW into minecraft.jar
-3) Decompile with MCP, it will complain a bit
-4) Apply MCP fix patch using the mcp_fix.diff file
-5) Run MCP's updatemd5 script
-6) Patch the source code using ./diffs/*.diff files
-7) Copy ./src/*.java files to your ./src/minecraft/net/minecraft/src/ directory
-...
-42) Profit!
+1. Unpack MCP 7.51
+2. Install BTW into 1.5.2 minecraft.jar
+3. Place minecraft.jar, jinput.jar, lwjgl.jar, lwjgl_util.jar into ./jars/bin/ directory,
+   and natives (jinput, lwjgl, openal) into ./jars/bin/natives/ directory
+4. Decompile with MCP, it will complain a bit
+5. Apply MCP fix patch using the mcp_fix.diff file:
+   patch -p 1 -i mcp_fix.diff
+   If you have trouble with patch.exe crashing on Windows,
+   use the one from Git distribution or make changes by hand.
+6. Run MCP updatemd5
+7. backup the ./temp/client.md5 file
+8. Run MCP cleanup
+9. Install BTWTweak into minecraft.jar with BTW
+10. Decompile with MCP again
+11. Apply MCP fix again
+12. put back the saved ./temp/client.md5 file
+13. Copy ./tweakres/\*.\* directory contents to your ./bin/minecraft/ directory
+14. Copy ./tweaksrc/\*.java files to your ./src/minecraft/net/minecraft/src/ directory
 
-[****** Binary installation instruction ******]
+Now you can modify source, MCP recompile and play using MCP startclient!
 
-1) Follow the Source installation instructions
-2) Recompile, reobfuscate with MCP
-3) Insert all ./reobf/minecraft/GPE*.class files into patcher/GPEBTWTweak_files.zip
-4) Insert all ./res/*.* files into patcher/GPEBTWTweak_files.zip
-5) Compile the patcher if you haven't yet: "javac BTWTweaker.java CliPatcher.java"
-6) Repackage the patcher: "jar cvfe BTWTweak.jar CliPatcher *"
-7) Use the patcher
-...
-42) Profit!
+# Binary installation instruction
 
-[********** Change Log ************]
+1. Follow the Source installation instructions
+2. MCP recompile, then MCP reobfuscate
+3. Insert all ./reobf/minecraft/GPE\*.class files into patcher/GPEBTWTweak_files.zip
+4. If you added/modified textures, put them back to ./tweakres/ directory
+5. Insert all ./tweakres/\*.\* files into patcher/GPEBTWTweak_files.zip
+6. Compile the patcher if you haven't yet: "javac BTWTweaker.java CliPatcher.java"
+7. Repackage the patcher: "jar cvfe BTWTweak.jar CliPatcher \*"
 
-You can see it here:
-https://raw.github.com/grompe/BTWTweak/master/patcher/readme.txt
+Now you have BTWTweak.jar!
