@@ -95,13 +95,12 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
       Minecraft mc = Minecraft.getMinecraft();
       if (!mc.thePlayer.capabilities.isCreativeMode) return;
       World world = mc.thePlayer.worldObj;
-      int x = MathHelper.floor_double(mc.thePlayer.posX);
-      int y = MathHelper.floor_double(mc.thePlayer.posY) - 1;
-      int z = MathHelper.floor_double(mc.thePlayer.posZ);
-      int bl = world.getBlockLightValue(x, y, z);
-      mc.thePlayer.addChatMessage(String.format("(%d, %d, %d): blockLight %d", x, y, z, bl));
+      //int x = MathHelper.floor_double(mc.thePlayer.posX);
+      //int y = MathHelper.floor_double(mc.thePlayer.posY) - 1;
+      //int z = MathHelper.floor_double(mc.thePlayer.posZ);
+      //int bl = world.getBlockLightValue(x, y, z);
+      //mc.thePlayer.addChatMessage(String.format("(%d, %d, %d): blockLight %d", x, y, z, bl));
       //GPEBTWTweak.attemptToPlaceGravestone(world, x, y, z);
-      /*
       if (mc.objectMouseOver != null)
       {
         if (mc.objectMouseOver.typeOfHit == EnumMovingObjectType.TILE)
@@ -114,7 +113,6 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
           mc.thePlayer.addChatMessage(String.format("Looking at block %d:%d (%d, %d, %d)", id, meta, x, y, z));
         }
       }
-      */
     }
     if (sprintKey.pressed)
     {
@@ -125,12 +123,19 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
 
   private void cycleVertSlots(Minecraft mc, int slot)
   {
-    // Inventory layout:
+    // Inventory layout for thePlayer.inventory.mainInventory:
     //  9 10 11 12 13 14 15 16 17
     // 18 19 20 21 22 23 24 25 26
     // 27 28 29 30 31 32 33 34 35
     // --------------------------
     //  0  1  2  3  4  5  6  7  8
+
+    // Inventory layout for window clicks:
+    //  9 10 11 12 13 14 15 16 17
+    // 18 19 20 21 22 23 24 25 26
+    // 27 28 29 30 31 32 33 34 35
+    // --------------------------
+    // 36 37 38 39 40 41 42 43 44
     EntityClientPlayerMP player = mc.thePlayer;
     int windowId = mc.thePlayer.inventoryContainer.windowId;
     PlayerControllerMP controller = mc.playerController;
@@ -144,9 +149,8 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
       {
         if (inv[slot + 9 * i] != null)
         {
-          controller.windowClick(windowId, slot + 9 * i, 0, 0, player);
-          controller.windowClick(windowId, slot, 0, 0, player);
-          // FIXME: item gets stuck in hand
+          controller.windowClick(windowId, slot + i * 9, 0, 0, player);
+          controller.windowClick(windowId, slot + 36, 0, 0, player);
           return;
         }
       }
@@ -173,9 +177,13 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
     }
     for (int i = 3; i > lastRow; i--)
     {
-      controller.windowClick(windowId, slot + i * 9, 0, 0, player);
+      // Don't attempt to pick up empty slots
+      boolean a = inv[slot + i * 9] != null;
+      boolean b = inv[(slot + i * 9 + 9) % 36] != null;
+      if (!a && !b) continue;
+      if (a) controller.windowClick(windowId, slot + i * 9, 0, 0, player);
       controller.windowClick(windowId, slot + i * 9 + 9, 0, 0, player);
-      controller.windowClick(windowId, slot + i * 9, 0, 0, player);
+      if (b) controller.windowClick(windowId, slot + i * 9, 0, 0, player);
     }
   }
 
