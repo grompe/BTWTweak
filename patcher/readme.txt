@@ -3,6 +3,44 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.9f
 
 [********** Change Log ************]
 
+v0.9g
+
+- Limited chicken egg incubating to one at a time. No more happily hatching
+  stacks of eggs, unless you build a whole room dedicated to that.
+
+- New hotbar cycling mode: fill empty slot. People who previously didn't
+  like hotbar cycling may find this feature useful.
+
+- Increased the chance of flint from digging and filtering gravel as it felt
+  way too rare. Also digging gravel has higher chance to drop a loose rock.
+
+- Extended block IDs! This means there is no more shortage of them and new
+  blocks can be added freely. Thanks to Yhetti for pioneering the technique.
+
+- Made Soap blocks slippery. You will have to replace and recraft soap
+  blocks you already have for this to take effect.
+
+- Added storage blocks for Wheat, Diamond Ingot, Coal, Charcoal, Coal Dust,
+  Nethercoal, Sugar, Bone, Nitre, Potash, Ash, Flour (requires 9 of each).
+  All of them can be retrieved by crafted back to items.
+  Block of Bone can be only crafted by Hardcore Packing.
+
+- Added Block of Flesh, squishy block made of 9 Rotten Flesh by Hardcore
+  Packing and uncrafted by hand.
+
+- Added Block of Sawdust, made of 16 Sawdust by Hardcore Packing and
+  uncrafted by saw.
+
+- Added Block of Slime, sticky transparent block made of 9 slimeballs. Note
+  that it doesn't affect piston mechanics like it does in later versions of
+  Vanilla Minecraft.
+
+- Redstone and Lapis are now handled by Hardcore Packing, and all of the
+  above storage blocks.
+
+- Added preview for microblocks: now you can see where your sidings,
+  mouldings and corners will go.
+
 v0.9f (patcher fix)
 
 - Changed the way BTW version is detected when patching to be more reliable,

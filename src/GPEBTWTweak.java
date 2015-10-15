@@ -415,7 +415,6 @@ public class GPEBTWTweak extends FCAddOn
     FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockStorage, 1, 4), new Object[] {"###", "###", "###", '#', Item.sugar});
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.sugar, 9), new Object[] {new ItemStack(gpeBlockStorage, 1, 4)});
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.bone, 9), new Object[] {new ItemStack(gpeBlockStorage, 1, 5)});
-    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcSawDust, 16), new Object[] {new ItemStack(gpeBlockStorage, 1, 6)});
     FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockStorage, 1, 7), new Object[] {"###", "###", "###", '#', FCBetterThanWolves.fcItemNitre});
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemNitre, 9), new Object[] {new ItemStack(gpeBlockStorage, 1, 7)});
     FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockStorage, 1, 8), new Object[] {"###", "###", "###", '#', FCBetterThanWolves.fcPotash});
@@ -635,6 +634,11 @@ public class GPEBTWTweak extends FCAddOn
       EjectSawProducts(world, x, y, z,
         meta == 15 ? FCBetterThanWolves.fcBlockWoodCornerItemStubID : FCBetterThanWolves.fcBlockWoodMouldingItemStubID,
         3, meta == 12 ? 2 : 3);
+    }
+    else if (id == gpeBlockStorage.blockID)
+    {
+      if (meta != 6) return false;
+      EjectSawProducts(world, x, y, z, FCBetterThanWolves.fcSawDust.itemID, 0, 16);
     }
     else
     {
