@@ -4912,6 +4912,21 @@ function getObjProperty(n, propname)
       },
     },
     // Fix mods! Now with this mod you can fix mods for the mod for Minecraft.
+    // Fix CraftGuide visible compass/clock exploit
+    "uristqwerty/CraftGuide/client/ui/GuiRenderer":
+    {
+      tweakClientMethods:
+      {
+        "drawItemStack(Lwm;IIZ)V": function(mn)
+        {
+          check(mn, [0x61225517]);
+          log("\t* Stopping CraftGuide visible compass/clock exploit in " + mn.name + mn.desc);
+          replaceAllMethodCalls(mn,
+            [INVOKEVIRTUAL, "bhi", "b", "(Lawv;Lbge;Lwm;II)V"],
+            [INVOKESTATIC, "GPEBTWTweakProxyClient", "safeRenderItemAndEffectIntoGUI", "(Lbhi;Lawv;Lbge;Lwm;II)V"]);
+        }
+      }
+    },
     // Fix Deco add-on
     "Ginger":
     {

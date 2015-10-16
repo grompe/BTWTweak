@@ -317,8 +317,29 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
     GL11.glDepthMask(true);
     GL11.glEnable(GL11.GL_TEXTURE_2D);
     GL11.glDisable(GL11.GL_BLEND);
-}
-    
+  }
+
+  public static void safeRenderItemAndEffectIntoGUI(RenderItem ri, FontRenderer fr, RenderEngine re, ItemStack stack, int par4, int par5)
+  {
+    int id = stack.itemID;
+    if (id == Item.compass.itemID)
+    {
+      TextureCompass.compassTexture.UpdateInert();
+      ri.renderItemAndEffectIntoGUI(fr, re, stack, par4, par5);
+      TextureCompass.compassTexture.updateAnimation();
+    }
+    else if (id == Item.pocketSundial.itemID)
+    {
+      TextureClock.m_clockTexture.UpdateInert();
+      ri.renderItemAndEffectIntoGUI(fr, re, stack, par4, par5);
+      TextureClock.m_clockTexture.updateAnimation();
+    }
+    else
+    {
+      ri.renderItemAndEffectIntoGUI(fr, re, stack, par4, par5);
+    }
+  }
+  
   public static void setAppIcon(Frame frame)
   {
     try

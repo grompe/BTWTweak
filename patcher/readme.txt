@@ -41,6 +41,9 @@ v0.9g
 - Added preview for microblocks: now you can see where your sidings,
   mouldings and corners will go.
 
+- If CraftGuide is found in the minecraft.jar, it will be patched so it will
+  not display actual compass and clock data in its GUI.
+
 v0.9f (patcher fix)
 
 - Changed the way BTW version is detected when patching to be more reliable,
