@@ -166,7 +166,9 @@ public class GPEBTWTweak extends FCAddOn
         + "gpeBlockGravestoneID=163\r\n"
         + "gpeBlockRustedRailID=164\r\n"
         + "gpeBlockRenameID=162\r\n"
+        + "// don't change gpeBlockDiamondIngotID if Deco Add-On is present\r\n"
         + "gpeBlockDiamondIngotID=3007\r\n"
+        + "// don't change gpeBlockHayBaleID if Deco Add-On is present\r\n"
         + "gpeBlockHayBaleID=3025\r\n"
         + "gpeBlockSoapID=1700\r\n"
         + "gpeBlockStorageID=1701\r\n"
@@ -733,8 +735,11 @@ public class GPEBTWTweak extends FCAddOn
     }
     t.put(gpeBlockRustedRail.getUnlocalizedName() + ".name", "Rusted Rail");
     t.put(gpeBlockRename.getUnlocalizedName() + ".name", "Writing Table");
-    t.put(gpeBlockDiamondIngot.getUnlocalizedName() + ".name", "Block of Processed Diamond");
-    t.put(gpeBlockHayBale.getUnlocalizedName() + ".name", "Hay Bale");
+    if (!isDecoPresent)
+    {
+      t.put(gpeBlockDiamondIngot.getUnlocalizedName() + ".name", "Block of Processed Diamond");
+      t.put(gpeBlockHayBale.getUnlocalizedName() + ".name", "Hay Bale");
+    }
     t.put("tile.fcBlockAestheticOpaque.soap.name", "Old Block of Soap");
     t.put(gpeBlockSoap.getUnlocalizedName() + ".name", "Block of Soap");
     t.put(gpeBlockFlesh.getUnlocalizedName() + ".name", "Block of Flesh");
