@@ -1,4 +1,4 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.9f
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.9g
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
@@ -41,8 +41,12 @@ v0.9g
 - Added preview for microblocks: now you can see where your sidings,
   mouldings and corners will go.
 
+- Removed bone to glue recipe; bonemeal to glue ratio nerfed to 64 to 1.
+
 - If CraftGuide is found in the minecraft.jar, it will be patched so it will
   not display actual compass and clock data in its GUI.
+
+- Added support for IME input (MC-2781).
 
 v0.9f (patcher fix)
 

@@ -788,6 +788,47 @@ function getObjProperty(n, propname)
         log("Class " + cn.name + ": \t+ Adding gloom render to ingame GUI");
       },
     },
+    "axr": // GuiScreen
+    {
+      tweakClientMethods:
+      {
+        "n()V": function(mn)
+        {
+          check(mn, 0xA56A0AD6);
+          log("\t* Handling IME input in " + mn.name + mn.desc, 1);
+          var changes = 0;
+          var label = LabelNode();
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.JumpInsnNode"))
+            {
+              mn.instructions.insert(n, toInsnList(
+                [
+                  label,
+                  FrameNode(F_SAME, 0, null, 0, null),
+                ]
+              ));
+              mn.instructions.insert(mn.instructions.get(0), toInsnList(
+                [
+                  MethodInsnNode(INVOKESTATIC, "org/lwjgl/input/Keyboard", "getEventCharacter", "()C"),
+                  IntInsnNode(BIPUSH, 32),
+                  JumpInsnNode(IF_ICMPGE, label),
+                ]
+              ));
+              return;
+            }
+          }
+          if (changes == 1)
+          {
+            log("");
+          } else {
+            log(" ...failed!");
+            recordFailure();
+          }
+        }
+      }
+    },
     "azb": // InventoryEffectRenderer
     {
       tweakClientMethods:
