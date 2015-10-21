@@ -11,7 +11,7 @@ public class GPEBTWTweak extends FCAddOn
 {
   public static GPEBTWTweak instance;
   public static GPEBTWTweakProxy proxy;
-  public static String tweakVersion = "0.9g";
+  public static String tweakVersion = "0.9ga";
 
   public static boolean isDecoPresent;
 
@@ -757,6 +757,7 @@ public class GPEBTWTweak extends FCAddOn
     t.put("enchantment.haste", "Velocity");
     t.put("container.rename", "Write Tags & Name");
     t.put("key.sprint", "Sprint");
+    t.put("key.tell", "Tell");
 
     t.put("pottery.crucible", "Crucible");
     t.put("pottery.planter", "Planter");

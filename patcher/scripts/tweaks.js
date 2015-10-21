@@ -1520,6 +1520,25 @@ function getObjProperty(n, propname)
         },
       },
     },
+    'bdv': // EntityClientPlayerMP
+    {
+      tweakClientMethods:
+      {
+        "d(Ljava/lang/String;)V": function(mn)
+        {
+          check(mn, 0x10810419);
+          CodeInserter(
+            BeginningFinder(),
+            [
+              VarInsnNode(ALOAD, 1),
+              MethodInsnNode(INVOKESTATIC, "GPEBTWTweakProxyClient", "sendingChatMessage", "(Ljava/lang/String;)V"),
+            ],
+            "\t* Adding chat message check hook in ",
+            INSERT_BEFORE
+          ).process(mn);
+        }
+      },
+    },
     "bfq": // EntityRenderer
     {
       tweakMethods:

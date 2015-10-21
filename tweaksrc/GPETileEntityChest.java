@@ -49,6 +49,7 @@ public class GPETileEntityChest extends FCTileEntityChest
   {
     Block block = getBlockType();
     if (block == null) return;
+    if (block.blockID != Block.chest.blockID) return;
 
     oldChecked = true;
 

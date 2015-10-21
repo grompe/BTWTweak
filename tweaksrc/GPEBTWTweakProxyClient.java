@@ -15,7 +15,10 @@ import org.lwjgl.input.Keyboard;
 public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
 {
   public KeyBinding sprintKey;
+  public KeyBinding tellKey;
   private Map tileEntitySpecialRendererMap;
+
+  public static String lastToldName = "";
 
   public File getConfigDir()
   {
@@ -62,6 +65,7 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
   public void addKeyBindings()
   {
     sprintKey = addKeyBinding("key.sprint", Keyboard.KEY_LCONTROL);
+    tellKey = addKeyBinding("key.tell", 19); // R
   }
 
   public KeyBinding addKeyBinding(String name, int key)
@@ -119,6 +123,11 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
     {
       Minecraft mc = Minecraft.getMinecraft();
       if (!mc.thePlayer.isSprinting()) mc.thePlayer.setSprinting(true);
+    }
+    if (tellKey.pressed)
+    {
+      Minecraft mc = Minecraft.getMinecraft();
+      mc.displayGuiScreen(new GuiChat("/tell " + lastToldName));
     }
   }
 
@@ -184,6 +193,18 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
       if (a) controller.windowClick(windowId, slot + i * 9, 0, 0, player);
       controller.windowClick(windowId, slot + i * 9 + 9, 0, 0, player);
       if (b) controller.windowClick(windowId, slot + i * 9, 0, 0, player);
+    }
+  }
+
+  public static void sendingChatMessage(String msg)
+  {
+    if (msg.startsWith("/tell "))
+    {
+      String[] s = msg.split(" ", 3);
+      if (s.length >= 2)
+      {
+        lastToldName = s[1] + " ";
+      }
     }
   }
   
