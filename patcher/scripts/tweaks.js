@@ -4973,6 +4973,35 @@ function getObjProperty(n, propname)
     },
     // Fix mods! Now with this mod you can fix mods for the mod for Minecraft.
     // Fix CraftGuide visible compass/clock exploit
+    "CraftGuide_Vanilla":
+    {
+      tweakClientMethods:
+      {
+        "checkKeybind()V": function(mn)
+        {
+          check(mn, 0x226D2A8D);
+          log("\t* Making CraftGuide work in inventory screens too in " + mn.name + mn.desc);
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner.equals("ava") && n.name.equals("e") && n.desc.equals("Z"))
+            {
+              mn.instructions.insert(n, toInsnList(
+                [
+                  FieldInsnNode(GETFIELD, "ava", "d", "I"),
+                  MethodInsnNode(INVOKESTATIC, "org/lwjgl/input/Keyboard", "isKeyDown", "(I)Z"),
+                ]
+              ));
+              mn.instructions.remove(n);
+              log("");
+              return;
+            }
+          }
+          log(" ...failed!");
+          recordFailure();
+        }
+      }
+    },
     "uristqwerty/CraftGuide/client/ui/GuiRenderer":
     {
       tweakClientMethods:
