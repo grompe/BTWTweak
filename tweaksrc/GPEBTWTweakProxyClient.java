@@ -217,9 +217,10 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
     ItemStack stack = player.inventory.getCurrentItem();
     if (stack == null) return;
     int id = stack.itemID;
-    int meta = stack.getItemDamage();
+    if (id > 4096) return;
     Block block = Block.blocksList[id];
     if (block == null) return;
+    int meta = stack.getItemDamage();
     boolean isSiding = id == FCBetterThanWolves.fcBlockWoodSidingItemStubID
       || (id != FCBetterThanWolves.fcBlockWoodCornerItemStubID && meta == 0 && block instanceof FCBlockSidingAndCorner);
     boolean isMoulding = block instanceof FCBlockMoulding;
