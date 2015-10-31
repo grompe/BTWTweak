@@ -352,6 +352,8 @@ public class GPEBTWTweak extends FCAddOn
       FCRecipes.AddVanillaRecipe(new ItemStack(Block.brick), new Object[] {"X", "X", 'X', new ItemStack(Block.stoneSingleSlab, 1, 4)});
       FCRecipes.AddVanillaRecipe(new ItemStack(Block.stoneBrick), new Object[] {"X", "X", 'X', new ItemStack(Block.stoneSingleSlab, 1, 5)});
     }
+    FCRecipes.AddVanillaRecipe(new ItemStack(Block.netherBrick), new Object[] {"X", "X", 'X', new ItemStack(Block.stoneSingleSlab, 1, 6)});
+    FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcAestheticOpaque, 1, 10), new Object[] {"X", "X", 'X', new ItemStack(FCBetterThanWolves.fcAestheticNonOpaque, 1, 10)});
 
     FCRecipes.AddVanillaRecipe(new ItemStack(gpeItemSilk, 1), new Object[] {"###", "###", "###", '#', Item.silk});
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.silk, 9), new Object[] {new ItemStack(gpeItemSilk)});
