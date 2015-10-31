@@ -23,6 +23,11 @@ public class GPEBlockGlass extends BlockGlass
     }
   }
 
+  public boolean CanContainPistonPackingToFacing(World world, int x, int y, int z, int side)
+  {
+    return true;
+  }
+
   // Work around beacon missing texture
   @ClientOnly
   public void registerIcons(IconRegister r)
