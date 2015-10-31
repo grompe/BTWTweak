@@ -668,7 +668,11 @@ public class GPEBTWTweak extends FCAddOn
   {
     if (gpeBlockGravestoneID == 0) return false;
     if (y <= 0) return false;
-    while (isReplaceableBlock(world, x, y - 1, z)) y--;
+    while (isReplaceableBlock(world, x, y - 1, z))
+    {
+      y--;
+      if (y <= 0) return false;
+    }
     if (placeGravestoneIfPossibleAt(world, x, y, z)) return true;
     for (int xx = x - 1; xx <= x + 1; xx++)
     {
