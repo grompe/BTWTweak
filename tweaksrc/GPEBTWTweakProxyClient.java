@@ -221,10 +221,10 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
     Block block = Block.blocksList[id];
     if (block == null) return;
     boolean isSiding = id == FCBetterThanWolves.fcBlockWoodSidingItemStubID
-      || (meta == 0 && block instanceof FCBlockSidingAndCorner);
+      || (id != FCBetterThanWolves.fcBlockWoodCornerItemStubID && meta == 0 && block instanceof FCBlockSidingAndCorner);
     boolean isMoulding = block instanceof FCBlockMoulding;
     boolean isCorner = id == FCBetterThanWolves.fcBlockWoodCornerItemStubID
-      || (meta == 1 && block instanceof FCBlockSidingAndCorner);
+      || (id != FCBetterThanWolves.fcBlockWoodSidingItemStubID && meta == 1 && block instanceof FCBlockSidingAndCorner);
     if (isSiding || isMoulding || isCorner)
     {
       World world = player.worldObj;
