@@ -217,18 +217,17 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
     ItemStack stack = player.inventory.getCurrentItem();
     if (stack == null) return;
     int id = stack.itemID;
-    // Let's just assume that whoever changes block IDs in BTW is his own enemy
-    if (id > 214 || id < 178) return;
-    if (id == 196 || id == 197 || id == 198 || id == 185 || id == 186 || id == 202 || id == 182 || id == 188
-      || id == 178 || id == 191 || id == 214 || id == 187 || id == 203 || id == 183 || id == 189 || id == 179 || id == 192)
+    int meta = stack.getItemDamage();
+    Block block = Block.blocksList[id];
+    if (block == null) return;
+    boolean isSiding = id == FCBetterThanWolves.fcBlockWoodSidingItemStubID
+      || (meta == 0 && block instanceof FCBlockSidingAndCorner);
+    boolean isMoulding = block instanceof FCBlockMoulding;
+    boolean isCorner = id == FCBetterThanWolves.fcBlockWoodCornerItemStubID
+      || (meta == 1 && block instanceof FCBlockSidingAndCorner);
+    if (isSiding || isMoulding || isCorner)
     {
       World world = player.worldObj;
-      int meta = stack.getItemDamage();
-      boolean isSiding = (id == 196 || (id == 185 && meta == 0) || (id == 186 && meta == 0) || (id == 202 && meta == 0)
-        || (id == 182 && meta == 0) || (id == 188 && meta == 0) || (id == 178 && meta == 0) || (id == 191 && meta == 0));
-      boolean isMoulding = (id == 197 || id == 214 || id == 187 || id == 203 || id == 183 || id == 189 || id == 179 || id == 192);
-      boolean isCorner = (id == 198 || (id == 185 && meta == 1) || (id == 186 && meta == 1) || (id == 202 && meta == 1)
-        || (id == 182 && meta == 1) || (id == 188 && meta == 1) || (id == 178 && meta == 1) || (id == 191 && meta == 1));
       int x = mop.blockX;
       int y = mop.blockY;
       int z = mop.blockZ;
@@ -240,6 +239,7 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
         y += Facing.offsetsYForSide[mop.sideHit];
         z += Facing.offsetsZForSide[mop.sideHit];
       }
+      if (!world.checkNoEntityCollision(AxisAlignedBB.getAABBPool().getAABB(x, y, z, x + 1, y + 1, z + 1))) return;
       if (world.getBlockMaterial(x, y, z).isReplaceable())
       {
         float hitX = (float)mop.hitVec.xCoord - (float)mop.blockX;
