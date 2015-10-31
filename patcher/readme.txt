@@ -27,6 +27,11 @@ v0.9h
 - Added recipes for joining nether brick slabs and white cobble slabs into
   blocks.
 
+- Fixed problem where ladder couldn't be placed when standing in the same
+  block even though the player did not intersect its collision box (MC-9704).
+  This also allows placing microblocks when partially standing in the target
+  block; the preview feature was adjusted accordingly.
+
 v0.9g
 
 - Limited chicken egg incubating to one at a time. No more happily hatching

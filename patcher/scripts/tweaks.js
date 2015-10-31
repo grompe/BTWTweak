@@ -1520,6 +1520,37 @@ function getObjProperty(n, propname)
         },
       },
     },
+    "bdr": // PlayerControllerMP
+    {
+      tweakClientMethods:
+      {
+        "a(Lsq;Laab;Lwm;IIIILarc;)Z": function(mn)
+        {
+          check(mn, 0x5A6E2C5E);
+          log("\t* Hooking block placing decision in " + mn.name + mn.desc);
+          for (var i = 0; i < mn.instructions.size(); i++)
+          {
+            var n = mn.instructions.get(i);
+            if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("xn") && n.name.equals("a") && n.desc.equals("(Laab;IIIILsq;Lwm;)Z"))
+            {
+              mn.instructions.insert(n, toInsnList(
+                [
+                  VarInsnNode(FLOAD, 9),
+                  VarInsnNode(FLOAD, 10),
+                  VarInsnNode(FLOAD, 11),
+                  MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "canPlaceItemBlock", "(Lxn;Laab;IIIILsq;Lwm;FFF)Z"),
+                ]
+              ));
+              mn.instructions.remove(n);
+              log("");
+              return;
+            }
+          }
+          log(" ...failed!");
+          recordFailure();
+        },
+      },
+    },
     'bdv': // EntityClientPlayerMP
     {
       tweakClientMethods:

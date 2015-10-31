@@ -239,7 +239,6 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
         y += Facing.offsetsYForSide[mop.sideHit];
         z += Facing.offsetsZForSide[mop.sideHit];
       }
-      if (!world.checkNoEntityCollision(AxisAlignedBB.getAABBPool().getAABB(x, y, z, x + 1, y + 1, z + 1))) return;
       if (world.getBlockMaterial(x, y, z).isReplaceable())
       {
         float hitX = (float)mop.hitVec.xCoord - (float)mop.blockX;
@@ -249,12 +248,12 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
         {
           switch(mop.sideHit)
           {
-            case 0: drawPlacementBox(x, y + 0.5, z, 1, 0.5, 1, player, ticks); break;
-            case 1: drawPlacementBox(x, y      , z, 1, 0.5, 1, player, ticks); break;
-            case 2: drawPlacementBox(x, y, z + 0.5, 1, 1, 0.5, player, ticks); break;
-            case 3: drawPlacementBox(x, y, z      , 1, 1, 0.5, player, ticks); break;
-            case 4: drawPlacementBox(x + 0.5, y, z, 0.5, 1, 1, player, ticks); break;
-            case 5: drawPlacementBox(x      , y, z, 0.5, 1, 1, player, ticks); break;
+            case 0: drawPlacementBox(world, x, y + 0.5, z, 1, 0.5, 1, player, ticks); break;
+            case 1: drawPlacementBox(world, x, y      , z, 1, 0.5, 1, player, ticks); break;
+            case 2: drawPlacementBox(world, x, y, z + 0.5, 1, 1, 0.5, player, ticks); break;
+            case 3: drawPlacementBox(world, x, y, z      , 1, 1, 0.5, player, ticks); break;
+            case 4: drawPlacementBox(world, x + 0.5, y, z, 0.5, 1, 1, player, ticks); break;
+            case 5: drawPlacementBox(world, x      , y, z, 0.5, 1, 1, player, ticks); break;
           }
         }
         else if (isMoulding)
@@ -267,12 +266,12 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
           double az = z + (hitZ > 0.5 ? 0.5 : 0);
           switch(mop.sideHit)
           {
-            case 0: drawPlacementBox(xz ? ax : x, y + 0.5, xz ? z : az, xz ? 0.5 : 1, 0.5, xz ? 1 : 0.5, player, ticks); break;
-            case 1: drawPlacementBox(xz ? ax : x, y      , xz ? z : az, xz ? 0.5 : 1, 0.5, xz ? 1 : 0.5, player, ticks); break;
-            case 2: drawPlacementBox(xy ? ax : x, xy ? y : ay, z + 0.5, xy ? 0.5 : 1, xy ? 1 : 0.5, 0.5, player, ticks); break;
-            case 3: drawPlacementBox(xy ? ax : x, xy ? y : ay, z      , xy ? 0.5 : 1, xy ? 1 : 0.5, 0.5, player, ticks); break;
-            case 4: drawPlacementBox(x + 0.5, yz ? ay : y, yz ? z : az, 0.5, yz ? 0.5 : 1, yz ? 1 : 0.5, player, ticks); break;
-            case 5: drawPlacementBox(x      , yz ? ay : y, yz ? z : az, 0.5, yz ? 0.5 : 1, yz ? 1 : 0.5, player, ticks); break;
+            case 0: drawPlacementBox(world, xz ? ax : x, y + 0.5, xz ? z : az, xz ? 0.5 : 1, 0.5, xz ? 1 : 0.5, player, ticks); break;
+            case 1: drawPlacementBox(world, xz ? ax : x, y      , xz ? z : az, xz ? 0.5 : 1, 0.5, xz ? 1 : 0.5, player, ticks); break;
+            case 2: drawPlacementBox(world, xy ? ax : x, xy ? y : ay, z + 0.5, xy ? 0.5 : 1, xy ? 1 : 0.5, 0.5, player, ticks); break;
+            case 3: drawPlacementBox(world, xy ? ax : x, xy ? y : ay, z      , xy ? 0.5 : 1, xy ? 1 : 0.5, 0.5, player, ticks); break;
+            case 4: drawPlacementBox(world, x + 0.5, yz ? ay : y, yz ? z : az, 0.5, yz ? 0.5 : 1, yz ? 1 : 0.5, player, ticks); break;
+            case 5: drawPlacementBox(world, x      , yz ? ay : y, yz ? z : az, 0.5, yz ? 0.5 : 1, yz ? 1 : 0.5, player, ticks); break;
           }
         }
         else if (isCorner)
@@ -282,20 +281,23 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
           double az = z + (hitZ > 0.5 ? 0.5 : 0);
           switch(mop.sideHit)
           {
-            case 0: drawPlacementBox(ax, y + 0.5, az, 0.5, 0.5, 0.5, player, ticks); break;
-            case 1: drawPlacementBox(ax, y      , az, 0.5, 0.5, 0.5, player, ticks); break;
-            case 2: drawPlacementBox(ax, ay, z + 0.5, 0.5, 0.5, 0.5, player, ticks); break;
-            case 3: drawPlacementBox(ax, ay, z      , 0.5, 0.5, 0.5, player, ticks); break;
-            case 4: drawPlacementBox(x + 0.5, ay, az, 0.5, 0.5, 0.5, player, ticks); break;
-            case 5: drawPlacementBox(x      , ay, az, 0.5, 0.5, 0.5, player, ticks); break;
+            case 0: drawPlacementBox(world, ax, y + 0.5, az, 0.5, 0.5, 0.5, player, ticks); break;
+            case 1: drawPlacementBox(world, ax, y      , az, 0.5, 0.5, 0.5, player, ticks); break;
+            case 2: drawPlacementBox(world, ax, ay, z + 0.5, 0.5, 0.5, 0.5, player, ticks); break;
+            case 3: drawPlacementBox(world, ax, ay, z      , 0.5, 0.5, 0.5, player, ticks); break;
+            case 4: drawPlacementBox(world, x + 0.5, ay, az, 0.5, 0.5, 0.5, player, ticks); break;
+            case 5: drawPlacementBox(world, x      , ay, az, 0.5, 0.5, 0.5, player, ticks); break;
           }
         }
       }
     }
   }
 
-  private static void drawPlacementBox(double x, double y, double z, double xx, double yy, double zz, EntityPlayer player, float ticks)
+  private static void drawPlacementBox(World world, double x, double y, double z, double xx, double yy, double zz, EntityPlayer player, float ticks)
   {
+    AxisAlignedBB rbb = AxisAlignedBB.getBoundingBox(x, y, z, x + xx, y + yy, z + zz);
+    if (!world.checkNoEntityCollision(rbb)) return;
+
     GL11.glEnable(GL11.GL_BLEND);
     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
     GL11.glColor4f(0.3F, 0.8F, 0.6F, 0.8F);
@@ -307,7 +309,7 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
     double ox = player.lastTickPosX + (player.posX - player.lastTickPosX) * (double)ticks;
     double oy = player.lastTickPosY + (player.posY - player.lastTickPosY) * (double)ticks;
     double oz = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * (double)ticks;
-    AxisAlignedBB a = AxisAlignedBB.getBoundingBox(x, y, z, x + xx, y + yy, z + zz).expand(bev, bev, bev).getOffsetBoundingBox(-ox, -oy, -oz);
+    AxisAlignedBB a = rbb.expand(bev, bev, bev).getOffsetBoundingBox(-ox, -oy, -oz);
     
     Tessellator t = Tessellator.instance;
     t.startDrawing(3);

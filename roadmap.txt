@@ -31,7 +31,6 @@ Feedback
 - Better way of placing sidings and mouldings: let them fill the block up to next appropriate state:
   mouldings, sidings, stairs, planks, etc.
   - For example, always place things vertically and when crouching - horizontally.
-  - Also let the player occupy part of the block he intends to build in if it doesn't intersect the bounding box
   - look at FCBlockMoulding.java / onBlockPlaced()
 
 - Fix axle texture in a better way
