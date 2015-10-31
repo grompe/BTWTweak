@@ -4972,7 +4972,6 @@ function getObjProperty(n, propname)
       },
     },
     // Fix mods! Now with this mod you can fix mods for the mod for Minecraft.
-    // Fix CraftGuide visible compass/clock exploit
     "CraftGuide_Vanilla":
     {
       tweakClientMethods:

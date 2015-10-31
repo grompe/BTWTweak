@@ -1,7 +1,31 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.9g
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.9h
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
+
+v0.9h
+
+- If CraftGuide is found in the minecraft.jar, it will be patched so the
+  guide key works on inventory screens and displays recipes involving the
+  item under the cursor. I find it interesting the code was there all this
+  time yet unable to execute due to a bug.
+
+- Added key shortcut for quick usage of /tell command for quick and
+  hassle-free private messaging on servers. Default on R. It will open the
+  chat with "/tell" + last told username.
+
+- Fixed possible server crash when loading a corrupted world where chest tile
+  entity does not match the chest block.
+
+- Fixed problem with falling out of the world causing an infinite loop if
+  gravestones are enabled.
+
+- Improved microblock preview: now it supports additional microblocks from
+  add-ons and displays only when the block placement is not obstructed by
+  player or other entities.
+
+- Added recipes for joining nether brick slabs and white cobble slabs into
+  blocks.
 
 v0.9g
 
