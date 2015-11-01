@@ -171,6 +171,7 @@ public class BTWTweaker
     scriptProxy.execResource("scripts/tweaks_rocks.js");
     scriptProxy.execResource("scripts/tweaks_visual.js");
     scriptProxy.execResource("scripts/tweaks_worldgen.js");
+    if (hasResource("scripts/custom.js")) scriptProxy.execResource("scripts/custom.js");
 
     File jar = new File(jarname);
     String outputname = jarname.replaceFirst("\\.([^.]+)$", "_tweak.$1");

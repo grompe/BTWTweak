@@ -276,6 +276,19 @@ function replaceAllMethodCalls(mn, def1, def2)
   return true;
 }
 
+function replaceFirstString(mn, source, destination)
+{
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.LdcInsnNode") && (n.cst.toString() == source))
+    {
+      n.cst = String(destination);
+      return true;
+    }
+  }
+}
+
 function InsnNode(opcode)
 {
   return new asm.tree.InsnNode(opcode);
