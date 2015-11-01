@@ -1,5 +1,5 @@
 // className, deobfName, side, method, checksums, description
-tweak("FCBlockCauldron", "FCBlockCauldron", CLIENT, "RenderBlock(Lbgf;III)Z", 0xDD0A1369, "Adjusting visual fullness to 9 slots",
+tweak("FCBlockCauldron", null, CLIENT, "RenderBlock(Lbgf;III)Z", 0xDD0A1369, "Adjusting visual fullness to 9 slots",
 function(mn)
 {
   for (i = 0; i < mn.instructions.size(); i++)
@@ -12,7 +12,7 @@ function(mn)
     }
   }
 });
-tweak("FCBlockCrucible", "FCBlockCrucible", CLIENT, "RenderBlock(Lbgf;III)Z", 0xC9BA1A38, "Adjusting visual fullness to 9 slots",
+tweak("FCBlockCrucible", null, CLIENT, "RenderBlock(Lbgf;III)Z", 0xC9BA1A38, "Adjusting visual fullness to 9 slots",
 function(mn)
 {
   for (i = 0; i < mn.instructions.size(); i++)
@@ -25,7 +25,7 @@ function(mn)
     }
   }
 });
-tweak("FCClientGuiCookingVessel", "FCClientGuiCookingVessel", CLIENT, "a(FII)V", 0xA47A1391, "Adding GUI stoked indication and reducing slots to 9",
+tweak("FCClientGuiCookingVessel", null, CLIENT, "a(FII)V", 0xA47A1391, "Adding GUI stoked indication and reducing slots to 9",
 function(mn)
 {
   var changes = 0;
@@ -125,7 +125,7 @@ function(mn)
   }
   return changes == 2;
 });
-tweak("FCContainerCookingVessel", "FCContainerCookingVessel", BOTH, "<init>(Llt;LFCTileEntityCookingVessel;)V", 0xE7B32136, "(1/3) Adding stoked info handling and (1/2) reducing slots to 9",
+tweak("FCContainerCookingVessel", null, BOTH, "<init>(Llt;LFCTileEntityCookingVessel;)V", 0xE7B32136, "(1/3) Adding stoked info handling and (1/2) reducing slots to 9",
 function(mn)
 {
   var changes = 0;
@@ -178,7 +178,7 @@ function(mn)
   }
   return changes == 6;
 });
-tweak("FCContainerCookingVessel", "FCContainerCookingVessel", BOTH, "b(Lsq;I)Lwm;", 0xE83F127D, "(2/2) Reducing slots to 9",
+tweak("FCContainerCookingVessel", null, BOTH, "b(Lsq;I)Lwm;", 0xE83F127D, "(2/2) Reducing slots to 9",
 function(mn)
 {
   var changes = 0;
@@ -194,7 +194,7 @@ function(mn)
   }
   return changes == 3;
 });
-tweak("FCContainerCookingVessel", "FCContainerCookingVessel", BOTH, "a(Ltp;)V", 0x119C040A, "(2/3) Adding stoked info handling",
+tweak("FCContainerCookingVessel", null, BOTH, "a(Ltp;)V", 0x119C040A, "(2/3) Adding stoked info handling",
 function(mn)
 {
   return CodeInserter(
@@ -210,7 +210,7 @@ function(mn)
     ]
   ).process(mn);
 });
-tweak("FCContainerCookingVessel", "FCContainerCookingVessel", BOTH, "b()V", 0x3F10F73, "(3/3) Adding stoked info handling",
+tweak("FCContainerCookingVessel", null, BOTH, "b()V", 0x3F10F73, "(3/3) Adding stoked info handling",
 function(mn)
 {
   var changes = 0;
@@ -274,7 +274,7 @@ function(mn)
   }
   return changes == 2;
 });
-tweak("FCContainerCookingVessel", "FCContainerCookingVessel", CLIENT, "b(II)V", 0x9DD02F8, "(GUI) Adding stoked info handling",
+tweak("FCContainerCookingVessel", null, CLIENT, "b(II)V", 0x9DD02F8, "(GUI) Adding stoked info handling",
 function(mn)
 {
   var label = LabelNode();
@@ -294,12 +294,12 @@ function(mn)
     INSERT_BEFORE
   ).process(mn);
 });
-add("FCContainerCookingVessel", "FCContainerCookingVessel", BOTH, "Added private integer m_iLastFireUnderType",
+add("FCContainerCookingVessel", null, BOTH, "Added private integer m_iLastFireUnderType",
 function(cn)
 {
   cn.fields.add(FieldNode(ACC_PRIVATE, "m_iLastFireUnderType", "I", null, null));
 });
-tweak("FCTileEntityCauldron", "FCTileEntityCauldron", BOTH, "GetUncookedItemInventoryIndex()I", 0xB3C40CCC, "(1/3) Changing 27 slots to 9",
+tweak("FCTileEntityCauldron", null, BOTH, "GetUncookedItemInventoryIndex()I", 0xB3C40CCC, "(1/3) Changing 27 slots to 9",
 function(mn)
 {
   for (var i = 0; i < mn.instructions.size(); i++)
@@ -312,7 +312,7 @@ function(mn)
     }
   }
 });
-tweak("FCTileEntityCauldron", "FCTileEntityCauldron", BOTH, "ContainsNonFoulFood()Z", 0x57AF11C4, "(2/3) Changing 27 slots to 9",
+tweak("FCTileEntityCauldron", null, BOTH, "ContainsNonFoulFood()Z", 0x57AF11C4, "(2/3) Changing 27 slots to 9",
 function(mn)
 {
   for (var i = 0; i < mn.instructions.size(); i++)
@@ -325,7 +325,7 @@ function(mn)
     }
   }
 });
-tweak("FCTileEntityCauldron", "FCTileEntityCauldron", BOTH, "TaintAllNonFoulFoodInInventory()Z", 0x7E9A19E2, "(3/3) Changing 27 slots to 9",
+tweak("FCTileEntityCauldron", null, BOTH, "TaintAllNonFoulFoodInInventory()Z", 0x7E9A19E2, "(3/3) Changing 27 slots to 9",
 function(mn)
 {
   for (var i = 0; i < mn.instructions.size(); i++)
@@ -338,7 +338,7 @@ function(mn)
     }
   }
 });
-tweak("FCTileEntityCookingVessel", "FCTileEntityCookingVessel", BOTH, "<init>()V", 0xC37E1086, "(1/2) Changing 27 slots to 9",
+tweak("FCTileEntityCookingVessel", null, BOTH, "<init>()V", 0xC37E1086, "(1/2) Changing 27 slots to 9",
 function(mn)
 {
   for (var i = 0; i < mn.instructions.size(); i++)
@@ -351,7 +351,7 @@ function(mn)
     }
   }
 });
-tweak("FCTileEntityCookingVessel", "FCTileEntityCookingVessel", BOTH, "j_()I", 0xCE00BD, "(2/2) Changing 27 slots to 9",
+tweak("FCTileEntityCookingVessel", null, BOTH, "j_()I", 0xCE00BD, "(2/2) Changing 27 slots to 9",
 function(mn)
 {
   for (var i = 0; i < mn.instructions.size(); i++)
@@ -364,7 +364,7 @@ function(mn)
     }
   }
 });
-tweak("FCTileEntityCookingVessel", "FCTileEntityCookingVessel", BOTH, "a(I)Lwm;", 0x4A501C5, "(1/2) Including anti-crash safety measure",
+tweak("FCTileEntityCookingVessel", null, BOTH, "a(I)Lwm;", 0x4A501C5, "(1/2) Including anti-crash safety measure",
 function(mn)
 {
   var label = LabelNode();
@@ -382,7 +382,7 @@ function(mn)
     INSERT_BEFORE
   ).process(mn);
 });
-tweak("FCTileEntityCookingVessel", "FCTileEntityCookingVessel", BOTH, "a(ILwm;)V", 0x414B078B, "(2/2) Including anti-crash safety measure",
+tweak("FCTileEntityCookingVessel", null, BOTH, "a(ILwm;)V", 0x414B078B, "(2/2) Including anti-crash safety measure",
 function(mn)
 {
   var label = LabelNode();
@@ -399,7 +399,7 @@ function(mn)
     INSERT_BEFORE
   ).process(mn);
 });
-tweak("FCTileEntityCookingVessel", "FCTileEntityCookingVessel", BOTH, "h()V", 0x5D0638DA, "Making heat dissipate slower",
+tweak("FCTileEntityCookingVessel", null, BOTH, "h()V", 0x5D0638DA, "Making heat dissipate slower",
 function(mn)
 {
   var i;

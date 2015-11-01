@@ -365,22 +365,40 @@ function isBTWVersionOrNewer(ver)
 }
 
 var classesToTweak = {};
+var deobfNames = {};
+
+function addDeobfName(className, deobfName)
+{
+  if (deobfName == null) return;
+  if (!deobfNames[className])
+  {
+    deobfNames[className] = deobfName
+  } else {
+    if (deobfNames[className] != deobfName)
+    {
+      log("Warning: overwriting deobfuscated class name: was '" + deobfNames[className] + "', now '" + deobfName + "'");
+      deobfNames[className] = deobfName;
+    }
+  }
+}
 
 function tweak(className, deobfName, side, method, checksums, description, process)
 {
   if ((side == CLIENT) && !onClient()) return;
+  addDeobfName(className, deobfName);
   if (!classesToTweak[className]) classesToTweak[className] = {tweakMethods: {}, add: []};
   if (!classesToTweak[className].tweakMethods[method]) classesToTweak[className].tweakMethods[method] = [];
   classesToTweak[className].tweakMethods[method].push({
-      deobfName: deobfName, checksums: checksums, description: description, process: process});
+    checksums: checksums, description: description, process: process});
 }
 
 function add(className, deobfName, side, description, process)
 {
   if ((side == CLIENT) && !onClient()) return;
+  addDeobfName(className, deobfName);
   if (!classesToTweak[className]) classesToTweak[className] = {tweakMethods: {}, add: []};
   classesToTweak[className].add.push({
-    deobfName: deobfName, description: description, process: process});
+    description: description, process: process});
 }
 
 (function(){
@@ -430,7 +448,12 @@ function add(className, deobfName, side, description, process)
     var count = 0;
     var total = length(a.tweakMethods);
     var mn;
-
+    var name = cn.name;
+    if (deobfNames[name])
+    {
+      name += " [" + deobfNames[name] + "]";
+    }
+    log("Class " + name + ": ", 1);
     for (var i = 0; i < cn.methods.size(); i++)
     {
       mn = cn.methods.get(i);
@@ -438,12 +461,6 @@ function add(className, deobfName, side, description, process)
       var tweaks;
       if (a.tweakMethods && (tweaks = a.tweakMethods[mn.name + mn.desc]))
       {
-        var name = cn.name;
-        if (tweaks[0].deobfName != name)
-        {
-          name += " [" + tweaks[0].deobfName + "]";
-        }
-        log("Class " + name + ": ", 1);
         for (var i2 = 0; i2 < tweaks.length; i2++)
         {
           if (tweaks[i2].checksums != CHECKSUM_IGNORE)
@@ -478,7 +495,7 @@ function add(className, deobfName, side, description, process)
     {
       for (var i = 0; i < a.add.length; i++)
       {
-        log("Class " + name + ": " + a.add[0].description);
+        log("\t* " + a.add[0].description);
         a.add[i].process(cn);
       }
     }

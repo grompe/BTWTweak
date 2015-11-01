@@ -347,27 +347,27 @@ function(mn)
   }
   return changes == 2;
 });
-add("FCBlockBed", "FCBlockBed", CLIENT, "Fixed cracks on bed",
+add("FCBlockBed", null, CLIENT, "Fixed cracks on bed",
 function(cn)
 {
   addRenderBlockDamageEffectMethod(cn);
 });
-add("FCBlockEnderChest", "FCBlockEnderChest", CLIENT, "Fixed cracks on ender chest",
+add("FCBlockEnderChest", null, CLIENT, "Fixed cracks on ender chest",
 function(cn)
 {
   addRenderBlockDamageEffectMethod(cn);
 });
-add("FCBlockBeacon", "FCBlockBeacon", CLIENT, "Fixed cracks on beacon",
+add("FCBlockBeacon", null, CLIENT, "Fixed cracks on beacon",
 function(cn)
 {
   addRenderBlockDamageEffectMethod(cn);
 });
-add("FCBlockCocoa", "FCBlockCocoa", CLIENT, "Fixed cracks on cocoa beans",
+add("FCBlockCocoa", null, CLIENT, "Fixed cracks on cocoa beans",
 function(cn)
 {
   addRenderBlockDamageEffectMethod(cn);
 });
-add("FCBlockSign", "FCBlockSign", CLIENT, "Fixed cracks on wall sign",
+add("FCBlockSign", null, CLIENT, "Fixed cracks on wall sign",
 function(cn)
 {
   var label = LabelNode();
@@ -401,7 +401,7 @@ function(cn)
   ));
   cn.methods.add(mn);
 });
-tweak("FCBlockTurntable", "FCBlockTurntable", CLIENT, "RenderBlock(Lbgf;III)Z", 0xBBB81AF0, "Using visual spin",
+tweak("FCBlockTurntable", null, CLIENT, "RenderBlock(Lbgf;III)Z", 0xBBB81AF0, "Using visual spin",
 function(mn)
 {
   var label = LabelNode();
@@ -429,7 +429,7 @@ function(mn)
     ]
   ).process(mn);
 });
-add("FCBlockTurntable", "FCBlockTurntable", CLIENT, "Adding visual spin function",
+add("FCBlockTurntable", null, CLIENT, "Adding visual spin function",
 function(cn)
 {
   var mn = MethodNode(ACC_PUBLIC, "getVisualSpin", "(Lbgf;III)I", null, null);
@@ -458,7 +458,7 @@ function(cn)
   ));
   cn.methods.add(mn);
 });
-add("FCItemBlockPlanter", "FCItemBlockPlanter", CLIENT, "Adding tooltip item info",
+add("FCItemBlockPlanter", null, CLIENT, "Adding tooltip item info",
 function(cn)
 {
   var mn = MethodNode(ACC_PUBLIC, "a", "(Lwm;Lsq;Ljava/util/List;Z)V", null, null);
@@ -510,7 +510,7 @@ function(cn)
   ));
   cn.methods.add(mn);
 });
-add("FCItemBlockUnfiredPottery", "FCItemBlockUnfiredPottery", CLIENT, "Adding tooltip item info",
+add("FCItemBlockUnfiredPottery", null, CLIENT, "Adding tooltip item info",
 function(cn)
 {
   var mn = MethodNode(ACC_PUBLIC, "a", "(Lwm;Lsq;Ljava/util/List;Z)V", null, null);
@@ -570,7 +570,7 @@ function(cn)
 });
 
 // Technically visual, but require tweaks on both sides
-tweak("FCBlockHandCrank", "FCBlockHandCrank", BOTH, "a(Laak;III)V", 0x47E01C6, "Lowering hand crank bounding box",
+tweak("FCBlockHandCrank", null, BOTH, "a(Laak;III)V", 0x47E01C6, "Lowering hand crank bounding box",
 function(mn)
 {
   var counter = 0;
@@ -588,28 +588,28 @@ function(mn)
     }
   }
 });
-tweak("FCBlockKiln", "FCBlockKiln", BOTH, "a(Laab;IIILjava/util/Random;)V", 0x2DAB2AE1, "Improving the crack (1/3)",
+tweak("FCBlockKiln", null, BOTH, "a(Laab;IIILjava/util/Random;)V", 0x2DAB2AE1, "Improving the crack (1/3)",
 function(mn)
 {
   return replaceAllMethodCalls(mn,
     [INVOKEVIRTUAL, "aab", "f", "(IIIII)V"],
     [INVOKESTATIC, "GPEBTWTweak", "addKilnCrackEffect", "(Laab;IIIII)V"]);
 });
-tweak("FCBlockKiln", "FCBlockKiln", BOTH, "a(Laab;IIIII)V", 0x358204FD, "Improving the crack (2/3)",
+tweak("FCBlockKiln", null, BOTH, "a(Laab;IIIII)V", 0x358204FD, "Improving the crack (2/3)",
 function(mn)
 {
   return replaceAllMethodCalls(mn,
     [INVOKEVIRTUAL, "aab", "f", "(IIIII)V"],
     [INVOKESTATIC, "GPEBTWTweak", "addKilnCrackEffect", "(Laab;IIIII)V"]);
 });
-tweak("FCBlockKiln", "FCBlockKiln", BOTH, "a(Laab;IIII)V", 0x6D780E50, "Improving the crack (3/3)",
+tweak("FCBlockKiln", null, BOTH, "a(Laab;IIII)V", 0x6D780E50, "Improving the crack (3/3)",
 function(mn)
 {
   return replaceAllMethodCalls(mn,
     [INVOKEVIRTUAL, "aab", "f", "(IIIII)V"],
     [INVOKESTATIC, "GPEBTWTweak", "addKilnCrackEffect", "(Laab;IIIII)V"]);
 });
-tweak("FCTileEntityTurntable", "FCTileEntityTurntable", BOTH, "<init>()V", 0x41CA0676, "Adding visual spin init",
+tweak("FCTileEntityTurntable", null, BOTH, "<init>()V", 0x41CA0676, "Adding visual spin init",
 function(mn)
 {
   return CodeInserter(
@@ -622,7 +622,7 @@ function(mn)
     INSERT_BEFORE
   ).process(mn);
 });
-tweak("FCTileEntityTurntable", "FCTileEntityTurntable", BOTH, "h()V", 0x6AAB37DE, "Adding visual spin support",
+tweak("FCTileEntityTurntable", null, BOTH, "h()V", 0x6AAB37DE, "Adding visual spin support",
 function(mn)
 {
   return CodeInserter(
@@ -661,12 +661,12 @@ function(mn)
     ]
   ).process(mn);
 });
-add("FCTileEntityTurntable", "FCTileEntityTurntable", BOTH, "Adding visual spin field",
+add("FCTileEntityTurntable", null, BOTH, "Adding visual spin field",
 function(cn)
 {
   cn.fields.add(FieldNode(ACC_PUBLIC, "visualSpin", "I", null, null));
 });
-tweak("FCUtilsWorld", "FCUtilsWorld", BOTH, "CanMobsSpawnHere(Laab;III)Z", 0x65EC265F, "Fixing True Sight wrongly marking Mycelium as mob-spawnable",
+tweak("FCUtilsWorld", null, BOTH, "CanMobsSpawnHere(Laab;III)Z", 0x65EC265F, "Fixing True Sight wrongly marking Mycelium as mob-spawnable",
 function(mn)
 {
   var label1 = LabelNode();

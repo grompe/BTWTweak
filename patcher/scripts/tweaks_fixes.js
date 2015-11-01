@@ -125,7 +125,7 @@ function(mn)
 // Fix mods! Now with this mod you can fix mods for the mod for Minecraft.
 // =======================================================================
     
-tweak("CraftGuide_Vanilla", "CraftGuide_Vanilla", CLIENT, "checkKeybind()V", 0x226D2A8D, "Making CraftGuide work in inventory screens too",
+tweak("CraftGuide_Vanilla", null, CLIENT, "checkKeybind()V", 0x226D2A8D, "Making CraftGuide work in inventory screens too",
 function(mn)
 {
   for (var i = 0; i < mn.instructions.size(); i++)
@@ -144,7 +144,7 @@ function(mn)
     }
   }
 });
-tweak("uristqwerty/CraftGuide/client/ui/GuiRenderer", "GuiRenderer", CLIENT, "drawItemStack(Lwm;IIZ)V", 0x61225517, "Stopping CraftGuide visible compass/clock exploit",
+tweak("uristqwerty/CraftGuide/client/ui/GuiRenderer", null, CLIENT, "drawItemStack(Lwm;IIZ)V", 0x61225517, "Stopping CraftGuide visible compass/clock exploit",
 function(mn)
 {
   return replaceAllMethodCalls(mn,
@@ -153,7 +153,7 @@ function(mn)
 });
 
 // Fix Deco add-on
-tweak("Ginger", "Ginger", BOTH, "MakeBlocks()V", 0x7B7F833B, "Fixing Deco add-on calling an outdated beacon method name",
+tweak("Ginger", null, BOTH, "MakeBlocks()V", 0x7B7F833B, "Fixing Deco add-on calling an outdated beacon method name",
 function(mn)
 {
   if (!isBTWVersionOrNewer("4.99999A0E")) return;
@@ -173,7 +173,7 @@ function(mn)
     }
   }
 });
-tweak("Ginger$FCItemDye_ColorPlus", "Ginger$FCItemDye_ColorPlus", CLIENT, "a(Lly;)V", 0x66B909E1, "Fixing Deco add-on using wrong dye texture name",
+tweak("Ginger$FCItemDye_ColorPlus", null, CLIENT, "a(Lly;)V", 0x66B909E1, "Fixing Deco add-on using wrong dye texture name",
 function(mn)
 {
   // Since Deco doesn't provide a version string, have to rely on checksum only
@@ -192,7 +192,7 @@ function(mn)
     }
   }
 });
-tweak("Ginger$Util", "Ginger$Util", BOTH, "CheatBlockIDs()V", 0x35CE5784, "Fixing Deco add-on extending block IDs of FCTileEntityBeacon",
+tweak("Ginger$Util", null, BOTH, "CheatBlockIDs()V", 0x35CE5784, "Fixing Deco add-on extending block IDs of FCTileEntityBeacon",
 function(mn)
 {
   // Since Deco doesn't provide a version string, have to rely on checksum only

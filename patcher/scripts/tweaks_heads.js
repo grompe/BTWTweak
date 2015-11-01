@@ -120,7 +120,7 @@ function(cn)
   ));
   cn.methods.add(mn);
 });
-add("FCEntityJungleSpider", "FCEntityJungleSpider", BOTH, "Jungle spider is too small to drop head",
+add("FCEntityJungleSpider", null, BOTH, "Jungle spider is too small to drop head",
 function(cn)
 {
   var mn = MethodNode(ACC_PROTECTED, "dropHead", "()V", null, null);

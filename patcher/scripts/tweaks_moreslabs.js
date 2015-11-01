@@ -1,11 +1,11 @@
 // className, deobfName, side, method, checksums, description
-tweak("FCBlockDirtSlab", "FCBlockDirtSlab", BOTH, "HasValidAnchorToFacing(Laab;IIII)Z", CHECKSUM_IGNORE, "Make public",
+tweak("FCBlockDirtSlab", null, BOTH, "HasValidAnchorToFacing(Laab;IIII)Z", CHECKSUM_IGNORE, "Make public",
 function(mn)
 {
   mn.access = ACC_PUBLIC;
   return true;
 });
-tweak("FCItemBlockDirtSlab", "FCItemBlockDirtSlab", BOTH, "d(Lwm;)Ljava/lang/String;", 0x55A80942, "(1/3) Adding dirt slab item types",
+tweak("FCItemBlockDirtSlab", null, BOTH, "d(Lwm;)Ljava/lang/String;", 0x55A80942, "(1/3) Adding dirt slab item types",
 function(mn)
 {
   var changes = 0;
@@ -65,7 +65,7 @@ function(mn)
   }
   return changes == 2;
 });
-tweak("FCItemBlockDirtSlab", "FCItemBlockDirtSlab", BOTH, "canCombineWithBlock(Laab;IIII)Z", 0xAE2D0A64, "(2/3) Adding dirt slab item types",
+tweak("FCItemBlockDirtSlab", null, BOTH, "canCombineWithBlock(Laab;IIII)Z", 0xAE2D0A64, "(2/3) Adding dirt slab item types",
 function(mn)
 {
   var changes = 0;
@@ -86,7 +86,7 @@ function(mn)
   }
   return changes == 2;
 });
-tweak("FCItemBlockDirtSlab", "FCItemBlockDirtSlab", BOTH, "convertToFullBlock(Laab;III)Z", 0x49FA1335, "(3/3) Adding dirt slab item types",
+tweak("FCItemBlockDirtSlab", null, BOTH, "convertToFullBlock(Laab;III)Z", 0x49FA1335, "(3/3) Adding dirt slab item types",
 function(mn)
 {
   for (var i = 0; i < mn.instructions.size(); i++)

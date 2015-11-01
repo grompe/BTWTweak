@@ -44,7 +44,7 @@ function(mn)
     }
   }
 });
-add("FCBlockBed", "FCBlockBed", BOTH, "Allowing sleep",
+add("FCBlockBed", null, BOTH, "Allowing sleep",
 function(cn)
 {
   for (var i = 0; i < cn.methods.size(); i++)

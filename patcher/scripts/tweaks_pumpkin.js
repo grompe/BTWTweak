@@ -1,5 +1,5 @@
 // className, deobfName, side, method, checksums, description
-tweak("FCBlockGourd", "FCBlockGourd", BOTH, "Explode(Laab;DDD)V", [0x20A72147, 0x55EA249F], "Exploding Jack-O-Lanterns with torches",
+tweak("FCBlockGourd", null, BOTH, "Explode(Laab;DDD)V", [0x20A72147, 0x55EA249F], "Exploding Jack-O-Lanterns with torches",
 function(mn)
 {
   var label1 = LabelNode();
@@ -63,7 +63,7 @@ function(mn)
   ));
   return true;
 });
-tweak("FCBlockPumpkin", "FCBlockPumpkin", CLIENT, "a(Lly;)V", 0x28FF05C8, "Adding jack icon back",
+tweak("FCBlockPumpkin", null, CLIENT, "a(Lly;)V", 0x28FF05C8, "Adding jack icon back",
 function(mn)
 {
   for (i = 0; i < mn.instructions.size(); i++)
@@ -86,7 +86,7 @@ function(mn)
     }
   }
 });
-tweak("FCBlockPumpkin", "FCBlockPumpkin", BOTH, "<init>(IZ)V", 0x2C60197, "Inserting isLantern handling back",
+tweak("FCBlockPumpkin", null, BOTH, "<init>(IZ)V", 0x2C60197, "Inserting isLantern handling back",
 function(mn)
 {
   return CodeInserter(
@@ -98,9 +98,8 @@ function(mn)
     ]
   ).process(mn);
 });
-add("FCBlockPumpkin", "FCBlockPumpkin", BOTH, "Added isLantern field back",
+add("FCBlockPumpkin", null, BOTH, "Added isLantern field back",
 function(cn)
 {
   cn.fields.add(FieldNode(ACC_PRIVATE, "isLantern", "Z", null, null));
 });
-

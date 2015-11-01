@@ -1,5 +1,5 @@
 // className, deobfName, side, method, checksums, description
-tweak("FCBlockBlockDispenser", "FCBlockBlockDispenser", BOTH, "DispenseBlockOrItem(Laab;IIILjava/util/Random;)V", [0xB78B99F2, 0x9DEF97A1], "Handling loose rocks (if old version)",
+tweak("FCBlockBlockDispenser", null, BOTH, "DispenseBlockOrItem(Laab;IIILjava/util/Random;)V", [0xB78B99F2, 0x9DEF97A1], "Handling loose rocks (if old version)",
 function(mn)
 {
   if (isBTWVersionOrNewer("4.89666")) return true;

@@ -389,7 +389,7 @@ function(cn)
   ));
   cn.methods.add(mn);
 });
-tweak("FCTileEntityTurntable", "FCTileEntityTurntable", BOTH, "RotateFurnace(IIIZ)V", 0x8ADA0887, "Supporting new furnace state",
+tweak("FCTileEntityTurntable", null, BOTH, "RotateFurnace(IIIZ)V", 0x8ADA0887, "Supporting new furnace state",
 function(mn)
 {
   var changes = 0;

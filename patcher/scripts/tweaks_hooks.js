@@ -14,7 +14,7 @@ function(cn)
   cn.methods.add(mn);
 });
 // className, deobfName, side, method, checksums, description
-tweak("net/minecraft/client/Minecraft", "Minecraft", CLIENT, "main([Ljava/lang/String;)V", 0x4F527386, "Adding app icons",
+tweak("net/minecraft/client/Minecraft", null, CLIENT, "main([Ljava/lang/String;)V", 0x4F527386, "Adding app icons",
 function(mn)
 {
   for (var i = 0; i < mn.instructions.size(); i++)
@@ -37,7 +37,7 @@ function(mn)
     }
   }
 });
-tweak("net/minecraft/client/Minecraft", "Minecraft", CLIENT, "a()V", [0xA79A9DCF, 0x5E5FA51F], "Adding readyForInput hook",
+tweak("net/minecraft/client/Minecraft", null, CLIENT, "a()V", [0xA79A9DCF, 0x5E5FA51F], "Adding readyForInput hook",
 function(mn)
 {
   for (var i = mn.instructions.size() - 1; i >= 0; i--)
@@ -50,7 +50,7 @@ function(mn)
     }
   }
 });
-tweak("net/minecraft/client/Minecraft", "Minecraft", CLIENT, "l()V", 0x6F5697A8, "Adding keyboard hook",
+tweak("net/minecraft/client/Minecraft", null, CLIENT, "l()V", 0x6F5697A8, "Adding keyboard hook",
 function(mn)
 {
   for (var i = 0; i < mn.instructions.size(); i++)
@@ -254,7 +254,7 @@ function(mn)
 tweak("bfq", "EntityRenderer", CLIENT, "a(FJ)V", [0x13FCF28A, 0x48CAF8B5], "Adding microblock preview hook",
 function(mn)
 {
-  var changes = 2;
+  var changes = 0;
   for (var i = 0; i < mn.instructions.size(); i++)
   {
     var n = mn.instructions.get(i);
@@ -271,7 +271,7 @@ function(mn)
   }
   return changes == 2;
 });
-tweak("FCBlockSaw", "FCBlockSaw", BOTH, "HandleSawingExceptionCases(Laab;IIIIIIILjava/util/Random;)Z", 0xB82C6297, "Inserting onBlockSawed() hook",
+tweak("FCBlockSaw", null, BOTH, "HandleSawingExceptionCases(Laab;IIIIIIILjava/util/Random;)Z", 0xB82C6297, "Inserting onBlockSawed() hook",
 function(mn)
 {
   var changes = 0;
@@ -336,7 +336,7 @@ function(mn)
   return changes == 3;
 });
 
-tweak("FCUtilsInventory", "FCUtilsInventory", BOTH, "AddItemStackToChest(Lapy;Lwm;)Z", 0xBBAB1C34, "Replacing hopper to chest deposit function",
+tweak("FCUtilsInventory", null, BOTH, "AddItemStackToChest(Lapy;Lwm;)Z", 0xBBAB1C34, "Replacing hopper to chest deposit function",
 function(mn)
 {
   mn.instructions.clear();
@@ -350,7 +350,7 @@ function(mn)
   ));
   return true;
 });
-tweak("FCUtilsInventory", "FCUtilsInventory", BOTH, "AddItemStackToDoubleInventory(Llt;Llt;Lwm;)Z", CHECKSUM_IGNORE, "Make public",
+tweak("FCUtilsInventory", null, BOTH, "AddItemStackToDoubleInventory(Llt;Llt;Lwm;)Z", CHECKSUM_IGNORE, "Make public",
 function(mn)
 {
   mn.access = ACC_PUBLIC | ACC_STATIC;

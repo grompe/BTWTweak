@@ -66,5 +66,3 @@ function(mn)
   }
   return changes == 5;
 });
-
-

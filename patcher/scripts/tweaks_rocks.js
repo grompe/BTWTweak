@@ -33,7 +33,7 @@ function(mn)
     }
   }
 });
-tweak("FCBlockHopper", "FCBlockHopper", BOTH, "OnEntityItemCollidedWithBlock(Laab;IIILrh;)V", 0xE7F6250, "Calling new gravel handling",
+tweak("FCBlockHopper", null, BOTH, "OnEntityItemCollidedWithBlock(Laab;IIILrh;)V", 0xE7F6250, "Calling new gravel handling",
 function(mn)
 {
   var label;
@@ -84,7 +84,7 @@ function(mn)
     }
   }
 });
-add("FCBlockHopper", "FCBlockHopper", BOTH, "Adding new gravel handling",
+add("FCBlockHopper", null, BOTH, "Adding new gravel handling",
 function(cn)
 {
   var label = LabelNode();
