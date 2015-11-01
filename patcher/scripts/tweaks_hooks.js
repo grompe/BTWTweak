@@ -350,7 +350,7 @@ function(mn)
   ));
   return true;
 });
-tweak("FCUtilsInventory", null, BOTH, "AddItemStackToDoubleInventory(Llt;Llt;Lwm;)Z", CHECKSUM_IGNORE, "Make public",
+tweak("FCUtilsInventory", null, BOTH, "AddItemStackToDoubleInventory(Llt;Llt;Lwm;)Z", CHECKSUM_IGNORE, "Make access public",
 function(mn)
 {
   mn.access = ACC_PUBLIC | ACC_STATIC;

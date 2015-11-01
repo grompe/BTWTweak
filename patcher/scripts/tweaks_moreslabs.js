@@ -1,5 +1,5 @@
 // className, deobfName, side, method, checksums, description
-tweak("FCBlockDirtSlab", null, BOTH, "HasValidAnchorToFacing(Laab;IIII)Z", CHECKSUM_IGNORE, "Make public",
+tweak("FCBlockDirtSlab", null, BOTH, "HasValidAnchorToFacing(Laab;IIII)Z", CHECKSUM_IGNORE, "Make access public",
 function(mn)
 {
   mn.access = ACC_PUBLIC;

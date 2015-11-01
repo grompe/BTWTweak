@@ -461,12 +461,12 @@ function add(className, deobfName, side, description, process)
       var tweaks;
       if (a.tweakMethods && (tweaks = a.tweakMethods[mn.name + mn.desc]))
       {
+        var sum = calcMethodChecksum(mn);
         for (var i2 = 0; i2 < tweaks.length; i2++)
         {
           if (tweaks[i2].checksums != CHECKSUM_IGNORE)
           {
             var checksum = tweaks[i2].checksums;
-            var sum = calcMethodChecksum(mn);
             if (typeof tweaks[i2].checksums == "undefined")
             {
               log("Debug: Checksum for " + mn.name + mn.desc + " is 0x" + toHex(sum));
