@@ -246,6 +246,23 @@ BTW download link: http://www.minecraftforum.net/forums/mapping-and-modding/mine
 
 Minecraft 1.5.2 download link: http://s3.amazonaws.com/Minecraft.Download/versions/1.5.2/1.5.2.jar
 
+Libraries download links:
+https://libraries.minecraft.net/net/java/jinput/jinput/2.0.5/jinput-2.0.5.jar
+https://libraries.minecraft.net/org/lwjgl/lwjgl/lwjgl/2.9.1/lwjgl-2.9.1.jar
+https://libraries.minecraft.net/org/lwjgl/lwjgl/lwjgl_util/2.9.1/lwjgl_util-2.9.1.jar
+
+Natives for Windows:
+https://libraries.minecraft.net/net/java/jinput/jinput-platform/2.0.5/jinput-platform-2.0.5-natives-windows.jar
+https://libraries.minecraft.net/org/lwjgl/lwjgl/lwjgl-platform/2.9.1/lwjgl-platform-2.9.1-natives-windows.jar
+
+Natives for Linux:
+https://libraries.minecraft.net/net/java/jinput/jinput-platform/2.0.5/jinput-platform-2.0.5-natives-linux.jar
+https://libraries.minecraft.net/org/lwjgl/lwjgl/lwjgl-platform/2.9.1/lwjgl-platform-2.9.1-natives-linux.jar
+
+Natives for OS X:
+https://libraries.minecraft.net/net/java/jinput/jinput-platform/2.0.5/jinput-platform-2.0.5-natives-osx.jar
+https://libraries.minecraft.net/org/lwjgl/lwjgl/lwjgl-platform/2.9.1/lwjgl-platform-2.9.1-natives-osx.jar
+
 ---
 
 # Source installation instructions
@@ -253,7 +270,7 @@ Minecraft 1.5.2 download link: http://s3.amazonaws.com/Minecraft.Download/versio
 1. Unpack MCP 7.51
 2. Install BTW into 1.5.2 minecraft.jar
 3. Place minecraft.jar, jinput.jar, lwjgl.jar, lwjgl_util.jar into ./jars/bin/ directory,
-   and natives (jinput, lwjgl, openal) into ./jars/bin/natives/ directory
+   and natives (.dll or .so or .jnilib files) into ./jars/bin/natives/ directory
 4. Decompile with MCP, it will complain a bit
 5. Apply MCP fix patch using the mcp_fix.diff file:
    patch -p 1 -i mcp_fix.diff
