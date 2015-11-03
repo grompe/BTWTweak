@@ -823,3 +823,27 @@ function(mn)
     }
   }
 });
+tweak("acn", "WorldProvider", CLIENT, "j()Z", 0x1E3004E6, "(1/2) Removing void fog",
+function(mn)
+{
+  mn.instructions.clear();
+  mn.instructions.add(toInsnList(
+    [
+      InsnNode(ICONST_0),
+      InsnNode(IRETURN),
+    ]
+  ));
+  return true;
+});
+tweak("acn", "WorldProvider", CLIENT, "k()D", 0x104203A5, "(2/2) Removing void fog",
+function(mn)
+{
+  mn.instructions.clear();
+  mn.instructions.add(toInsnList(
+    [
+      InsnNode(DCONST_1),
+      InsnNode(DRETURN),
+    ]
+  ));
+  return true;
+});
