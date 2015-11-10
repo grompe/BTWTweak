@@ -1,7 +1,20 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.9h
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.9i
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
+
+v0.9i
+
+- Restored the ability of Glass Block to contain piston packing.
+
+- Removed the void fog.
+
+- Refactored the patches, now it should be much easier to write new ones,
+  also you can add your own in the BTWTweak.jar/scripts/custom.js file.
+
+- Fixed patcher failing to remove client-only stuff on server.
+
+- Fixed tables and columns showing moulding placement preview box.
 
 v0.9h
 
