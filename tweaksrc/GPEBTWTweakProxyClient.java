@@ -223,7 +223,8 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
     int meta = stack.getItemDamage();
     boolean isSiding = id == FCBetterThanWolves.fcBlockWoodSidingItemStubID
       || (id != FCBetterThanWolves.fcBlockWoodCornerItemStubID && meta == 0 && block instanceof FCBlockSidingAndCorner);
-    boolean isMoulding = block instanceof FCBlockMoulding;
+    boolean isMoulding = id == FCBetterThanWolves.fcBlockWoodMouldingItemStubID
+      || (id != FCBetterThanWolves.fcBlockWoodMouldingDecorativeItemStubID && meta == 0 && block instanceof FCBlockMoulding);
     boolean isCorner = id == FCBetterThanWolves.fcBlockWoodCornerItemStubID
       || (id != FCBetterThanWolves.fcBlockWoodSidingItemStubID && meta == 1 && block instanceof FCBlockSidingAndCorner);
     if (isSiding || isMoulding || isCorner)
