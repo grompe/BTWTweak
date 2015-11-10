@@ -66,7 +66,6 @@ public class BTWTweaker
     }
     String jarname = args[0];
 
-    //if (jarname.indexOf("server") != -1) onServer = true;
     int jartype = checkClientServerBTWZip(jarname);
     log(jarname + ": "+explainStatus(jartype));
     if (jartype == STATUS_NOBTW)
@@ -84,8 +83,6 @@ public class BTWTweaker
       log("Tweaking BTW package is not yet implemented.\nPlease install on minecraft(_server).jar with BTW inside.");
       return;
     }
-    onServer = (jartype == STATUS_BTWSERVER);
-
     tweak(jarname, jartype);
   }
 
@@ -139,6 +136,7 @@ public class BTWTweaker
 
   public static void tweak(String jarname, int jartype) throws Exception
   {
+    onServer = (jartype == STATUS_BTWSERVER);
     try
     {
       Class.forName("sun.org.mozilla.javascript.internal.Context");
