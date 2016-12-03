@@ -466,7 +466,7 @@ function add(className, deobfName, side, description, process)
     {
       name += " [" + deobfNames[name] + "]";
     }
-    log("Class " + name + ": ", 1);
+    log("Class " + name + ": ");
     for (var i = 0; i < cn.methods.size(); i++)
     {
       mn = cn.methods.get(i);
