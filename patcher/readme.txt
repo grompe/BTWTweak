@@ -1,4 +1,4 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.9i
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.9j
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
@@ -14,6 +14,11 @@ v0.9j
 
 - Changed pistons to melt down to 2 gold nuggets and 6 iron nuggets to be
   consistent with reduction in BTW.
+
+- Allowed normal difficulty for hardcore (permadeath) mode.
+
+- Allowed easy difficulty to be selected only in the main menu. It is now
+  called "wimpy". Resets to normal after restarting the game.
 
 v0.9i
 

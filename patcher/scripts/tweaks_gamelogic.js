@@ -422,3 +422,76 @@ function(mn)
     }
   }
 });
+if (isBTWVersionOrNewer("4.89113"))
+{
+  tweak("iz", "WorldServer", BOTH, "b()V", 0xD2243D2B, "Re-allowing easy difficulty and normal - on hardcore",
+  function(mn)
+  {
+    var changes = 0;
+    for (var i = 0; i < mn.instructions.size(); i++)
+    {
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.JumpInsnNode") && (n.opcode == IF_ICMPGE))
+      {
+        n.opcode = IF_ICMPLE;
+        changes++;
+        break;
+      }
+    }
+    for (i += 1; i < mn.instructions.size(); i++)
+    {
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.InsnNode") && (n.opcode == ICONST_2))
+      {
+        mn.instructions.set(n, InsnNode(ICONST_1));
+        changes++;
+        if (changes == 3) return true;
+      }
+    }
+  });
+  tweak("avy", "GameSettings", CLIENT, "a(Lawa;I)V", 0xA47E6FD8, "Re-allowing easy difficulty",
+  function(mn)
+  {
+    var found = false;
+    for (var i = 0; i < mn.instructions.size(); i++)
+    {
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && (n.opcode == PUTFIELD) && n.owner.equals("avy") && n.name.equals("Y") && n.desc.equals("I"))
+      {
+        found = true;
+        break;
+      }
+    }
+    if (!found) return false;
+    var changes = 0;
+    for (i += 1; i < mn.instructions.size(); i++)
+    {
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.InsnNode") && (n.opcode == ICONST_2))
+      {
+        mn.instructions.set(n, MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "getMinimumDifficulty", "()I"));
+        changes++;
+        if (changes == 2) return true;
+      }
+    }
+  });
+  tweak("net/minecraft/server/MinecraftServer", null, BOTH, "c(I)V", 0x4461421, "Allowing normal difficulty on hardcore",
+  function(mn)
+  {
+    for (var i = 0; i < mn.instructions.size(); i++)
+    {
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.InsnNode") && (n.opcode == ICONST_3))
+      {
+        mn.instructions.insert(n, toInsnList(
+          [
+            VarInsnNode(ILOAD, 1),
+            MethodInsnNode(INVOKESTATIC, "java/lang/Math", "max", "(II)I"),
+          ]
+        ));
+        mn.instructions.set(n, InsnNode(ICONST_2));
+        return true;
+      }
+    }
+  });
+}

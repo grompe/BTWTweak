@@ -774,6 +774,7 @@ public class GPEBTWTweak extends FCAddOn
     t.put("container.rename", "Write Tags & Name");
     t.put("key.sprint", "Sprint");
     t.put("key.tell", "Tell");
+    t.put("options.difficulty.easy", "Wimpy");
 
     t.put("pottery.crucible", "Crucible");
     t.put("pottery.planter", "Planter");
@@ -1277,5 +1278,12 @@ public class GPEBTWTweak extends FCAddOn
       (double)x + block.minX, (double)y + block.minY, (double)z + block.minZ,
       (double)x + block.maxX, (double)y + block.maxY, (double)z + block.maxZ);
     return world.checkNoEntityCollision(bb);
+  }
+
+  public static int getMinimumDifficulty()
+  {
+    MinecraftServer srv = MinecraftServer.getServer();
+    if (srv == null) return 1;
+    return srv.isServerRunning() ? 2 : 1;
   }
 }
