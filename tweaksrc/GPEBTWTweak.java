@@ -11,7 +11,7 @@ public class GPEBTWTweak extends FCAddOn
 {
   public static GPEBTWTweak instance;
   public static GPEBTWTweakProxy proxy;
-  public static String tweakVersion = "0.9i";
+  public static String tweakVersion = "0.9j";
 
   public static boolean isDecoPresent;
 
@@ -352,7 +352,10 @@ public class GPEBTWTweak extends FCAddOn
       FCRecipes.AddVanillaRecipe(new ItemStack(Block.brick), new Object[] {"X", "X", 'X', new ItemStack(Block.stoneSingleSlab, 1, 4)});
       FCRecipes.AddVanillaRecipe(new ItemStack(Block.stoneBrick), new Object[] {"X", "X", 'X', new ItemStack(Block.stoneSingleSlab, 1, 5)});
     }
-    FCRecipes.AddVanillaRecipe(new ItemStack(Block.netherBrick), new Object[] {"X", "X", 'X', new ItemStack(Block.stoneSingleSlab, 1, 6)});
+    if (!isBTWVersionOrNewer("4.A2 Timing Rodent"))
+    {
+      FCRecipes.AddVanillaRecipe(new ItemStack(Block.netherBrick), new Object[] {"X", "X", 'X', new ItemStack(Block.stoneSingleSlab, 1, 6)});
+    }
     FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcAestheticOpaque, 1, 10), new Object[] {"X", "X", 'X', new ItemStack(FCBetterThanWolves.fcAestheticNonOpaque, 1, 10)});
 
     FCRecipes.AddVanillaRecipe(new ItemStack(gpeItemSilk, 1), new Object[] {"###", "###", "###", '#', Item.silk});
@@ -360,9 +363,15 @@ public class GPEBTWTweak extends FCAddOn
 
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.book, 1), new Object[] {Item.paper, Item.paper, Item.paper, FCBetterThanWolves.fcItemTannedLeatherCut});
 
-    Item pistonCore = isBTWVersionOrNewer("4.89666") ? Item.ingotIron : FCBetterThanWolves.fcSteel;
-    FCRecipes.AddStokedCrucibleRecipe(new ItemStack[] {new ItemStack(Item.goldNugget, 3), new ItemStack(pistonCore, 1)}, new ItemStack[] {new ItemStack(Block.pistonBase, 1)});
-    FCRecipes.AddStokedCrucibleRecipe(new ItemStack[] {new ItemStack(Item.goldNugget, 3), new ItemStack(pistonCore, 1)}, new ItemStack[] {new ItemStack(Block.pistonStickyBase, 1)});
+    if (isBTWVersionOrNewer("4.A2 Timing Rodent"))
+    {
+      FCRecipes.AddStokedCrucibleRecipe(new ItemStack[] {new ItemStack(Item.goldNugget, 2), new ItemStack(FCBetterThanWolves.fcItemNuggetIron, 6)}, new ItemStack[] {new ItemStack(Block.pistonBase, 1)});
+      FCRecipes.AddStokedCrucibleRecipe(new ItemStack[] {new ItemStack(Item.goldNugget, 2), new ItemStack(FCBetterThanWolves.fcItemNuggetIron, 6)}, new ItemStack[] {new ItemStack(Block.pistonStickyBase, 1)});
+    } else {
+      Item pistonCore = isBTWVersionOrNewer("4.89666") ? Item.ingotIron : FCBetterThanWolves.fcSteel;
+      FCRecipes.AddStokedCrucibleRecipe(new ItemStack[] {new ItemStack(Item.goldNugget, 3), new ItemStack(pistonCore, 1)}, new ItemStack[] {new ItemStack(Block.pistonBase, 1)});
+      FCRecipes.AddStokedCrucibleRecipe(new ItemStack[] {new ItemStack(Item.goldNugget, 3), new ItemStack(pistonCore, 1)}, new ItemStack[] {new ItemStack(Block.pistonStickyBase, 1)});
+    }
 
     FCRecipes.RemoveShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemIngotDiamond), new Object[] {new ItemStack(Item.ingotIron), new ItemStack(Item.diamond), new ItemStack(FCBetterThanWolves.fcItemCreeperOysters)});
     FCRecipes.AddCauldronRecipe(new ItemStack(FCBetterThanWolves.fcItemIngotDiamond), new ItemStack[] {new ItemStack(Item.ingotIron), new ItemStack(Item.diamond), new ItemStack(FCBetterThanWolves.fcItemCreeperOysters)});

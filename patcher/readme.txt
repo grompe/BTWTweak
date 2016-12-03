@@ -12,6 +12,9 @@ v0.9j
 
 - Added stump textures for non-oak wood types.
 
+- Changed pistons to melt down to 2 gold nuggets and 6 iron nuggets to be
+  consistent with reduction in BTW.
+
 v0.9i
 
 - Restored the ability of Glass Block to contain piston packing.
