@@ -2,8 +2,8 @@
 tweak("aen", "ComponentMineshaftCorridor", BOTH, "a(Laab;Ljava/util/Random;Laek;)Z", 0x97797998, "Making rails rusted in mineshafts",
 function(mn)
 {
-  var changes = 0;
-  for (i += 1; i < mn.instructions.size(); i++)
+  var i, changes = 0;
+  for (i = 0; i < mn.instructions.size(); i++)
   {
     var n = mn.instructions.get(i);
     if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.name.equals("aK"))
