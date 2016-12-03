@@ -3,6 +3,15 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.9i
 
 [********** Change Log ************]
 
+v0.9j
+
+- Removed BTWTweak stumps as they are now implemented in BTW.
+
+- Removed termites from mineshafts, logs are now whole again. This change
+  is due to the way stumps are implemented in BTW.
+
+- Added stump textures for non-oak wood types.
+
 v0.9i
 
 - Restored the ability of Glass Block to contain piston packing.

@@ -1,14 +1,7 @@
 diff --git a/src/minecraft/net/minecraft/src/ComponentMineshaftCorridor.java b/src/minecraft/net/minecraft/src/ComponentMineshaftCorridor.java
-index 3451ae6..ee0ee7a 100644
+index 3451ae6..3f90aa3 100644
 --- a/src/minecraft/net/minecraft/src/ComponentMineshaftCorridor.java
 +++ b/src/minecraft/net/minecraft/src/ComponentMineshaftCorridor.java
-@@ -240,2 +240,2 @@ public boolean addComponentParts(World par1World, Random par2Random, StructureBo
--                this.fillWithMetadataBlocks(par1World, par3StructureBoundingBox, 0, 0, var6, 0, 1, var6, Block.wood.blockID, 0, 0, 0, false);
--                this.fillWithMetadataBlocks(par1World, par3StructureBoundingBox, 2, 0, var6, 2, 1, var6, Block.wood.blockID, 0, 0, 0, false);
-+                this.fillWithMetadataBlocks(par1World, par3StructureBoundingBox, 0, 0, var6, 0, 1, var6, Block.wood.blockID, 12, 0, 0, false);
-+                this.fillWithMetadataBlocks(par1World, par3StructureBoundingBox, 2, 0, var6, 2, 1, var6, Block.wood.blockID, 12, 0, 0, false);
-@@ -242,0 +243 @@ public boolean addComponentParts(World par1World, Random par2Random, StructureBo
-+                var8 = 12;
-@@ -317 +318 @@ public boolean addComponentParts(World par1World, Random par2Random, StructureBo
+@@ -317 +317 @@ public boolean addComponentParts(World par1World, Random par2Random, StructureBo
 -                        this.randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.7F, 1, 0, var5, Block.rail.blockID, this.getMetadataWithOffset(Block.rail.blockID, 0));
 +                        this.randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.7F, 1, 0, var5, GPEBTWTweak.gpeBlockRustedRail.blockID, this.coordBaseMode & 1);

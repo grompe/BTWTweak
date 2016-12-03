@@ -20,6 +20,34 @@ function fixMobToBurnOnSlabs(mn)
     }
   }
 }
+function fixAxeCheckingForStump(mn)
+{
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner.equals("apa") && n.name.equals("N") && n.desc.equals("Lapa;"))
+    {
+      var n2 = n.getNext();
+      if (isInstance(n2, "org.objectweb.asm.tree.JumpInsnNode") && (n2.opcode == IF_ACMPNE))
+      {
+        n2.opcode = IF_ICMPNE;
+      } else {
+        return false;
+      }
+      mn.instructions.insert(n, toInsnList(
+        [
+          FieldInsnNode(GETFIELD, "apa", "cz", "I"),
+        ]
+      ));
+      mn.instructions.insertBefore(n, toInsnList(
+        [
+          FieldInsnNode(GETFIELD, "apa", "cz", "I"),
+        ]
+      ));
+      return true;
+    }
+  }
+}
 
 // className, deobfName, side, method, checksums, description
 tweak("rf", "EntityBoat", BOTH, "l_()V", 0x8C1045A2, "Making boat safe from falling damage bug",
@@ -120,6 +148,12 @@ function(mn)
   ]));
   return true;
 });
+if (isBTWVersionOrNewer("4.A2 Timing Rodent"))
+{
+  tweak("wi", "ItemAxe", BOTH, "getStrVsBlock(Lwm;Laab;Lapa;III)F", 0xF8E30EFB, "(1/3) Making axe check for tree stump block ID rather than block", fixAxeCheckingForStump);
+  tweak("wi", "ItemAxe", BOTH, "canHarvestBlock(Laab;Lapa;III)Z", 0xB5DB0C08, "(2/3) Making axe check for tree stump block ID rather than block", fixAxeCheckingForStump);
+  tweak("wi", "ItemAxe", BOTH, "IsEffecientVsBlock(Laab;Lapa;III)Z", 0x84A511D2, "(3/3) Making axe check for tree stump block ID rather than block", fixAxeCheckingForStump);
+}
 
 // =======================================================================
 // Fix mods! Now with this mod you can fix mods for the mod for Minecraft.

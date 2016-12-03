@@ -4,8 +4,12 @@ public class GPEBlockLog extends FCBlockLog
 {
   public static final String[] treeSide = new String[] {"tree_side", "tree_spruce", "tree_birch", "tree_jungle"};
   public static final String[] treeTop = new String[] {"tree_top", "tree_top_spruce", "tree_top_birch", "tree_top_jungle"};
+  public static final String[] trunkSide = new String[] {"fcBlockTrunkOak", "fcBlockTrunkSpruce", "fcBlockTrunkBirch", "fcBlockTrunkJungle"};
+  public static final String[] trunkTop = new String[] {"fcBlockTrunkTop", "trunk_top_spruce", "trunk_top_birch", "trunk_top_jungle"};
   private Icon[] iconsSide;
   private Icon[] iconsTop;
+  private Icon[] iconsTrunkSide;
+  private Icon[] iconsTrunkTop;
 
   protected GPEBlockLog(int id)
   {
@@ -18,33 +22,6 @@ public class GPEBlockLog extends FCBlockLog
     SetItemDamageDroppedWhenCookedByKiln(1);
   }
 
-  public void OnBlockDestroyedWithImproperTool(World world, EntityPlayer player, int x, int y, int z, int meta)
-  {
-    if (meta == 12)
-    {
-      // Eaten by termites, in abandoned mineshaft
-      dropBlockAsItem_do(world, x, y, z, new ItemStack(FCBetterThanWolves.fcSawDust));
-    } else {
-      super.OnBlockDestroyedWithImproperTool(world, player, x, y, z, meta);
-    }
-  }
-
-  public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int meta)
-  {
-    if (meta == 12)
-    {
-      // Eaten by termites, in abandoned mineshaft
-      dropBlockAsItem_do(world, x, y, z, new ItemStack(FCBetterThanWolves.fcSawDust));
-    } else {
-      super.harvestBlock(world, player, x, y, z, meta);
-    }
-  }
-
-  protected boolean canSilkHarvest(int meta)
-  {
-    return meta != 12;
-  }
-
   public void OnDestroyedByFire(World world, int x, int y, int z)
   {
     dropBlockAsItem_do(world, x, y, z, new ItemStack(GPEBTWTweak.gpeItemAsh.itemID, 1, 0));
@@ -53,13 +30,9 @@ public class GPEBlockLog extends FCBlockLog
   public float getBlockHardness(World world, int x, int y, int z)
   {
     float multiplier = 1;
-    // If dirt is below vertical log, consider it a hard stump
     int meta = world.getBlockMetadata(x, y, z);
-    if (meta == 12) return 0.5F; // Eaten by termites, in abandoned mineshaft
-    if (world.getBlockId(x, y - 1, z) == 3 && (meta & 12) == 0)
-    {
-      multiplier = 10;
-    }
+    // If meta is 12, it is a hard stump
+    if (meta == 12) multiplier = 3;
     // Make jungle wood somewhat softer, pine a bit softer
     if ((meta & 3) == 1) return 1.3F * multiplier;
     if ((meta & 3) == 3) return 1.0F * multiplier;
@@ -71,6 +44,11 @@ public class GPEBlockLog extends FCBlockLog
   {
     int pos = meta & 12;
     int typ = meta & 3;
+    if (pos == 12)
+    {
+      if (side <= 1) return iconsTrunkTop[typ];
+      return iconsTrunkSide[typ];
+    }
     return
       (
         (pos == 0 && (side == 1 || side == 0)) ||
@@ -86,10 +64,14 @@ public class GPEBlockLog extends FCBlockLog
   {
     iconsTop = new Icon[treeSide.length];
     iconsSide = new Icon[treeSide.length];
+    iconsTrunkSide = new Icon[treeSide.length];
+    iconsTrunkTop = new Icon[treeSide.length];
     for (int i = 0; i < iconsSide.length; i++)
     {
       iconsTop[i] = r.registerIcon(treeTop[i]);
       iconsSide[i] = r.registerIcon(treeSide[i]);
+      iconsTrunkTop[i] = r.registerIcon(trunkTop[i]);
+      iconsTrunkSide[i] = r.registerIcon(trunkSide[i]);
     }
     Block.wood.registerIcons(r);
   }
