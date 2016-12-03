@@ -397,7 +397,7 @@ function(mn)
     ]
   ).process(mn);
 });
-tweak("zr", "MerchantRecipeList", BOTH, "a(Lzq;)V", 0xAEAB0BC0, "Putting new villager offers at the beginning rather than the end",
+tweak("zr", "MerchantRecipeList", BOTH, "a(Lzq;)V", [0xAEAB0BC0, 0x5CD408EB], "Putting new villager offers at the beginning rather than the end",
 function(mn)
 {
   for (var i = 0; i < mn.instructions.size(); i++)
