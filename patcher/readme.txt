@@ -20,6 +20,8 @@ v0.9j
 - Allowed easy difficulty to be selected only in the main menu. It is now
   called "wimpy". Resets to normal after restarting the game.
 
+- Extended maximum chat line length to 256 characters.
+
 v0.9i
 
 - Restored the ability of Glass Block to contain piston packing.

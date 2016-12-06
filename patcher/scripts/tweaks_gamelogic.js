@@ -1,3 +1,17 @@
+function bipush2sipush(mn, orig, replacement, count)
+{
+  var changes = 0;
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.IntInsnNode") && (n.getOpcode() == BIPUSH) && (n.operand == orig))
+    {
+      mn.instructions.set(n, IntInsnNode(SIPUSH, replacement));
+      changes++;
+      if (changes == count) return true;
+    }
+  }
+}
 // className, deobfName, side, method, checksums, description
 tweak("anf", "BlockFlowing", BOTH, "n(Laab;III)Z", 0xAD981353, "Making lava more unstoppable",
 function(mn)
@@ -495,3 +509,23 @@ if (isBTWVersionOrNewer("4.89113"))
     }
   });
 }
+tweak("awh", "GuiNewChat", CLIENT, "a(Ljava/lang/String;IIZ)V", 0x5E152CD1, "(1/2, client) Extending chat line to 256 characters",
+function(mn)
+{
+  return bipush2sipush(mn, 100, 256, 2);
+});
+tweak("awj", "GuiChat", CLIENT, "A_()V", 0xF83F144E, "(2/2, client) Extending chat line to 256 characters",
+function(mn)
+{
+  return bipush2sipush(mn, 100, 256, 1);
+});
+tweak("cw", "Packet3Chat", BOTH, "<clinit>()V", 0x24A0175, "(2/2, server) Extending chat line to 256 characters",
+function(mn)
+{
+  return bipush2sipush(mn, 119, 275, 1);
+});
+tweak("jh", "NetServerHandler", BOTH, "a(Lcw;)V", 0xAE3E3152, "(1/2, server) Extending chat line to 256 characters",
+function(mn)
+{
+  return bipush2sipush(mn, 100, 256, 1);
+});
