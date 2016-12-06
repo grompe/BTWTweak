@@ -13,6 +13,32 @@ function(cn)
   ));
   cn.methods.add(mn);
 });
+tweak("FCBetterThanWolves", null, BOTH, "ServerPlayerConnectionInitialized(Ljh;Ljc;)V", CHECKSUM_IGNORE, "Adding BTWTweak to server announcement on connecting",
+function(mn)
+{
+  var changes = 0;
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.LdcInsnNode") && (
+        (n.cst.toString() == " connected to Better Than Wolves server V") ||
+        (n.cst.toString() == "BTW V")
+      ))
+    {
+      n2 = mn.instructions.get(i + 3);
+      mn.instructions.insert(n2, toInsnList(
+        [
+          LdcInsnNode(" + BTWTweak v"),
+          MethodInsnNode(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;"),
+          FieldInsnNode(GETSTATIC, "GPEBTWTweak", "tweakVersion", "Ljava/lang/String;"),
+          MethodInsnNode(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;"),
+        ]
+      ));
+      changes++;
+      if (changes == 2) return true;
+    }
+  }
+});
 // className, deobfName, side, method, checksums, description
 tweak("net/minecraft/client/Minecraft", null, CLIENT, "main([Ljava/lang/String;)V", 0x4F527386, "Adding app icons",
 function(mn)

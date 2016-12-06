@@ -22,6 +22,9 @@ v0.9j
 
 - Extended maximum chat line length to 256 characters.
 
+- Added BTWTweak version to the announcement message when connecting.
+  You don't want to use BTWTweak on non-BTWTweak servers and vice-versa.
+
 v0.9i
 
 - Restored the ability of Glass Block to contain piston packing.
