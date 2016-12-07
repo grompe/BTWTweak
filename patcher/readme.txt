@@ -25,6 +25,11 @@ v0.9j
 - Added BTWTweak version to the announcement message when connecting.
   You don't want to use BTWTweak on non-BTWTweak servers and vice-versa.
 
+- When disconnecting, the player entity is removed only after 60 ticks
+  (3 seconds). This prevents exploiting initial invulnerability by
+  repeatedly disconnecting and connecting in dangerous situations.
+  Make sure to disconnect only when safe from now on.
+
 v0.9i
 
 - Restored the ability of Glass Block to contain piston packing.

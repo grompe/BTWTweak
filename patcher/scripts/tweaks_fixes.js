@@ -154,6 +154,149 @@ if (isBTWVersionOrNewer("4.A2 Timing Rodent"))
   tweak("wi", "ItemAxe", BOTH, "canHarvestBlock(Laab;Lapa;III)Z", 0xB5DB0C08, "(2/3) Making axe check for tree stump block ID rather than block", fixAxeCheckingForStump);
   tweak("wi", "ItemAxe", BOTH, "IsEffecientVsBlock(Laab;Lapa;III)Z", 0x84A511D2, "(3/3) Making axe check for tree stump block ID rather than block", fixAxeCheckingForStump);
 }
+// Fix logging in and out repeatedly to abuse initial invulnerability to avoid dying
+add("jh", "NetServerHandler", BOTH, "Added private integer ticksToQuit",
+function(cn)
+{
+  cn.fields.add(FieldNode(ACC_PRIVATE, "ticksToQuit", "I", null, null));
+});
+tweak("jh", "NetServerHandler", BOTH, "<init>(Lnet/minecraft/server/MinecraftServer;Lcg;Ljc;)V", 0xC9D80BE7, "Initializing ticksToQuit",
+function(mn)
+{
+  return CodeInserter(
+    BeginningFinder(),
+    [
+      VarInsnNode(ALOAD, 0),
+      InsnNode(ICONST_0),
+      FieldInsnNode(PUTFIELD, "jh", "ticksToQuit", "I"),
+    ],
+    INSERT_BEFORE
+  ).process(mn);
+});
+tweak("jh", "NetServerHandler", BOTH, "d()V", 0x55B72340, "(1/2) Making players stay for 60 ticks after disconnecting",
+function(mn)
+{
+  return CodeInserter(
+    BeginningFinder(),
+    [
+      VarInsnNode(ALOAD, 0),
+      MethodInsnNode(INVOKESPECIAL, "jh", "checkPendingQuit", "()V"),
+    ],
+    INSERT_BEFORE
+  ).process(mn);
+});
+tweak("jh", "NetServerHandler", BOTH, "a(Ljava/lang/String;[Ljava/lang/Object;)V", 0x72E72243, "(2/2) Making players stay for 60 ticks after disconnecting",
+function(mn)
+{
+  mn.instructions.clear();
+  var label = LabelNode();
+  mn.instructions.add(toInsnList(
+    [
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "jh", "ticksToQuit", "I"),
+      JumpInsnNode(IFNE, label),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "jh", "d", "Lnet/minecraft/server/MinecraftServer;"),
+      MethodInsnNode(INVOKEVIRTUAL, "net/minecraft/server/MinecraftServer", "al", "()Lku;"),
+      TypeInsnNode(NEW, "java/lang/StringBuilder"),
+      InsnNode(DUP),
+      MethodInsnNode(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "()V"),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "jh", "c", "Ljc;"),
+      FieldInsnNode(GETFIELD, "jc", "bS", "Ljava/lang/String;"),
+      MethodInsnNode(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;"),
+      LdcInsnNode(" lost connection: "),
+      MethodInsnNode(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;"),
+      VarInsnNode(ALOAD, 1),
+      MethodInsnNode(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;"),
+      MethodInsnNode(INVOKEVIRTUAL, "java/lang/StringBuilder", "toString", "()Ljava/lang/String;"),
+      MethodInsnNode(INVOKEINTERFACE, "ku", "a", "(Ljava/lang/String;)V"),
+      VarInsnNode(ALOAD, 0),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "jh", "e", "I"),
+      IntInsnNode(BIPUSH, 60),
+      InsnNode(IADD),
+      FieldInsnNode(PUTFIELD, "jh", "ticksToQuit", "I"),
+      label,
+      FrameNode(F_SAME, 0, null, 0, null),
+      InsnNode(RETURN),
+    ]
+  ));
+  return true;
+});
+add("jh", "NetServerHandler", BOTH, "Adding checkPendingQuit",
+function(cn)
+{
+  var mn = MethodNode(ACC_PRIVATE, "checkPendingQuit", "()V", null, null);
+  var label = LabelNode();
+  mn.instructions.add(toInsnList(
+    [
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "jh", "b", "Z"),
+      JumpInsnNode(IFNE, label),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "jh", "ticksToQuit", "I"),
+      JumpInsnNode(IFEQ, label),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "jh", "e", "I"),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "jh", "ticksToQuit", "I"),
+      JumpInsnNode(IF_ICMPLT, label),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "jh", "d", "Lnet/minecraft/server/MinecraftServer;"),
+      MethodInsnNode(INVOKEVIRTUAL, "net/minecraft/server/MinecraftServer", "ad", "()Lgu;"),
+      TypeInsnNode(NEW, "cw"),
+      InsnNode(DUP),
+      TypeInsnNode(NEW, "java/lang/StringBuilder"),
+      InsnNode(DUP),
+      MethodInsnNode(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "()V"),
+      FieldInsnNode(GETSTATIC, "a", "o", "La;"),
+      MethodInsnNode(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/Object;)Ljava/lang/StringBuilder;"),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "jh", "c", "Ljc;"),
+      MethodInsnNode(INVOKEVIRTUAL, "jc", "ax", "()Ljava/lang/String;"),
+      MethodInsnNode(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;"),
+      LdcInsnNode(" left the game."),
+      MethodInsnNode(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;"),
+      MethodInsnNode(INVOKEVIRTUAL, "java/lang/StringBuilder", "toString", "()Ljava/lang/String;"),
+      MethodInsnNode(INVOKESPECIAL, "cw", "<init>", "(Ljava/lang/String;)V"),
+      MethodInsnNode(INVOKEVIRTUAL, "gu", "a", "(Lei;)V"),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "jh", "d", "Lnet/minecraft/server/MinecraftServer;"),
+      MethodInsnNode(INVOKEVIRTUAL, "net/minecraft/server/MinecraftServer", "ad", "()Lgu;"),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "jh", "c", "Ljc;"),
+      MethodInsnNode(INVOKEVIRTUAL, "gu", "e", "(Ljc;)V"),
+      VarInsnNode(ALOAD, 0),
+      InsnNode(ICONST_1),
+      FieldInsnNode(PUTFIELD, "jh", "b", "Z"),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "jh", "d", "Lnet/minecraft/server/MinecraftServer;"),
+      MethodInsnNode(INVOKEVIRTUAL, "net/minecraft/server/MinecraftServer", "I", "()Z"),
+      JumpInsnNode(IFEQ, label),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "jh", "c", "Ljc;"),
+      FieldInsnNode(GETFIELD, "jc", "bS", "Ljava/lang/String;"),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "jh", "d", "Lnet/minecraft/server/MinecraftServer;"),
+      MethodInsnNode(INVOKEVIRTUAL, "net/minecraft/server/MinecraftServer", "H", "()Ljava/lang/String;"),
+      MethodInsnNode(INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/Object;)Z"),
+      JumpInsnNode(IFEQ, label),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "jh", "d", "Lnet/minecraft/server/MinecraftServer;"),
+      MethodInsnNode(INVOKEVIRTUAL, "net/minecraft/server/MinecraftServer", "al", "()Lku;"),
+      LdcInsnNode("Stopping singleplayer server as player logged out"),
+      MethodInsnNode(INVOKEINTERFACE, "ku", "a", "(Ljava/lang/String;)V"),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "jh", "d", "Lnet/minecraft/server/MinecraftServer;"),
+      MethodInsnNode(INVOKEVIRTUAL, "net/minecraft/server/MinecraftServer", "n", "()V"),
+      label,
+      FrameNode(F_SAME, 0, null, 0, null),
+      InsnNode(RETURN),
+    ]
+  ));
+  cn.methods.add(mn);
+});
 
 // =======================================================================
 // Fix mods! Now with this mod you can fix mods for the mod for Minecraft.
