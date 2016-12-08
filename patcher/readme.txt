@@ -30,6 +30,10 @@ v0.9j
   repeatedly disconnecting and connecting in dangerous situations.
   Make sure to disconnect only when safe from now on.
 
+- Changed dynamite to be lit with hold and thrown with release of a button.
+  This makes throwing dynamite more precise and much more fun!
+  This feature is dedicated to the good old Blood 3D game.
+
 v0.9i
 
 - Restored the ability of Glass Block to contain piston packing.

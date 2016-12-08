@@ -254,6 +254,7 @@ public class GPEBTWTweak extends FCAddOn
 
     Item.m_bSuppressConflictWarnings = true;
     FCBetterThanWolves.fcPotash = new GPEItemPotash(FCBetterThanWolves.fcPotash.itemID - 256);
+    FCBetterThanWolves.fcDynamite = new GPEItemDynamite(FCBetterThanWolves.fcDynamite.itemID - 256);
     gpeItemLooseRock = new GPEItemLooseRock(gpeLooseRockID - 256);
     gpeItemSilk = new Item(gpeSilkID - 256).setUnlocalizedName("gpeItemSilk").setCreativeTab(CreativeTabs.tabMaterials).SetBuoyancy(1.0F).SetBellowsBlowDistance(2);
     gpeItemAsh = new GPEItemPotash(gpeAshID - 256).setUnlocalizedName("gpeItemAsh");
@@ -775,6 +776,8 @@ public class GPEBTWTweak extends FCAddOn
     t.put("key.sprint", "Sprint");
     t.put("key.tell", "Tell");
     t.put("options.difficulty.easy", "Wimpy");
+    t.put("selectWorld.gameMode.hardcore.line1", "Same as survival mode,");
+    t.put("selectWorld.gameMode.hardcore.line2", "one life only");
 
     t.put("pottery.crucible", "Crucible");
     t.put("pottery.planter", "Planter");
