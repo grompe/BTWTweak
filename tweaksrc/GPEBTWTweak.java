@@ -805,6 +805,10 @@ public class GPEBTWTweak extends FCAddOn
     t.put("options.difficulty.easy", "Wimpy");
     t.put("selectWorld.gameMode.hardcore.line1", "Same as survival mode,");
     t.put("selectWorld.gameMode.hardcore.line2", "one life only");
+    t.put("achievement.acquireIron.desc", "Craft an iron ingot from 9 nuggets");
+    t.put("achievement.buildHoe.desc", "Use iron ingots and rods to make a hoe");
+    t.put("achievement.buildSword.desc", "Use rocks and rods to make an axe");
+    t.put("achievement.enchantments.desc", "Find an enchantment table");
 
     t.put("pottery.crucible", "Crucible");
     t.put("pottery.planter", "Planter");

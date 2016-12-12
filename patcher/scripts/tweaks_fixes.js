@@ -297,6 +297,139 @@ function(cn)
   ));
   cn.methods.add(mn);
 });
+// Fix achievements to be achieveable
+tweak("jv", "AchievementList", BOTH, "<clinit>()V", 0x562B905E, "(1/4) Making achievements achieveable",
+function(mn)
+{
+  var changes = 0;
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner.equals("wk") && n.desc.equals("Lwk;"))
+    {
+      if (n.name.equals("O"))
+      {
+        n.name = "Q";
+        changes++;
+      }
+      if (n.name.equals("s"))
+      {
+        n.name = "z";
+        changes++;
+      }
+      if (changes == 2) return true;
+    }
+  }
+});
+tweak("rh", "EntityItem", BOTH, "b_(Lsq;)V", 0x780F22BB, "(2/4) Making achievements achieveable",
+function(mn)
+{
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("sq") && n.name.equals("a") && n.desc.equals("(Lka;)V"))
+    {
+      var frame = mn.instructions.get(i + 3); // fakeinst
+      if (isInstance(frame, "org.objectweb.asm.tree.FrameNode"))
+      {
+        var label = LabelNode();
+        mn.instructions.insert(frame, toInsnList(
+          [
+            VarInsnNode(ALOAD, 2),
+            FieldInsnNode(GETFIELD, "wm", "c", "I"),
+            FieldInsnNode(GETSTATIC, "apa", "bI", "Lapa;"),
+            FieldInsnNode(GETFIELD, "apa", "cz", "I"),
+            JumpInsnNode(IF_ICMPNE, label),
+            VarInsnNode(ALOAD, 1),
+            FieldInsnNode(GETSTATIC, "jv", "D", "Lju;"),
+            MethodInsnNode(INVOKEVIRTUAL, "sq", "a", "(Lka;)V"),
+            label,
+            FrameNode(F_SAME, 0, null, 0, null),
+          ]
+        ));
+        return true;
+      }
+      return;
+    }
+  }
+});
+tweak("tx", "SlotFurnace", BOTH, "b(Lwm;)V", 0x5094290D, "(3/4) Making achievements achieveable",
+function(mn)
+{
+  var changes = 0;
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner.equals("wk") && n.name.equals("p") && n.desc.equals("Lwk;"))
+    {
+      n.name = "ba";
+      changes++;
+    }
+    if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner.equals("jv") && n.name.equals("k") && n.desc.equals("Lju;"))
+    {
+      n.name = "n";
+      changes++;
+    }
+    if (changes == 2) return true;
+  }
+});
+tweak("uk", "SlotCrafting", BOTH, "b(Lwm;)V", 0x79C03DC4, "(4/4) Making achievements achieveable",
+function(mn)
+{
+  var changes = 0;
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.JumpInsnNode") && n.opcode == GOTO)
+    {
+      var label = LabelNode();
+      var ret = n.label;
+      var frame = mn.instructions.get(i + 3); // fakeinst
+      if (isInstance(frame, "org.objectweb.asm.tree.FrameNode"))
+      {
+        mn.instructions.insert(frame, toInsnList(
+          [
+            VarInsnNode(ALOAD, 1),
+            FieldInsnNode(GETFIELD, "wm", "c", "I"),
+            FieldInsnNode(GETSTATIC, "wk", "p", "Lwk;"),
+            FieldInsnNode(GETFIELD, "wk", "cp", "I"),
+            JumpInsnNode(IF_ICMPNE, label),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "uk", "b", "Lsq;"),
+            FieldInsnNode(GETSTATIC, "jv", "k", "Lju;"),
+            InsnNode(ICONST_1),
+            MethodInsnNode(INVOKEVIRTUAL, "sq", "a", "(Lka;I)V"),
+            JumpInsnNode(GOTO, ret),
+            label,
+            FrameNode(F_SAME, 0, null, 0, null),
+          ]
+        ));
+        changes++;
+        break;
+      }
+      return;
+    }
+  }
+  if (changes != 1) return;
+  for (i += 1; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner.equals("wk") && n.desc.equals("Lwk;"))
+    {
+      if (n.name.equals("O"))
+      {
+        n.name = "Q";
+        changes++;
+      }
+      if (n.name.equals("s"))
+      {
+        n.name = "z";
+        changes++;
+      }
+      if (changes == 3) return true;
+    }
+  }
+});
 
 // =======================================================================
 // Fix mods! Now with this mod you can fix mods for the mod for Minecraft.

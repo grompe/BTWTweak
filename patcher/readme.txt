@@ -39,6 +39,9 @@ v0.9j
 - Added support for the new Deco addon, if glass shards are found, they
   will drop upon the destruction of glass blocks
 
+- Changed achievements around a bit to be technically possible in BTW.
+  Ideally they need an overhaul but that's some future task.
+
 v0.9i
 
 - Restored the ability of Glass Block to contain piston packing.
