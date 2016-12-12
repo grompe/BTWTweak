@@ -19,13 +19,31 @@ public class GPEBlockGlass extends BlockGlass
     if (!world.isRemote && entity.fallDistance > 3.0F)
     {
       world.playAuxSFX(2001, x, y, z, Block.glass.blockID);
-      world.setBlockWithNotify(x, y, z, 0);
+      world.destroyBlock(x, y, z, true);
     }
   }
 
   public boolean CanContainPistonPackingToFacing(World world, int x, int y, int z, int side)
   {
     return true;
+  }
+
+  public int quantityDroppedWithBonus(int fortune, Random random)
+  {
+    if (GPEBTWTweak.decoGlassShard == null) return 0;
+    return Math.min(4, quantityDropped(random) + random.nextInt(fortune + 1));
+  }
+
+  public int quantityDropped(Random random)
+  {
+    if (GPEBTWTweak.decoGlassShard == null) return 0;
+    return 2 + random.nextInt(3);
+  }
+
+  public int idDropped(int meta, Random random, int fortune)
+  {
+    if (GPEBTWTweak.decoGlassShard == null) return 0;
+    return GPEBTWTweak.decoGlassShard.itemID;
   }
 
   // Work around beacon missing texture

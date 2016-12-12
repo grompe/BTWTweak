@@ -34,6 +34,11 @@ v0.9j
   This makes throwing dynamite more precise and much more fun!
   This feature is dedicated to the good old Blood 3D game.
 
+- Dropped support for the old Deco addon
+
+- Added support for the new Deco addon, if glass shards are found, they
+  will drop upon the destruction of glass blocks
+
 v0.9i
 
 - Restored the ability of Glass Block to contain piston packing.

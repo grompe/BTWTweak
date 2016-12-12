@@ -14,6 +14,7 @@ public class GPEBTWTweak extends FCAddOn
   public static String tweakVersion = "0.9j";
 
   public static boolean isDecoPresent;
+  public static Item decoGlassShard = null;
 
   public static Block gpeBlockStone;
   public static Block compatAxleBlock;
@@ -225,16 +226,7 @@ public class GPEBTWTweak extends FCAddOn
       compatAxleBlock = Block.blocksList[247];
     }
 
-    try
-    {
-      Class.forName("Ginger");
-      isDecoPresent = true;
-    }
-    catch(ClassNotFoundException e)
-    {
-      isDecoPresent = false;
-    }
-
+    isDecoPresent = classExists("AddonManager");
     if (!isDecoPresent) extendBlockIDs();
 
     Block.blocksList[1] = null;  gpeBlockStone = new GPEBlockStone(1);
@@ -281,9 +273,12 @@ public class GPEBTWTweak extends FCAddOn
     }
     gpeBlockRustedRail = Itemize(new GPEBlockRustedRail(gpeBlockRustedRailID));
     gpeBlockRename = Itemize(new GPEBlockRename(gpeBlockRenameID));
-    if (!isDecoPresent)
+    if (!isDecoPresent || !classExists("Addon_Diamondium"))
     {
       gpeBlockDiamondIngot = Itemize(new GPEBlockDiamondIngot(gpeBlockDiamondIngotID));
+    }
+    if (!isDecoPresent || !classExists("Addon_HayBale"))
+    {
       gpeBlockHayBale = Itemize(new GPEBlockHayBale(gpeBlockHayBaleID));
     }
     gpeBlockSoap = Itemize(new GPEBlockSoap(gpeBlockSoapID));
@@ -408,10 +403,13 @@ public class GPEBTWTweak extends FCAddOn
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemHamAndEggs, 2), new Object[] {new ItemStack(gpeItemHardBoiledEgg), new ItemStack(Item.porkCooked)});
     FCRecipes.AddCauldronRecipe(new ItemStack(gpeItemHardBoiledEgg), new ItemStack[] {new ItemStack(Item.egg)});
 
-    if (!isDecoPresent)
+    if (!isDecoPresent || !classExists("Addon_Diamondium"))
     {
       FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockDiamondIngot, 1), new Object[] {"###", "###", "###", '#', FCBetterThanWolves.fcItemIngotDiamond});
       FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemIngotDiamond, 9), new Object[] {new ItemStack(gpeBlockDiamondIngot)});
+    }
+    if (!isDecoPresent || !classExists("Addon_HayBale"))
+    {
       FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockHayBale, 1), new Object[] {"###", "###", "###", '#', Item.wheat});
       FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.wheat, 9), new Object[] {new ItemStack(gpeBlockHayBale)});
     }
@@ -496,6 +494,30 @@ public class GPEBTWTweak extends FCAddOn
     {
       FCAddOnHandler.LogMessage("Error while integrating with BTW Research Add-On!");
       e.printStackTrace();
+    }
+  }
+
+  // Because Deco is doing its core work in PostInitialize and we need to get results of that
+  private void postPostInitialize()
+  {
+    if (isDecoPresent)
+    {
+      FCAddOnHandler.LogMessage("BTWTweak now looks for Deco 2.0+ Add-On to integrate with...");
+      try
+      {
+        Class ag = Class.forName("Addon_Glass");
+        decoGlassShard = (Item)ag.getField("glassChunk").get(null);
+        FCAddOnHandler.LogMessage("Found glass chunk with ID=" + Integer.toString(decoGlassShard.itemID));
+      }
+      catch (ClassNotFoundException e)
+      {
+        FCAddOnHandler.LogMessage("Deco part 'Addon_Glass' not found.");
+      }
+      catch (Exception e)
+      {
+        FCAddOnHandler.LogMessage("Error while integrating with Deco Add-On!");
+        e.printStackTrace();
+      }
     }
   }
 
@@ -722,6 +744,8 @@ public class GPEBTWTweak extends FCAddOn
 
   public void OnLanguageLoaded(StringTranslate st)
   {
+    postPostInitialize();
+
     Properties t = st.GetTranslateTable();
     t.put(Item.stick.getUnlocalizedName() + ".name", "Rod");
     if (isBTWVersionOrNewer("4.99999A0D Marsupial??!!"))
@@ -751,9 +775,12 @@ public class GPEBTWTweak extends FCAddOn
     }
     t.put(gpeBlockRustedRail.getUnlocalizedName() + ".name", "Rusted Rail");
     t.put(gpeBlockRename.getUnlocalizedName() + ".name", "Writing Table");
-    if (!isDecoPresent)
+    if (!isDecoPresent || !classExists("Addon_Diamondium"))
     {
       t.put(gpeBlockDiamondIngot.getUnlocalizedName() + ".name", "Block of Processed Diamond");
+    }
+    if (!isDecoPresent || !classExists("Addon_HayBale"))
+    {
       t.put(gpeBlockHayBale.getUnlocalizedName() + ".name", "Hay Bale");
     }
     t.put("tile.fcBlockAestheticOpaque.soap.name", "Old Block of Soap");
@@ -1288,5 +1315,20 @@ public class GPEBTWTweak extends FCAddOn
     MinecraftServer srv = MinecraftServer.getServer();
     if (srv == null) return 1;
     return srv.isServerRunning() ? 2 : 1;
+  }
+
+  public static boolean classExists(String cn)
+  {
+    boolean result;
+    try
+    {
+      Class.forName(cn);
+      result = true;
+    }
+    catch(ClassNotFoundException e)
+    {
+      result = false;
+    }
+    return result;
   }
 }
