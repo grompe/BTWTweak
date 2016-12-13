@@ -297,8 +297,8 @@ function(cn)
   ));
   cn.methods.add(mn);
 });
-// Fix achievements to be achieveable
-tweak("jv", "AchievementList", BOTH, "<clinit>()V", 0x562B905E, "(1/4) Making achievements achieveable",
+// Fix achievements to be achievable
+tweak("jv", "AchievementList", BOTH, "<clinit>()V", 0x562B905E, "(1/4) Making achievements achievable",
 function(mn)
 {
   var changes = 0;
@@ -321,7 +321,7 @@ function(mn)
     }
   }
 });
-tweak("rh", "EntityItem", BOTH, "b_(Lsq;)V", 0x780F22BB, "(2/4) Making achievements achieveable",
+tweak("rh", "EntityItem", BOTH, "b_(Lsq;)V", 0x780F22BB, "(2/4) Making achievements achievable",
 function(mn)
 {
   for (var i = 0; i < mn.instructions.size(); i++)
@@ -353,7 +353,7 @@ function(mn)
     }
   }
 });
-tweak("tx", "SlotFurnace", BOTH, "b(Lwm;)V", 0x5094290D, "(3/4) Making achievements achieveable",
+tweak("tx", "SlotFurnace", BOTH, "b(Lwm;)V", 0x5094290D, "(3/4) Making achievements achievable",
 function(mn)
 {
   var changes = 0;
@@ -373,7 +373,7 @@ function(mn)
     if (changes == 2) return true;
   }
 });
-tweak("uk", "SlotCrafting", BOTH, "b(Lwm;)V", 0x79C03DC4, "(4/4) Making achievements achieveable",
+tweak("uk", "SlotCrafting", BOTH, "b(Lwm;)V", 0x79C03DC4, "(4/4) Making achievements achievable",
 function(mn)
 {
   var changes = 0;
