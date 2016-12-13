@@ -45,7 +45,10 @@ public class GPEEntityRock extends EntityThrowable implements FCIEntityPacketHan
         int y = mop.blockY;
         int z = mop.blockZ;
         int id = worldObj.getBlockId(x, y, z);
-        if (id == Block.glass.blockID || id == Block.thinGlass.blockID)
+        Block block = Block.blocksList[id];
+        if (block instanceof BlockGlass ||
+          (block instanceof BlockPane && worldObj.getBlockMaterial(x, y, z) == Material.glass)
+        )
         {
           worldObj.playAuxSFX(2001, x, y, z, Block.glass.blockID);
           worldObj.destroyBlock(x, y, z, true);

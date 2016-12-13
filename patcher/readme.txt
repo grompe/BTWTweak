@@ -34,10 +34,11 @@ v0.9j
   This makes throwing dynamite more precise and much more fun!
   This feature is dedicated to the good old Blood 3D game.
 
-- Dropped support for the old Deco addon
+- Dropped support for the old Deco addon.
 
 - Added support for the new Deco addon, if glass shards are found, they
-  will drop upon the destruction of glass blocks
+  will drop upon the destruction of glass blocks. Similarly, Deco stained
+  glass is breakable like usual glass, both by rocks and by falling upon.
 
 - Changed achievements around a bit to be technically possible in BTW.
   Ideally they need an overhaul but that's some future task.

@@ -529,3 +529,26 @@ function(mn)
 {
   return bipush2sipush(mn, 100, 256, 1);
 });
+add("Addon_Glass$BlockStainedGlass", null, BOTH, "Making Deco stained glass inherit from GPEBlockGlass",
+function(cn)
+{
+  cn.superName = "GPEBlockGlass";
+});
+tweak("Addon_Glass$BlockStainedGlass", null, BOTH, "<init>(I)V", 0xBC392253, "Making Deco stained glass break like BTWTweak glass",
+function(mn)
+{
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("FCBlockGlass") && n.name.equals("<init>") && n.desc.equals("(ILaif;Z)V"))
+    {
+      var n2 = n.getPrevious();
+      var n3 = n2.getPrevious();
+      n.owner = "GPEBlockGlass";
+      n.desc = "(I)V";
+      mn.instructions.remove(n2);
+      mn.instructions.remove(n3);
+      return true;
+    }
+  }
+});
