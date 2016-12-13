@@ -1,0 +1,17 @@
+diff --git a/src/minecraft/net/minecraft/src/SlotCrafting.java b/src/minecraft/net/minecraft/src/SlotCrafting.java
+index 27139bd..55eeb25 100644
+--- a/src/minecraft/net/minecraft/src/SlotCrafting.java
++++ b/src/minecraft/net/minecraft/src/SlotCrafting.java
+@@ -63 +63,5 @@ protected void onCrafting(ItemStack par1ItemStack)
+-        if (par1ItemStack.itemID == Block.workbench.blockID)
++        if (par1ItemStack.itemID == Item.ingotIron.itemID)
++        {
++            this.thePlayer.addStat(AchievementList.acquireIron, 1);
++        }
++        else if (par1ItemStack.itemID == Block.workbench.blockID)
+@@ -75 +79 @@ else if (par1ItemStack.itemID == Block.furnaceIdle.blockID)
+-        else if (par1ItemStack.itemID == Item.hoeWood.itemID)
++        else if (par1ItemStack.itemID == Item.hoeIron.itemID)
+@@ -91 +95 @@ else if (par1ItemStack.itemID == Item.pickaxeStone.itemID)
+-        else if (par1ItemStack.itemID == Item.swordWood.itemID)
++        else if (par1ItemStack.itemID == Item.axeStone.itemID)

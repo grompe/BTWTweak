@@ -1,9 +1,15 @@
 diff --git a/src/minecraft/net/minecraft/src/EntityItem.java b/src/minecraft/net/minecraft/src/EntityItem.java
-index 4c55875..3cfd4ba 100644
+index 4c55875..a0d5733 100644
 --- a/src/minecraft/net/minecraft/src/EntityItem.java
 +++ b/src/minecraft/net/minecraft/src/EntityItem.java
 @@ -125 +125 @@ public void onUpdate()
 -        if (!this.worldObj.isRemote && this.age >= 6000)
 +        if (!this.worldObj.isRemote && this.age >= 20*60*30)
-@@ -456,0 +457 @@ protected void doBlockCollisions()
+@@ -323,0 +324,5 @@ public void onCollideWithPlayer(EntityPlayer par1EntityPlayer)
++                if (var2.itemID == Block.enchantmentTable.blockID)
++                {
++                    par1EntityPlayer.triggerAchievement(AchievementList.enchantments);
++                }
++
+@@ -456,0 +462 @@ protected void doBlockCollisions()
 +                            GPEBTWTweak.onEntityCollidedWithBlock(this.worldObj, var7, var8, var9, this);

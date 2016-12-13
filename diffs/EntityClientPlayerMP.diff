@@ -1,0 +1,6 @@
+diff --git a/src/minecraft/net/minecraft/src/EntityClientPlayerMP.java b/src/minecraft/net/minecraft/src/EntityClientPlayerMP.java
+index b3b9852..e0a2c43 100644
+--- a/src/minecraft/net/minecraft/src/EntityClientPlayerMP.java
++++ b/src/minecraft/net/minecraft/src/EntityClientPlayerMP.java
+@@ -164,0 +165 @@ public void sendChatMessage(String par1Str)
++        GPEBTWTweakProxyClient.sendingChatMessage(par1Str);

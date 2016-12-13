@@ -1,0 +1,10 @@
+diff --git a/src/minecraft/net/minecraft/src/SlotFurnace.java b/src/minecraft/net/minecraft/src/SlotFurnace.java
+index 76cc628..83eaebd 100644
+--- a/src/minecraft/net/minecraft/src/SlotFurnace.java
++++ b/src/minecraft/net/minecraft/src/SlotFurnace.java
+@@ -82 +82 @@ else if (var3 < 1.0F)
+-        if (par1ItemStack.itemID == Item.ingotIron.itemID)
++        if (par1ItemStack.itemID == Item.cake.itemID)
+@@ -84 +84 @@ else if (var3 < 1.0F)
+-            this.thePlayer.addStat(AchievementList.acquireIron, 1);
++            this.thePlayer.addStat(AchievementList.bakeCake, 1);

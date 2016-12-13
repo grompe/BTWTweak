@@ -1,9 +1,42 @@
 diff --git a/src/minecraft/net/minecraft/src/NetServerHandler.java b/src/minecraft/net/minecraft/src/NetServerHandler.java
-index 1a2c49d..2a28c5d 100644
+index 1a2c49d..f6cf478 100644
 --- a/src/minecraft/net/minecraft/src/NetServerHandler.java
 +++ b/src/minecraft/net/minecraft/src/NetServerHandler.java
-@@ -928 +928 @@ public void handleUpdateSign(Packet130UpdateSign par1Packet130UpdateSign)
+@@ -27,0 +28 @@
++    private int ticksToQuit = 0;
+@@ -69,0 +71 @@ public void networkTick()
++        checkPendingQuit();
+@@ -95,0 +98,15 @@ public void networkTick()
++    private void checkPendingQuit()
++    {
++        if (!connectionClosed && (ticksToQuit != 0) && (currentTicks >= ticksToQuit))
++        {
++            mcServer.getConfigurationManager().sendPacketToAllPlayers(new Packet3Chat(EnumChatFormatting.YELLOW + playerEntity.getTranslatedEntityName() + " left the game."));
++            mcServer.getConfigurationManager().playerLoggedOut(playerEntity);
++            connectionClosed = true;
++            if (mcServer.isSinglePlayer() && playerEntity.username.equals(mcServer.getServerOwner()))
++            {
++                mcServer.getLogAgent().logInfo("Stopping singleplayer server as player logged out");
++                mcServer.initiateShutdown();
++            }
++        }
++    }
++
+@@ -532,6 +549 @@ public void handleErrorMessage(String par1Str, Object[] par2ArrayOfObj)
+-        this.mcServer.getLogAgent().logInfo(this.playerEntity.username + " lost connection: " + par1Str);
+-        this.mcServer.getConfigurationManager().sendPacketToAllPlayers(new Packet3Chat(EnumChatFormatting.YELLOW + this.playerEntity.getTranslatedEntityName() + " left the game."));
+-        this.mcServer.getConfigurationManager().playerLoggedOut(this.playerEntity);
+-        this.connectionClosed = true;
+-
+-        if (this.mcServer.isSinglePlayer() && this.playerEntity.username.equals(this.mcServer.getServerOwner()))
++        if (ticksToQuit == 0)
+@@ -539,2 +551,2 @@ public void handleErrorMessage(String par1Str, Object[] par2ArrayOfObj)
+-            this.mcServer.getLogAgent().logInfo("Stopping singleplayer server as player logged out");
+-            this.mcServer.initiateShutdown();
++          mcServer.getLogAgent().logInfo(playerEntity.username + " lost connection: " + par1Str);
++          ticksToQuit = currentTicks + 60;
+@@ -928 +940 @@ public void handleUpdateSign(Packet130UpdateSign par1Packet130UpdateSign)
 -                        if (ChatAllowedCharacters.allowedCharacters.indexOf(par1Packet130UpdateSign.signLines[var5].charAt(var8)) < 0)
 +                        if (!ChatAllowedCharacters.isAllowedCharacter(par1Packet130UpdateSign.signLines[var5].charAt(var8)))
-@@ -1174,0 +1175 @@ else if ("MC|ItemName".equals(par1Packet250CustomPayload.channel) && this.player
+@@ -1174,0 +1187 @@ else if ("MC|ItemName".equals(par1Packet250CustomPayload.channel) && this.player
 +                else GPEBTWTweak.serverCustomPacketReceived(this.playerEntity, par1Packet250CustomPayload);

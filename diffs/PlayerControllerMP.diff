@@ -1,0 +1,8 @@
+diff --git a/src/minecraft/net/minecraft/src/PlayerControllerMP.java b/src/minecraft/net/minecraft/src/PlayerControllerMP.java
+index bbc8e81..81096fc 100644
+--- a/src/minecraft/net/minecraft/src/PlayerControllerMP.java
++++ b/src/minecraft/net/minecraft/src/PlayerControllerMP.java
+@@ -347 +347,2 @@ public boolean onPlayerRightClick(EntityPlayer par1EntityPlayer, World par2World
+-            if (!var14.canPlaceItemBlockOnSide(par2World, par4, par5, par6, par7, par1EntityPlayer, par3ItemStack))
++            if (!GPEBTWTweak.canPlaceItemBlock(var14, par2World, par4, par5, par6, par7, par1EntityPlayer, par3ItemStack, var9, var10, var11))
++            //if (!var14.canPlaceItemBlockOnSide(par2World, par4, par5, par6, par7, par1EntityPlayer, par3ItemStack))

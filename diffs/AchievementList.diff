@@ -1,0 +1,10 @@
+diff --git a/src/minecraft/net/minecraft/src/AchievementList.java b/src/minecraft/net/minecraft/src/AchievementList.java
+index de4598b..a357165 100644
+--- a/src/minecraft/net/minecraft/src/AchievementList.java
++++ b/src/minecraft/net/minecraft/src/AchievementList.java
+@@ -42 +42 @@
+-    public static Achievement buildHoe = (new Achievement(6, "buildHoe", 2, -3, Item.hoeWood, buildWorkBench)).registerAchievement();
++    public static Achievement buildHoe = (new Achievement(6, "buildHoe", 2, -3, Item.hoeIron, buildWorkBench)).registerAchievement();
+@@ -60 +60 @@
+-    public static Achievement buildSword = (new Achievement(12, "buildSword", 6, -1, Item.swordWood, buildWorkBench)).registerAchievement();
++    public static Achievement buildSword = (new Achievement(12, "buildSword", 6, -1, Item.axeStone, buildWorkBench)).registerAchievement();

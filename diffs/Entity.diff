@@ -1,6 +1,30 @@
 diff --git a/src/minecraft/net/minecraft/src/Entity.java b/src/minecraft/net/minecraft/src/Entity.java
-index d66b21a..e4239b3 100644
+index d66b21a..49f9362 100644
 --- a/src/minecraft/net/minecraft/src/Entity.java
 +++ b/src/minecraft/net/minecraft/src/Entity.java
-@@ -966,0 +967 @@ protected void doBlockCollisions()
+@@ -701,0 +702,23 @@ else if (par5 > 0.0D)
++            if (!onGround && isSneaking() && this instanceof EntityPlayer)
++            {
++              int x = MathHelper.floor_double(posX);
++              int y = MathHelper.floor_double(boundingBox.minY);
++              int z = MathHelper.floor_double(posZ);
++              int id = worldObj.getBlockId(x, y, z);
++              if (id == FCBetterThanWolves.fcRopeBlock.blockID)
++              {
++                int x2 = MathHelper.floor_double(posX + par1);
++                int z2 = MathHelper.floor_double(posZ + par5);
++                if (worldObj.getBlockId(x2, y, z) == 0)
++                {
++                  par1 = 0;
++                  var13 = 0;
++                }
++                if (worldObj.getBlockId(x, y, z2) == 0)
++                {
++                  par5 = 0;
++                  var17 = 0;
++                }
++              }
++            }
++
+@@ -966,0 +990 @@ protected void doBlockCollisions()
 +                            GPEBTWTweak.onEntityCollidedWithBlock(this.worldObj, var7, var8, var9, this);

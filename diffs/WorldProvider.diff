@@ -1,0 +1,10 @@
+diff --git a/src/minecraft/net/minecraft/src/WorldProvider.java b/src/minecraft/net/minecraft/src/WorldProvider.java
+index d244195..b05f05d 100644
+--- a/src/minecraft/net/minecraft/src/WorldProvider.java
++++ b/src/minecraft/net/minecraft/src/WorldProvider.java
+@@ -225 +225 @@ public boolean getWorldHasVoidParticles()
+-        return this.terrainType != WorldType.FLAT && !this.hasNoSky;
++        return false;
+@@ -235 +235 @@ public double getVoidFogYFactor()
+-        return this.terrainType == WorldType.FLAT ? 1.0D : 0.03125D;
++        return 1.0D;
