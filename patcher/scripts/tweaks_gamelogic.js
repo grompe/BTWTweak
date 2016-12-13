@@ -529,6 +529,91 @@ function(mn)
 {
   return bipush2sipush(mn, 100, 256, 1);
 });
+tweak("mp", "Entity", BOTH, "d(DDD)V", 0x8DFC67A0, "Making it impossible to fall from a rope while sneaking",
+function(mn)
+{
+  var label_new1 = LabelNode();
+  var label_new2 = LabelNode();
+  return CodeInserter(
+    CustomFinder(function(n)
+    {
+      return isInstance(n, "org.objectweb.asm.tree.FrameNode") && (getObjProperty(n, "type") == F_CHOP);
+    }),
+    [
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "mp", "F", "Z"),
+      JumpInsnNode(IFNE, label_new1),
+      VarInsnNode(ALOAD, 0),
+      MethodInsnNode(INVOKEVIRTUAL, "mp", "ag", "()Z"),
+      JumpInsnNode(IFEQ, label_new1),
+      VarInsnNode(ALOAD, 0),
+      TypeInsnNode(INSTANCEOF, "sq"),
+      JumpInsnNode(IFEQ, label_new1),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "mp", "u", "D"),
+      MethodInsnNode(INVOKESTATIC, "kx", "c", "(D)I"),
+      VarInsnNode(ISTORE, 21),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "mp", "E", "Laqx;"),
+      FieldInsnNode(GETFIELD, "aqx", "b", "D"),
+      MethodInsnNode(INVOKESTATIC, "kx", "c", "(D)I"),
+      VarInsnNode(ISTORE, 22),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "mp", "w", "D"),
+      MethodInsnNode(INVOKESTATIC, "kx", "c", "(D)I"),
+      VarInsnNode(ISTORE, 23),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "mp", "q", "Laab;"),
+      VarInsnNode(ILOAD, 21),
+      VarInsnNode(ILOAD, 22),
+      VarInsnNode(ILOAD, 23),
+      MethodInsnNode(INVOKEVIRTUAL, "aab", "a", "(III)I"),
+      VarInsnNode(ISTORE, 24),
+      VarInsnNode(ILOAD, 24),
+      FieldInsnNode(GETSTATIC, "FCBetterThanWolves", "fcRopeBlock", "Lapa;"),
+      FieldInsnNode(GETFIELD, "apa", "cz", "I"),
+      JumpInsnNode(IF_ICMPNE, label_new1),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "mp", "u", "D"),
+      VarInsnNode(DLOAD, 1),
+      InsnNode(DADD),
+      MethodInsnNode(INVOKESTATIC, "kx", "c", "(D)I"),
+      VarInsnNode(ISTORE, 25),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "mp", "w", "D"),
+      VarInsnNode(DLOAD, 5),
+      InsnNode(DADD),
+      MethodInsnNode(INVOKESTATIC, "kx", "c", "(D)I"),
+      VarInsnNode(ISTORE, 26),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "mp", "q", "Laab;"),
+      VarInsnNode(ILOAD, 25),
+      VarInsnNode(ILOAD, 22),
+      VarInsnNode(ILOAD, 23),
+      MethodInsnNode(INVOKEVIRTUAL, "aab", "a", "(III)I"),
+      JumpInsnNode(IFNE, label_new2),
+      InsnNode(DCONST_0),
+      VarInsnNode(DSTORE, 1),
+      InsnNode(DCONST_0),
+      VarInsnNode(DSTORE, 13),
+      label_new2,
+      FrameNode(F_FULL, 18, ["mp", DOUBLE, DOUBLE, DOUBLE, DOUBLE, DOUBLE, DOUBLE, DOUBLE, DOUBLE, DOUBLE, "aqx", INTEGER, INTEGER, INTEGER, INTEGER, INTEGER, INTEGER, INTEGER], 0, []),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "mp", "q", "Laab;"),
+      VarInsnNode(ILOAD, 21),
+      VarInsnNode(ILOAD, 22),
+      VarInsnNode(ILOAD, 26),
+      MethodInsnNode(INVOKEVIRTUAL, "aab", "a", "(III)I"),
+      JumpInsnNode(IFNE, label_new1),
+      InsnNode(DCONST_0),
+      VarInsnNode(DSTORE, 5),
+      InsnNode(DCONST_0),
+      VarInsnNode(DSTORE, 17),
+      label_new1,
+      FrameNode(F_FULL, 12, ["mp", DOUBLE, DOUBLE, DOUBLE, DOUBLE, DOUBLE, DOUBLE, DOUBLE, DOUBLE, DOUBLE, "aqx", INTEGER], 0, []),
+    ]
+  ).process(mn);
+});
 add("Addon_Glass$BlockStainedGlass", null, BOTH, "Making Deco stained glass inherit from GPEBlockGlass",
 function(cn)
 {
