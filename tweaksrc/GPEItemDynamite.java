@@ -44,9 +44,13 @@ public class GPEItemDynamite extends FCItemDynamite
 
   public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int inUseCount)
   {
+    --stack.stackSize;
+    if (stack.stackSize <= 0)
+    {
+      player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
+    }
     if (!world.isRemote)
     {
-      --stack.stackSize;
       float strength = 0.5F + 1.5F * (float)(Math.min(100, 120 - inUseCount)) / 100.0F;
       FCEntityDynamite dynamite = new FCEntityDynamite(world, player, this.itemID, true);
       dynamite.m_iFuse = inUseCount;
@@ -58,6 +62,7 @@ public class GPEItemDynamite extends FCItemDynamite
     }
   }
 
+  // You wouldn't eat dynamite, would you?
   public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player)
   {
     if (!world.isRemote)
