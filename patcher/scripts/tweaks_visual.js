@@ -823,6 +823,26 @@ function(mn)
     }
   }
 });
+tweak("bkf", "GuiMainMenu", CLIENT, "A_()V", 0x40E0618E, "Unshifting buttons to make space for version info",
+function(mn)
+{
+  var changes = 0;
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.IntInsnNode") && (n.getOpcode() == BIPUSH) && (n.operand == 12))
+    {
+      n2 = n.getNext();
+      if (isInstance(n2, "org.objectweb.asm.tree.InsnNode") && (n2.getOpcode() == IADD))
+      {
+        mn.instructions.remove(n);
+        mn.instructions.remove(n2);
+        changes++;
+        if (changes == 3) return true;
+      }
+    }
+  }
+});
 tweak("acn", "WorldProvider", CLIENT, "j()Z", 0x1E3004E6, "(1/2) Removing void fog",
 function(mn)
 {

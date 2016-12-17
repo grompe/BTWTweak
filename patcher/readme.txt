@@ -48,6 +48,9 @@ v0.9j
 - Added an ability to jump out of vehicles such as boats and minecarts
   without silly and unpredictable teleportation.
 
+- Fixed small visual error: main menu buttons covering the long BTW version
+  string.
+
 v0.9i
 
 - Restored the ability of Glass Block to contain piston packing.
