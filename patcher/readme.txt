@@ -45,6 +45,9 @@ v0.9j
 
 - Made it so that sneaking would prevent falling from a rope.
 
+- Added an ability to jump out of vehicles such as boats and minecarts
+  without silly and unpredictable teleportation.
+
 v0.9i
 
 - Restored the ability of Glass Block to contain piston packing.

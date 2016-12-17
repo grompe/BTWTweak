@@ -1,6 +1,22 @@
 diff --git a/src/minecraft/net/minecraft/src/EntityClientPlayerMP.java b/src/minecraft/net/minecraft/src/EntityClientPlayerMP.java
-index b3b9852..e0a2c43 100644
+index b3b9852..20d8f03 100644
 --- a/src/minecraft/net/minecraft/src/EntityClientPlayerMP.java
 +++ b/src/minecraft/net/minecraft/src/EntityClientPlayerMP.java
-@@ -164,0 +165 @@ public void sendChatMessage(String par1Str)
+@@ -23,0 +24 @@
++    private boolean sentDismount = false;
+@@ -63,0 +65,13 @@ public void sendMotionUpdates()
++        if (!isJumping || ridingEntity == null)
++        {
++            sentDismount = false;
++        } else {
++            if (isJumping && ridingEntity != null && !sentDismount)
++            {
++                ridingEntity.riddenByEntity = null;
++                ridingEntity = null;
++                jump();
++                sendQueue.addToSendQueue(new Packet250CustomPayload("GPE|Dismount", null));
++                sentDismount = true;
++            }
++        }
+@@ -164,0 +179 @@ public void sendChatMessage(String par1Str)
 +        GPEBTWTweakProxyClient.sendingChatMessage(par1Str);

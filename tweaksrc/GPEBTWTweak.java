@@ -1065,6 +1065,14 @@ public class GPEBTWTweak extends FCAddOn
         return true;
       }
     }
+    else if (packet.channel.equals("GPE|Dismount"))
+    {
+      if (player.ridingEntity != null)
+      {
+        player.ridingEntity.riddenByEntity = null;
+        player.ridingEntity = null;
+      }
+    }
     return false;
   }
 

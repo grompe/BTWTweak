@@ -614,6 +614,82 @@ function(mn)
     ]
   ).process(mn);
 });
+add('bdv', "EntityClientPlayerMP", CLIENT, "Adding sentDismount field",
+function(cn)
+{
+  cn.fields.add(FieldNode(ACC_PRIVATE, "sentDismount", "Z", null, null));
+});
+tweak('bdv', "EntityClientPlayerMP", CLIENT, "<init>(Lnet/minecraft/client/Minecraft;Laab;Lawf;Lbdk;)V", 0x488C06CC, "(1/2) Adding ability to jump out of vehicles",
+function(mn)
+{
+  return CodeInserter(
+    BeginningFinder(),
+    [
+      VarInsnNode(ALOAD, 0),
+      InsnNode(ICONST_0),
+      FieldInsnNode(PUTFIELD, "bdv", "sentDismount", "Z"),
+    ],
+    INSERT_BEFORE
+  ).process(mn);
+});
+tweak('bdv', "EntityClientPlayerMP", CLIENT, "d()V", 0x1AE86900, "(2/2) Adding ability to jump out of vehicles",
+function(mn)
+{
+  var label_new1 = LabelNode();
+  var label_new2 = LabelNode();
+  var label_new3 = LabelNode();
+  return CodeInserter(
+    BeginningFinder(),
+    [
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "bdv", "bG", "Z"),
+      JumpInsnNode(IFEQ, label_new1),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "bdv", "o", "Lmp;"),
+      JumpInsnNode(IFNONNULL, label_new2),
+      label_new1,
+      FrameNode(F_SAME, 0, null, 0, null),
+      VarInsnNode(ALOAD, 0),
+      InsnNode(ICONST_0),
+      FieldInsnNode(PUTFIELD, "bdv", "sentDismount", "Z"),
+      JumpInsnNode(GOTO, label_new3),
+      label_new2,
+      FrameNode(F_SAME, 0, null, 0, null),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "bdv", "bG", "Z"),
+      JumpInsnNode(IFEQ, label_new3),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "bdv", "o", "Lmp;"),
+      JumpInsnNode(IFNULL, label_new3),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "bdv", "sentDismount", "Z"),
+      JumpInsnNode(IFNE, label_new3),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "bdv", "o", "Lmp;"),
+      InsnNode(ACONST_NULL),
+      FieldInsnNode(PUTFIELD, "mp", "n", "Lmp;"),
+      VarInsnNode(ALOAD, 0),
+      InsnNode(ACONST_NULL),
+      FieldInsnNode(PUTFIELD, "bdv", "o", "Lmp;"),
+      VarInsnNode(ALOAD, 0),
+      MethodInsnNode(INVOKEVIRTUAL, "bdv", "bl", "()V"),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "bdv", "a", "Lbdk;"),
+      TypeInsnNode(NEW, "dk"),
+      InsnNode(DUP),
+      LdcInsnNode("GPE|Dismount"),
+      InsnNode(ACONST_NULL),
+      MethodInsnNode(INVOKESPECIAL, "dk", "<init>", "(Ljava/lang/String;[B)V"),
+      MethodInsnNode(INVOKEVIRTUAL, "bdk", "c", "(Lei;)V"),
+      VarInsnNode(ALOAD, 0),
+      InsnNode(ICONST_1),
+      FieldInsnNode(PUTFIELD, "bdv", "sentDismount", "Z"),
+      label_new3,
+      FrameNode(F_SAME, 0, null, 0, null),
+    ],
+    INSERT_BEFORE
+  ).process(mn);
+});
 add("Addon_Glass$BlockStainedGlass", null, BOTH, "Making Deco stained glass inherit from GPEBlockGlass",
 function(cn)
 {
