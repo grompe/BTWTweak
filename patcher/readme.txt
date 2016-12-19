@@ -46,7 +46,8 @@ v0.9j
 - Made it so that sneaking would prevent falling from a rope.
 
 - Added an ability to jump out of vehicles such as boats and minecarts
-  without silly and unpredictable teleportation.
+  without silly and unpredictable teleportation. This also could lead to
+  interesting contraptions with jumping out of a speeding minecart.
 
 - Fixed small visual error: main menu buttons covering the long BTW version
   string.

@@ -1,22 +1,24 @@
 diff --git a/src/minecraft/net/minecraft/src/EntityClientPlayerMP.java b/src/minecraft/net/minecraft/src/EntityClientPlayerMP.java
-index b3b9852..20d8f03 100644
+index b3b9852..63258c2 100644
 --- a/src/minecraft/net/minecraft/src/EntityClientPlayerMP.java
 +++ b/src/minecraft/net/minecraft/src/EntityClientPlayerMP.java
 @@ -23,0 +24 @@
 +    private boolean sentDismount = false;
-@@ -63,0 +65,13 @@ public void sendMotionUpdates()
+@@ -63,0 +65,15 @@ public void sendMotionUpdates()
 +        if (!isJumping || ridingEntity == null)
 +        {
 +            sentDismount = false;
 +        } else {
-+            if (isJumping && ridingEntity != null && !sentDismount)
++            if (isJumping && ridingEntity != null && !sentDismount && this.getDistanceSqToEntity(ridingEntity) < 1)
 +            {
 +                ridingEntity.riddenByEntity = null;
++                motionX = ridingEntity.motionX;
++                motionZ = ridingEntity.motionZ;
 +                ridingEntity = null;
 +                jump();
 +                sendQueue.addToSendQueue(new Packet250CustomPayload("GPE|Dismount", null));
 +                sentDismount = true;
 +            }
 +        }
-@@ -164,0 +179 @@ public void sendChatMessage(String par1Str)
+@@ -164,0 +181 @@ public void sendChatMessage(String par1Str)
 +        GPEBTWTweakProxyClient.sendingChatMessage(par1Str);

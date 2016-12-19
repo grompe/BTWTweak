@@ -1,7 +1,15 @@
 diff --git a/src/minecraft/net/minecraft/src/GuiMainMenu.java b/src/minecraft/net/minecraft/src/GuiMainMenu.java
-index 2eab63c..d81206b 100644
+index 2eab63c..a83b5c0 100644
 --- a/src/minecraft/net/minecraft/src/GuiMainMenu.java
 +++ b/src/minecraft/net/minecraft/src/GuiMainMenu.java
+@@ -192,2 +192,2 @@ else if (var1.get(2) + 1 == 10 && var1.get(5) == 31)
+-            this.buttonList.add(new GuiButton(0, this.width / 2 - 100, var4 + 72 + 12, 98, 20, var2.translateKey("menu.options")));
+-            this.buttonList.add(new GuiButton(4, this.width / 2 + 2, var4 + 72 + 12, 98, 20, var2.translateKey("menu.quit")));
++            this.buttonList.add(new GuiButton(0, this.width / 2 - 100, var4 + 72 /*+ 12*/, 98, 20, var2.translateKey("menu.options")));
++            this.buttonList.add(new GuiButton(4, this.width / 2 + 2, var4 + 72 /*+ 12*/, 98, 20, var2.translateKey("menu.quit")));
+@@ -196 +196 @@ else if (var1.get(2) + 1 == 10 && var1.get(5) == 31)
+-        this.buttonList.add(new GuiButtonLanguage(5, this.width / 2 - 124, var4 + 72 + 12));
++        this.buttonList.add(new GuiButtonLanguage(5, this.width / 2 - 124, var4 + 72 /*+ 12*/));
 @@ -540,0 +541,2 @@ public void drawScreen(int par1, int par2, float par3)
 +        this.drawString(this.fontRenderer, "BTW v" + FCBetterThanWolves.fcVersionString, 2, this.height - 30, 0xFFFF00);
 +        this.drawString(this.fontRenderer, "BTWTweak v" + GPEBTWTweak.tweakVersion, 2, this.height - 20, 0x55AAFF);
