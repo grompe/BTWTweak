@@ -445,6 +445,49 @@ function(mn)
     INSERT_BEFORE
   ).process(mn);
 });
+tweak("mp", "Entity", BOTH, "x()V", 0x1C8882FF, "Kill players that went through the roof of the Nether",
+function(mn)
+{
+  var found = false;
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.LdcInsnNode") && isInstance(n.cst, "java.lang.Double") && (n.cst == "-64.0"))
+    {
+      found = true;
+      break;
+    }
+  }
+  if (!found) return;
+  for (i += 1; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.FrameNode"))
+    {
+      var label = LabelNode();
+      mn.instructions.insert(n, toInsnList(
+        [
+          VarInsnNode(ALOAD, 0),
+          FieldInsnNode(GETFIELD, "mp", "v", "D"),
+          LdcInsnNode(Double("127.5")),
+          InsnNode(DCMPL),
+          JumpInsnNode(IFLE, label),
+          VarInsnNode(ALOAD, 0),
+          FieldInsnNode(GETFIELD, "mp", "q", "Laab;"),
+          FieldInsnNode(GETFIELD, "aab", "t", "Lacn;"),
+          FieldInsnNode(GETFIELD, "acn", "h", "I"),
+          InsnNode(ICONST_M1),
+          JumpInsnNode(IF_ICMPNE, label),
+          VarInsnNode(ALOAD, 0),
+          MethodInsnNode(INVOKEVIRTUAL, "mp", "B", "()V"),
+          label,
+          FrameNode(F_SAME, 0, null, 0, null),
+        ]
+      ));
+      return true;
+    }
+  }
+});
 
 // =======================================================================
 // Fix mods! Now with this mod you can fix mods for the mod for Minecraft.

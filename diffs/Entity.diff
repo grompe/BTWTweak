@@ -1,7 +1,10 @@
 diff --git a/src/minecraft/net/minecraft/src/Entity.java b/src/minecraft/net/minecraft/src/Entity.java
-index d66b21a..49f9362 100644
+index d66b21a..6db4c10 100644
 --- a/src/minecraft/net/minecraft/src/Entity.java
 +++ b/src/minecraft/net/minecraft/src/Entity.java
+@@ -521 +521 @@ else if (this.fire > 0)
+-        if (this.posY < -64.0D)
++        if (this.posY < -64.0D || (this.posY > 127.5D && this.worldObj.provider.dimensionId == -1))
 @@ -701,0 +702,23 @@ else if (par5 > 0.0D)
 +            if (!onGround && isSneaking() && this instanceof EntityPlayer)
 +            {

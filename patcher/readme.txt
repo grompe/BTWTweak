@@ -61,6 +61,8 @@ v0.9j
 - Fixed (prevented) wolf cubs teleporting to player as they grow up even
   while sitting.
 
+- Fixed an exploit with players escaping through the roof of Nether.
+
 v0.9i
 
 - Restored the ability of Glass Block to contain piston packing.
