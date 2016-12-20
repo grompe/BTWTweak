@@ -58,6 +58,9 @@ v0.9j
 
 - Added an ability to attach torches, buttons, etc. on backsides of stairs.
 
+- Fixed (prevented) wolf cubs teleporting to player as they grow up even
+  while sitting.
+
 v0.9i
 
 - Restored the ability of Glass Block to contain piston packing.

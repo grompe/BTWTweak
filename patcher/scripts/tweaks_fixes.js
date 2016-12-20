@@ -430,6 +430,21 @@ function(mn)
     }
   }
 });
+tweak("ok", "EntityAIFollowOwner", BOTH, "c()V", 0x2E4906C6, "Preventing wolves from teleporting to player on growing up",
+function(mn)
+{
+  return CodeInserter(
+    CustomFinder(function(n)
+    {
+      return isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner.equals("ok") && n.name.equals("h") && n.desc.equals("I");
+    }),
+    [
+      InsnNode(POP),
+      IntInsnNode(BIPUSH, 10),
+    ],
+    INSERT_BEFORE
+  ).process(mn);
+});
 
 // =======================================================================
 // Fix mods! Now with this mod you can fix mods for the mod for Minecraft.
