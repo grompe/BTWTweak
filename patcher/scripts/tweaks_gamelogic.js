@@ -756,3 +756,102 @@ function(mn)
     }
   }
 });
+add("aoq", "BlockStairs", BOTH, "Adding ability to place torches, ladders, buttons on all flat stair surfaces",
+function(cn)
+{
+  var mn = MethodNode(ACC_PUBLIC, "HasLargeCenterHardPointToFacing", "(Laak;IIII)Z", null, null);
+  var l0 = LabelNode();
+  var l1 = LabelNode();
+  var l2 = LabelNode();
+  var l3 = LabelNode();
+  var l4 = LabelNode();
+  var l5 = LabelNode();
+  var l6 = LabelNode();
+  var l7 = LabelNode();
+  mn.instructions.add(toInsnList(
+    [
+      VarInsnNode(ALOAD, 1),
+      VarInsnNode(ILOAD, 2),
+      VarInsnNode(ILOAD, 3),
+      VarInsnNode(ILOAD, 4),
+      MethodInsnNode(INVOKEINTERFACE, "aak", "h", "(III)I"),
+      VarInsnNode(ISTORE, 6),
+      VarInsnNode(ILOAD, 6),
+      InsnNode(ICONST_4),
+      InsnNode(IAND),
+      InsnNode(ICONST_4),
+      JumpInsnNode(IF_ICMPNE, l0),
+      InsnNode(ICONST_1),
+      JumpInsnNode(GOTO, l1),
+      l0,
+      FrameNode(F_APPEND, 1, [INTEGER], 0, null),
+      InsnNode(ICONST_0),
+      l1,
+      FrameNode(F_SAME1, 0, null, 1, [INTEGER]),
+      VarInsnNode(ISTORE, 7),
+      VarInsnNode(ILOAD, 6),
+      InsnNode(ICONST_3),
+      InsnNode(IAND),
+      VarInsnNode(ISTORE, 8),
+      VarInsnNode(ILOAD, 7),
+      JumpInsnNode(IFNE, l2),
+      VarInsnNode(ILOAD, 5),
+      JumpInsnNode(IFNE, l2),
+      InsnNode(ICONST_1),
+      InsnNode(IRETURN),
+      l2,
+      FrameNode(F_APPEND,2, [INTEGER, INTEGER], 0, null),
+      VarInsnNode(ILOAD, 7),
+      JumpInsnNode(IFEQ, l3),
+      VarInsnNode(ILOAD, 5),
+      InsnNode(ICONST_1),
+      JumpInsnNode(IF_ICMPNE, l3),
+      InsnNode(ICONST_1),
+      InsnNode(IRETURN),
+      l3,
+      FrameNode(F_SAME, 0, null, 0, null),
+      VarInsnNode(ILOAD, 8),
+      InsnNode(ICONST_3),
+      JumpInsnNode(IF_ICMPNE, l4),
+      VarInsnNode(ILOAD, 5),
+      InsnNode(ICONST_2),
+      JumpInsnNode(IF_ICMPNE, l4),
+      InsnNode(ICONST_1),
+      InsnNode(IRETURN),
+      l4,
+      FrameNode(F_SAME, 0, null, 0, null),
+      VarInsnNode(ILOAD, 8),
+      InsnNode(ICONST_2),
+      JumpInsnNode(IF_ICMPNE, l5),
+      VarInsnNode(ILOAD, 5),
+      InsnNode(ICONST_3),
+      JumpInsnNode(IF_ICMPNE, l5),
+      InsnNode(ICONST_1),
+      InsnNode(IRETURN),
+      l5,
+      FrameNode(F_SAME, 0, null, 0, null),
+      VarInsnNode(ILOAD, 8),
+      InsnNode(ICONST_1),
+      JumpInsnNode(IF_ICMPNE, l6),
+      VarInsnNode(ILOAD, 5),
+      InsnNode(ICONST_4),
+      JumpInsnNode(IF_ICMPNE, l6),
+      InsnNode(ICONST_1),
+      InsnNode(IRETURN),
+      l6,
+      FrameNode(F_SAME, 0, null, 0, null),
+      VarInsnNode(ILOAD, 8),
+      JumpInsnNode(IFNE, l7),
+      VarInsnNode(ILOAD, 5),
+      InsnNode(ICONST_5),
+      JumpInsnNode(IF_ICMPNE, l7),
+      InsnNode(ICONST_1),
+      InsnNode(IRETURN),
+      l7,
+      FrameNode(F_SAME, 0, null, 0, null),
+      InsnNode(ICONST_0),
+      InsnNode(IRETURN),
+    ]
+  ));
+  cn.methods.add(mn);
+});

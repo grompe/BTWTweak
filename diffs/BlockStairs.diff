@@ -1,0 +1,19 @@
+diff --git a/src/minecraft/net/minecraft/src/BlockStairs.java b/src/minecraft/net/minecraft/src/BlockStairs.java
+index 10c1e48..fef0773 100644
+--- a/src/minecraft/net/minecraft/src/BlockStairs.java
++++ b/src/minecraft/net/minecraft/src/BlockStairs.java
+@@ -625,0 +626,14 @@ public void registerIcons(IconRegister par1IconRegister) {}
++
++    public boolean HasLargeCenterHardPointToFacing(IBlockAccess b, int x, int y, int z, int side)
++    {
++        int meta = b.getBlockMetadata(x, y, z);
++        boolean up = (meta & 4) == 4;
++        int rotation = meta & 3;
++        if (!up && side == 0) return true;
++        if (up && side == 1) return true;
++        if (rotation == 3 && side == 2) return true;
++        if (rotation == 2 && side == 3) return true;
++        if (rotation == 1 && side == 4) return true;
++        if (rotation == 0 && side == 5) return true;
++        return false;
++    }

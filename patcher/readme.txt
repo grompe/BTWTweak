@@ -56,6 +56,8 @@ v0.9j
   block. Unlike new versions of Minecraft, such buttons are symmetric. Also,
   the buttons are now placeable on any flat surface, not just full blocks.
 
+- Added an ability to attach torches, buttons, etc. on backsides of stairs.
+
 v0.9i
 
 - Restored the ability of Glass Block to contain piston packing.

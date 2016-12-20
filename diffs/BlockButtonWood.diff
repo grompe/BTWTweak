@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/BlockButtonWood.java b/src/minecraft/net/minecraft/src/BlockButtonWood.java
+index bad7dc3..a3dff58 100644
+--- a/src/minecraft/net/minecraft/src/BlockButtonWood.java
++++ b/src/minecraft/net/minecraft/src/BlockButtonWood.java
+@@ -3 +3 @@
+-public class BlockButtonWood extends BlockButton
++public class BlockButtonWood extends GPEBlockButton
