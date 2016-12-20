@@ -12,6 +12,18 @@ function bipush2sipush(mn, orig, replacement, count)
     }
   }
 }
+function replaceButtonInit(mn)
+{
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("ali") && n.name.equals("<init>") && n.desc.equals("(IZ)V"))
+    {
+      n.owner = "GPEBlockButton";
+      return true;
+    }
+  }
+}
 // className, deobfName, side, method, checksums, description
 tweak("anf", "BlockFlowing", BOTH, "n(Laab;III)Z", 0xAD981353, "Making lava more unstoppable",
 function(mn)
@@ -706,6 +718,20 @@ function(mn)
     ],
     INSERT_BEFORE
   ).process(mn);
+});
+tweak("aps", "BlockButtonWood", BOTH, "<init>(I)V", 0x301019B, "(1/2) Making wooden button inherit from GPEBlockButton",
+replaceButtonInit);
+add("aps", "BlockButtonWood", BOTH, "(2/2) Making wooden button inherit from GPEBlockButton",
+function(cn)
+{
+  cn.superName = "GPEBlockButton";
+});
+tweak("aos", "BlockButtonStone", BOTH, "<init>(I)V", 0x2FE019A, "(1/2) Making stone button inherit from GPEBlockButton",
+replaceButtonInit);
+add("aos", "BlockButtonStone", BOTH, "(2/2) Making stone button inherit from GPEBlockButton",
+function(cn)
+{
+  cn.superName = "GPEBlockButton";
 });
 add("Addon_Glass$BlockStainedGlass", null, BOTH, "Making Deco stained glass inherit from GPEBlockGlass",
 function(cn)

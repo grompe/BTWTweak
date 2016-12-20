@@ -52,6 +52,10 @@ v0.9j
 - Fixed small visual error: main menu buttons covering the long BTW version
   string.
 
+- Backported ability for buttons to be placed on the top and bottom of the
+  block. Unlike new versions of Minecraft, such buttons are symmetric. Also,
+  the buttons are now placeable on any flat surface, not just full blocks.
+
 v0.9i
 
 - Restored the ability of Glass Block to contain piston packing.
