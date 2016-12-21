@@ -1,0 +1,16 @@
+diff --git a/src/minecraft/net/minecraft/src/FCBlockPlanter.java b/src/minecraft/net/minecraft/src/FCBlockPlanter.java
+index ab28ca2..cf26d55 100644
+--- a/src/minecraft/net/minecraft/src/FCBlockPlanter.java
++++ b/src/minecraft/net/minecraft/src/FCBlockPlanter.java
+@@ -2,0 +3 @@
++import java.util.List;
+@@ -453,0 +455,9 @@ public static void RenderFilledPlanterInvBlock(RenderBlocks var0, Block var1, in
++
++    public void getSubBlocks(int id, CreativeTabs t, List l)
++    {
++        l.add(new ItemStack(id, 1, 0));
++        l.add(new ItemStack(id, 1, 1));
++        l.add(new ItemStack(id, 1, 2));
++        l.add(new ItemStack(id, 1, 8));
++        l.add(new ItemStack(id, 1, 9));
++    }

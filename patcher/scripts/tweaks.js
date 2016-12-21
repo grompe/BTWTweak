@@ -377,6 +377,16 @@ function isBTWVersionOrNewer(ver)
   return Packages.BTWTweaker.btwVersion >= ver;
 }
 
+function hasResource(name)
+{
+  return Packages.BTWTweaker.hasResource(name);
+}
+
+function execJS(name)
+{
+  return Packages.BTWTweaker.execResource("scripts/" + name);
+}
+
 var classesToTweak = {};
 var deobfNames = {};
 
@@ -525,3 +535,20 @@ function add(className, deobfName, side, description, process)
   };
 
 })();
+
+execJS("tweaks_bed.js");
+execJS("tweaks_cauldron.js");
+execJS("tweaks_creative.js");
+execJS("tweaks_fixes.js");
+execJS("tweaks_furnace.js");
+execJS("tweaks_gamelogic.js");
+execJS("tweaks_heads.js");
+execJS("tweaks_hooks.js");
+execJS("tweaks_language.js");
+execJS("tweaks_moreslabs.js");
+execJS("tweaks_old.js");
+execJS("tweaks_pumpkin.js");
+execJS("tweaks_rocks.js");
+execJS("tweaks_visual.js");
+execJS("tweaks_worldgen.js");
+if (hasResource("scripts/custom.js")) execJS("custom.js");

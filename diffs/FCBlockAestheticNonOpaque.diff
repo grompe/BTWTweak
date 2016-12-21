@@ -1,0 +1,18 @@
+diff --git a/src/minecraft/net/minecraft/src/FCBlockAestheticNonOpaque.java b/src/minecraft/net/minecraft/src/FCBlockAestheticNonOpaque.java
+index f201b69..f1cb567 100644
+--- a/src/minecraft/net/minecraft/src/FCBlockAestheticNonOpaque.java
++++ b/src/minecraft/net/minecraft/src/FCBlockAestheticNonOpaque.java
+@@ -676,8 +676,5 @@ public boolean shouldSideBeRendered(IBlockAccess var1, int var2, int var3, int v
+-    public void getSubBlocks(int var1, CreativeTabs var2, List var3)
+-    {
+-        var3.add(new ItemStack(var1, 1, 1));
+-        var3.add(new ItemStack(var1, 1, 2));
+-        var3.add(new ItemStack(var1, 1, 4));
+-        var3.add(new ItemStack(var1, 1, 5));
+-        var3.add(new ItemStack(var1, 1, 10));
+-        var3.add(new ItemStack(var1, 1, 12));
++    public void getSubBlocks(int id, CreativeTabs t, List l)
++    {
++        l.add(new ItemStack(id, 1, 5));
++        l.add(new ItemStack(id, 1, 10));
++        l.add(new ItemStack(id, 1, 12));

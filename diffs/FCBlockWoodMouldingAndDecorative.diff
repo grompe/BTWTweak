@@ -1,17 +1,45 @@
 diff --git a/src/minecraft/net/minecraft/src/FCBlockWoodMouldingAndDecorative.java b/src/minecraft/net/minecraft/src/FCBlockWoodMouldingAndDecorative.java
-index 9be5ad5..df16e0b 100644
+index 9be5ad5..065d728 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockWoodMouldingAndDecorative.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockWoodMouldingAndDecorative.java
-@@ -74 +74,3 @@ public int GetItemIDDroppedOnSaw(World var1, int var2, int var3, int var4)
+@@ -2,0 +3 @@
++import java.util.List;
+@@ -74 +75,3 @@ public int GetItemIDDroppedOnSaw(World var1, int var2, int var3, int var4)
 -        return this.IsDecorative(var1, var2, var3, var4) ? super.GetItemIDDroppedOnSaw(var1, var2, var3, var4) : FCBetterThanWolves.fcBlockWoodCornerItemStubID;
 +        int metadata = var1.getBlockMetadata(var2, var3, var4);
 +        if (metadata == 12 || metadata == 13 || metadata == 14) return FCBetterThanWolves.fcBlockWoodMouldingItemStubID;
 +        return FCBetterThanWolves.fcBlockWoodCornerItemStubID;
-@@ -79 +81,3 @@ public int GetItemCountDroppedOnSaw(World var1, int var2, int var3, int var4)
+@@ -79 +82,3 @@ public int GetItemCountDroppedOnSaw(World var1, int var2, int var3, int var4)
 -        return this.IsDecorative(var1, var2, var3, var4) ? super.GetItemCountDroppedOnSaw(var1, var2, var3, var4) : 2;
 +        int metadata = var1.getBlockMetadata(var2, var3, var4);
 +        if (metadata == 13 || metadata == 14 || metadata == 15) return 3;
 +        return 2;
-@@ -85 +89 @@ public int GetItemDamageDroppedOnSaw(World var1, int var2, int var3, int var4)
+@@ -85 +90 @@ public int GetItemDamageDroppedOnSaw(World var1, int var2, int var3, int var4)
 -        return IsDecorativeFromMetadata(var5) ? super.GetItemDamageDroppedOnSaw(var1, var2, var3, var4) : this.damageDropped(var5);
 +        return this.damageDropped(var5);
+@@ -211,0 +217,25 @@ public static void RenderOakTableInvBlock(RenderBlocks var0, Block var1)
++
++    public void getSubBlocks(int id, CreativeTabs t, List l)
++    {
++        l.add(new ItemStack(id, 1, 0));
++        l.add(new ItemStack(id, 1, 1));
++        l.add(new ItemStack(id, 1, 2));
++        l.add(new ItemStack(id, 1, 3));
++        if (id == FCBetterThanWolves.fcBlockWoodBirchMouldingAndDecorative.blockID)
++        {
++          l.add(new ItemStack(id, 1, 4));
++          l.add(new ItemStack(id, 1, 5));
++          l.add(new ItemStack(id, 1, 6));
++          l.add(new ItemStack(id, 1, 7));
++          l.add(new ItemStack(id, 1, 8));
++          l.add(new ItemStack(id, 1, 9));
++          l.add(new ItemStack(id, 1, 10));
++          l.add(new ItemStack(id, 1, 11));
++        }
++        if (id == FCBetterThanWolves.fcBlockWoodJungleSidingAndCorner.blockID)
++        {
++          l.add(new ItemStack(id, 1, 5));
++          l.add(new ItemStack(id, 1, 6));
++          l.add(new ItemStack(id, 1, 7));
++        }
++    }

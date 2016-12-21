@@ -1,5 +1,5 @@
 diff --git a/src/minecraft/net/minecraft/src/FCBlockWoodSidingAndCornerAndDecorative.java b/src/minecraft/net/minecraft/src/FCBlockWoodSidingAndCornerAndDecorative.java
-index 1a6c7dd..a803c68 100644
+index 1a6c7dd..de3dc5f 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockWoodSidingAndCornerAndDecorative.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockWoodSidingAndCornerAndDecorative.java
 @@ -67 +67 @@ public int GetItemIDDroppedOnSaw(World var1, int var2, int var3, int var4)
@@ -11,3 +11,33 @@ index 1a6c7dd..a803c68 100644
 @@ -88 +88 @@ public int GetItemDamageDroppedOnSaw(World var1, int var2, int var3, int var4)
 -            return var5 == 14 ? this.GetWoodTypeFromBlockID() : super.GetItemDamageDroppedOnSaw(var1, var2, var3, var4);
 +            return var5 == 12 || var5 == 14 ? this.GetWoodTypeFromBlockID() : super.GetItemDamageDroppedOnSaw(var1, var2, var3, var4);
+@@ -123 +123 @@ else if (this.blockID == FCBetterThanWolves.fcBlockWoodBirchSidingAndCorner.bloc
+-    public void getSubBlocks(int var1, CreativeTabs var2, List var3)
++    public void getSubBlocks(int id, CreativeTabs t, List l)
+@@ -125 +125,5 @@ public void getSubBlocks(int var1, CreativeTabs var2, List var3)
+-        if (var1 == FCBetterThanWolves.fcBlockWoodOakSidingAndCorner.blockID)
++        l.add(new ItemStack(id, 1, 0));
++        l.add(new ItemStack(id, 1, 1));
++        l.add(new ItemStack(id, 1, 2));
++        l.add(new ItemStack(id, 1, 3));
++        if (id == FCBetterThanWolves.fcBlockWoodBirchMouldingAndDecorative.blockID)
+@@ -127,3 +131,8 @@ public void getSubBlocks(int var1, CreativeTabs var2, List var3)
+-            var3.add(new ItemStack(var1, 1, 12));
+-            var3.add(new ItemStack(var1, 1, 0));
+-            var3.add(new ItemStack(var1, 1, 1));
++          l.add(new ItemStack(id, 1, 4));
++          l.add(new ItemStack(id, 1, 5));
++          l.add(new ItemStack(id, 1, 6));
++          l.add(new ItemStack(id, 1, 7));
++          l.add(new ItemStack(id, 1, 8));
++          l.add(new ItemStack(id, 1, 9));
++          l.add(new ItemStack(id, 1, 10));
++          l.add(new ItemStack(id, 1, 11));
+@@ -131 +140 @@ public void getSubBlocks(int var1, CreativeTabs var2, List var3)
+-        else
++        if (id == FCBetterThanWolves.fcBlockWoodJungleSidingAndCorner.blockID)
+@@ -133 +142,3 @@ public void getSubBlocks(int var1, CreativeTabs var2, List var3)
+-            super.getSubBlocks(var1, var2, var3);
++          l.add(new ItemStack(id, 1, 5));
++          l.add(new ItemStack(id, 1, 6));
++          l.add(new ItemStack(id, 1, 7));

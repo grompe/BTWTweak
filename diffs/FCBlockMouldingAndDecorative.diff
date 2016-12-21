@@ -1,0 +1,16 @@
+diff --git a/src/minecraft/net/minecraft/src/FCBlockMouldingAndDecorative.java b/src/minecraft/net/minecraft/src/FCBlockMouldingAndDecorative.java
+index 884eedf..f447bc2 100644
+--- a/src/minecraft/net/minecraft/src/FCBlockMouldingAndDecorative.java
++++ b/src/minecraft/net/minecraft/src/FCBlockMouldingAndDecorative.java
+@@ -2,0 +3,2 @@
++import java.util.List;
++
+@@ -421,0 +424,8 @@ public static void RenderTableInvBlock(RenderBlocks var0, Block var1)
++
++    public void getSubBlocks(int id, CreativeTabs t, List l)
++    {
++        l.add(new ItemStack(id, 1, 0));
++        l.add(new ItemStack(id, 1, 12));
++        l.add(new ItemStack(id, 1, 13));
++        l.add(new ItemStack(id, 1, 15));
++    }

@@ -55,6 +55,11 @@ public class BTWTweaker
     return true;
   }
 
+  public static void execResource(String name)
+  {
+    scriptProxy.execResource(name);
+  }
+
   public static void main(final String args[]) throws Exception
   {
     if (args.length == 0 || args.length == 1 && args[0].equals("--help"))
@@ -155,21 +160,6 @@ public class BTWTweaker
 
     scriptProxy.execResource("scripts/opcodes.js");
     scriptProxy.execResource("scripts/tweaks.js");
-    scriptProxy.execResource("scripts/tweaks_bed.js");
-    scriptProxy.execResource("scripts/tweaks_cauldron.js");
-    scriptProxy.execResource("scripts/tweaks_fixes.js");
-    scriptProxy.execResource("scripts/tweaks_furnace.js");
-    scriptProxy.execResource("scripts/tweaks_gamelogic.js");
-    scriptProxy.execResource("scripts/tweaks_heads.js");
-    scriptProxy.execResource("scripts/tweaks_hooks.js");
-    scriptProxy.execResource("scripts/tweaks_language.js");
-    scriptProxy.execResource("scripts/tweaks_moreslabs.js");
-    scriptProxy.execResource("scripts/tweaks_old.js");
-    scriptProxy.execResource("scripts/tweaks_pumpkin.js");
-    scriptProxy.execResource("scripts/tweaks_rocks.js");
-    scriptProxy.execResource("scripts/tweaks_visual.js");
-    scriptProxy.execResource("scripts/tweaks_worldgen.js");
-    if (hasResource("scripts/custom.js")) scriptProxy.execResource("scripts/custom.js");
 
     File jar = new File(jarname);
     String outputname = jarname.replaceFirst("\\.([^.]+)$", "_tweak.$1");

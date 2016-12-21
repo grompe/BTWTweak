@@ -68,6 +68,10 @@ v0.9j
 - Fixed stuck glitched ghost fireballs. This possibly fixes stuck non-ghost
   fireballs, too.
 
+- Fixed and adjusted what blocks are displayed on creative tabs.
+
+- Added ability to add new tweak scripts without recompiling BTWTweak.
+
 v0.9i
 
 - Restored the ability of Glass Block to contain piston packing.

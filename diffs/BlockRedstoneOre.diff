@@ -1,0 +1,17 @@
+diff --git a/src/minecraft/net/minecraft/src/BlockRedstoneOre.java b/src/minecraft/net/minecraft/src/BlockRedstoneOre.java
+index 877e87e..14d9660 100644
+--- a/src/minecraft/net/minecraft/src/BlockRedstoneOre.java
++++ b/src/minecraft/net/minecraft/src/BlockRedstoneOre.java
+@@ -2,0 +3 @@
++import java.util.List;
+@@ -187,0 +189,10 @@ protected ItemStack createStackedBlock(int par1)
++
++    public void getSubBlocks(int id, CreativeTabs t, List l)
++    {
++        l.add(new ItemStack(id, 1, 0));
++        if (id != Block.oreNetherQuartz.blockID)
++        {
++            l.add(new ItemStack(id, 1, 1));
++            l.add(new ItemStack(id, 1, 2));
++        }
++    }

@@ -454,6 +454,8 @@ public class GPEBTWTweak extends FCAddOn
       BiomeGenBase.forest.spawnableMonsterList.add(new SpawnListEntry(EntityWolf.class, 1, 1, 1));
     }
     
+    fixUpCreativeTabs();
+
     FCAddOnHandler.LogMessage("Grom PE's BTWTweak is done tweaking. Enjoy!");
   }
 
@@ -522,6 +524,43 @@ public class GPEBTWTweak extends FCAddOn
       Item.map.SetBuoyancy(1.0F);
       Item.map.SetBellowsBlowDistance(3);
     }
+  }
+
+  private void fixUpCreativeTabs()
+  {
+    Block.waterStill.setCreativeTab(CreativeTabs.tabBlock);
+    Block.lavaStill.setCreativeTab(CreativeTabs.tabBlock);
+    Block.mushroomBrown.setCreativeTab(null);
+    Block.mushroomRed.setCreativeTab(null);
+    Block.tilledField.setCreativeTab(CreativeTabs.tabDecorations);
+    FCBetterThanWolves.fcBlockWoodOakMouldingAndDecorative.setCreativeTab(null);
+    Block.commandBlock.setCreativeTab(CreativeTabs.tabRedstone);
+
+    FCBetterThanWolves.fcBlockSidingAndCornerBlackStone.setCreativeTab(CreativeTabs.tabDecorations);
+    FCBetterThanWolves.fcBlockMouldingAndDecorativeBlackStone.setCreativeTab(CreativeTabs.tabDecorations);
+    FCBetterThanWolves.fcBlockSandstoneSidingAndCorner.setCreativeTab(CreativeTabs.tabDecorations);
+    FCBetterThanWolves.fcBlockSandstoneMouldingAndDecorative.setCreativeTab(CreativeTabs.tabDecorations);
+    FCBetterThanWolves.fcBlockSmoothStoneSidingAndCorner.setCreativeTab(CreativeTabs.tabDecorations);
+    FCBetterThanWolves.fcBlockSmoothStoneMouldingAndDecorative.setCreativeTab(CreativeTabs.tabDecorations);
+    FCBetterThanWolves.fcBlockBrickSidingAndCorner.setCreativeTab(CreativeTabs.tabDecorations);
+    FCBetterThanWolves.fcBlockBrickMouldingAndDecorative.setCreativeTab(CreativeTabs.tabDecorations);
+    FCBetterThanWolves.fcBlockNetherBrickSidingAndCorner.setCreativeTab(CreativeTabs.tabDecorations);
+    FCBetterThanWolves.fcBlockNetherBrickMouldingAndDecorative.setCreativeTab(CreativeTabs.tabDecorations);
+    FCBetterThanWolves.fcBlockWhiteStoneSidingAndCorner.setCreativeTab(CreativeTabs.tabDecorations);
+    FCBetterThanWolves.fcBlockWhiteStoneMouldingAndDecorative.setCreativeTab(CreativeTabs.tabDecorations);
+    FCBetterThanWolves.fcBlockStoneBrickSidingAndCorner.setCreativeTab(CreativeTabs.tabDecorations);
+    FCBetterThanWolves.fcBlockStoneBrickMouldingAndDecorative.setCreativeTab(CreativeTabs.tabDecorations);
+
+    // wood sidings             - FCBlockWoodSidingAndCornerAndDecorative => 0 1 2 3
+    FCBetterThanWolves.fcBlockWoodSpruceSidingAndCorner.setCreativeTab(CreativeTabs.tabDecorations);
+    // wood mouldings                  - FCBlockWoodMouldingAndDecorative => 0 1 2 3
+    FCBetterThanWolves.fcBlockWoodSpruceMouldingAndDecorative.setCreativeTab(CreativeTabs.tabDecorations);
+    // wood corners             - FCBlockWoodSidingAndCornerAndDecorative => 0 1 2 3
+    FCBetterThanWolves.fcBlockWoodBirchSidingAndCorner.setCreativeTab(CreativeTabs.tabDecorations);
+    // wood columns, pedestals, tables - FCBlockWoodMouldingAndDecorative => 0 1 2 3 4 5 6 7 8 9 10 11
+    FCBetterThanWolves.fcBlockWoodBirchMouldingAndDecorative.setCreativeTab(CreativeTabs.tabDecorations);
+    // wood benches, fences     - FCBlockWoodSidingAndCornerAndDecorative => 0 1 2 3 . 5 6 7
+    FCBetterThanWolves.fcBlockWoodJungleSidingAndCorner.setCreativeTab(CreativeTabs.tabDecorations);
   }
 
   public static Block Itemize(Block block)
@@ -751,6 +790,8 @@ public class GPEBTWTweak extends FCAddOn
 
     Properties t = st.GetTranslateTable();
     t.put(Item.stick.getUnlocalizedName() + ".name", "Rod");
+    t.put(Block.railDetector.getUnlocalizedName() + ".name", "Loaded Detector Rail");
+    t.put(FCBetterThanWolves.fcBlockDetectorRailSoulforgedSteel.getUnlocalizedName() + ".name", "Player Detector Rail");
     if (isBTWVersionOrNewer("4.99999A0D Marsupial??!!"))
     {
       t.put(FCBetterThanWolves.fcBlockDirtSlab.getUnlocalizedName() + ".gravel.name", "Old Gravel Slab");
@@ -1330,6 +1371,11 @@ public class GPEBTWTweak extends FCAddOn
     MinecraftServer srv = MinecraftServer.getServer();
     if (srv == null) return 1;
     return srv.isServerRunning() ? 2 : 1;
+  }
+
+  public static void addCreativeEnchantment(Enchantment e, List l)
+  {
+    l.add(new ItemStack(FCBetterThanWolves.fcArcaneScroll, 1, e.effectId));
   }
 
   public static boolean classExists(String cn)

@@ -6,8 +6,16 @@ import java.util.Random;
 public class GPEBlockAestheticOpaque extends FCBlockAestheticOpaque
 {
   private static final int wicker = 0;
+  private static final int dung = 1;
+  private static final int hellfire = 3;
   private static final int padding = 4;
+  private static final int rope = 6;
+  private static final int flint = 7;
+  private static final int whitestone = 9;
+  private static final int whitecobble = 10;
   private static final int barrel = 11;
+  private static final int choppingblock = 13;
+  private static final int enderblock = 14;
 
   private static final float[] hardness =
   {
@@ -20,6 +28,7 @@ public class GPEBlockAestheticOpaque extends FCBlockAestheticOpaque
     super(id);
     ItemAxe.SetAllAxesToBeEffectiveVsBlock(this);
     ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
+    setCreativeTab(CreativeTabs.tabBlock);
   }
 
   public float getBlockHardness(World world, int x, int y, int z)
@@ -66,4 +75,18 @@ public class GPEBlockAestheticOpaque extends FCBlockAestheticOpaque
     return 0;
   }
 
+  public void getSubBlocks(int id, CreativeTabs t, List l)
+  {
+    l.add(new ItemStack(id, 1, wicker));
+    l.add(new ItemStack(id, 1, dung));
+    l.add(new ItemStack(id, 1, hellfire));
+    l.add(new ItemStack(id, 1, padding));
+    l.add(new ItemStack(id, 1, rope));
+    l.add(new ItemStack(id, 1, flint));
+    l.add(new ItemStack(id, 1, whitestone));
+    l.add(new ItemStack(id, 1, whitecobble));
+    l.add(new ItemStack(id, 1, barrel));
+    l.add(new ItemStack(id, 1, choppingblock));
+    l.add(new ItemStack(id, 1, enderblock));
+  }
 }

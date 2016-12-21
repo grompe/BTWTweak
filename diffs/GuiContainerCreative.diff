@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/GuiContainerCreative.java b/src/minecraft/net/minecraft/src/GuiContainerCreative.java
+index 934809d..0152950 100644
+--- a/src/minecraft/net/minecraft/src/GuiContainerCreative.java
++++ b/src/minecraft/net/minecraft/src/GuiContainerCreative.java
+@@ -343 +343 @@ private void updateCreativeSearch()
+-                Item.enchantedBook.func_92113_a(var12, var1.itemList);
++                GPEBTWTweak.addCreativeEnchantment(var12, var1.itemList);

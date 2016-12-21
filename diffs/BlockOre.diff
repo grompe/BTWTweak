@@ -1,0 +1,17 @@
+diff --git a/src/minecraft/net/minecraft/src/BlockOre.java b/src/minecraft/net/minecraft/src/BlockOre.java
+index 38abdf1..4867d94 100644
+--- a/src/minecraft/net/minecraft/src/BlockOre.java
++++ b/src/minecraft/net/minecraft/src/BlockOre.java
+@@ -2,0 +3 @@
++import java.util.List;
+@@ -93,0 +95,10 @@ public int damageDropped(int par1)
++
++    public void getSubBlocks(int id, CreativeTabs t, List l)
++    {
++        l.add(new ItemStack(id, 1, 0));
++        if (id != Block.oreNetherQuartz.blockID)
++        {
++            l.add(new ItemStack(id, 1, 1));
++            l.add(new ItemStack(id, 1, 2));
++        }
++    }
