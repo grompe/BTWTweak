@@ -488,6 +488,37 @@ function(mn)
     }
   }
 });
+tweak("su", "EntityFireball", BOTH, "l_()V", 0x8AA2DC62, "Remove stuck glitched ghost fireballs",
+function(mn)
+{
+  for (var i = mn.instructions.size() - 1; i >= 0; i--)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("su") && n.name.equals("b") && n.desc.equals("(DDD)V"))
+    {
+      var label = LabelNode();
+      var label_skip = LabelNode();
+      mn.instructions.insert(n, toInsnList(
+        [
+          VarInsnNode(ALOAD, 0),
+          FieldInsnNode(GETFIELD, "su", "u", "D"),
+          MethodInsnNode(INVOKESTATIC, "java/lang/Double", "isNaN", "(D)Z"),
+          JumpInsnNode(IFNE, label),
+          VarInsnNode(ALOAD, 0),
+          FieldInsnNode(GETFIELD, "su", "x", "D"),
+          MethodInsnNode(INVOKESTATIC, "java/lang/Double", "isNaN", "(D)Z"),
+          JumpInsnNode(IFEQ, label_skip),
+          label,
+          FrameNode(F_SAME, 0, null, 0, null),
+          VarInsnNode(ALOAD, 0),
+          MethodInsnNode(INVOKEVIRTUAL, "su", "w", "()V"),
+          label_skip,
+        ]
+      ));
+      return true;
+    }
+  }
+});
 
 // =======================================================================
 // Fix mods! Now with this mod you can fix mods for the mod for Minecraft.

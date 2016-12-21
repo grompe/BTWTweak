@@ -65,6 +65,9 @@ v0.9j
 
 - Fixed an exploit with players escaping through the roof of Nether.
 
+- Fixed stuck glitched ghost fireballs. This possibly fixes stuck non-ghost
+  fireballs, too.
+
 v0.9i
 
 - Restored the ability of Glass Block to contain piston packing.

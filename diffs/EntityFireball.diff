@@ -1,0 +1,10 @@
+diff --git a/src/minecraft/net/minecraft/src/EntityFireball.java b/src/minecraft/net/minecraft/src/EntityFireball.java
+index 535ac93..8514abd 100644
+--- a/src/minecraft/net/minecraft/src/EntityFireball.java
++++ b/src/minecraft/net/minecraft/src/EntityFireball.java
+@@ -206,0 +207,5 @@ public void onUpdate()
++
++            if (Double.isNaN(this.posX) || Double.isNaN(this.motionX))
++            {
++                this.setDead();
++            }
