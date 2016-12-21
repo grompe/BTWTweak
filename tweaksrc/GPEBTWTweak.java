@@ -518,6 +518,9 @@ public class GPEBTWTweak extends FCAddOn
         FCAddOnHandler.LogMessage("Error while integrating with Deco Add-On!");
         e.printStackTrace();
       }
+      // Fix Deco losing map item properties
+      Item.map.SetBuoyancy(1.0F);
+      Item.map.SetBellowsBlowDistance(3);
     }
   }
 
