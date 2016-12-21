@@ -40,6 +40,8 @@ v0.9j
   will drop upon the destruction of glass blocks. Similarly, Deco stained
   glass is breakable like usual glass, both by rocks and by falling upon.
 
+- Fix Deco error with losing written map item buoyancy and blow distance.
+
 - Changed achievements around a bit to be technically possible in BTW.
   Ideally they need an overhaul but that's some future task.
 
