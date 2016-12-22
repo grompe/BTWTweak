@@ -70,6 +70,9 @@ Need to think more about
 - Make ores drop loose rocks and raw ore pieces; add pure ores
   (block ID so it can be placed in the kiln)
 
+- portals in multiplayer are problematic as opening a portal either means
+  uninvited guests, or getting lost as you try to get back
+
 
 Complex
 =======
