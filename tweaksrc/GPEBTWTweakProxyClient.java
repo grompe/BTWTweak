@@ -222,11 +222,16 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
     if (block == null) return;
     int meta = stack.getItemDamage();
     boolean isSiding = id == FCBetterThanWolves.fcBlockWoodSidingItemStubID
-      || (id != FCBetterThanWolves.fcBlockWoodCornerItemStubID && meta == 0 && block instanceof FCBlockSidingAndCorner);
+      || (id != FCBetterThanWolves.fcBlockWoodCornerItemStubID
+       && id != FCBetterThanWolves.fcBlockWoodSidingDecorativeItemStubID
+       && meta == 0 && block instanceof FCBlockSidingAndCorner);
     boolean isMoulding = id == FCBetterThanWolves.fcBlockWoodMouldingItemStubID
-      || (id != FCBetterThanWolves.fcBlockWoodMouldingDecorativeItemStubID && meta == 0 && block instanceof FCBlockMoulding);
+      || (id != FCBetterThanWolves.fcBlockWoodMouldingDecorativeItemStubID
+       && meta == 0 && block instanceof FCBlockMoulding);
     boolean isCorner = id == FCBetterThanWolves.fcBlockWoodCornerItemStubID
-      || (id != FCBetterThanWolves.fcBlockWoodSidingItemStubID && meta == 1 && block instanceof FCBlockSidingAndCorner);
+      || (id != FCBetterThanWolves.fcBlockWoodSidingItemStubID
+       && id != FCBetterThanWolves.fcBlockWoodSidingDecorativeItemStubID
+       && meta == 1 && block instanceof FCBlockSidingAndCorner);
     if (isSiding || isMoulding || isCorner)
     {
       World world = player.worldObj;

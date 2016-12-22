@@ -97,4 +97,9 @@ public class GPEBlockStone extends FCBlockStone
     list.add(new ItemStack(id, 1, 1));
     list.add(new ItemStack(id, 1, 2));
   }
+
+  public int getDamageValue(World world, int x, int y, int z)
+  {
+    return world.getBlockMetadata(x, y, z);
+  }
 }
