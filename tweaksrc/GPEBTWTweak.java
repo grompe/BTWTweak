@@ -1341,6 +1341,12 @@ public class GPEBTWTweak extends FCAddOn
 
   public static boolean canPlaceItemBlock(ItemBlock ib, World world, int x, int y, int z, int side, EntityPlayer player, ItemStack stack, float hitX, float hitY, float hitZ)
   {
+    if (ib instanceof GPEItemBlockMicro)
+    {
+      GPEItemBlockMicro mi = (GPEItemBlockMicro)ib;
+      if (mi.attemptToCombineWithBlock(stack, world, x, y, z, side, hitX, hitY, hitZ, false, true))
+        return true;
+    }
     int id = ib.getBlockID();
     int meta = ib.getMetadata(stack.getItemDamage());
     Block block = Block.blocksList[id];

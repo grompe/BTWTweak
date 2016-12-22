@@ -72,6 +72,18 @@ v0.9j
 
 - Added ability to add new tweak scripts without recompiling BTWTweak.
 
+- Added ability to merge microblocks by placing them together with the others
+  in the following ways:
+  - corner + corner = moulding,
+  - moulding + moulding = siding,
+  - siding + moulding = stairs,
+  - stairs + moulding = full block,
+  - siding + siding = full block,
+  - moulding + siding = stairs.
+
+- Improved microblock preview to take account for the above change,
+  and display correctly when looking at a side of a snow cover.
+
 v0.9i
 
 - Restored the ability of Glass Block to contain piston packing.

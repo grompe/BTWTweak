@@ -24,6 +24,30 @@ function replaceButtonInit(mn)
     }
   }
 }
+function takeMicroblockOwnership(className, checksum)
+{
+  tweak(className, null, BOTH, "<init>(I)V", checksum, "(1/2) Making microblock inherit from GPEItemBlockMicro",
+  function(mn)
+  {
+    for (var i = 0; i < mn.instructions.size(); i++)
+    {
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.name.equals("<init>") && n.desc.equals("(I)V"))
+      {
+        if (n.owner.equals("FCItemBlockCustom") || n.owner.equals("xn"))
+        {
+          n.owner = "GPEItemBlockMicro";
+          return true;
+        }
+      }
+    }
+  });
+  add(className, null, BOTH, "(2/2) Making microblock inherit from GPEItemBlockMicro",
+  function(cn)
+  {
+    cn.superName = "GPEItemBlockMicro";
+  });
+}
 // className, deobfName, side, method, checksums, description
 tweak("anf", "BlockFlowing", BOTH, "n(Laab;III)Z", 0xAD981353, "Making lava more unstoppable",
 function(mn)
@@ -733,6 +757,11 @@ function(cn)
 {
   cn.superName = "GPEBlockButton";
 });
+takeMicroblockOwnership("FCItemBlockMoulding", 0x411E0779);
+takeMicroblockOwnership("FCItemBlockSidingAndCorner", 0x411E0779);
+takeMicroblockOwnership("FCItemBlockWoodCornerStub", 0x2C60197);
+takeMicroblockOwnership("FCItemBlockWoodMouldingStub", 0x2C60197);
+takeMicroblockOwnership("FCItemBlockWoodSidingStub", 0x2C60197);
 add("Addon_Glass$BlockStainedGlass", null, BOTH, "Making Deco stained glass inherit from GPEBlockGlass",
 function(cn)
 {

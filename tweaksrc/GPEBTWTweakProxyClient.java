@@ -233,76 +233,97 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
       int x = mop.blockX;
       int y = mop.blockY;
       int z = mop.blockZ;
-      // Workaround: don't display when pointing at side of snow cover
-      if (world.getBlockId(mop.blockX, mop.blockY, mop.blockZ) == 78 && mop.sideHit > 1) return;
-      if (!world.getBlockMaterial(mop.blockX, mop.blockY, mop.blockZ).isReplaceable())
+      float hitX = (float)mop.hitVec.xCoord - (float)mop.blockX;
+      float hitY = (float)mop.hitVec.yCoord - (float)mop.blockY;
+      float hitZ = (float)mop.hitVec.zCoord - (float)mop.blockZ;
+      boolean combine = false;
+      boolean direct = false;
+      int side = mop.sideHit;
+      GPEItemBlockMicro mi = stack.getItem() instanceof GPEItemBlockMicro ? (GPEItemBlockMicro)stack.getItem() : null;
+      if (mi != null && mi.attemptToCombineWithBlock(stack, world, x, y, z, side, hitX, hitY, hitZ, false, true))
       {
-        x += Facing.offsetsXForSide[mop.sideHit];
-        y += Facing.offsetsYForSide[mop.sideHit];
-        z += Facing.offsetsZForSide[mop.sideHit];
+        combine = true;
+        direct = true;
+      } else {
+        if (world.getBlockId(x, y, z) == Block.snow.blockID)
+        {
+          side = 1;
+        }
+        if (!world.getBlockMaterial(x, y, z).isReplaceable())
+        {
+          x += Facing.offsetsXForSide[side];
+          y += Facing.offsetsYForSide[side];
+          z += Facing.offsetsZForSide[side];
+        }
+        if (mi != null && mi.attemptToCombineWithBlock(stack, world, x, y, z, side, hitX, hitY, hitZ, true, true))
+        {
+          combine = true;
+        } else {
+          if (!world.getBlockMaterial(x, y, z).isReplaceable()) return;
+        }
       }
-      if (world.getBlockMaterial(x, y, z).isReplaceable())
+      double dd = direct ? 0.5 : 0;
+      if (isSiding)
       {
-        float hitX = (float)mop.hitVec.xCoord - (float)mop.blockX;
-        float hitY = (float)mop.hitVec.yCoord - (float)mop.blockY;
-        float hitZ = (float)mop.hitVec.zCoord - (float)mop.blockZ;
-        if (isSiding)
+        switch(side)
         {
-          switch(mop.sideHit)
-          {
-            case 0: drawPlacementBox(world, x, y + 0.5, z, 1, 0.5, 1, player, ticks); break;
-            case 1: drawPlacementBox(world, x, y      , z, 1, 0.5, 1, player, ticks); break;
-            case 2: drawPlacementBox(world, x, y, z + 0.5, 1, 1, 0.5, player, ticks); break;
-            case 3: drawPlacementBox(world, x, y, z      , 1, 1, 0.5, player, ticks); break;
-            case 4: drawPlacementBox(world, x + 0.5, y, z, 0.5, 1, 1, player, ticks); break;
-            case 5: drawPlacementBox(world, x      , y, z, 0.5, 1, 1, player, ticks); break;
-          }
+          case 0: drawPlacementBox(world, x, y - dd + 0.5, z, 1, 0.5, 1, player, ticks, combine); break;
+          case 1: drawPlacementBox(world, x, y + dd      , z, 1, 0.5, 1, player, ticks, combine); break;
+          case 2: drawPlacementBox(world, x, y, z - dd + 0.5, 1, 1, 0.5, player, ticks, combine); break;
+          case 3: drawPlacementBox(world, x, y, z + dd      , 1, 1, 0.5, player, ticks, combine); break;
+          case 4: drawPlacementBox(world, x - dd + 0.5, y, z, 0.5, 1, 1, player, ticks, combine); break;
+          case 5: drawPlacementBox(world, x + dd      , y, z, 0.5, 1, 1, player, ticks, combine); break;
         }
-        else if (isMoulding)
+      }
+      else if (isMoulding)
+      {
+        boolean xz = Math.abs(hitX - 0.5) > Math.abs(hitZ - 0.5);
+        boolean xy = Math.abs(hitX - 0.5) > Math.abs(hitY - 0.5);
+        boolean yz = Math.abs(hitY - 0.5) > Math.abs(hitZ - 0.5);
+        double ax = x + (hitX > 0.5 ? 0.5 : 0);
+        double ay = y + (hitY > 0.5 ? 0.5 : 0);
+        double az = z + (hitZ > 0.5 ? 0.5 : 0);
+        switch(side)
         {
-          boolean xz = Math.abs(hitX - 0.5) > Math.abs(hitZ - 0.5);
-          boolean xy = Math.abs(hitX - 0.5) > Math.abs(hitY - 0.5);
-          boolean yz = Math.abs(hitY - 0.5) > Math.abs(hitZ - 0.5);
-          double ax = x + (hitX > 0.5 ? 0.5 : 0);
-          double ay = y + (hitY > 0.5 ? 0.5 : 0);
-          double az = z + (hitZ > 0.5 ? 0.5 : 0);
-          switch(mop.sideHit)
-          {
-            case 0: drawPlacementBox(world, xz ? ax : x, y + 0.5, xz ? z : az, xz ? 0.5 : 1, 0.5, xz ? 1 : 0.5, player, ticks); break;
-            case 1: drawPlacementBox(world, xz ? ax : x, y      , xz ? z : az, xz ? 0.5 : 1, 0.5, xz ? 1 : 0.5, player, ticks); break;
-            case 2: drawPlacementBox(world, xy ? ax : x, xy ? y : ay, z + 0.5, xy ? 0.5 : 1, xy ? 1 : 0.5, 0.5, player, ticks); break;
-            case 3: drawPlacementBox(world, xy ? ax : x, xy ? y : ay, z      , xy ? 0.5 : 1, xy ? 1 : 0.5, 0.5, player, ticks); break;
-            case 4: drawPlacementBox(world, x + 0.5, yz ? ay : y, yz ? z : az, 0.5, yz ? 0.5 : 1, yz ? 1 : 0.5, player, ticks); break;
-            case 5: drawPlacementBox(world, x      , yz ? ay : y, yz ? z : az, 0.5, yz ? 0.5 : 1, yz ? 1 : 0.5, player, ticks); break;
-          }
+          case 0: drawPlacementBox(world, xz ? ax : x , y - dd + 0.5, xz ? z : az , xz ? 0.5 : 1, 0.5, xz ? 1 : 0.5, player, ticks, combine); break;
+          case 1: drawPlacementBox(world, xz ? ax : x , y + dd      , xz ? z : az , xz ? 0.5 : 1, 0.5, xz ? 1 : 0.5, player, ticks, combine); break;
+          case 2: drawPlacementBox(world, xy ? ax : x , xy ? y : ay , z - dd + 0.5, xy ? 0.5 : 1, xy ? 1 : 0.5, 0.5, player, ticks, combine); break;
+          case 3: drawPlacementBox(world, xy ? ax : x , xy ? y : ay , z + dd      , xy ? 0.5 : 1, xy ? 1 : 0.5, 0.5, player, ticks, combine); break;
+          case 4: drawPlacementBox(world, x - dd + 0.5, yz ? ay : y , yz ? z : az , 0.5, yz ? 0.5 : 1, yz ? 1 : 0.5, player, ticks, combine); break;
+          case 5: drawPlacementBox(world, x + dd      , yz ? ay : y , yz ? z : az , 0.5, yz ? 0.5 : 1, yz ? 1 : 0.5, player, ticks, combine); break;
         }
-        else if (isCorner)
+      }
+      else if (isCorner)
+      {
+        double ax = x + (hitX > 0.5 ? 0.5 : 0);
+        double ay = y + (hitY > 0.5 ? 0.5 : 0);
+        double az = z + (hitZ > 0.5 ? 0.5 : 0);
+        switch(side)
         {
-          double ax = x + (hitX > 0.5 ? 0.5 : 0);
-          double ay = y + (hitY > 0.5 ? 0.5 : 0);
-          double az = z + (hitZ > 0.5 ? 0.5 : 0);
-          switch(mop.sideHit)
-          {
-            case 0: drawPlacementBox(world, ax, y + 0.5, az, 0.5, 0.5, 0.5, player, ticks); break;
-            case 1: drawPlacementBox(world, ax, y      , az, 0.5, 0.5, 0.5, player, ticks); break;
-            case 2: drawPlacementBox(world, ax, ay, z + 0.5, 0.5, 0.5, 0.5, player, ticks); break;
-            case 3: drawPlacementBox(world, ax, ay, z      , 0.5, 0.5, 0.5, player, ticks); break;
-            case 4: drawPlacementBox(world, x + 0.5, ay, az, 0.5, 0.5, 0.5, player, ticks); break;
-            case 5: drawPlacementBox(world, x      , ay, az, 0.5, 0.5, 0.5, player, ticks); break;
-          }
+          case 0: drawPlacementBox(world, ax, y - dd + 0.5, az, 0.5, 0.5, 0.5, player, ticks, combine); break;
+          case 1: drawPlacementBox(world, ax, y + dd      , az, 0.5, 0.5, 0.5, player, ticks, combine); break;
+          case 2: drawPlacementBox(world, ax, ay, z - dd + 0.5, 0.5, 0.5, 0.5, player, ticks, combine); break;
+          case 3: drawPlacementBox(world, ax, ay, z + dd      , 0.5, 0.5, 0.5, player, ticks, combine); break;
+          case 4: drawPlacementBox(world, x - dd + 0.5, ay, az, 0.5, 0.5, 0.5, player, ticks, combine); break;
+          case 5: drawPlacementBox(world, x + dd      , ay, az, 0.5, 0.5, 0.5, player, ticks, combine); break;
         }
       }
     }
   }
 
-  private static void drawPlacementBox(World world, double x, double y, double z, double xx, double yy, double zz, EntityPlayer player, float ticks)
+  private static void drawPlacementBox(World world, double x, double y, double z, double xx, double yy, double zz, EntityPlayer player, float ticks, boolean altcolor)
   {
     AxisAlignedBB rbb = AxisAlignedBB.getBoundingBox(x, y, z, x + xx, y + yy, z + zz);
     if (!world.checkNoEntityCollision(rbb)) return;
 
     GL11.glEnable(GL11.GL_BLEND);
     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-    GL11.glColor4f(0.3F, 0.8F, 0.6F, 0.8F);
+    if (altcolor)
+    {
+      GL11.glColor4f(0.8F, 0.8F, 0.6F, 0.8F);
+    } else {
+      GL11.glColor4f(0.3F, 0.8F, 0.6F, 0.8F);
+    }
     GL11.glLineWidth(2.0F);
     GL11.glDisable(GL11.GL_TEXTURE_2D);
     GL11.glDepthMask(false);
