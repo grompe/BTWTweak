@@ -86,6 +86,8 @@ v0.9j
 - Added very rare zombie spawn with axes. Beware, they wreck obstacles much
   faster than regular zombies!
 
+- Fixed middle-click block picking for wooden microblocks.
+
 v0.9i
 
 - Restored the ability of Glass Block to contain piston packing.

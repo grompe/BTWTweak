@@ -1,5 +1,5 @@
 diff --git a/src/minecraft/net/minecraft/src/FCBlockWoodSidingAndCornerAndDecorative.java b/src/minecraft/net/minecraft/src/FCBlockWoodSidingAndCornerAndDecorative.java
-index 1a6c7dd..de3dc5f 100644
+index 1a6c7dd..a86b749 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockWoodSidingAndCornerAndDecorative.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockWoodSidingAndCornerAndDecorative.java
 @@ -67 +67 @@ public int GetItemIDDroppedOnSaw(World var1, int var2, int var3, int var4)
@@ -41,3 +41,16 @@ index 1a6c7dd..de3dc5f 100644
 +          l.add(new ItemStack(id, 1, 5));
 +          l.add(new ItemStack(id, 1, 6));
 +          l.add(new ItemStack(id, 1, 7));
+@@ -135,0 +147,12 @@ public void getSubBlocks(int var1, CreativeTabs var2, List var3)
++
++    public int getDamageValue(World world, int x, int y, int z)
++    {
++      int id = world.getBlockId(x, y, z);
++      if (id == FCBetterThanWolves.fcBlockWoodSpruceMouldingAndDecorative.blockID) return 1;
++      if (id == FCBetterThanWolves.fcBlockWoodSpruceSidingAndCorner.blockID)       return 1;
++      if (id == FCBetterThanWolves.fcBlockWoodBirchMouldingAndDecorative.blockID)  return 2;
++      if (id == FCBetterThanWolves.fcBlockWoodBirchSidingAndCorner.blockID)        return 2;
++      if (id == FCBetterThanWolves.fcBlockWoodJungleMouldingAndDecorative.blockID) return 3;
++      if (id == FCBetterThanWolves.fcBlockWoodJungleSidingAndCorner.blockID)       return 3;
++      return 0;
++    }

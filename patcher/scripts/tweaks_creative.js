@@ -336,6 +336,79 @@ function getWoodTypesCode()
 }
 fixCreativeTypes("FCBlockWoodMouldingAndDecorative", null, getWoodTypesCode());
 fixCreativeTypes("FCBlockWoodSidingAndCornerAndDecorative", null, getWoodTypesCode());
+function fixWoodBlockPick(cn)
+{
+  var l0 = LabelNode();
+  var l1 = LabelNode();
+  var l2 = LabelNode();
+  var l3 = LabelNode();
+  var l4 = LabelNode();
+  var l5 = LabelNode();
+  var mn = MethodNode(ACC_PUBLIC, "h", "(Laab;III)I", null, null);
+  mn.instructions.add(toInsnList(
+    [
+      VarInsnNode(ALOAD, 1),
+      VarInsnNode(ILOAD, 2),
+      VarInsnNode(ILOAD, 3),
+      VarInsnNode(ILOAD, 4),
+      MethodInsnNode(INVOKEVIRTUAL, "aab", "a", "(III)I"),
+      VarInsnNode(ISTORE, 5),
+      VarInsnNode(ILOAD, 5),
+      FieldInsnNode(GETSTATIC, "FCBetterThanWolves", "fcBlockWoodSpruceMouldingAndDecorative", "Lapa;"),
+      FieldInsnNode(GETFIELD, "apa", "cz", "I"),
+      JumpInsnNode(IF_ICMPNE, l0),
+      InsnNode(ICONST_1),
+      InsnNode(IRETURN),
+      l0,
+      FrameNode(F_APPEND,1, [INTEGER], 0, null),
+      VarInsnNode(ILOAD, 5),
+      FieldInsnNode(GETSTATIC, "FCBetterThanWolves", "fcBlockWoodSpruceSidingAndCorner", "Lapa;"),
+      FieldInsnNode(GETFIELD, "apa", "cz", "I"),
+      JumpInsnNode(IF_ICMPNE, l1),
+      InsnNode(ICONST_1),
+      InsnNode(IRETURN),
+      l1,
+      FrameNode(F_SAME, 0, null, 0, null),
+      VarInsnNode(ILOAD, 5),
+      FieldInsnNode(GETSTATIC, "FCBetterThanWolves", "fcBlockWoodBirchMouldingAndDecorative", "Lapa;"),
+      FieldInsnNode(GETFIELD, "apa", "cz", "I"),
+      JumpInsnNode(IF_ICMPNE, l2),
+      InsnNode(ICONST_2),
+      InsnNode(IRETURN),
+      l2,
+      FrameNode(F_SAME, 0, null, 0, null),
+      VarInsnNode(ILOAD, 5),
+      FieldInsnNode(GETSTATIC, "FCBetterThanWolves", "fcBlockWoodBirchSidingAndCorner", "Lapa;"),
+      FieldInsnNode(GETFIELD, "apa", "cz", "I"),
+      JumpInsnNode(IF_ICMPNE, l3),
+      InsnNode(ICONST_2),
+      InsnNode(IRETURN),
+      l3,
+      FrameNode(F_SAME, 0, null, 0, null),
+      VarInsnNode(ILOAD, 5),
+      FieldInsnNode(GETSTATIC, "FCBetterThanWolves", "fcBlockWoodJungleMouldingAndDecorative", "Lapa;"),
+      FieldInsnNode(GETFIELD, "apa", "cz", "I"),
+      JumpInsnNode(IF_ICMPNE, l4),
+      InsnNode(ICONST_3),
+      InsnNode(IRETURN),
+      l4,
+      FrameNode(F_SAME, 0, null, 0, null),
+      VarInsnNode(ILOAD, 5),
+      FieldInsnNode(GETSTATIC, "FCBetterThanWolves", "fcBlockWoodJungleSidingAndCorner", "Lapa;"),
+      FieldInsnNode(GETFIELD, "apa", "cz", "I"),
+      JumpInsnNode(IF_ICMPNE, l5),
+      InsnNode(ICONST_3),
+      InsnNode(IRETURN),
+      l5,
+      FrameNode(F_SAME, 0, null, 0, null),
+      InsnNode(ICONST_0),
+      InsnNode(IRETURN),
+    ]
+  ));
+  cn.methods.add(mn);
+}
+add("FCBlockWoodMouldingAndDecorative", null, CLIENT, "Fixing block middle-click picking", fixWoodBlockPick);
+add("FCBlockWoodSidingAndCornerAndDecorative", null, CLIENT, "Fixing block middle-click picking", fixWoodBlockPick);
 
 tweak("ayy", "GuiContainerCreative", CLIENT, "i()V", 0xB6582FB7, "Replacing enchanted books with scrolls",
 function(mn)
