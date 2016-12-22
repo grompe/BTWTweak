@@ -7,7 +7,16 @@ Main goals
 
 -------------------------------------------------------------------------------
 
+Todo
+====
+
 - Make Patcher GUI
+
+- Automate both binary and source installs
+
+- Setup live code reloading
+
+- Make some sort of modding API
 
 - Better maps:
   - fast loading
@@ -68,3 +77,5 @@ Known bugs/exploits/oversights
 
 - https://bugs.mojang.com/browse/MC-3367
   "Reflecting ghast fireballs is nearly impossible"
+
+- middle-click picking: wooden table and pedestal -> column; fence -> bench
