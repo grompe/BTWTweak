@@ -884,3 +884,80 @@ function(cn)
   ));
   cn.methods.add(mn);
 });
+tweak("sj", "EntityZombie", BOTH, "bH()V", 0x14C20F2F, "Very rarely giving axes to zombies",
+function(mn)
+{
+  for (var i = mn.instructions.size() - 1; i >= 0; i--)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.InsnNode") && (n.getOpcode() == RETURN))
+    {
+      var label = LabelNode();
+      mn.instructions.insertBefore(n, toInsnList(
+        [
+          VarInsnNode(ALOAD, 0),
+          FieldInsnNode(GETFIELD, "sj", "ab", "Ljava/util/Random;"),
+          MethodInsnNode(INVOKEVIRTUAL, "java/util/Random", "nextFloat", "()F"),
+          LdcInsnNode(new Float("0.005")),
+          InsnNode(FCMPG),
+          JumpInsnNode(IFGE, label),
+          VarInsnNode(ALOAD, 0),
+          InsnNode(ICONST_0),
+          TypeInsnNode(NEW, "wm"),
+          InsnNode(DUP),
+          FieldInsnNode(GETSTATIC, "wk", "i", "Lwk;"),
+          MethodInsnNode(INVOKESPECIAL, "wm", "<init>", "(Lwk;)V"),
+          MethodInsnNode(INVOKEVIRTUAL, "sj", "c", "(ILwm;)V"),
+          VarInsnNode(ALOAD, 0),
+          FieldInsnNode(GETFIELD, "sj", "bq", "[F"),
+          InsnNode(ICONST_0),
+          LdcInsnNode(new Float("0.99")),
+          InsnNode(FASTORE),
+          label,
+          FrameNode(F_SAME, 0, null, 0, null),
+        ]
+      ));
+      return true;
+    }
+  }
+});
+tweak("FCEntityAIZombieBreakBarricades", null, BOTH, "e()V", 0x7353560, "Very quickly breaking doors by axe-wielding zombies",
+function(mn)
+{
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && (n.opcode == PUTFIELD)
+      && n.owner.equals("FCEntityAIZombieBreakBarricades") && n.name.equals("breakingTime") && n.desc.equals("I"))
+    {
+      var label = LabelNode();
+      mn.instructions.insert(n, toInsnList(
+        [
+          VarInsnNode(ALOAD, 0),
+          FieldInsnNode(GETFIELD, "FCEntityAIZombieBreakBarricades", "m_AssociatedEntity", "Lng;"),
+          MethodInsnNode(INVOKEVIRTUAL, "ng", "bG", "()Lwm;"),
+          JumpInsnNode(IFNULL, label),
+          VarInsnNode(ALOAD, 0),
+          FieldInsnNode(GETFIELD, "FCEntityAIZombieBreakBarricades", "m_AssociatedEntity", "Lng;"),
+          MethodInsnNode(INVOKEVIRTUAL, "ng", "bG", "()Lwm;"),
+          MethodInsnNode(INVOKEVIRTUAL, "wm", "b", "()Lwk;"),
+          FieldInsnNode(GETFIELD, "wk", "cp", "I"),
+          FieldInsnNode(GETSTATIC, "wk", "i", "Lwk;"),
+          FieldInsnNode(GETFIELD, "wk", "cp", "I"),
+          JumpInsnNode(IF_ICMPNE, label),
+          VarInsnNode(ALOAD, 0),
+          IntInsnNode(SIPUSH, 240),
+          VarInsnNode(ALOAD, 0),
+          FieldInsnNode(GETFIELD, "FCEntityAIZombieBreakBarricades", "breakingTime", "I"),
+          IntInsnNode(BIPUSH, 9),
+          InsnNode(IADD),
+          MethodInsnNode(INVOKESTATIC, "java/lang/Math", "min", "(II)I"),
+          FieldInsnNode(PUTFIELD, "FCEntityAIZombieBreakBarricades", "breakingTime", "I"),
+          label,
+          FrameNode(F_SAME, 0, null, 0, null),
+        ]
+      ));
+      return true;
+    }
+  }
+});

@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/FCItemBlockSidingAndCorner.java b/src/minecraft/net/minecraft/src/FCItemBlockSidingAndCorner.java
+index 1cd4446..98fcb00 100644
+--- a/src/minecraft/net/minecraft/src/FCItemBlockSidingAndCorner.java
++++ b/src/minecraft/net/minecraft/src/FCItemBlockSidingAndCorner.java
+@@ -3 +3 @@
+-public class FCItemBlockSidingAndCorner extends ItemBlock
++public class FCItemBlockSidingAndCorner extends GPEItemBlockMicro

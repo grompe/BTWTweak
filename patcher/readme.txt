@@ -83,6 +83,9 @@ v0.9j
 - Improved microblock preview to take account for the above change,
   and display correctly when looking at a side of a snow cover.
 
+- Added very rare zombie spawn with axes. Beware, they wreck obstacles much
+  faster than regular zombies!
+
 v0.9i
 
 - Restored the ability of Glass Block to contain piston packing.

@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/FCItemBlockWoodMouldingStub.java b/src/minecraft/net/minecraft/src/FCItemBlockWoodMouldingStub.java
+index d39bde6..6d07523 100644
+--- a/src/minecraft/net/minecraft/src/FCItemBlockWoodMouldingStub.java
++++ b/src/minecraft/net/minecraft/src/FCItemBlockWoodMouldingStub.java
+@@ -3 +3 @@
+-public class FCItemBlockWoodMouldingStub extends FCItemBlockCustom
++public class FCItemBlockWoodMouldingStub extends GPEItemBlockMicro

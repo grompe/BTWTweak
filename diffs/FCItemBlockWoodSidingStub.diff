@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/FCItemBlockWoodSidingStub.java b/src/minecraft/net/minecraft/src/FCItemBlockWoodSidingStub.java
+index 8320028..720f42e 100644
+--- a/src/minecraft/net/minecraft/src/FCItemBlockWoodSidingStub.java
++++ b/src/minecraft/net/minecraft/src/FCItemBlockWoodSidingStub.java
+@@ -3 +3 @@
+-public class FCItemBlockWoodSidingStub extends FCItemBlockCustom
++public class FCItemBlockWoodSidingStub extends GPEItemBlockMicro

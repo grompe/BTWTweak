@@ -1,7 +1,13 @@
 diff --git a/src/minecraft/net/minecraft/src/EntityZombie.java b/src/minecraft/net/minecraft/src/EntityZombie.java
-index 3466d92..07416af 100644
+index 3466d92..60d55eb 100644
 --- a/src/minecraft/net/minecraft/src/EntityZombie.java
 +++ b/src/minecraft/net/minecraft/src/EntityZombie.java
 @@ -142 +142 @@ public void onLivingUpdate()
 -            if (var1 > 0.5F && this.rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F && this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)))
 +            if (var1 > 0.5F && this.rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F && this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY) + 1, MathHelper.floor_double(this.posZ)))
+@@ -292,0 +293,5 @@ protected void addRandomArmor()
++        if (this.rand.nextFloat() < 0.005F)
++        {
++            this.setCurrentItemOrArmor(0, new ItemStack(Item.axeIron));
++            this.equipmentDropChances[0] = 0.99F;
++        }

@@ -1,0 +1,10 @@
+diff --git a/src/minecraft/net/minecraft/src/FCEntityAIZombieBreakBarricades.java b/src/minecraft/net/minecraft/src/FCEntityAIZombieBreakBarricades.java
+index 4b0db66..f6a7775 100644
+--- a/src/minecraft/net/minecraft/src/FCEntityAIZombieBreakBarricades.java
++++ b/src/minecraft/net/minecraft/src/FCEntityAIZombieBreakBarricades.java
+@@ -132,0 +133,5 @@ public void updateTask()
++        if (this.m_AssociatedEntity.getHeldItem() != null
++          && this.m_AssociatedEntity.getHeldItem().getItem().itemID == Item.axeIron.itemID)
++        {
++          this.breakingTime = Math.min(240, this.breakingTime + 9);
++        }

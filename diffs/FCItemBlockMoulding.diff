@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/FCItemBlockMoulding.java b/src/minecraft/net/minecraft/src/FCItemBlockMoulding.java
+index df81f94..bc45401 100644
+--- a/src/minecraft/net/minecraft/src/FCItemBlockMoulding.java
++++ b/src/minecraft/net/minecraft/src/FCItemBlockMoulding.java
+@@ -3 +3 @@
+-public class FCItemBlockMoulding extends ItemBlock
++public class FCItemBlockMoulding extends GPEItemBlockMicro
