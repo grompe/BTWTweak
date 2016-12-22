@@ -1,7 +1,7 @@
 BTWTweak is a mod that is intended to improve Better Than Wolves mod experience.
 
-Assuming BTWTweak v0.9d and Better Than Wolves 4.99999A0Fb Marsupial!?!?,
-(as of 19 Mar 2015) here is the list of changes.
+Assuming BTWTweak v0.9j and Better Than Wolves 4.A2 Timing Rodent b,
+(as of 23 Dec 2016) here is the list of changes.
 
 
 # When launching Minecraft:
@@ -13,20 +13,23 @@ Assuming BTWTweak v0.9d and Better Than Wolves 4.99999A0Fb Marsupial!?!?,
 - Controls configuration is now a scrollable list, and has a key binding for
   sprinting (default to Left Ctrl).
 
+- Easy difficulty is selectable again, but resets to normal after restarting the
+  game.
+
+- Hardcore (permadeath) mode has optional hard difficulty, and normal otherwise.
+
 
 # In the early game:
 
-- The tree base block is much harder to break, and requires dirt block below it
-  to be dug out. Leave it alone. This is to encourage leaving tree stumps so
-  deforested areas look awesome. Also a reason to consider planters with grass
-  later in game.
+- Achievements are now technically possible in BTW. Ideally they need an
+  overhaul but that's some future task.
 
-- In contrast with the above, spruce and jungle trees are now easier to break.
-  This makes softer tree types more suited for crafting, while harder ones are
-  best left for fuel.
+- Spruce and jungle trees are now easier to break. This makes softer tree types
+  more suited for crafting, while harder ones are best left for fuel.
 
 - Tree trunk tops textures now correspond to the type of the tree instead of
-  having oak texture, just like in later Minecraft versions.
+  having oak texture, just like in later Minecraft versions. Stumps have correct
+  textures as well.
 
 - The wooden and stone pickaxes last for 2 and 7 uses respectively, and don't
   immediately expire when you try to attack mobs with them. This makes starting
@@ -48,6 +51,13 @@ Assuming BTWTweak v0.9d and Better Than Wolves 4.99999A0Fb Marsupial!?!?,
 - Flints appear only rarely in place of rocks when digging gravel and stone.
   This makes flint more valuable.
 
+- Chests are now placeable next to each other, regardless of any adjacent
+  double chests. Single chests will be merged to double chests as before. This
+  allows configurations (especially together with hoppers) that were not
+  possible before. Not being able to place a chest seemed like an arbitrary and
+  awkward limitation. Placing a chest while sneaking allows to control which
+  chest it combines with, or none at all.
+
 - Eating on the ladder is now dangerous. Don't try shooting with a bow or
   blocking with a sword while on the ladder either. It felt like an exploit
   that you could eat while climbing ladders.
@@ -57,8 +67,7 @@ Assuming BTWTweak v0.9d and Better Than Wolves 4.99999A0Fb Marsupial!?!?,
 
 - If you die, a gravestone will be placed nearby, if possible. If you destroy
   it, you only get one rock. This is so you can have memories of your death if
-  you manage to find your past gravestone. Mind you, if you oppose this idea,
-  you can turn gravestones off by setting their block ID to 0 in BTWTweak.cfg.
+  you manage to find your past gravestone. This can be disabled in BTWTweak.cfg.
 
 - If you play with "short" or "tiny" view distance, you will see the sun and the
   moon, since keeping track of time and moon phases are important parts of the
@@ -89,6 +98,10 @@ Assuming BTWTweak v0.9d and Better Than Wolves 4.99999A0Fb Marsupial!?!?,
   
 - Ladder, wooden door, sign and sugar cane no longer stops lava, so do not
   attempt this if you were abusing this before.
+
+- It's now possible to jump out of boats and minecarts (and off pigs) without
+  silly and unpredictable teleportation. This also could lead to interesting
+  contraptions with jumping out of a speeding minecart.
 
 - If you are lucky and manage to find a witch hut (and loot it without dying),
   you can use the cistern you find in it to craft a cauldron. Just add a bucket
@@ -133,10 +146,7 @@ Assuming BTWTweak v0.9d and Better Than Wolves 4.99999A0Fb Marsupial!?!?,
   and it's possible to use beds and lie down to rest, and regenerate even when
   hungry. Regeneration rate is doubled and hunger rate is halved when resting.
   Obviously, beds won't skip the night and won't set your spawn point anymore.
-
-- Abandoned mineshafts won't completely replace a need for tree farms anymore.
-  The logs in them are eaten by termites and will only drop a piece of sawdust
-  when harvested.
+  They also work in other dimensions.
 
 - Diamond ingot recipe has been moved to the cauldron. Yep, this requires you to
   burn some wooden logs under the cauldron. This is more fitting for the now
@@ -145,8 +155,24 @@ Assuming BTWTweak v0.9d and Better Than Wolves 4.99999A0Fb Marsupial!?!?,
 - Logs destroyed by fire now drop ash. Also wither skeletons drop ash. It can be
   used as a fertilizer.
 
+- Wolves now respawn in forest biome (but not forest hills) like hostile mobs.
+  This is mainly done to support long term servers, where no animals and wolves
+  left for kilometers around. This can be disabled in BTWTweak.cfg.
+
+- Sitting wolf cubs no longer teleport to player as they grow up.
+
+- The void fog is gone. It was annoying.
+
 
 # When you progress to the saw and tanned leather:
+
+- Better microblocks: it's now possible to fill blocks to the next appropriate
+  shape by placing corners, mouldings and sidings: corners can combine into
+  mouldings, mouldings can combine with sidings to become stairs or with stairs
+  to become full blocks, sidings can combine into full blocks. Better yet, you
+  can see where exactly your microblocks will go and if they get merged!
+
+- Sneaking now prevents falling from a rope. Rope climbing is much safer now. 
 
 - Chest, gearbox, note block, jukebox, door, trapdoor, fence gate, pulley,
   bellows, ladder, bookshelf, hopper, platform, barrel, axle and saw, as well as
@@ -161,6 +187,12 @@ Assuming BTWTweak v0.9d and Better Than Wolves 4.99999A0Fb Marsupial!?!?,
 
 - Ladders are now placeable on vertically put sidings, or any suitable surface
   for that matter, not just full blocks.
+
+- Torches, buttons, ladders are now placeable on backsides of stairs.
+
+- Buttons can now be placed on the top and bottom of the blocks. Unlike new
+  versions of Minecraft, such buttons are symmetric. Also, the buttons are now
+  placeable on any flat surface, not just full blocks.
 
 - Loose rocks can be launched with a dispenser or a sling. The sling is crafted
   with a piece of cut tanned leather and two ropes on sides. Note that the price
@@ -180,6 +212,26 @@ Assuming BTWTweak v0.9d and Better Than Wolves 4.99999A0Fb Marsupial!?!?,
   Velocity, and also level 1 of that enchantment can be found in trades or made
   in vanilla enchanter.
 
+- Hard-boiled eggs can be made from raw eggs in a cauldron. Complementary to
+  this, if you place an egg on a padding block with an active light block above,
+  it will hatch. This allows you to control the end result of eggs precisely.
+
+- Storage blocks for Wheat, Diamond Ingot, Coal, Charcoal, Coal Dust,
+  Nethercoal, Sugar, Bone, Nitre, Potash, Ash, Flour (requires 9 of each).
+  All of them can be retrieved by crafting back to items.
+  Block of Bone can be only crafted by Hardcore Packing.
+
+- Block of Flesh, squishy block made of 9 Rotten Flesh by Hardcore Packing and
+  uncrafted by hand.
+
+- Block of Sawdust, made of 16 Sawdust by Hardcore Packing and uncrafted by saw.
+
+- Block of Slime, sticky transparent block made of 9 slimeballs. Note that it
+  doesn't affect piston mechanics like it does in later versions of Minecraft.
+
+- Redstone and Lapis are now handled by Hardcore Packing, and all of the
+  above storage blocks.
+
 - Small BTW fixes such as correct soap, rope, padding and wicker block hardness;
   Gloom now consumes player's meat, mycelium and huge mushroom blocks no longer
   show swirling True Sight particles, even though mobs cannot spawn on them.
@@ -196,7 +248,7 @@ Assuming BTWTweak v0.9d and Better Than Wolves 4.99999A0Fb Marsupial!?!?,
 - Potash and ash can be used as a fertilizer for farmland or planter. It can
   simply be dropped on the top of the block, like bonemeal.
 
-- Stoked cauldron can make glue from 8 bones or 24 bone meal.
+- Stoked cauldron can make glue from 64 bone meal.
 
 - Wool blocks can be boiled in a stoked cauldron to retrieve components.
 
@@ -205,8 +257,20 @@ Assuming BTWTweak v0.9d and Better Than Wolves 4.99999A0Fb Marsupial!?!?,
 
 - Charcoal texture has been backported the from newer Minecraft versions.
 
+- It is no longer possible to escape through the roof of Nether.
 
-# Late game has only one notable change:
+
+# When you find a village:
+
+- Villagers now display newest offers in the beginning of the list rather than
+  the end, to put an end to constant scrolling through offers.
+
+
+# Late game:
+
+- Dynamite is now lit with hold and thrown with release of a button. This makes
+  throwing dynamite more precise and much more fun! This feature is dedicated to
+  the good old Blood 3D game.
 
 - Cobblestone and stone drop in cobblestone blocks if destroyed by a soulforged
   tool. Like in good old times.
@@ -218,15 +282,28 @@ Assuming BTWTweak v0.9d and Better Than Wolves 4.99999A0Fb Marsupial!?!?,
   corresponding inventory column. This is configurable in BTWTweak.cfg.
 
 - /playtime command that can be used to track the age of the world, and how
-  long you've kept being alive
+  long you've kept being alive.
 
-- Sign posts now accept unicode characters
+- New key shortcut, default on R, to open the chat with "/tell " + last told
+  username so you can chat easily in private.
+
+- Sign posts now accept unicode characters.
+
+- Chat now accepts IME input and messages can be 256 characters long.
 
 - Improved font display for latin and cyrillic scripts when unicode font
   is chosen. That includes a fix for wider characters.
 
 - Removed the annoying inventory shift when player has effects/buffs.
   It was getting unbearable when running in and outside of a beacon range.
+
+- If you install over CraftGuide, it will be patched so it works from the
+  inventory screen and compass and clock stop displaying real data in its GUI.
+
+- When disconnecting, the player entity is removed only after 60 ticks
+  (3 seconds). This prevents exploiting initial invulnerability by
+  repeatedly disconnecting and connecting in dangerous situations.
+  Make sure to disconnect only when safe from now on.
 
 
 # Concerns, suggestions, feedback?

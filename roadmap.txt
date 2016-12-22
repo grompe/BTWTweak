@@ -5,88 +5,66 @@ Main goals
 - Keep the balance
 
 
-Skipped
-=======
-
-- Make animals affected by gloom as well, to make encasing them to save from danger more difficult
-- Light blocks drop filament and redstone when broken
-  (thought against it)
-- Prevent weapons from decreasing durability if no damage was done (clicked a red mob)
-  or reduce red time (might have side-effects)
-- On respawn, if not affected by Hardcore Spawn, reduce the health and hunger to 50%
-
-
-Feedback
-========
-
-- glue from bones was removed for a good reason: you're swimming in mob drops once you have a mob farm
-  [Grom] My experience is that mob farm is sufficiently late-game to allow infinite glue, so I'm keeping it
-
-
 -------------------------------------------------------------------------------
 
-- Cauldron having a water slot that needs refilling, indicating if the cauldron is dirty;
-  dirty needs to be just mined and replaced for now
+- Make Patcher GUI
 
-- Better way of placing sidings and mouldings: let them fill the block up to next appropriate state:
-  mouldings, sidings, stairs, planks, etc.
-  - For example, always place things vertically and when crouching - horizontally.
-  - look at FCBlockMoulding.java / onBlockPlaced()
+- Better maps:
+  - fast loading
+  - aligned to grid
+  - ability to paint on them
+  - fix mycelium being green on the map
 
-- Fix axle texture in a better way
+- Ensure localizability of all strings, translate to Russian
 
-- Port MultiMine
-
-- Lightning striking sand block converts it to fulgurite (glass)
-  - but living for a while in desert could lead to too many glass blocks
-
-- Block of Padding beacon, with feather falling effect in range
-
-- Make endermen conspire against player if he killed too many
+- Make seed safely stored in a separate file, only written on world creation
 
 
-Demands Block IDs
-=================
+Known bugs/exploits/oversights
+==============================
 
-- Backport slime block logic
+- BTW elevators are dangerous to players
 
-- Redstone-compliant version of trapdoor (iron trapdoor)
+- portal & minecart chest dupe exploit
 
-- Dirt turning to mud near water or in rain?
+- dungeon chests that are separate have no collision sometimes
 
-- Make ores drop loose rocks and raw ore pieces; add pure ores
-  (block ID so it can be placed in the kiln)
+- mobs sinking into ground clientside
 
+- mycelium not spreading on dirt slabs (FC may be working on it)
 
-Fleshing out
-============
+- input lag on slower computers when it's raining (not FPS lag, input lag is the issue)
 
-- Tan leather with salt from water found in seas only, to make an alternative for wolf poo
-  Better Than Wolves it is!
-  - Gathering water with bucket from sea gives sea water
-  - Crafting 3 glass panes in v shape makes a glass pan
-  - Glass pan with fire underneath can evaporate sea water to make salt
-  - Salt could be used to make food preserved for longer
-    - (bacon?) bacon slabs %)
+- baby cow when transforming can suffocate
 
-- Hard difficulty: food spoilage
-  - each food stack has food spoilage meter that slowly increases on random tick
-    - when it reaches 50%, each random tick there's more and more chance for it to rot, with 100% chance on 100% spoilage
-    - combining stacks combines food spoilage meter
-    - cooking or making new food refreshes spoilage meter
-    - food thrown out as an item entity spoils twice faster
-    - storing in a chest surrounded by snow or ice blocks makes it spoil 4 times slower
+- cow, when transforming, resets fed status so they can be bred faster on mycelium:
+  wait till they transform, shear, breed, repeat
 
-- Occasional sandstorms in deserts that lower visibility and reduce sand blocks to sand slabs to nothing and fill up space
-  with sand slabs and sand slabs to sand blocks
+- https://bugs.mojang.com/browse/MC-1058
+  "Some Entities cannot be seen when on the edge of the screen"
 
-- Gearboxes crafted with 6 axles -> gearboxes that can be used in compact designs
+- Black spots (FC may be looking into it)
 
-- More uses for nether quartz or black stone
+- sleeping in bed from minecart/boat mostly visual
 
+- sleeping in bed with FOV >= 100 = seeing inside head
 
-Random info
-===========
+- throwing ender pearl while in minecart/boat just damages
 
-Oddities:
-- white stone & cobble makes 6 stairs instead of usual 4
+- placing water directly on plants/rails/ladder? gives no drops
+  https://bugs.mojang.com/browse/MC-3737
+
+- https://bugs.mojang.com/browse/MC-3 - has a fix code
+  "Player facing changes when passing through nether portals in certain cases"
+
+- https://bugs.mojang.com/browse/MC-7508
+  "lighting error due to Chunk.heightMap ignoring block at the top level of an ExtendedBlockStorage instance (off by 1 error)"
+
+- https://bugs.mojang.com/browse/MC-43968 - has a fix code
+  "Ambient occlusion bug (With partial fix)"
+
+- https://bugs.mojang.com/browse/MC-2920
+  "Wrong fishing line calculation"
+
+- https://bugs.mojang.com/browse/MC-3367
+  "Reflecting ghast fireballs is nearly impossible"

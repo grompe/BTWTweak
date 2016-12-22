@@ -65,8 +65,7 @@ v0.9j
 
 - Fixed an exploit with players escaping through the roof of Nether.
 
-- Fixed stuck glitched ghost fireballs. This possibly fixes stuck non-ghost
-  fireballs, too.
+- Attempt to fix stuck glitched ghost fireballs.
 
 - Fixed and adjusted what blocks are displayed on creative tabs.
 

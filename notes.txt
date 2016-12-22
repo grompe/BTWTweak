@@ -1,0 +1,177 @@
+1-158 IDs are taken by vanilla
+178-255 are taken by BTW
+
+165 - research bench addon
+170, 171 - astrolabe addon
+
+159, 160, 161, 162, 163, 164
+166, 167, 168, 169
+172, 173, 174, 175, 176, 177
+free
+
+I'm using now:
+162, 163, 164 used
+
+
+- (from 1.6) named entities display a death message in the chat
+
+- (from 1.6) swords/weapons don't break blocks in creative
+
+- (from 1.8) Backport slime block logic
+
+- (from 1.9) Creepers, skeletons and zombies detection range of a player is halved
+  when the player is wearing their corresponding mob head.
+
+- (from 1.9) Transparent water side if behind glass blocks
+
+- (from 1.9) End stone brick
+
+- (from 1.10) Nether wart block?
+
+
+Straightforward
+===============
+
+- Redstone-compliant version of trapdoor (iron trapdoor)
+
+- make spiders explode when they eat infected chickens
+
+- trades account for BTWTweak
+  - add silk trade to librarian lvl 2-3?
+  - add bed trade to farmer lvl 3-4?
+  - add new heads to priest lvl 3
+  - move apple for farmer 1-2 lvl higher?
+
+- Make hoppers set soulsand's NBT to souls/XP contained and use that
+
+- Detect transparent texture packs
+
+- display 1 lvl req in rename gui, also prevent network traffic back and forth when typing
+
+- stop knockback is damage received is <= 1
+
+- MultiMine-like mechanics that allow to mine a block faster together
+  and continue mining after a short interruption
+
+
+Need to think more about
+========================
+
+- option to make stone and similar hard materials unbreakable by hand
+
+- restore the historical snow layers of varying thickness feature
+
+- port stuff from Unglitch mod
+
+- Make monsters spawn on slabs and animals graze slabs and wolves poop on slabs too
+
+- Block of Padding beacon, with feather falling effect in range
+
+- Make ores drop loose rocks and raw ore pieces; add pure ores
+  (block ID so it can be placed in the kiln)
+
+
+Complex
+=======
+
+- Tan leather with salt from water found in seas only, to make an alternative for wolf poo
+  Better Than Wolves it is!
+  - Gathering water with bucket from sea gives sea water
+  - Crafting 3 glass panes in v shape makes a glass pan
+  - Glass pan with fire underneath can evaporate sea water to make salt
+  - Salt could be used to make food preserved for longer
+    - (bacon?) bacon slabs %)
+
+- Hard difficulty: food spoilage
+  - each food stack has food spoilage meter that slowly increases on random tick
+    - when it reaches 50%, each random tick there's more and more chance for it to rot, with 100% chance on 100% spoilage
+    - combining stacks combines food spoilage meter
+    - cooking or making new food refreshes spoilage meter
+    - food thrown out as an item entity spoils twice faster
+    - storing in a chest surrounded by snow or ice blocks makes it spoil 4 times slower
+
+- Some steel-level equipment that protects or cures animals from hell souls?
+  - Freezing any living creature, which makes the hell soul escape,
+    with ability to unfreeze
+    - Needs ice covering all sides and under the influence of potion of weakness to freeze
+    - Will damage the entity by half-heart until it has half-heart left, after which it will be frozen
+    - Sheep won't freeze/get damaged unless sheared
+
+    - Will implement unfreezing in the following release, to note that cryogenics is one way procedure
+    - Death in 50%, 40%, 30%, 20% cases when unfreezing (depending on hellfire beacon level)
+    - If was possessed, death in 80%, 70%, 60%, 50% cases when unfreezing (depending on hellfire beacon level)
+    - If was a child, death in 100% cases when unfreezing
+    - Needs beacon of concentrated hellfire in range and standing on an infernal enchanter to unfreeze
+    - If unfrozen by other means (light, lava, etc), 100% death
+
+    - Block dispenser can pick frozen entities up as items
+
+- Allow zombies be cured again, make them convert to villagers that:
+  - are dumb and have a funny texture
+  - cannot trade
+  - if killed, drop same amount of XP as zombie
+  - can be bred together to create non-dumb farmer child
+  Rationale: apples can be only traded from a village, found in stronhold, or 1 in 100 in a dungeon
+  - Also provide steel-tech way to recover other kinds of villagers from those
+
+- Make villagers prioritize often traded materials and demand more of them for 1 emerald or reduce emeralds given;
+  similarly, often traded tools from blacksmith rise in prices and so on.
+  For a neglected trade, the process should go in reverse.
+  - Maximum 4x difference from base price
+
+- Occasional sandstorms in deserts that lower visibility and reduce sand blocks to sand slabs to nothing and fill up space
+  with sand slabs and sand slabs to sand blocks
+
+
+Incomplete
+==========
+
+- Slimes absorb all kind of dust/piles, get smaller from that + some effect
+
+- Gearboxes crafted with 6 axles -> gearboxes that can be used in compact designs
+
+- Dirt turning to mud near water or in rain?
+
+- Make skeletons drop bones only when killed by players, and
+  bone shards (grindable to 1 bone meal) otherwise, to make glue less easy
+  with mob traps.
+
+- Enchant that makes armor level ingot lighter, but leaves at minimum 1 ingot of weight
+  - maybe floating sheep could drop it?
+  - even crazier: zombie that ate a floating sheep would have a chance to drop that scroll instead of smite
+    
+- Make endermen conspire against player if he killed too many
+
+- Slimes absorb all kind of dust/piles, get smaller from that + some effect
+  - Slimes can merge together to bigger slime
+
+
+Insignificant
+=============
+- more uses for nether quartz or black stone
+
+- glistering melon is useless
+
+- if spider web cannot be placed on feet, try block above
+
+- fix axle texture in a better way
+
+- make spiders unable to climb soap blocks
+
+- tooltip icons: info about damage and food value
+
+- make grass block show roots if empty block is directly underneath
+
+- flint tools slightly stronger than rock
+
+- place item frames on floors and maybe on ceilings
+
+- cauldron having a water slot that needs refilling, indicating if the cauldron is dirty;
+  dirty needs to be just mined and replaced for now
+
+- lightning striking sand block converts it to fulgurite (glass)
+  - but living for a while in desert could lead to too many glass blocks
+
+Oddities:
+- white stone & cobble makes 6 stairs instead of usual 4
+- nether brick, cobblestone, stone make 6 walls/fences, others make 2
