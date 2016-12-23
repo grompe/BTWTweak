@@ -1,3 +1,5 @@
+![Screenshot of BTWTweak showing most of the new blocks and items](https://i.imgur.com/2AqGnYX.png)
+
 BTWTweak is a mod that is intended to improve Better Than Wolves mod experience.
 
 Assuming BTWTweak v0.9j and Better Than Wolves 4.A2 Timing Rodent b,
