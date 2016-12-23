@@ -15,8 +15,6 @@ I'm using now:
 
 - (from 1.6) named entities display a death message in the chat
 
-- (from 1.6) swords/weapons don't break blocks in creative
-
 - (from 1.8) Backport slime block logic
 
 - (from 1.9) Creepers, skeletons and zombies detection range of a player is halved

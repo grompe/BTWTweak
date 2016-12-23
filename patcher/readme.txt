@@ -88,6 +88,8 @@ v0.9j
 
 - Fixed middle-click block picking for wooden microblocks.
 
+- Fixed swords breaking blocks in creative like in new versions of Minecraft.
+
 v0.9i
 
 - Restored the ability of Glass Block to contain piston packing.

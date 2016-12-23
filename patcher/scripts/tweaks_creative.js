@@ -16,6 +16,35 @@ function fixCreativeTypes(className, deobfName, code)
     cn.methods.add(mn);
   });
 }
+function skipIfHoldingSwordInCreative(mn)
+{
+  var label = LabelNode();
+  return CodeInserter(
+    BeginningFinder(),
+    [
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "bdr", "k", "Laaj;"),
+      MethodInsnNode(INVOKEVIRTUAL, "aaj", "d", "()Z"),
+      JumpInsnNode(IFEQ, label),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "bdr", "a", "Lnet/minecraft/client/Minecraft;"),
+      FieldInsnNode(GETFIELD, "net/minecraft/client/Minecraft", "g", "Lbdv;"),
+      MethodInsnNode(INVOKEVIRTUAL, "bdv", "bG", "()Lwm;"),
+      JumpInsnNode(IFNULL, label),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "bdr", "a", "Lnet/minecraft/client/Minecraft;"),
+      FieldInsnNode(GETFIELD, "net/minecraft/client/Minecraft", "g", "Lbdv;"),
+      MethodInsnNode(INVOKEVIRTUAL, "bdv", "bG", "()Lwm;"),
+      MethodInsnNode(INVOKEVIRTUAL, "wm", "b", "()Lwk;"),
+      TypeInsnNode(INSTANCEOF, "xr"),
+      JumpInsnNode(IFEQ, label),
+      InsnNode(RETURN),
+      label,
+      FrameNode(F_SAME, 0, null, 0, null),
+    ],
+    INSERT_BEFORE
+  ).process(mn);
+}
 
 function getOreTypesCode()
 {
@@ -430,3 +459,7 @@ function(mn)
     }
   }
 });
+tweak("bdr", "PlayerControllerMP", CLIENT, "b(IIII)V", 0xC6374240, "(1/2) Fix swords breaking blocks in creative",
+skipIfHoldingSwordInCreative);
+tweak("bdr", "PlayerControllerMP", CLIENT, "c(IIII)V", 0xE96B41E3, "(2/2) Fix swords breaking blocks in creative",
+skipIfHoldingSwordInCreative);
