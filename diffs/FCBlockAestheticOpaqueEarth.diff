@@ -1,0 +1,13 @@
+diff --git a/src/minecraft/net/minecraft/src/FCBlockAestheticOpaqueEarth.java b/src/minecraft/net/minecraft/src/FCBlockAestheticOpaqueEarth.java
+index 59706e7..f5e119a 100644
+--- a/src/minecraft/net/minecraft/src/FCBlockAestheticOpaqueEarth.java
++++ b/src/minecraft/net/minecraft/src/FCBlockAestheticOpaqueEarth.java
+@@ -2,0 +3 @@
++import java.util.List;
+@@ -570,0 +572,6 @@ public Icon getIcon(int var1, int var2)
++
++    public void getSubBlocks(int id, CreativeTabs t, List l)
++    {
++        l.add(new ItemStack(id, 1, m_iSubtypePackedEarth));
++        l.add(new ItemStack(id, 1, m_iSubtypeDung));
++    }

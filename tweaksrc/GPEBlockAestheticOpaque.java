@@ -6,7 +6,6 @@ import java.util.Random;
 public class GPEBlockAestheticOpaque extends FCBlockAestheticOpaque
 {
   private static final int wicker = 0;
-  private static final int dung = 1;
   private static final int hellfire = 3;
   private static final int padding = 4;
   private static final int rope = 6;
@@ -78,7 +77,6 @@ public class GPEBlockAestheticOpaque extends FCBlockAestheticOpaque
   public void getSubBlocks(int id, CreativeTabs t, List l)
   {
     l.add(new ItemStack(id, 1, wicker));
-    l.add(new ItemStack(id, 1, dung));
     l.add(new ItemStack(id, 1, hellfire));
     l.add(new ItemStack(id, 1, padding));
     l.add(new ItemStack(id, 1, rope));

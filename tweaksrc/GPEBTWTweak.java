@@ -11,7 +11,7 @@ public class GPEBTWTweak extends FCAddOn
 {
   public static GPEBTWTweak instance;
   public static GPEBTWTweakProxy proxy;
-  public static String tweakVersion = "0.9j";
+  public static String tweakVersion = "0.9k";
 
   public static boolean isDecoPresent;
   public static Item decoGlassShard = null;
@@ -535,6 +535,7 @@ public class GPEBTWTweak extends FCAddOn
     Block.tilledField.setCreativeTab(CreativeTabs.tabDecorations);
     FCBetterThanWolves.fcBlockWoodOakMouldingAndDecorative.setCreativeTab(null);
     Block.commandBlock.setCreativeTab(CreativeTabs.tabRedstone);
+    FCBetterThanWolves.fcBlockAestheticOpaqueEarth.setCreativeTab(CreativeTabs.tabBlock);
 
     FCBetterThanWolves.fcBlockSidingAndCornerBlackStone.setCreativeTab(CreativeTabs.tabDecorations);
     FCBetterThanWolves.fcBlockMouldingAndDecorativeBlackStone.setCreativeTab(CreativeTabs.tabDecorations);

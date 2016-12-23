@@ -1,7 +1,11 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.9j
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.9k
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
+
+v0.9k (unreleased)
+
+- Fixed creative tab display for Dung block and Packed Earth.
 
 v0.9j
 

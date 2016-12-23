@@ -365,6 +365,28 @@ function getWoodTypesCode()
 }
 fixCreativeTypes("FCBlockWoodMouldingAndDecorative", null, getWoodTypesCode());
 fixCreativeTypes("FCBlockWoodSidingAndCornerAndDecorative", null, getWoodTypesCode());
+fixCreativeTypes("FCBlockAestheticOpaqueEarth", null,
+[
+  VarInsnNode(ALOAD, 3),
+  TypeInsnNode(NEW, "wm"),
+  InsnNode(DUP),
+  VarInsnNode(ILOAD, 1),
+  InsnNode(ICONST_1),
+  IntInsnNode(BIPUSH, 6),
+  MethodInsnNode(INVOKESPECIAL, "wm", "<init>", "(III)V"),
+  MethodInsnNode(INVOKEINTERFACE, "java/util/List", "add", "(Ljava/lang/Object;)Z"),
+  InsnNode(POP),
+  VarInsnNode(ALOAD, 3),
+  TypeInsnNode(NEW, "wm"),
+  InsnNode(DUP),
+  VarInsnNode(ILOAD, 1),
+  InsnNode(ICONST_1),
+  IntInsnNode(BIPUSH, 7),
+  MethodInsnNode(INVOKESPECIAL, "wm", "<init>", "(III)V"),
+  MethodInsnNode(INVOKEINTERFACE, "java/util/List", "add", "(Ljava/lang/Object;)Z"),
+  InsnNode(POP),
+  InsnNode(RETURN),
+]);
 function fixWoodBlockPick(cn)
 {
   var l0 = LabelNode();
