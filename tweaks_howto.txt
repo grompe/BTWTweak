@@ -1,0 +1,20 @@
+How to tweak existing classes using ASM and JavaScript
+======================================================
+
+1. Note the class file you want to change.
+2. Compile it in original form, reobfuscate, save that file (orig.class).
+3. Make changes, preferably at the beginning or the end of the methods.
+4. Compile the changed class file, reobfuscate, save (mod.class).
+5. Run Asmifier4JS on both saved files:
+
+java -cp . org.objectweb.asm.util.ASMifier4JS orig.class >orig.asm
+java -cp . org.objectweb.asm.util.ASMifier4JS mod.class >mod.asm
+
+6. Run a diff on the "asmified" files to see how bytecode is changed:
+
+diff -U 100 orig.asm mod.asm >changes.diff
+
+7. Note the changes and write JavaScript code that makes such changes.
+   You'd want to insert bytecode at notable places that are unlikely to
+   change: unique names, constants, beginning or the end of the code.
+   Refer to the tweak_*.js files to see how patches should look like.

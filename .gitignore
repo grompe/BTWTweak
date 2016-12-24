@@ -1,1 +1,6 @@
 *.class
+!patcher/org/objectweb/asm/*.class
+!patcher/org/objectweb/asm/tree/*.class
+!patcher/org/objectweb/asm/util/*.class
+patcher/org/objectweb/asm/util/Textifier.class
+patcher/org/objectweb/asm/util/Asmifier4JS.class
