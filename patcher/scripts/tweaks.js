@@ -451,7 +451,7 @@ function add(className, deobfName, side, description, process)
   {
     if (classname in classesToTweak) return ACTION_TWEAK;
     var s = classname + "";
-    if (s.startsWith("GPE")) return ACTION_ADAPTSERVER;
+    if (s.toString().startsWith("GPE")) return ACTION_ADAPTSERVER;
     return ACTION_COPY;
   };
 
