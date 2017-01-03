@@ -15,4 +15,10 @@ public class GPEBTWTweakProxy
   public void addKeyBindings() {}
 
   public void onKeyPress(int key) {}
+
+  public void playEntitySound(String sound, Entity entity, float volume, float pitch, boolean priority) {}
+
+  public void playEntitySoundOnce(String sound, Entity entity, float volume, float pitch, boolean priority) {}
+
+  public void stopEntitySound(Entity entity) {}
 }

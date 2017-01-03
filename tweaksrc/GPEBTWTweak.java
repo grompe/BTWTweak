@@ -10,7 +10,7 @@ import java.lang.reflect.*;
 public class GPEBTWTweak extends FCAddOn
 {
   public static GPEBTWTweak instance;
-  public static GPEBTWTweakProxy proxy;
+  private static GPEBTWTweakProxy proxy;
   public static String tweakVersion = "0.9l";
 
   private static boolean postPostInitialized = false;
@@ -1086,6 +1086,25 @@ public class GPEBTWTweak extends FCAddOn
         e.printStackTrace();
       }
     }
+    if (packet.channel.equals("GPE|Shutup"))
+    {
+      try
+      {
+        DataInputStream stream = new DataInputStream(new ByteArrayInputStream(packet.data));
+        int entityId = stream.readInt();
+        WorldClient world = mc.theWorld;
+        Entity entity = world.getEntityByID(entityId);
+        if (entity != null)
+        {
+          proxy.stopEntitySound(entity);
+          return true;
+        }
+      }
+      catch (IOException e)
+      {
+        e.printStackTrace();
+      }
+    }
     return false;
   }
 
@@ -1386,6 +1405,42 @@ public class GPEBTWTweak extends FCAddOn
   public static void addCreativeEnchantment(Enchantment e, List l)
   {
     l.add(new ItemStack(FCBetterThanWolves.fcArcaneScroll, 1, e.effectId));
+  }
+
+  public static void playEntitySound(String sound, Entity entity, float volume, float pitch, boolean priority)
+  {
+    proxy.playEntitySound(sound, entity, volume, pitch, priority);
+  }
+
+  public static void playEntitySoundOnce(String sound, Entity entity, float volume, float pitch, boolean priority)
+  {
+    proxy.playEntitySoundOnce(sound, entity, volume, pitch, priority);
+  }
+
+  public static void stopEntitySound(Entity entity)
+  {
+    proxy.stopEntitySound(entity);
+  }
+
+  public static void stopEntitySoundBroadcast(EntityPlayer player, Entity entity)
+  {
+    if (!entity.worldObj.isRemote)
+    {
+      ServerConfigurationManager cm = MinecraftServer.getServer().getConfigurationManager();
+      ByteArrayOutputStream a = new ByteArrayOutputStream();
+      DataOutputStream d = new DataOutputStream(a);
+      try
+      {
+        d.writeInt(entity.entityId);
+      }
+      catch (Exception e)
+      {
+        e.printStackTrace();
+      }
+      Packet packet = new Packet250CustomPayload("GPE|Shutup", a.toByteArray());
+      cm.sendToAllNearExcept(player, entity.posX, entity.posY, entity.posZ, 64.0D, entity.worldObj.provider.dimensionId, packet);
+    }
+    proxy.stopEntitySound(entity);
   }
 
   public static boolean classExists(String cn)

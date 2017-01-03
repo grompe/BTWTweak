@@ -402,4 +402,30 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
     }
     catch(IOException e) {}
   }
+
+  public void playEntitySound(String sound, Entity entity, float volume, float pitch, boolean priority)
+  {
+    SoundManager sm = Minecraft.getMinecraft().sndManager;
+    if (sm.isEntitySoundPlaying(entity))
+    {
+      sm.stopEntitySound(entity);
+    }
+    sm.playEntitySound(sound, entity, volume, pitch, priority);
+  }
+
+  public void playEntitySoundOnce(String sound, Entity entity, float volume, float pitch, boolean priority)
+  {
+    SoundManager sm = Minecraft.getMinecraft().sndManager;
+    if (sm.isEntitySoundPlaying(entity))
+    {
+      sm.stopEntitySound(entity);
+    }
+    sm.playEntitySoundOnce(sound, entity, volume, pitch, priority);
+  }
+
+  public void stopEntitySound(Entity entity)
+  {
+    SoundManager sm = Minecraft.getMinecraft().sndManager;
+    sm.stopEntitySound(entity);
+  }
 }

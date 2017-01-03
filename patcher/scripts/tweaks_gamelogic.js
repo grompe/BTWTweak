@@ -328,21 +328,6 @@ function(cn)
   ));
   cn.methods.add(mn);
 });
-tweak("ru", "EntityCreeper", BOTH, "a_(Lsq;)Z", [0xC74B29CB, 0xC58F29C5, 0xC7B729D7, 0xC5FB29D1], "Hurting Creeper when sheared",
-function(mn)
-{
-  return CodeInserter(
-    MethodInsnFinder("ru", +1),
-    [
-      VarInsnNode(ALOAD, 0),
-      VarInsnNode(ALOAD, 1),
-      MethodInsnNode(INVOKESTATIC, "mg", "a", "(Lsq;)Lmg;"),
-      InsnNode(ICONST_2),
-      MethodInsnNode(INVOKEVIRTUAL, "ru", "a", "(Lmg;I)Z"),
-      InsnNode(POP),
-    ]
-  ).process(mn);
-});
 tweak("sf", "EntitySkeleton", BOTH, "a(ZI)V", 0xEDE5138A, "Making wither skeletons drop ash",
 function(mn)
 {

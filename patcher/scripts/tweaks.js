@@ -289,6 +289,26 @@ function replaceFirstString(mn, source, destination)
   }
 }
 
+function cloneMethod(mn, access, name, desc, signature, exceptions)
+{
+  var mn2 = MethodNode(access, name, desc, signature, exceptions);
+  var lmap = new java.util.HashMap();
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.LabelNode"))
+    {
+      lmap.put(n, LabelNode());
+    }
+  }
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    mn2.instructions.add(n.clone(lmap));
+  }
+  return mn2;
+}
+
 function InsnNode(opcode)
 {
   return new asm.tree.InsnNode(opcode);
@@ -549,6 +569,7 @@ execJS("tweaks_moreslabs.js");
 execJS("tweaks_old.js");
 execJS("tweaks_pumpkin.js");
 execJS("tweaks_rocks.js");
+execJS("tweaks_sound.js");
 execJS("tweaks_visual.js");
 execJS("tweaks_worldgen.js");
 if (hasResource("scripts/custom.js")) execJS("custom.js");

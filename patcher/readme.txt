@@ -7,6 +7,9 @@ v0.9l (unreleased)
 
 - Fixed extraneous attempts to integrate with Deco addon.
 
+- Changed creepers to stop hissing sounds when sheared or killed. It was
+  strange hearing the hiss after there is nothing to hiss (with).
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.
