@@ -11,8 +11,9 @@ public class GPEBTWTweak extends FCAddOn
 {
   public static GPEBTWTweak instance;
   public static GPEBTWTweakProxy proxy;
-  public static String tweakVersion = "0.9k";
+  public static String tweakVersion = "0.9l";
 
+  private static boolean postPostInitialized = false;
   public static boolean isDecoPresent;
   public static Item decoGlassShard = null;
 
@@ -502,6 +503,8 @@ public class GPEBTWTweak extends FCAddOn
   // Because Deco is doing its core work in PostInitialize and we need to get results of that
   private void postPostInitialize()
   {
+    if (postPostInitialized) return;
+    postPostInitialized = true;
     if (isDecoPresent)
     {
       FCAddOnHandler.LogMessage("BTWTweak now looks for Deco 2.0+ Add-On to integrate with...");
