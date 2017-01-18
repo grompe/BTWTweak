@@ -10,6 +10,8 @@ v0.9l (unreleased)
 - Changed creepers to stop hissing sounds when sheared or killed. It was
   strange hearing the hiss after there is nothing to hiss (with).
 
+- Fixed not all stumps being hard enough.
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.

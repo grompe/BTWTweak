@@ -31,8 +31,8 @@ public class GPEBlockLog extends FCBlockLog
   {
     float multiplier = 1;
     int meta = world.getBlockMetadata(x, y, z);
-    // If meta is 12, it is a hard stump
-    if (meta == 12) multiplier = 3;
+    // Hard stump
+    if ((meta & 12) == 12) multiplier = 3;
     // Make jungle wood somewhat softer, pine a bit softer
     if ((meta & 3) == 1) return 1.3F * multiplier;
     if ((meta & 3) == 3) return 1.0F * multiplier;
