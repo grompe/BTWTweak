@@ -109,6 +109,28 @@ function getObjProperty(n, propname)
   return n["class"].getField(propname).get(n);
 }
 
+// Polyfill for Java 6's JS engine
+if (!Array.prototype.indexOf)
+{
+  Array.prototype.indexOf = function(searchElement, fromIndex)
+  {
+    var k;
+    if (this == null) throw new TypeError('"this" is null or not defined');
+    var o = Object(this);
+    var len = o.length >>> 0;
+    if (len === 0) return -1;
+    var n = fromIndex | 0;
+    if (n >= len) return -1;
+    k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
+    while (k < len)
+    {
+      if (k in o && o[k] === searchElement) return k;
+      k++;
+    }
+    return -1;
+  };
+}
+
 // Common tweak code
 
 function calcMethodChecksum(mn)
@@ -165,7 +187,7 @@ function MethodInsnFinder(owner, offset)
 {
   if (!(this instanceof MethodInsnFinder)) return new MethodInsnFinder(owner, offset);
   this.owner = owner;
-  this.offset = offset || 0;
+  this.offset = offset ? offset : 0;
   this.process = function(instructions)
   {
     for (var i = 0; i < instructions.size(); i++)
@@ -184,7 +206,7 @@ function CustomFinder(checkfunc, offset)
 {
   if (!(this instanceof CustomFinder)) return new CustomFinder(checkfunc, offset);
   this.checkfunc = checkfunc;
-  this.offset = offset || 0;
+  this.offset = offset ? offset : 0;
   this.process = function(instructions)
   {
     for (var i = 0; i < instructions.size(); i++)
@@ -203,7 +225,7 @@ function InsnFinder(opcode, offset)
 {
   if (!(this instanceof InsnFinder)) return new InsnFinder(opcode, offset);
   this.opcode = opcode;
-  this.offset = offset || 0;
+  this.offset = offset ? offset : 0;
   this.process = function(instructions)
   {
     for (var i = 0; i < instructions.size(); i++)
@@ -222,7 +244,7 @@ function JumpInsnFinder(opcode, offset)
 {
   if (!(this instanceof JumpInsnFinder)) return new JumpInsnFinder(opcode, offset);
   this.opcode = opcode;
-  this.offset = offset || 0;
+  this.offset = offset ? offset : 0;
   this.process = function(instructions)
   {
     for (var i = 0; i < instructions.size(); i++)
