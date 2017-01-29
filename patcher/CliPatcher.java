@@ -113,18 +113,24 @@ public class CliPatcher
     System.out.println("== Modes of operation ==");
 
     int i = 0;
+    int clientnumber = 0;
+    int servernumber = 0;
+    if (mcbtwclient == BTWTweaker.STATUS_BTWCLIENT)
+    {
+      i++;
+      System.out.println(String.format("(%d) Patch minecraft.jar which has BTW client installed", i));
+      clientnumber = i;
+    }
+    if (mcbtwserver == BTWTweaker.STATUS_BTWSERVER)
+    {
+      i++;
+      System.out.println(String.format("(%d) Patch minecraft_server.jar which has BTW server installed", i));
+      servernumber = i;
+    }
     for (String btw : btwVersions)
     {
       i++;
       System.out.println(String.format("(%d) Patch %s", i, btw));
-    }
-    if (mcbtwclient == BTWTweaker.STATUS_BTWCLIENT)
-    {
-      System.out.println("(c) Patch minecraft.jar which has BTW client installed");
-    }
-    if (mcbtwserver == BTWTweaker.STATUS_BTWSERVER)
-    {
-      System.out.println("(s) Patch minecraft_server.jar which has BTW server installed");
     }
     System.out.print("Input number of your choice and press Enter (blank=cancel): ");
     String choice = input().trim().toLowerCase();
@@ -133,18 +139,15 @@ public class CliPatcher
     {
       System.out.println("Cancelled by user.");
       System.exit(2);
-    } else if (choice.equals("c") && (mcbtwclient == BTWTweaker.STATUS_BTWCLIENT))
-    {
-      tweak(mcname, mcbtwclient);
-    } else if (choice.equals("s") && (mcbtwserver == BTWTweaker.STATUS_BTWSERVER))
-    {
-      tweak(mcservername, mcbtwserver);
-    } /* else {
+    } else {
       boolean valid;
       try
       {
         i = Integer.parseInt(choice);
-        valid = i < btwVersions.size();
+        valid = i <= btwVersions.size();
+        if (i == clientnumber) valid = true;
+        if (i == servernumber) valid = true;
+        if (i == 0) valid = false;
       }
       catch (NumberFormatException e)
       {
@@ -152,12 +155,23 @@ public class CliPatcher
       }
       if (valid)
       {
-        BTWTweaker.tweak(btwVersions.get(i), BTWTweaker.STATUS_BTWPACKAGE);
+        if (i == clientnumber)
+        {
+          tweak(mcname, mcbtwclient);
+        }
+        else if (i == servernumber)
+        {
+          tweak(mcservername, mcbtwserver);
+        }
+        else
+        {
+          BTWTweaker.tweak(btwVersions.get(i - 1), BTWTweaker.STATUS_BTWPACKAGE);
+        }
       } else {
         System.out.println("Invalid input.");
         System.exit(1);
       }
-    } */
+    }
 
     System.out.println("== Finished ==\nPress Enter to quit.");
     input();
