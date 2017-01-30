@@ -430,6 +430,7 @@ function(mn)
     }
   }
 });
+/*
 tweak("ok", "EntityAIFollowOwner", BOTH, "c()V", 0x2E4906C6, "Preventing wolves from teleporting to player on growing up",
 function(mn)
 {
@@ -445,6 +446,7 @@ function(mn)
     INSERT_BEFORE
   ).process(mn);
 });
+*/
 tweak("mp", "Entity", BOTH, "x()V", 0x1C8882FF, "Kill players that went through the roof of the Nether",
 function(mn)
 {

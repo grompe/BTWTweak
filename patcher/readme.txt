@@ -12,6 +12,10 @@ v0.9l (unreleased)
 
 - Fixed not all stumps being hard enough.
 
+- Reverted v0.9j fix for wolf cubs teleporting to player as they grow up
+  as it prevented wolves from following the player. I was unable to
+  reproduce this bug, so if you still encounter it, please let me know. 
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.
