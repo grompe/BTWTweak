@@ -317,7 +317,7 @@ public abstract class GPEItemBlockMicro extends FCItemBlockCustom
         if (side == 3 &&  xz && !xy &&  yz        &&  ay && !az && !shifted) placemeta = 0;
         if (side == 0 && !xz && !xy &&  yz        && !ay &&  az &&  shifted) placemeta = 0;
         if (side == 2 && !xz && !xy && !yz        &&  ay && !az &&  shifted) placemeta = 0;
-        if (side == 0 &&  xz &&  xy && !yz        && !ay && !az && !shifted) placemeta = 6;
+        if (side == 0 && !xz &&  xy && !yz        && !ay && !az && !shifted) placemeta = 6;
         if (side == 3 && !xz && !xy && !yz        && !ay &&  az &&  shifted) placemeta = 6;
         if (side == 1 && !xz && !xy &&  yz        &&  ay && !az &&  shifted) placemeta = 6;
       }
