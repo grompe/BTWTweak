@@ -230,7 +230,7 @@ public class GPEBTWTweak extends FCAddOn
     }
 
     isDecoPresent = classExists("AddonManager");
-    if (!isDecoPresent) extendBlockIDs();
+    if (!isDecoPresent && !isBTWVersionOrNewer("4.A4 Kiloblock Boon")) extendBlockIDs();
 
     Block.blocksList[1] = null;  gpeBlockStone = new GPEBlockStone(1);
     Block.blocksList[4] = null;  new GPEBlockCobblestone(4);
