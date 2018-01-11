@@ -39,7 +39,7 @@ function(cn)
   };
   cn.methods.add(mn);
 });
-tweak("ru", "EntityCreeper", BOTH, "a_(Lsq;)Z", [0xC74B29CB, 0xC58F29C5, 0xC7B729D7, 0xC5FB29D1], "Hurting and shutting up Creeper when sheared",
+tweak("ru", "EntityCreeper", BOTH, "a_(Lsq;)Z", [0xC74B29CB, 0xC58F29C5, 0xC7B729D7, 0xC5FB29D1, 0xB4E52E97], "Hurting and shutting up Creeper when sheared",
 function(mn)
 {
   return CodeInserter(

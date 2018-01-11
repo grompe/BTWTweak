@@ -50,7 +50,7 @@ function fixAxeCheckingForStump(mn)
 }
 
 // className, deobfName, side, method, checksums, description
-tweak("rf", "EntityBoat", BOTH, "l_()V", 0x8C1045A2, "Making boat safe from falling damage bug",
+tweak("rf", "EntityBoat", BOTH, "l_()V", [0x8C1045A2, 0x20734BFD], "Making boat safe from falling damage bug",
 function(mn)
 {
   var label = LabelNode();
