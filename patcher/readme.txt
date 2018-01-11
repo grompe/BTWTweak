@@ -16,6 +16,10 @@ v0.9l (unreleased)
   as it prevented wolves from following the player. I was unable to
   reproduce this bug, so if you still encounter it, please let me know. 
 
+- Fixed compatibility with BTW version "4.A3 Headed Beastie".
+  Unfortunately, due to ID clash, old BTWTweak spider heads will turn into
+  infused skulls. Get rid of spider heads before upgrading to avoid this.
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.
