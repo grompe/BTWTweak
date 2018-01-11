@@ -20,6 +20,10 @@ v0.9l (unreleased)
   Unfortunately, due to ID clash, old BTWTweak spider heads will turn into
   infused skulls. Get rid of spider heads before upgrading to avoid this.
 
+- Fixed Minecraft crash when loading an unknown language. It is usually
+  caused by sharing options.txt with a newer Minecraft version
+  (lowercase "en_us").
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.

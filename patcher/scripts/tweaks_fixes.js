@@ -524,6 +524,32 @@ function(mn)
     }
   }
 });
+tweak("bp", "StringTranslate", CLIENT, "a(Ljava/util/Properties;Ljava/lang/String;)V", 0xF2A01ED4, "Fix crash on unknown language",
+function(mn)
+{
+  var label = LabelNode();
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.name.equals("getResourceAsStream"))
+    {
+      mn.instructions.insert(n, toInsnList(
+        [
+          InsnNode(DUP),
+          JumpInsnNode(IFNONNULL, label),
+          TypeInsnNode(NEW, "java/io/IOException"),
+          InsnNode(DUP),
+          LdcInsnNode("Invalid language"),
+          MethodInsnNode(INVOKESPECIAL, "java/io/IOException", "<init>", "(Ljava/lang/String;)V"),
+          InsnNode(ATHROW),
+          label,
+          FrameNode(F_SAME, 0, null, 0, null),
+        ]
+      ));
+      return true;
+    }
+  }
+});
 
 // =======================================================================
 // Fix mods! Now with this mod you can fix mods for the mod for Minecraft.

@@ -1,0 +1,11 @@
+diff --git a/src/minecraft/net/minecraft/src/StringTranslate.java b/src/minecraft/net/minecraft/src/StringTranslate.java
+index c8ffa41..dd1db4e 100644
+--- a/src/minecraft/net/minecraft/src/StringTranslate.java
++++ b/src/minecraft/net/minecraft/src/StringTranslate.java
+@@ -6,0 +7 @@
++import java.io.InputStream;
+@@ -85 +86,3 @@ private void loadLanguage(Properties par1Properties, String par2Str) throws IOEx
+-            var3 = new BufferedReader(new InputStreamReader(StringTranslate.class.getResourceAsStream("/lang/" + par2Str + ".lang"), "UTF-8"));
++            InputStream res = StringTranslate.class.getResourceAsStream("/lang/" + par2Str + ".lang");
++            if (res == null) throw new IOException("Invalid language");
++            var3 = new BufferedReader(new InputStreamReader(res, "UTF-8"));
