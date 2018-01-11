@@ -15,6 +15,7 @@ public class GPEBlockAestheticOpaque extends FCBlockAestheticOpaque
   private static final int barrel = 11;
   private static final int choppingblock = 13;
   private static final int enderblock = 14;
+  private static final int boneblock = 15;
 
   private static final float[] hardness =
   {
@@ -55,6 +56,7 @@ public class GPEBlockAestheticOpaque extends FCBlockAestheticOpaque
   {
     int meta = world.getBlockMetadata(x, y, z);
     if (meta == padding) return soundClothFootstep;
+    if (meta == boneblock) return soundGravelFootstep;
     return stepSound;
   }
 
@@ -86,5 +88,9 @@ public class GPEBlockAestheticOpaque extends FCBlockAestheticOpaque
     l.add(new ItemStack(id, 1, barrel));
     l.add(new ItemStack(id, 1, choppingblock));
     l.add(new ItemStack(id, 1, enderblock));
+    if (GPEBTWTweak.isBTWVersionOrNewer("4.A3 Headed Beastie"))
+    {
+      l.add(new ItemStack(id, 1, boneblock));
+    }
   }
 }

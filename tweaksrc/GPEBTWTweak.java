@@ -42,6 +42,7 @@ public class GPEBTWTweak extends FCAddOn
   public static int hcSpawnRadius = 2000;
   public static int minFogDistance = 128;
   public static boolean spawnWolvesInForests = isBTWVersionOrNewer("4.99999A0F");
+  public static boolean btwBone = isBTWVersionOrNewer("4.A3 Headed Beastie");
 
   public static int gpeLooseRockID = 17000;
   public static int gpeSilkID = 17001;
@@ -840,7 +841,12 @@ public class GPEBTWTweak extends FCAddOn
     t.put(gpeBlockStorage.getUnlocalizedName() + ".coaldust.name", "Block of Coal Dust");
     t.put(gpeBlockStorage.getUnlocalizedName() + ".nethercoal.name", "Block of Nethercoal");
     t.put(gpeBlockStorage.getUnlocalizedName() + ".sugar.name", "Block of Sugar");
-    t.put(gpeBlockStorage.getUnlocalizedName() + ".bone.name", "Block of Bone");
+    if (isBTWVersionOrNewer("4.A3 Headed Beastie"))
+    {
+      t.put(gpeBlockStorage.getUnlocalizedName() + ".bone.name", "Old Block of Bone");
+    } else {
+      t.put(gpeBlockStorage.getUnlocalizedName() + ".bone.name", "Block of Bone");
+    }
     t.put(gpeBlockStorage.getUnlocalizedName() + ".sawdust.name", "Block of Sawdust");
     t.put(gpeBlockStorage.getUnlocalizedName() + ".nitre.name", "Block of Nitre");
     t.put(gpeBlockStorage.getUnlocalizedName() + ".potash.name", "Block of Potash");
@@ -1243,7 +1249,10 @@ public class GPEBTWTweak extends FCAddOn
     if (id == FCBetterThanWolves.fcCoalDust.itemID) return gpeBlockStorageID;
     if (id == FCBetterThanWolves.fcNethercoal.itemID) return gpeBlockStorageID;
     if (id == Item.sugar.itemID) return gpeBlockStorageID;
-    if (id == Item.bone.itemID) return gpeBlockStorageID;
+    if (id == Item.bone.itemID)
+    {
+      return btwBone ? FCBetterThanWolves.fcAestheticOpaque.blockID : gpeBlockStorageID;
+    }
     if (id == FCBetterThanWolves.fcSawDust.itemID) return gpeBlockStorageID;
     if (id == FCBetterThanWolves.fcItemNitre.itemID) return gpeBlockStorageID;
     if (id == FCBetterThanWolves.fcFlour.itemID) return gpeBlockStorageID;
@@ -1258,7 +1267,10 @@ public class GPEBTWTweak extends FCAddOn
     if (id == FCBetterThanWolves.fcCoalDust.itemID) return 2;
     if (id == FCBetterThanWolves.fcNethercoal.itemID) return 3;
     if (id == Item.sugar.itemID) return 4;
-    if (id == Item.bone.itemID) return 5;
+    if (id == Item.bone.itemID)
+    {
+      return btwBone ? 15 : 5;
+    }
     if (id == FCBetterThanWolves.fcSawDust.itemID) return 6;
     if (id == FCBetterThanWolves.fcItemNitre.itemID) return 7;
     if (id == FCBetterThanWolves.fcFlour.itemID) return 10;
