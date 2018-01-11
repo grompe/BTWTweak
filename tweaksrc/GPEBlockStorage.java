@@ -71,7 +71,7 @@ public class GPEBlockStorage extends Block
     list.add(new ItemStack(id, 1, 2));
     list.add(new ItemStack(id, 1, 3));
     list.add(new ItemStack(id, 1, 4));
-    if (!GPEBTWTweak.isBTWVersionOrNewer("4.A3 Headed Beastie"))
+    if (!GPEBTWTweak.btwBone)
     {
       list.add(new ItemStack(id, 1, 5));
     }

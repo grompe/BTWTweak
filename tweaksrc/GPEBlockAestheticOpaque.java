@@ -88,7 +88,7 @@ public class GPEBlockAestheticOpaque extends FCBlockAestheticOpaque
     l.add(new ItemStack(id, 1, barrel));
     l.add(new ItemStack(id, 1, choppingblock));
     l.add(new ItemStack(id, 1, enderblock));
-    if (GPEBTWTweak.isBTWVersionOrNewer("4.A3 Headed Beastie"))
+    if (GPEBTWTweak.btwBone)
     {
       l.add(new ItemStack(id, 1, boneblock));
     }

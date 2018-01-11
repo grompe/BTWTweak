@@ -8,7 +8,10 @@ public class GPEBlockFlesh extends Block
     setHardness(0.6F);
     setStepSound(FCBetterThanWolves.fcSoundSquishFootstep);
     setUnlocalizedName("gpeBlockFlesh");
-    setCreativeTab(CreativeTabs.tabBlock);
+    if (!GPEBTWTweak.btwFlesh)
+    {
+      setCreativeTab(CreativeTabs.tabBlock);
+    }
     ItemAxe.SetAllAxesToBeEffectiveVsBlock(this);
   }
 }

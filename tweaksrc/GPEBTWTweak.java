@@ -43,6 +43,7 @@ public class GPEBTWTweak extends FCAddOn
   public static int minFogDistance = 128;
   public static boolean spawnWolvesInForests = isBTWVersionOrNewer("4.99999A0F");
   public static boolean btwBone = isBTWVersionOrNewer("4.A3 Headed Beastie");
+  public static boolean btwFlesh = isBTWVersionOrNewer("4.A4 Kiloblock Boon");
 
   public static int gpeLooseRockID = 17000;
   public static int gpeSilkID = 17001;
@@ -834,14 +835,19 @@ public class GPEBTWTweak extends FCAddOn
     }
     t.put("tile.fcBlockAestheticOpaque.soap.name", "Old Block of Soap");
     t.put(gpeBlockSoap.getUnlocalizedName() + ".name", "Block of Soap");
-    t.put(gpeBlockFlesh.getUnlocalizedName() + ".name", "Block of Flesh");
+    if (btwFlesh)
+    {
+      t.put(gpeBlockFlesh.getUnlocalizedName() + ".name", "Old Block of Flesh");
+    } else {
+      t.put(gpeBlockFlesh.getUnlocalizedName() + ".name", "Block of Flesh");
+    }
     t.put(gpeBlockSlime.getUnlocalizedName() + ".name", "Block of Slime");
     t.put(gpeBlockStorage.getUnlocalizedName() + ".coal.name", "Block of Coal");
     t.put(gpeBlockStorage.getUnlocalizedName() + ".charcoal.name", "Block of Charcoal");
     t.put(gpeBlockStorage.getUnlocalizedName() + ".coaldust.name", "Block of Coal Dust");
     t.put(gpeBlockStorage.getUnlocalizedName() + ".nethercoal.name", "Block of Nethercoal");
     t.put(gpeBlockStorage.getUnlocalizedName() + ".sugar.name", "Block of Sugar");
-    if (isBTWVersionOrNewer("4.A3 Headed Beastie"))
+    if (btwBone)
     {
       t.put(gpeBlockStorage.getUnlocalizedName() + ".bone.name", "Old Block of Bone");
     } else {
@@ -1242,7 +1248,10 @@ public class GPEBTWTweak extends FCAddOn
     int id = stack.itemID;
     int meta = stack.getItemDamage();
     if (id == Item.redstone.itemID) return Block.blockRedstone.blockID;
-    if (id == Item.rottenFlesh.itemID) return gpeBlockFleshID;
+    if (id == Item.rottenFlesh.itemID)
+    {
+      return btwFlesh ? FCBetterThanWolves.fcBlockRottenFlesh.blockID : gpeBlockFleshID;
+    }
     if (id == Item.enderPearl.itemID) return FCBetterThanWolves.fcAestheticOpaque.blockID;
     if (id == FCBetterThanWolves.fcSoap.itemID) return gpeBlockSoapID;
     if (id == Item.wheat.itemID) return gpeBlockHayBaleID;
