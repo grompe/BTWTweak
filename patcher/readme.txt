@@ -29,6 +29,8 @@ v0.9l (unreleased)
 - Fixed wolves/cats teleporting to player as they grow up while sitting,
   for real now (MC-28440).
 
+- Adjusted microblock merging so it won't happen while facing the saw.
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.

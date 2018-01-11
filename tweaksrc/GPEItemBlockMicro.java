@@ -59,6 +59,7 @@ public abstract class GPEItemBlockMicro extends FCItemBlockCustom
   {
     int id = stack.itemID;
     if (id > 4096) return false;
+    if (isSawFacingHere(world, x, y, z)) return false;
     Block block = Block.blocksList[id];
     if (block == null) return false;
     int meta = stack.getItemDamage();
@@ -85,6 +86,19 @@ public abstract class GPEItemBlockMicro extends FCItemBlockCustom
     if (isSiding) return attemptToCombineSidingWithBlock(placeid, world, x, y, z, side, hitX, hitY, hitZ, shifted, simulate);
     if (isMoulding) return attemptToCombineMouldingWithBlock(placeid, world, x, y, z, side, hitX, hitY, hitZ, shifted, simulate);
     if (isCorner) return attemptToCombineCornerWithBlock(placeid, world, x, y, z, side, hitX, hitY, hitZ, shifted, simulate);
+    return false;
+  }
+
+  private boolean isSawFacingHere(World world, int x, int y, int z)
+  {
+    int saw = FCBetterThanWolves.fcSaw.blockID;
+    int meta = 0;
+         if (world.getBlockId(x + 1, y, z) == saw) { meta = world.getBlockMetadata(x + 1, y, z); return (meta & 7) == 4; }
+    else if (world.getBlockId(x - 1, y, z) == saw) { meta = world.getBlockMetadata(x - 1, y, z); return (meta & 7) == 5; }
+    else if (world.getBlockId(x, y + 1, z) == saw) { meta = world.getBlockMetadata(x, y + 1, z); return (meta & 7) == 0; }
+    else if (world.getBlockId(x, y - 1, z) == saw) { meta = world.getBlockMetadata(x, y - 1, z); return (meta & 7) == 1; }
+    else if (world.getBlockId(x, y, z + 1) == saw) { meta = world.getBlockMetadata(x, y, z + 1); return (meta & 7) == 2; }
+    else if (world.getBlockId(x, y, z - 1) == saw) { meta = world.getBlockMetadata(x, y, z - 1); return (meta & 7) == 3; }
     return false;
   }
 
