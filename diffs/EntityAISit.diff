@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/EntityAISit.java b/src/minecraft/net/minecraft/src/EntityAISit.java
+index 0782611..783f322 100644
+--- a/src/minecraft/net/minecraft/src/EntityAISit.java
++++ b/src/minecraft/net/minecraft/src/EntityAISit.java
+@@ -29 +29 @@ else if (this.theEntity.isInWater())
+-        else if (!this.theEntity.onGround)
++        else if (this.theEntity.fallDistance > 0.5F) // MC-28440

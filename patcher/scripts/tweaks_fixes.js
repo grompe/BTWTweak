@@ -433,23 +433,31 @@ function(mn)
     }
   }
 });
-/*
-tweak("ok", "EntityAIFollowOwner", BOTH, "c()V", 0x2E4906C6, "Preventing wolves from teleporting to player on growing up",
+tweak("pk", "EntityAISit", BOTH, "a()Z", 0xC59E0D23, "Preventing wolves/cats from teleporting to player on growing up",
 function(mn)
 {
-  return CodeInserter(
-    CustomFinder(function(n)
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner.equals("nu") && n.name.equals("F") && n.desc.equals("Z"))
     {
-      return isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner.equals("ok") && n.name.equals("h") && n.desc.equals("I");
-    }),
-    [
-      InsnNode(POP),
-      IntInsnNode(BIPUSH, 10),
-    ],
-    INSERT_BEFORE
-  ).process(mn);
+      var n2 = n.getNext();
+      if (isInstance(n2, "org.objectweb.asm.tree.JumpInsnNode") && (n2.opcode == IFNE))
+      {
+        n2.opcode = IFLE;
+        mn.instructions.insert(n, toInsnList(
+          [
+            FieldInsnNode(GETFIELD, "nu", "T", "F"),
+            LdcInsnNode(Float("0.5")),
+            InsnNode(FCMPL),
+          ]
+        ));
+        mn.instructions.remove(n);
+        return true;
+      }
+    }
+  }
 });
-*/
 tweak("mp", "Entity", BOTH, "x()V", 0x1C8882FF, "Kill players that went through the roof of the Nether",
 function(mn)
 {

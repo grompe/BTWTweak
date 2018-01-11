@@ -1,7 +1,0 @@
-diff --git a/src/minecraft/net/minecraft/src/EntityAIFollowOwner.java b/src/minecraft/net/minecraft/src/EntityAIFollowOwner.java
-index 1092946..0e99965 100644
---- a/src/minecraft/net/minecraft/src/EntityAIFollowOwner.java
-+++ b/src/minecraft/net/minecraft/src/EntityAIFollowOwner.java
-@@ -65 +65 @@ public void startExecuting()
--        this.field_75343_h = 0;
-+        this.field_75343_h = 10;

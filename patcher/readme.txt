@@ -26,6 +26,9 @@ v0.9l (unreleased)
 
 - Fixed iron pickaxes being too effective on dark stone.
 
+- Fixed wolves/cats teleporting to player as they grow up while sitting,
+  for real now (MC-28440).
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.
