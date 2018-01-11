@@ -79,3 +79,9 @@ Known bugs/exploits/oversights
   "Reflecting ghast fireballs is nearly impossible"
 
 - middle-click picking: wooden table and pedestal -> column; fence -> bench
+
+- Endermen forget the enemy player if he logs out
+
+- Glass panes don't break like glass blocks if you land on them
+
+- Rarely, phantom creeper hiss plays in BTWTweak v0.9l

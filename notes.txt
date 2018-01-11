@@ -51,6 +51,8 @@ Straightforward
 - MultiMine-like mechanics that allow to mine a block faster together
   and continue mining after a short interruption
 
+- snow cover, when pushed by piston, turns into snowball
+
 
 Need to think more about
 ========================
@@ -149,6 +151,8 @@ Incomplete
 
 Insignificant
 =============
+- bow item texture always show normal arrow when firing rotten or SFS ones
+
 - more uses for nether quartz or black stone
 
 - glistering melon is useless
