@@ -588,21 +588,21 @@ function(mn)
     }
   }
 });
-tweak("FCBlockKiln", null, BOTH, "a(Laab;IIILjava/util/Random;)V", 0x2DAB2AE1, "Improving the crack (1/3)",
+tweak("FCBlockKiln", null, BOTH, "a(Laab;IIILjava/util/Random;)V", 0x2DAB2AE1, "(1/3) Improving the crack",
 function(mn)
 {
   return replaceAllMethodCalls(mn,
     [INVOKEVIRTUAL, "aab", "f", "(IIIII)V"],
     [INVOKESTATIC, "GPEBTWTweak", "addKilnCrackEffect", "(Laab;IIIII)V"]);
 });
-tweak("FCBlockKiln", null, BOTH, "a(Laab;IIIII)V", 0x358204FD, "Improving the crack (2/3)",
+tweak("FCBlockKiln", null, BOTH, "a(Laab;IIIII)V", 0x358204FD, "(2/3) Improving the crack",
 function(mn)
 {
   return replaceAllMethodCalls(mn,
     [INVOKEVIRTUAL, "aab", "f", "(IIIII)V"],
     [INVOKESTATIC, "GPEBTWTweak", "addKilnCrackEffect", "(Laab;IIIII)V"]);
 });
-tweak("FCBlockKiln", null, BOTH, "a(Laab;IIII)V", 0x6D780E50, "Improving the crack (3/3)",
+tweak("FCBlockKiln", null, BOTH, "a(Laab;IIII)V", 0x6D780E50, "(3/3) Improving the crack",
 function(mn)
 {
   return replaceAllMethodCalls(mn,

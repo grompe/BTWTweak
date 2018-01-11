@@ -125,25 +125,30 @@ function(cn)
   ));
   cn.methods.add(mn);
 });
-tweak("wu", "ItemPickaxe", BOTH, "canHarvestBlock(Laab;Lapa;III)Z", 0xFB743BEB, "Making Pickaxe handle overridden stone",
-function(mn)
+function handleOverriddenStone(locvar)
 {
-  var label = new LabelNode();
-  var result = CodeInserter(
-    JumpInsnFinder(IF_ACMPNE),
-    [
-      JumpInsnNode(IF_ACMPEQ, label),
-      VarInsnNode(ALOAD, 2),
-      FieldInsnNode(GETSTATIC, "GPEBTWTweak", "gpeBlockStone", "Lapa;"),
-    ],
-    INSERT_BEFORE
-  ).process(mn);
-  if (!result) return;
-  return CodeInserter(
-    JumpInsnFinder(IF_ACMPNE),
-    [
-      label,
-      FrameNode(F_SAME, 0, null, 0, null),
-    ]
-  ).process(mn);
-});
+  return function (mn)
+  {
+    var label = new LabelNode();
+    var result = CodeInserter(
+      JumpInsnFinder(IF_ACMPNE),
+      [
+        JumpInsnNode(IF_ACMPEQ, label),
+        VarInsnNode(ALOAD, locvar),
+        FieldInsnNode(GETSTATIC, "GPEBTWTweak", "gpeBlockStone", "Lapa;"),
+      ],
+      INSERT_BEFORE
+    ).process(mn);
+    if (!result) return;
+    return CodeInserter(
+      JumpInsnFinder(IF_ACMPNE),
+      [
+        label,
+        FrameNode(F_SAME, 0, null, 0, null),
+      ]
+    ).process(mn);
+  };
+}
+tweak("wu", "ItemPickaxe", BOTH, "canHarvestBlock(Laab;Lapa;III)Z", 0xFB743BEB, "(1/3) Making Pickaxe handle overridden stone", handleOverriddenStone(2));
+tweak("wu", "ItemPickaxe", BOTH, "getStrVsBlock(Lwm;Laab;Lapa;III)F", 0x1C970FF0, "(2/3) Making Pickaxe handle overridden stone", handleOverriddenStone(3));
+tweak("wu", "ItemPickaxe", BOTH, "IsEffecientVsBlock(Laab;Lapa;III)Z", 0x331C054B, "(3/3) Making Pickaxe handle overridden stone", handleOverriddenStone(2));

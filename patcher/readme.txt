@@ -24,6 +24,8 @@ v0.9l (unreleased)
   caused by sharing options.txt with a newer Minecraft version
   (lowercase "en_us").
 
+- Fixed iron pickaxes being too effective on dark stone.
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.
