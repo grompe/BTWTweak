@@ -33,7 +33,7 @@ function(mn)
     }
   }
 });
-tweak("FCBlockHopper", null, BOTH, "OnEntityItemCollidedWithBlock(Laab;IIILrh;)V", 0xE7F6250, "Calling new gravel handling",
+tweak("FCBlockHopper", null, BOTH, "OnEntityItemCollidedWithBlock(Laab;IIILrh;)V", [0xE7F6250, 0x63F75060], "Calling new gravel handling",
 function(mn)
 {
   var label;
@@ -50,7 +50,7 @@ function(mn)
       mn.instructions.insert(n, toInsnList(
         [
           LdcInsnNode(Float("0.5")),
-          VarInsnNode(ILOAD, 16),
+          VarInsnNode(ILOAD, locvar - 3), // was 16
           InsnNode(I2F),
           LdcInsnNode(Float("0.3")),
           InsnNode(FMUL),
@@ -66,7 +66,7 @@ function(mn)
           VarInsnNode(ALOAD, 5),
           FieldInsnNode(GETSTATIC, "GPEBTWTweak", "gpeItemLooseRock", "Lwk;"),
           FieldInsnNode(GETFIELD, "wk", "cp", "I"),
-          VarInsnNode(ILOAD, 16),
+          VarInsnNode(ILOAD, locvar - 3), // was 16
           VarInsnNode(ILOAD, locvar),
           InsnNode(ISUB),
           MethodInsnNode(INVOKESPECIAL, "FCBlockHopper", "handleNewGravelTop", "(Laab;Lrh;II)V"),

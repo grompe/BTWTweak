@@ -81,22 +81,25 @@ function(mn)
 {
   return fixMobToBurnOnSlabs(mn);
 });
-tweak("wo", "ItemMap", BOTH, "a(Laab;Lmp;Lajl;)V", 0x420DA13F, "Extending BlockIDs for ItemMap",
-function(mn)
+if (!isBTWVersionOrNewer("4.A4 Kiloblock Boon"))
 {
-  var changes = 0;
-  for (var i = 0; i < mn.instructions.size(); i++)
+  tweak("wo", "ItemMap", BOTH, "a(Laab;Lmp;Lajl;)V", 0x420DA13F, "Extending BlockIDs for ItemMap",
+  function(mn)
   {
-    var n = mn.instructions.get(i);
-    if (isInstance(n, "org.objectweb.asm.tree.IntInsnNode") && (n.getOpcode() == SIPUSH) && (n.operand == 256))
+    var changes = 0;
+    for (var i = 0; i < mn.instructions.size(); i++)
     {
-      n.operand = 4096;
-      changes++;
-      if (changes == 2) break;
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.IntInsnNode") && (n.getOpcode() == SIPUSH) && (n.operand == 256))
+      {
+        n.operand = 4096;
+        changes++;
+        if (changes == 2) break;
+      }
     }
-  }
-  return changes == 2;
-});
+    return changes == 2;
+  });
+}
 tweak("zs", "MobSpawnerBaseLogic", BOTH, "g()V", 0x72426C61, "Fixing mob spawner offset",
 function(mn)
 {
