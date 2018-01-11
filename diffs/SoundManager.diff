@@ -1,0 +1,56 @@
+diff --git a/src/minecraft/net/minecraft/src/SoundManager.java b/src/minecraft/net/minecraft/src/SoundManager.java
+index b18734e..c48b683 100644
+--- a/src/minecraft/net/minecraft/src/SoundManager.java
++++ b/src/minecraft/net/minecraft/src/SoundManager.java
+@@ -404,0 +405,51 @@ public void playEntitySound(String par1Str, Entity par2Entity, float par3, float
++                    }
++
++                    sndSystem.setVolume(var6, par3 * this.options.soundVolume);
++                    sndSystem.setVelocity(var6, (float)par2Entity.motionX, (float)par2Entity.motionY, (float)par2Entity.motionZ);
++                    sndSystem.play(var6);
++                    this.playingSounds.add(var6);
++                }
++            }
++        }
++    }
++
++    public void playEntitySoundOnce(String par1Str, Entity par2Entity, float par3, float par4, boolean par5)
++    {
++        if (par2Entity != null && loaded && (this.options.soundVolume != 0.0F || par1Str == null))
++        {
++            String var6 = "entity_" + par2Entity.entityId;
++
++            if (this.playingSounds.contains(var6))
++            {
++                this.updateSoundLocation(par2Entity);
++            }
++            else
++            {
++                if (sndSystem.playing(var6))
++                {
++                    sndSystem.stop(var6);
++                }
++
++                if (par1Str == null)
++                {
++                    return;
++                }
++
++                SoundPoolEntry var7 = this.soundPoolSounds.getRandomSoundFromSoundPool(par1Str);
++
++                if (var7 != null && par3 > 0.0F)
++                {
++                    float var8 = 16.0F;
++
++                    if (par3 > 1.0F)
++                    {
++                        var8 *= par3;
++                    }
++
++                    sndSystem.newSource(par5, var6, var7.soundUrl, var7.soundName, false, (float)par2Entity.posX, (float)par2Entity.posY, (float)par2Entity.posZ, 2, var8);
++                    sndSystem.setLooping(var6, false);
++                    sndSystem.setPitch(var6, par4);
++
++                    if (par3 > 1.0F)
++                    {
++                        par3 = 1.0F;

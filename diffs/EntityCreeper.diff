@@ -1,7 +1,15 @@
 diff --git a/src/minecraft/net/minecraft/src/EntityCreeper.java b/src/minecraft/net/minecraft/src/EntityCreeper.java
-index f5f68d7..ecfb838 100644
+index f5f68d7..a0836ac 100644
 --- a/src/minecraft/net/minecraft/src/EntityCreeper.java
 +++ b/src/minecraft/net/minecraft/src/EntityCreeper.java
-@@ -280,0 +281,2 @@ public boolean interact(EntityPlayer var1)
+@@ -115 +115,2 @@ public void onUpdate()
+-                this.playSound("random.fuse", 1.0F, 0.5F);
++                //this.playSound("random.fuse", 1.0F, 0.5F);
++                GPEBTWTweak.playEntitySoundOnce("random.fuse", this, 1.0F, 0.5F, true);
+@@ -127,0 +129 @@ public void onUpdate()
++                GPEBTWTweak.stopEntitySound(this);
+@@ -170,0 +173 @@ public void onDeath(DamageSource par1DamageSource)
++        GPEBTWTweak.stopEntitySound(this);
+@@ -280,0 +284,2 @@ public boolean interact(EntityPlayer var1)
 +            this.attackEntityFrom(DamageSource.causePlayerDamage(var1), 2);
-+
++            GPEBTWTweak.stopEntitySoundBroadcast(var1, this);
