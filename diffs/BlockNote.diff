@@ -1,0 +1,27 @@
+diff --git a/src/minecraft/net/minecraft/src/BlockNote.java b/src/minecraft/net/minecraft/src/BlockNote.java
+index 20e7f37..bcca921 100644
+--- a/src/minecraft/net/minecraft/src/BlockNote.java
++++ b/src/minecraft/net/minecraft/src/BlockNote.java
+@@ -85 +85 @@ public boolean onBlockEventReceived(World par1World, int par2, int par3, int par
+-        String var8 = "harp";
++        String var8 = "note.harp";
+@@ -89 +89 @@ public boolean onBlockEventReceived(World par1World, int par2, int par3, int par
+-            var8 = "bd";
++            var8 = "note.bd";
+@@ -94 +94 @@ public boolean onBlockEventReceived(World par1World, int par2, int par3, int par
+-            var8 = "snare";
++            var8 = "note.snare";
+@@ -99 +99 @@ public boolean onBlockEventReceived(World par1World, int par2, int par3, int par
+-            var8 = "hat";
++            var8 = "note.hat";
+@@ -104 +104 @@ public boolean onBlockEventReceived(World par1World, int par2, int par3, int par
+-            var8 = "bassattack";
++            var8 = "note.bassattack";
+@@ -107 +107,6 @@ public boolean onBlockEventReceived(World par1World, int par2, int par3, int par
+-        par1World.playSoundEffect((double)par2 + 0.5D, (double)par3 + 0.5D, (double)par4 + 0.5D, "note." + var8, 3.0F, var7);
++        if (par5 == 5)
++        {
++            var8 = "mob.wolf.bark1";
++        }
++
++        par1World.playSoundEffect((double)par2 + 0.5D, (double)par3 + 0.5D, (double)par4 + 0.5D, var8, 3.0F, var7);

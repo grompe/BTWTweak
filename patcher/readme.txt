@@ -12,17 +12,13 @@ v0.9l (unreleased)
 
 - Fixed not all stumps being hard enough.
 
-- Reverted v0.9j fix for wolf cubs teleporting to player as they grow up
-  as it prevented wolves from following the player. I was unable to
-  reproduce this bug, so if you still encounter it, please let me know. 
-
 - Fixed compatibility with BTW version "4.A3 Headed Beastie".
   Unfortunately, due to ID clash, old BTWTweak spider heads will turn into
   infused skulls. Get rid of spider heads before upgrading to avoid this.
 
 - Fixed Minecraft crash when loading an unknown language. It is usually
   caused by sharing options.txt with a newer Minecraft version
-  (lowercase "en_us").
+  (option "lang" is lowercase "en_us" instead of "en_US").
 
 - Fixed iron pickaxes being too effective on dark stone.
 
@@ -30,6 +26,9 @@ v0.9l (unreleased)
   for real now (MC-28440).
 
 - Adjusted microblock merging so it won't happen while facing the saw.
+
+- Added bark note to the note block that stands on top of a companion cube.
+  Now it is possible to recreate Dogsong in Minecraft.
 
 v0.9k
 

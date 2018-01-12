@@ -1,0 +1,28 @@
+diff --git a/src/minecraft/net/minecraft/src/FCItemTuningFork.java b/src/minecraft/net/minecraft/src/FCItemTuningFork.java
+index 669ed03..b54487e 100644
+--- a/src/minecraft/net/minecraft/src/FCItemTuningFork.java
++++ b/src/minecraft/net/minecraft/src/FCItemTuningFork.java
+@@ -25 +25 @@ public boolean onItemUse(ItemStack var1, EntityPlayer var2, World var3, int var4
+-        String var13 = "harp";
++        String var13 = "note.harp";
+@@ -51 +51 @@ public boolean onItemUse(ItemStack var1, EntityPlayer var2, World var3, int var4
+-            var13 = "bd";
++            var13 = "note.bd";
+@@ -56 +56 @@ public boolean onItemUse(ItemStack var1, EntityPlayer var2, World var3, int var4
+-            var13 = "snare";
++            var13 = "note.snare";
+@@ -61 +61 @@ public boolean onItemUse(ItemStack var1, EntityPlayer var2, World var3, int var4
+-            var13 = "hat";
++            var13 = "note.hat";
+@@ -66 +66 @@ public boolean onItemUse(ItemStack var1, EntityPlayer var2, World var3, int var4
+-            var13 = "bassattack";
++            var13 = "note.bassattack";
+@@ -69 +69,7 @@ public boolean onItemUse(ItemStack var1, EntityPlayer var2, World var3, int var4
+-        var3.playSoundEffect((double)var4 + 0.5D, (double)var5 + 0.5D, (double)var6 + 0.5D, "note." + var13, 3.0F, var12);
++        int id = var3.getBlockId(var4, var5, var6);
++        if (id == FCBetterThanWolves.fcCompanionCube.blockID)
++        {
++            var13 = "mob.wolf.bark1";
++        }
++
++        var3.playSoundEffect((double)var4 + 0.5D, (double)var5 + 0.5D, (double)var6 + 0.5D, "" + var13, 3.0F, var12);
