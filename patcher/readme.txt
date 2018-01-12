@@ -41,6 +41,10 @@ v0.9l (unreleased)
 
 - Added some more blocks and items to creative tabs.
 
+- Restored the effect of swiftness potion. Apparently it is possible to
+  build a witch farm in a specific way to gather swiftness potions, and the
+  motivation to do so was killed by removing the effect.
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.

@@ -1,5 +1,5 @@
 diff --git a/src/minecraft/net/minecraft/src/EntityLiving.java b/src/minecraft/net/minecraft/src/EntityLiving.java
-index a2a98c4..df2f23d 100644
+index a2a98c4..0df1a3d 100644
 --- a/src/minecraft/net/minecraft/src/EntityLiving.java
 +++ b/src/minecraft/net/minecraft/src/EntityLiving.java
 @@ -2871,0 +2872,5 @@ public boolean func_104002_bU()
@@ -7,4 +7,10 @@ index a2a98c4..df2f23d 100644
 +    {
 +        this.persistenceRequired = true;
 +    }
++
+@@ -2879,0 +2885,5 @@ public float getSpeedModifier()
++        if (this.isPotionActive(Potion.moveSpeed))
++        {
++            var1 *= 1.0F + 0.2F * (float)(this.getActivePotionEffect(Potion.moveSpeed).getAmplifier() + 1);
++        }
 +

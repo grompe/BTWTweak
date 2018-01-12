@@ -949,3 +949,59 @@ function(mn)
     }
   }
 });
+tweak("ng", "EntityLiving", BOTH, "bE()F", 0xB84C4738, "Restoring the effect of swiftness potions",
+function(mn)
+{
+  var label = LabelNode();
+  var changes = 0;
+  var saven;
+  var i;
+  for (i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.VarInsnNode") && (n.opcode == ALOAD) && (n["var"] == 0))
+    {
+      saven = n;
+      changes++;
+      break;
+    }
+  }
+  for (i += 1; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.FrameNode"))
+    {
+      mn.instructions.set(n, FrameNode(F_SAME, 0, null, 0, null));
+      changes++;
+      break;
+    }
+  }
+  if (saven)
+  {
+    mn.instructions.insert(saven, toInsnList(
+      [
+        VarInsnNode(ALOAD, 0),
+        FieldInsnNode(GETSTATIC, "mk", "c", "Lmk;"),
+        MethodInsnNode(INVOKEVIRTUAL, "ng", "a", "(Lmk;)Z"),
+        JumpInsnNode(IFEQ, label),
+        VarInsnNode(FLOAD, 1),
+        InsnNode(FCONST_1),
+        LdcInsnNode(Float("0.2")),
+        VarInsnNode(ALOAD, 0),
+        FieldInsnNode(GETSTATIC, "mk", "c", "Lmk;"),
+        MethodInsnNode(INVOKEVIRTUAL, "ng", "b", "(Lmk;)Lml;"),
+        MethodInsnNode(INVOKEVIRTUAL, "ml", "c", "()I"),
+        InsnNode(ICONST_1),
+        InsnNode(IADD),
+        InsnNode(I2F),
+        InsnNode(FMUL),
+        InsnNode(FADD),
+        InsnNode(FMUL),
+        VarInsnNode(FSTORE, 1),
+        label,
+        FrameNode(F_APPEND, 1, [FLOAT], 0, null),
+      ]
+    ));
+  }
+  return changes == 2;
+});
