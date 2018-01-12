@@ -30,6 +30,9 @@ v0.9l (unreleased)
 - Added bark note to the note block that stands on top of a companion cube.
   Now it is possible to recreate Dogsong in Minecraft.
 
+- Changed scoreboard sidebar to be shown only when player list key is held
+  (default Tab).
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.

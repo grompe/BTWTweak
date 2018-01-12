@@ -80,6 +80,26 @@ function(mn)
     INSERT_BEFORE
   ).process(mn);
 });
+tweak("aww", "GuiIngame", CLIENT, "a(Lare;IILawv;)V", 0x1C9F4439, "Show scoreboard sidebar only as player list is shown",
+function(mn)
+{
+  var label = LabelNode();
+  return CodeInserter(
+    BeginningFinder(),
+    [
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "aww", "d", "Lnet/minecraft/client/Minecraft;"),
+      FieldInsnNode(GETFIELD, "net/minecraft/client/Minecraft", "z", "Lavy;"),
+      FieldInsnNode(GETFIELD, "avy", "T", "Lava;"),
+      FieldInsnNode(GETFIELD, "ava", "e", "Z"),
+      JumpInsnNode(IFNE, label),
+      InsnNode(RETURN),
+      label,
+      FrameNode(F_SAME, 0, null, 0, null),
+    ],
+    INSERT_BEFORE
+  ).process(mn);
+});
 tweak("aww", "GuiIngame", CLIENT, "a(FZII)V", 0x995D1671, "Inserting checkForGloomRender()",
 function(mn)
 {
