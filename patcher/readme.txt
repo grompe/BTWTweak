@@ -35,6 +35,10 @@ v0.9l (unreleased)
 
 - Fixed certain duping methods by removing zero-stack glitch items.
 
+- Changed rails and iron bars to smelt by one.
+
+- Changed stump remover to stack to 64.
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.

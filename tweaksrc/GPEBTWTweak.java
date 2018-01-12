@@ -290,6 +290,11 @@ public class GPEBTWTweak extends FCAddOn
     gpeBlockFlesh = Itemize(new GPEBlockFlesh(gpeBlockFleshID));
     gpeBlockSlime = Itemize(new GPEBlockSlime(gpeBlockSlimeID));
 
+    if (isBTWVersionOrNewer("4.A2 Timing Rodent"))
+    {
+      FCBetterThanWolves.fcItemStumpRemover.setMaxStackSize(64);
+    }
+    
     new GPEEnchantmentHaste(gpeEnchantmentHaste);
 
     TileEntity.ReplaceVanillaMapping(FCTileEntityChest.class, GPETileEntityChest.class, "Chest");
@@ -366,6 +371,11 @@ public class GPEBTWTweak extends FCAddOn
     {
       FCRecipes.AddStokedCrucibleRecipe(new ItemStack[] {new ItemStack(Item.goldNugget, 2), new ItemStack(FCBetterThanWolves.fcItemNuggetIron, 6)}, new ItemStack[] {new ItemStack(Block.pistonBase, 1)});
       FCRecipes.AddStokedCrucibleRecipe(new ItemStack[] {new ItemStack(Item.goldNugget, 2), new ItemStack(FCBetterThanWolves.fcItemNuggetIron, 6)}, new ItemStack[] {new ItemStack(Block.pistonStickyBase, 1)});
+      // Change rails and iron bars to smelt by one
+      FCCraftingManagerCrucibleStoked.getInstance().RemoveRecipe(new ItemStack(FCBetterThanWolves.fcItemNuggetIron, 18), new ItemStack[] {new ItemStack(Block.rail, 8)});
+      FCCraftingManagerCrucibleStoked.getInstance().RemoveRecipe(new ItemStack(FCBetterThanWolves.fcItemNuggetIron, 18), new ItemStack[] {new ItemStack(Block.fenceIron, 8)});
+      FCRecipes.AddStokedCrucibleRecipe(new ItemStack(FCBetterThanWolves.fcItemNuggetIron, 2), new ItemStack[] {new ItemStack(Block.rail)});
+      FCRecipes.AddStokedCrucibleRecipe(new ItemStack(FCBetterThanWolves.fcItemNuggetIron, 2), new ItemStack[] {new ItemStack(Block.fenceIron)});
     } else {
       Item pistonCore = isBTWVersionOrNewer("4.89666") ? Item.ingotIron : FCBetterThanWolves.fcSteel;
       FCRecipes.AddStokedCrucibleRecipe(new ItemStack[] {new ItemStack(Item.goldNugget, 3), new ItemStack(pistonCore, 1)}, new ItemStack[] {new ItemStack(Block.pistonBase, 1)});
