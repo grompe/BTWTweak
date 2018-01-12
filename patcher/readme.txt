@@ -39,6 +39,8 @@ v0.9l (unreleased)
 
 - Changed stump remover to stack to 64.
 
+- Added some more blocks and items to creative tabs.
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.

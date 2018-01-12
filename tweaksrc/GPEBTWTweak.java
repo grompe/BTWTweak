@@ -582,6 +582,23 @@ public class GPEBTWTweak extends FCAddOn
     FCBetterThanWolves.fcBlockWoodBirchMouldingAndDecorative.setCreativeTab(CreativeTabs.tabDecorations);
     // wood benches, fences     - FCBlockWoodSidingAndCornerAndDecorative => 0 1 2 3 . 5 6 7
     FCBetterThanWolves.fcBlockWoodJungleSidingAndCorner.setCreativeTab(CreativeTabs.tabDecorations);
+
+    FCBetterThanWolves.fcInfernalEnchanter.setCreativeTab(CreativeTabs.tabDecorations);
+    if (isBTWVersionOrNewer("4.8999999"))
+    {
+      FCBetterThanWolves.fcBlockArcaneVessel.setCreativeTab(CreativeTabs.tabRedstone);
+    }
+    
+    FCBetterThanWolves.fcItemWitchWart.setCreativeTab(CreativeTabs.tabBrewing);
+    FCBetterThanWolves.fcItemCreeperOysters.setCreativeTab(CreativeTabs.tabBrewing);
+    if (isBTWVersionOrNewer("4.89PHILLIP"))
+    {
+      FCBetterThanWolves.fcItemMysteriousGland.setCreativeTab(CreativeTabs.tabBrewing);
+    }
+    if (isBTWVersionOrNewer("4.A2 Timing Rodent"))
+    {
+      FCBetterThanWolves.fcItemStumpRemover.setCreativeTab(CreativeTabs.tabTools);
+    }
   }
 
   public static Block Itemize(Block block)

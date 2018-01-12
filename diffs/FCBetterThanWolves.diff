@@ -1,12 +1,15 @@
 diff --git a/src/minecraft/net/minecraft/src/FCBetterThanWolves.java b/src/minecraft/net/minecraft/src/FCBetterThanWolves.java
-index 62631d7..ff75771 100644
+index 62631d7..b5ab25c 100644
 --- a/src/minecraft/net/minecraft/src/FCBetterThanWolves.java
 +++ b/src/minecraft/net/minecraft/src/FCBetterThanWolves.java
 @@ -17 +17 @@
 -    public static final String fcVersionString = "4.8911";
 +    public static String fcVersionString = "4.8911";
-@@ -25,0 +26,2 @@
+@@ -25,0 +26,3 @@
 +    public static Block fcBlockSlabFalling;
++    public static Block fcBlockArcaneVessel;
 +    public static Block fcBlockRottenFlesh;
-@@ -242,0 +245 @@
+@@ -242,0 +246,3 @@
 +    public static Item fcItemWool;
++    public static Item fcItemMysteriousGland;
++    public static Item fcItemStumpRemover;
