@@ -1,12 +1,14 @@
 diff --git a/src/minecraft/net/minecraft/src/FCUtilsInventory.java b/src/minecraft/net/minecraft/src/FCUtilsInventory.java
-index 3912661..3055867 100644
+index 3912661..39d5696 100644
 --- a/src/minecraft/net/minecraft/src/FCUtilsInventory.java
 +++ b/src/minecraft/net/minecraft/src/FCUtilsInventory.java
-@@ -272,0 +273,2 @@ public static boolean AddItemStackToChest(TileEntityChest var0, ItemStack var1)
+@@ -267,0 +268 @@ public static boolean AddItemStackToInventoryInSlotRange(IInventory var0, ItemSt
++        if (var1.stackSize <= 0) return true;
+@@ -272,0 +274,2 @@ public static boolean AddItemStackToChest(TileEntityChest var0, ItemStack var1)
 +        return GPEBTWTweak.addItemStackToChest(var0, var1);
 +        /*
-@@ -296,0 +299 @@ public static boolean AddItemStackToChest(TileEntityChest var0, ItemStack var1)
+@@ -296,0 +300 @@ public static boolean AddItemStackToChest(TileEntityChest var0, ItemStack var1)
 +        */
-@@ -394 +397 @@ private static boolean AttemptToPlaceInEmptySlotInSlotRange(IInventory var0, Ite
+@@ -394 +398 @@ private static boolean AttemptToPlaceInEmptySlotInSlotRange(IInventory var0, Ite
 -    private static boolean AddItemStackToDoubleInventory(IInventory var0, IInventory var1, ItemStack var2)
 +    public static boolean AddItemStackToDoubleInventory(IInventory var0, IInventory var1, ItemStack var2)

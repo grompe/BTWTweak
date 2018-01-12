@@ -33,6 +33,8 @@ v0.9l (unreleased)
 - Changed scoreboard sidebar to be shown only when player list key is held
   (default Tab).
 
+- Fixed certain duping methods by removing zero-stack glitch items.
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.

@@ -324,10 +324,34 @@ function(mn)
     }
   }
 });
-tweak("rh", "EntityItem", BOTH, "b_(Lsq;)V", 0x780F22BB, "(2/4) Making achievements achievable",
+tweak("rh", "EntityItem", BOTH, "b_(Lsq;)V", 0x780F22BB, "(2/4) Making achievements achievable; (1/2) removing zero-stack glitch items",
 function(mn)
 {
-  for (var i = 0; i < mn.instructions.size(); i++)
+  var changes = 0;
+  var i;
+  for (i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner.equals("wm") && n.name.equals("a") && n.desc.equals("I"))
+    {
+      var n2 = mn.instructions.get(i + 2);
+      var label1 = LabelNode();
+      mn.instructions.insert(n2, toInsnList(
+        [
+          VarInsnNode(ILOAD, 3),
+          JumpInsnNode(IFGT, label1),
+          VarInsnNode(ALOAD, 0),
+          MethodInsnNode(INVOKEVIRTUAL, "rh", "w", "()V"),
+          InsnNode(RETURN),
+          label1,
+          FrameNode(F_APPEND, 2, ["wm", INTEGER], 0, null),
+        ]
+      ));
+      changes++;
+      break;
+    }
+  }
+  for (i += 1; i < mn.instructions.size(); i++)
   {
     var n = mn.instructions.get(i);
     if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("sq") && n.name.equals("a") && n.desc.equals("(Lka;)V"))
@@ -350,11 +374,29 @@ function(mn)
             FrameNode(F_SAME, 0, null, 0, null),
           ]
         ));
-        return true;
+        return changes == 1;
       }
       return;
     }
   }
+});
+tweak("FCUtilsInventory", null, BOTH, "AddItemStackToInventoryInSlotRange(Llt;Lwm;II)Z", 0x2FCD0587, "(2/2) removing zero-stack glitch items",
+function(mn)
+{
+  var label = LabelNode();
+  return CodeInserter(
+    BeginningFinder(),
+    [
+      VarInsnNode(ALOAD, 1),
+      FieldInsnNode(GETFIELD, "wm", "a", "I"),
+      JumpInsnNode(IFGT, label),
+      InsnNode(ICONST_1),
+      InsnNode(IRETURN),
+      label,
+      FrameNode(F_SAME, 0, null, 0, null),
+    ],
+    INSERT_BEFORE
+  ).process(mn);
 });
 tweak("tx", "SlotFurnace", BOTH, "b(Lwm;)V", 0x5094290D, "(3/4) Making achievements achievable",
 function(mn)
