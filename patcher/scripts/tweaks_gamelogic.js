@@ -432,31 +432,34 @@ function(mn)
     ]
   ).process(mn);
 });
-tweak("zr", "MerchantRecipeList", BOTH, "a(Lzq;)V", [0xAEAB0BC0, 0x5CD408EB], "Putting new villager offers at the beginning rather than the end",
-function(mn)
+if (!isBTWVersionOrNewer("4.A4 Kiloblock Boon"))
 {
-  for (var i = 0; i < mn.instructions.size(); i++)
+  tweak("zr", "MerchantRecipeList", BOTH, "a(Lzq;)V", [0xAEAB0BC0, 0x5CD408EB], "Putting new villager offers at the beginning rather than the end",
+  function(mn)
   {
-    var n = mn.instructions.get(i);
-    if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("zr") && n.name.equals("add") && n.desc.equals("(Ljava/lang/Object;)Z"))
+    for (var i = 0; i < mn.instructions.size(); i++)
     {
-      var n2 = n;
-      n = n.getNext();
-      if (isInstance(n, "org.objectweb.asm.tree.InsnNode") && (n.opcode == POP))
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("zr") && n.name.equals("add") && n.desc.equals("(Ljava/lang/Object;)Z"))
       {
-        mn.instructions.remove(n2);
-        mn.instructions.insert(n, toInsnList(
-          [
-            InsnNode(ICONST_0),
-            VarInsnNode(ALOAD, 1),
-            MethodInsnNode(INVOKEVIRTUAL, "zr", "add", "(ILjava/lang/Object;)V"),
-          ]
-        ));
-        return true;
+        var n2 = n;
+        n = n.getNext();
+        if (isInstance(n, "org.objectweb.asm.tree.InsnNode") && (n.opcode == POP))
+        {
+          mn.instructions.remove(n2);
+          mn.instructions.insert(n, toInsnList(
+            [
+              InsnNode(ICONST_0),
+              VarInsnNode(ALOAD, 1),
+              MethodInsnNode(INVOKEVIRTUAL, "zr", "add", "(ILjava/lang/Object;)V"),
+            ]
+          ));
+          return true;
+        }
       }
     }
-  }
-});
+  });
+}
 if (isBTWVersionOrNewer("4.89113"))
 {
   tweak("iz", "WorldServer", BOTH, "b()V", 0xD2243D2B, "Re-allowing easy difficulty and normal - on hardcore",
