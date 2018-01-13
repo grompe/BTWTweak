@@ -42,6 +42,7 @@ public class GPEBTWTweak extends FCAddOn
   public static int hcSpawnRadius = 2000;
   public static int minFogDistance = 128;
   public static boolean spawnWolvesInForests = isBTWVersionOrNewer("4.99999A0F");
+  public static boolean writeDebugTextures = false;
   public static boolean btwBone = isBTWVersionOrNewer("4.A3 Headed Beastie");
   public static boolean btwFlesh = isBTWVersionOrNewer("4.A4 Kiloblock Boon");
 
@@ -105,6 +106,7 @@ public class GPEBTWTweak extends FCAddOn
         if (key.equals("hcSpawnRadius")) hcSpawnRadius = Integer.parseInt(value);
         if (key.equals("minFogDistance")) minFogDistance = Math.min(256, Integer.parseInt(value));
         if (key.equals("spawnWolvesInForests")) spawnWolvesInForests = Integer.parseInt(value) > 0;
+        if (key.equals("writeDebugTextures")) writeDebugTextures = Integer.parseInt(value) > 0;
 
         if (key.equals("gpeLooseRockID")) gpeLooseRockID = Integer.parseInt(value);
         if (key.equals("gpeSilkID")) gpeSilkID = Integer.parseInt(value);
@@ -135,6 +137,7 @@ public class GPEBTWTweak extends FCAddOn
     {
       String defaultConfig = ""
         + "// **** BTWTweak Settings ****\r\n"
+        + "// Delete this file so it is recreated with default values (and new settings if you've updated BTWTweak).\r\n"
         + "\r\n"
         + "// Inventory column cycling when pressing hotbar key twice.\r\n"
         + "// 0 = turn off, 1 = adaptive, 2 = two slots, 3 = three slots, 4 = four slots, 5 = only fill empty slot\r\n"
@@ -153,6 +156,10 @@ public class GPEBTWTweak extends FCAddOn
         + "// Spawn (and despawn) wild wolves in forest biome, to balance them being subject to Hardcore Hunger.\r\n"
         + "\r\n"
         + (isBTWVersionOrNewer("4.99999A0F") ? "spawnWolvesInForests=1\r\n" : "spawnWolvesInForests=0\r\n")
+        + "\r\n"
+        + "// Whether to write debug.stitched_*.png files. Slows down the game startup.\r\n"
+        + "\r\n"
+        + "writeDebugTextures=0\r\n"
         + "\r\n"
         + "// **** Item IDs ****\r\n"
         + "\r\n"

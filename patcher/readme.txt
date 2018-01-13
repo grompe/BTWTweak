@@ -47,6 +47,11 @@ v0.9l (unreleased)
 
 - Renamed vertical wind mill to "Vertical Wind Mill" from just "Wind Mill".
 
+- Turned off generation of debug textures ("debug.stitched_*.png") on game
+  startup. It was slowing the startup for no good reason. If you wish
+  to reenable this, put the following line in BTWTweak.cfg:
+  writeDebugTextures=1
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.

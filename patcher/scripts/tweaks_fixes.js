@@ -600,6 +600,42 @@ function(mn)
     }
   }
 });
+tweak("bir", "TextureMap", CLIENT, "b()V", [0x4084A6F9, 0xCB479DDD], "Making writig debug textures optional",
+function(mn)
+{
+  var changes = 0;
+  var label = LabelNode();
+  var i;
+  for (i = mn.instructions.size() - 1; i >= 0; i--)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("bio") && n.name.equals("b") && n.desc.equals("(Ljava/lang/String;)V"))
+    {
+      mn.instructions.insert(n, toInsnList(
+        [
+          label,
+          FrameNode(F_SAME, 0, null, 0, null),
+        ]
+      ));
+      changes++;
+      break;
+    }
+  }
+  for (i -= 1; i >= 0; i--)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.FrameNode"))
+    {
+      mn.instructions.insert(n, toInsnList(
+        [
+          FieldInsnNode(GETSTATIC, "GPEBTWTweak", "writeDebugTextures", "Z"),
+          JumpInsnNode(IFEQ, label),
+        ]
+      ));
+      return changes == 1;
+    }
+  }
+});
 
 // =======================================================================
 // Fix mods! Now with this mod you can fix mods for the mod for Minecraft.
