@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/ComponentScatteredFeatureJunglePyramid.java b/src/minecraft/net/minecraft/src/ComponentScatteredFeatureJunglePyramid.java
+index 0e9ad87..4844435 100644
+--- a/src/minecraft/net/minecraft/src/ComponentScatteredFeatureJunglePyramid.java
++++ b/src/minecraft/net/minecraft/src/ComponentScatteredFeatureJunglePyramid.java
+@@ -274 +274 @@ public boolean CheckIfLooted(World var1, StructureBoundingBox var2)
+-        return var9 < 5062500;
++        return var9 < GPEBTWTweak.hcSpawnRadiusAdjSq;

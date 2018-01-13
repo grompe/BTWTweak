@@ -1,0 +1,10 @@
+diff --git a/src/minecraft/net/minecraft/src/ComponentVillageStartPiece.java b/src/minecraft/net/minecraft/src/ComponentVillageStartPiece.java
+index 182ee50..91fccd7 100644
+--- a/src/minecraft/net/minecraft/src/ComponentVillageStartPiece.java
++++ b/src/minecraft/net/minecraft/src/ComponentVillageStartPiece.java
+@@ -87 +87 @@ private void InitializeModSpecificData(World var1)
+-        if (var8 < 5062500)
++        if (var8 < GPEBTWTweak.hcSpawnRadiusAdjSq)
+@@ -91 +91 @@ private void InitializeModSpecificData(World var1)
+-        else if (var8 < 7562500)
++        else if (var8 < GPEBTWTweak.hcSpawnRadiusAdj2Sq)

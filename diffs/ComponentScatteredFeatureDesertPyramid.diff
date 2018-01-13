@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/ComponentScatteredFeatureDesertPyramid.java b/src/minecraft/net/minecraft/src/ComponentScatteredFeatureDesertPyramid.java
+index ae7ac9b..688760a 100644
+--- a/src/minecraft/net/minecraft/src/ComponentScatteredFeatureDesertPyramid.java
++++ b/src/minecraft/net/minecraft/src/ComponentScatteredFeatureDesertPyramid.java
+@@ -34 +34 @@ public boolean addComponentParts(World par1World, Random par2Random, StructureBo
+-        if (var11 < 5062500)
++        if (var11 < GPEBTWTweak.hcSpawnRadiusAdjSq)

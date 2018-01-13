@@ -40,6 +40,8 @@ public class GPEBTWTweak extends FCAddOn
 
   public static int hotbarCycling = 1;
   public static int hcSpawnRadius = 2000;
+  public static int hcSpawnRadiusAdjSq = 2250*2250;
+  public static int hcSpawnRadiusAdj2Sq = 3000*3000;
   public static int minFogDistance = 128;
   public static boolean spawnWolvesInForests = isBTWVersionOrNewer("4.99999A0F");
   public static boolean writeDebugTextures = false;
@@ -144,7 +146,8 @@ public class GPEBTWTweak extends FCAddOn
         + "\r\n"
         + "hotbarCycling=1\r\n"
         + "\r\n"
-        + "// Hardcore Spawn radius, in blocks. Changing it from default 2000 may destabilize your game balance.\r\n"
+        + "// Hardcore Spawn radius, in blocks. Increasing it will make structures affected at further radius as well.\r\n"
+        + "// Decreasing it won't make populated villages or anything of the sort closer to the spawn.\r\n"
         + "\r\n"
         + "hcSpawnRadius=2000\r\n"
         + "\r\n"
@@ -238,6 +241,14 @@ public class GPEBTWTweak extends FCAddOn
 
     isDecoPresent = classExists("AddonManager");
     if (!isDecoPresent && !isBTWVersionOrNewer("4.A4 Kiloblock Boon")) extendBlockIDs();
+
+    hcSpawnRadiusAdjSq = Math.max((int)(hcSpawnRadius*hcSpawnRadius*1.265625F), 2250*2250);
+    if (isBTWVersionOrNewer("4.99999A0C Marsupial?!"))
+    {
+      hcSpawnRadiusAdj2Sq = Math.max((int)(hcSpawnRadius*hcSpawnRadius*2.25F), 3000*3000);
+    } else {
+      hcSpawnRadiusAdj2Sq = Math.max((int)(hcSpawnRadius*hcSpawnRadius*1.890625F), 2750*2750);
+    }
 
     Block.blocksList[1] = null;  gpeBlockStone = new GPEBlockStone(1);
     Block.blocksList[4] = null;  new GPEBlockCobblestone(4);

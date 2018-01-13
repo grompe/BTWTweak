@@ -55,6 +55,10 @@ v0.9l (unreleased)
 - Now it is possible to rename chests, furnaces, dispensers, brewing stands
   with Shift+right-clicking them with a name tag.
 
+- Fixed configurable Hardcore Spawn radius so that increasing it will push
+  populated villages and similar structures away accordingly. Decreasing it,
+  however, won't bring them closer.
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.

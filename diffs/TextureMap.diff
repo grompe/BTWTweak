@@ -1,0 +1,11 @@
+diff --git a/src/minecraft/net/minecraft/src/TextureMap.java b/src/minecraft/net/minecraft/src/TextureMap.java
+index c36cb75..78e463a 100644
+--- a/src/minecraft/net/minecraft/src/TextureMap.java
++++ b/src/minecraft/net/minecraft/src/TextureMap.java
+@@ -170,2 +170,4 @@ public void refreshTextures()
+-
+-        this.atlasTexture.writeImage("debug.stitched_" + this.textureName + ".png");
++        if (GPEBTWTweak.writeDebugTextures)
++        {
++            this.atlasTexture.writeImage("debug.stitched_" + this.textureName + ".png");
++        }

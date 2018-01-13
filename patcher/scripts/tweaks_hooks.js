@@ -395,6 +395,30 @@ function(mn)
     INSERT_BEFORE
   ).process(mn);
 });
+
+function constants2configHCS(mn)
+{
+  var changed = false;
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.LdcInsnNode") && (n.cst == 5062500))
+    {
+      changed = true;
+      mn.instructions.set(n, FieldInsnNode(GETSTATIC, "GPEBTWTweak", "hcSpawnRadiusAdjSq", "I"));
+    }
+    else if (isInstance(n, "org.objectweb.asm.tree.LdcInsnNode") && ((n.cst == 7562500) || (n.cst == 9000000)))
+    {
+      changed = true;
+      mn.instructions.set(n, FieldInsnNode(GETSTATIC, "GPEBTWTweak", "hcSpawnRadiusAdj2Sq", "I"));
+    }
+  }
+  return changed;
+}
+tweak("afq", "ComponentScatteredFeatureDesertPyramid", BOTH, "a(Laab;Ljava/util/Random;Laek;)Z", 0xBAE32112, "(1/3) Making Hardcore Spawn radius affect structures", constants2configHCS);
+tweak("afr", "ComponentScatteredFeatureJunglePyramid", BOTH, "CheckIfLooted(Laab;Laek;)Z", 0xE0440AE6, "(2/3) Making Hardcore Spawn radius affect structures", constants2configHCS);
+tweak("ahm", "ComponentVillageStartPiece", BOTH, "InitializeModSpecificData(Laab;)V", 0x87D022CC, "(3/3) Making Hardcore Spawn radius affect structures", constants2configHCS);
+
 tweak("jc", "EntityPlayerMP", BOTH, "DropMysteryMeat(I)V", 0x5B1D190E, "Adding player hardcore death hook",
 function(mn)
 {
