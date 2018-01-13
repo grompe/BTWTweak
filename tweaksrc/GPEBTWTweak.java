@@ -555,6 +555,7 @@ public class GPEBTWTweak extends FCAddOn
     Block.tilledField.setCreativeTab(CreativeTabs.tabDecorations);
     FCBetterThanWolves.fcBlockWoodOakMouldingAndDecorative.setCreativeTab(null);
     Block.commandBlock.setCreativeTab(CreativeTabs.tabRedstone);
+    Block.web.setCreativeTab(CreativeTabs.tabDecorations);
     FCBetterThanWolves.fcBlockAestheticOpaqueEarth.setCreativeTab(CreativeTabs.tabBlock);
 
     FCBetterThanWolves.fcBlockSidingAndCornerBlackStone.setCreativeTab(CreativeTabs.tabDecorations);
@@ -589,6 +590,7 @@ public class GPEBTWTweak extends FCAddOn
       FCBetterThanWolves.fcBlockArcaneVessel.setCreativeTab(CreativeTabs.tabRedstone);
     }
     
+    FCBetterThanWolves.fcItemRottenArrow.setCreativeTab(CreativeTabs.tabCombat);
     FCBetterThanWolves.fcItemWitchWart.setCreativeTab(CreativeTabs.tabBrewing);
     FCBetterThanWolves.fcItemCreeperOysters.setCreativeTab(CreativeTabs.tabBrewing);
     if (isBTWVersionOrNewer("4.89PHILLIP"))

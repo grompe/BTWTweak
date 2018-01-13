@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import java.util.List;
 import java.util.Random;
 import net.minecraft.client.Minecraft;
 
@@ -15,6 +16,7 @@ public class GPEBlockDirtSlab extends FCBlockDirtSlab
   {
     super(id);
     ItemSpade.SetAllShovelsToBeEffectiveVsBlock(this);
+    setCreativeTab(CreativeTabs.tabBlock);
   }
 
   public int damageDropped(int meta)
@@ -92,6 +94,12 @@ public class GPEBlockDirtSlab extends FCBlockDirtSlab
       }
     }
     return false;
+  }
+
+  public void getSubBlocks(int id, CreativeTabs t, List l)
+  {
+    l.add(new ItemStack(id, 1, 0));
+    l.add(new ItemStack(id, 1, 3));
   }
 
   @ClientOnly
