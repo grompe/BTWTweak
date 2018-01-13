@@ -52,6 +52,9 @@ v0.9l (unreleased)
   to reenable this, put the following line in BTWTweak.cfg:
   writeDebugTextures=1
 
+- Now it is possible to rename chests, furnaces, dispensers, brewing stands
+  with Shift+right-clicking them with a name tag.
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.
