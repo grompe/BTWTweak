@@ -45,6 +45,8 @@ v0.9l (unreleased)
   build a witch farm in a specific way to gather swiftness potions, and the
   motivation to do so was killed by removing the effect.
 
+- Renamed vertical wind mill to "Vertical Wind Mill" from just "Wind Mill".
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.

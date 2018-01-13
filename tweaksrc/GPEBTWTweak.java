@@ -841,6 +841,7 @@ public class GPEBTWTweak extends FCAddOn
       t.put(FCBetterThanWolves.fcBlockDirtSlab.getUnlocalizedName() + ".sand.name", "Sand Slab");
     }
     t.put(FCBetterThanWolves.fcItemRottenArrow.getUnlocalizedName() + ".name", "Rotten Arrow");
+    t.put(FCBetterThanWolves.fcItemWindMillVertical.getUnlocalizedName() + ".name", "Vertical Wind Mill");
     t.put("item.skull.spider.name", "Spider Head");
     t.put("item.skull.enderman.name", "Enderman Head");
     t.put("item.skull.pigzombie.name", "Zombie Pigman Head");
