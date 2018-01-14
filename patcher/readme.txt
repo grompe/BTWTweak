@@ -53,7 +53,8 @@ v0.9l (unreleased)
   writeDebugTextures=1
 
 - Now it is possible to rename chests, furnaces, dispensers, brewing stands
-  with Shift+right-clicking them with a name tag.
+  with Shift+right-clicking them with a name tag. Also it is possible to
+  edit sign posts by right-clicking them with Ink and Quill.
 
 - Fixed configurable Hardcore Spawn radius so that increasing it will push
   populated villages and similar structures away accordingly. Decreasing it,

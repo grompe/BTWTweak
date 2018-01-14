@@ -35,6 +35,10 @@ public class GPEItemNameTag extends Item
     {
       ((TileEntityFurnace)te).func_94129_a(stack.getDisplayName());
     }
+    else
+    {
+      return false;
+    }
     stack.stackSize--;
     return true;
   }

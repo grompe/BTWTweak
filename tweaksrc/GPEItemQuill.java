@@ -16,6 +16,23 @@ public class GPEItemQuill extends Item
     setMaxDamage(30);
   }
 
+  public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float var8, float var9, float var10)
+  {
+    if (!player.canPlayerEdit(x, y, z, side, stack)) return false;
+
+    TileEntity te = world.getBlockTileEntity(x, y, z);
+    if (te == null) return false;
+
+    int id = world.getBlockId(x, y, z);
+    if ((id == Block.signPost.blockID) || (id == Block.signWall.blockID))
+    {
+      player.displayGUIEditSign(te);
+      stack.damageItem(1, player);
+      return true;
+    }
+    return false;
+  }
+
   @ClientOnly
   public void registerIcons(IconRegister r)
   {
