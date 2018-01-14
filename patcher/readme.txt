@@ -67,6 +67,9 @@ v0.9l (unreleased)
 
 - Changed egg hatching sound at incubator to something more appropriate.
 
+- Disabled GUI auto-closing when inside portal. Looks like it served no
+  other purpose than to annoy people and help trap them inside the portal.
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.

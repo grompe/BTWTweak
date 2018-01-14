@@ -887,3 +887,24 @@ function(mn)
   ));
   return true;
 });
+tweak("bfj", "EntityPlayerSP", CLIENT, "c()V", 0x4714BC75, "Stopping GUI from auto-closing when inside portal",
+function(mn)
+{
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("net/minecraft/client/Minecraft") && n.name.equals("a") && n.desc.equals("(Laxr;)V"))
+    {
+      var n2 = n.getPrevious();
+      var n3 = n2.getPrevious();
+      var n4 = n3.getPrevious();
+      var n5 = n4.getPrevious();
+      mn.instructions.remove(n);
+      mn.instructions.remove(n2);
+      mn.instructions.remove(n3);
+      mn.instructions.remove(n4);
+      mn.instructions.remove(n5);
+      return true;
+    }
+  }
+});

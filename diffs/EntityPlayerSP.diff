@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/EntityPlayerSP.java b/src/minecraft/net/minecraft/src/EntityPlayerSP.java
+index 515f1f5..22ffdd6 100644
+--- a/src/minecraft/net/minecraft/src/EntityPlayerSP.java
++++ b/src/minecraft/net/minecraft/src/EntityPlayerSP.java
+@@ -127 +127 @@ public void onLivingUpdate()
+-                    this.mc.displayGuiScreen((GuiScreen)null);
++                    //this.mc.displayGuiScreen((GuiScreen)null);
