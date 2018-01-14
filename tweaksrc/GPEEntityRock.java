@@ -53,6 +53,10 @@ public class GPEEntityRock extends EntityThrowable implements FCIEntityPacketHan
           worldObj.playAuxSFX(2001, x, y, z, Block.glass.blockID);
           worldObj.destroyBlock(x, y, z, true);
         }
+        else if (block instanceof FCBlockVase)
+        {
+          ((FCBlockVase)block).BreakVase(worldObj, x, y, z);
+        }
       }
       FCUtilsItem.EjectSingleItemWithRandomVelocity(worldObj, (float)posX, (float)posY, (float)posZ, GPEBTWTweak.gpeItemLooseRock.itemID, 0);
       setDead();

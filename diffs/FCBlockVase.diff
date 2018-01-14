@@ -1,0 +1,10 @@
+diff --git a/src/minecraft/net/minecraft/src/FCBlockVase.java b/src/minecraft/net/minecraft/src/FCBlockVase.java
+index ed73265..e544033 100644
+--- a/src/minecraft/net/minecraft/src/FCBlockVase.java
++++ b/src/minecraft/net/minecraft/src/FCBlockVase.java
+@@ -153,0 +154,5 @@ public void onBlockHarvested(World var1, int var2, int var3, int var4, int var5,
++    public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion ex)
++    {
++        if (!world.isRemote) this.CheckForExplosion(world, x, y, z);
++    }
++

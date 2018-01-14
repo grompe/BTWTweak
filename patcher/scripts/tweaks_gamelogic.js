@@ -1005,3 +1005,27 @@ function(mn)
   }
   return changes == 2;
 });
+add("FCBlockVase", null, BOTH, "Adding vase chain explosions",
+function(cn)
+{
+  var mn = MethodNode(ACC_PUBLIC, "a", "(Laab;IIILzw;)V", null, null);
+  var label = LabelNode();
+  mn.instructions.add(toInsnList(
+    [
+      VarInsnNode(ALOAD, 1),
+      FieldInsnNode(GETFIELD, "aab", "I", "Z"),
+      JumpInsnNode(IFNE, label),
+      VarInsnNode(ALOAD, 0),
+      VarInsnNode(ALOAD, 1),
+      VarInsnNode(ILOAD, 2),
+      VarInsnNode(ILOAD, 3),
+      VarInsnNode(ILOAD, 4),
+      MethodInsnNode(INVOKESPECIAL, "FCBlockVase", "CheckForExplosion", "(Laab;III)Z"),
+      InsnNode(POP),
+      label,
+      FrameNode(F_SAME, 0, null, 0, null),
+      InsnNode(RETURN),
+    ]
+  ));
+  cn.methods.add(mn);
+});

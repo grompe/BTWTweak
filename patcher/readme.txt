@@ -62,6 +62,9 @@ v0.9l (unreleased)
 - Fixed newly generated single chests not having collision box set.
   Chests that already exist in the world won't be affected, though.
 
+- Made thrown rocks destroy vases. While at it, added chain explosions for
+  vases with blasting oil. How was this not a feature yet?!
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.
