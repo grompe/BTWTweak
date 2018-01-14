@@ -65,6 +65,8 @@ v0.9l (unreleased)
 - Made thrown rocks destroy vases. While at it, added chain explosions for
   vases with blasting oil. How was this not a feature yet?!
 
+- Changed egg hatching sound at incubator to something more appropriate.
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.

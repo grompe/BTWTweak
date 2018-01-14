@@ -1109,7 +1109,7 @@ public class GPEBTWTweak extends FCAddOn
         {
           if (item.stackSize == 1 && ((EntityItem)entity).age > 5400 && world.getBlockId(x, y + 2, z) == FCBetterThanWolves.fcLightBulbOn.blockID)
           {
-            world.playSoundAtEntity(entity, "random.pop", 0.25F, world.rand.nextFloat() * 1.5F + 1.0F);
+            world.playSoundAtEntity(entity, "mob.slime.attack", 0.25F, world.rand.nextFloat() * 0.2F + 1.4F);
             EntityChicken chick = new EntityChicken(world);
             chick.setGrowingAge(-24000);
             chick.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, 0F, 0F);
