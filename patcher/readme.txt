@@ -59,6 +59,9 @@ v0.9l (unreleased)
   populated villages and similar structures away accordingly. Decreasing it,
   however, won't bring them closer.
 
+- Fixed newly generated single chests not having collision box set.
+  Chests that already exist in the world won't be affected, though.
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.

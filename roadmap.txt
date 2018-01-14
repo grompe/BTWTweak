@@ -36,8 +36,6 @@ Known bugs/exploits/oversights
 
 - portal & minecart chest dupe exploit
 
-- dungeon chests that are separate have no collision sometimes
-
 - mobs sinking into ground clientside
 
 - mycelium not spreading on dirt slabs (FC may be working on it)
@@ -84,4 +82,4 @@ Known bugs/exploits/oversights
 
 - Glass panes don't break like glass blocks if you land on them
 
-- Rarely, phantom creeper hiss plays in BTWTweak v0.9l
+- Rarely, phantom creeper hiss plays in BTWTweak v0.9l?

@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/WorldGenDungeons.java b/src/minecraft/net/minecraft/src/WorldGenDungeons.java
+index 61ce514..cb3054d 100644
+--- a/src/minecraft/net/minecraft/src/WorldGenDungeons.java
++++ b/src/minecraft/net/minecraft/src/WorldGenDungeons.java
+@@ -115 +115 @@ else if (par1World.getBlockMaterial(var10, var11, var12).isSolid())
+-                                    par1World.setBlock(var12, par4, var19, Block.chest.blockID, 0, 2);
++                                    par1World.setBlock(var12, par4, var19, Block.chest.blockID, 2, 2);

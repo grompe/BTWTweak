@@ -600,7 +600,7 @@ function(mn)
     }
   }
 });
-tweak("bir", "TextureMap", CLIENT, "b()V", [0x4084A6F9, 0xCB479DDD], "Making writig debug textures optional",
+tweak("bir", "TextureMap", CLIENT, "b()V", [0x4084A6F9, 0xCB479DDD], "Making writing debug textures optional",
 function(mn)
 {
   var changes = 0;
@@ -636,6 +636,25 @@ function(mn)
     }
   }
 });
+function fixNewGenChests(mn)
+{
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner.equals("aln") && n.name.equals("cz") && n.desc.equals("I"))
+    {
+      var n2 = n.getNext();
+      if (isInstance(n2, "org.objectweb.asm.tree.InsnNode") && (n2.getOpcode() == ICONST_0))
+      {
+        mn.instructions.set(n2, InsnNode(ICONST_2));
+        return true;
+      }
+    }
+  }
+}
+tweak("add", "WorldGeneratorBonusChest", BOTH, "a(Laab;Ljava/util/Random;III)Z", 0xC02B2446, "(1/3) Fix generated chests' collision", fixNewGenChests);
+tweak("adu", "WorldGenDungeons", BOTH, "a(Laab;Ljava/util/Random;III)Z", 0x565B870A, "(2/3) Fix generated chests' collision", fixNewGenChests);
+tweak("agw", "StructureComponent", BOTH, "a(Laab;Laek;Ljava/util/Random;III[Llp;I)Z", 0xB59E1064, "(3/3) Fix generated chests' collision", fixNewGenChests);
 
 // =======================================================================
 // Fix mods! Now with this mod you can fix mods for the mod for Minecraft.

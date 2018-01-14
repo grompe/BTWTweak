@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/StructureComponent.java b/src/minecraft/net/minecraft/src/StructureComponent.java
+index 4a875dc..edf9e9e 100644
+--- a/src/minecraft/net/minecraft/src/StructureComponent.java
++++ b/src/minecraft/net/minecraft/src/StructureComponent.java
+@@ -775 +775 @@ protected boolean generateStructureChestContents(World par1World, StructureBound
+-            par1World.setBlock(var9, var10, var11, Block.chest.blockID, 0, 2);
++            par1World.setBlock(var9, var10, var11, Block.chest.blockID, 2, 2);

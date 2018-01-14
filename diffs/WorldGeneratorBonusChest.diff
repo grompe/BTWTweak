@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/WorldGeneratorBonusChest.java b/src/minecraft/net/minecraft/src/WorldGeneratorBonusChest.java
+index c587a8f..da867ed 100644
+--- a/src/minecraft/net/minecraft/src/WorldGeneratorBonusChest.java
++++ b/src/minecraft/net/minecraft/src/WorldGeneratorBonusChest.java
+@@ -48 +48 @@ public boolean generate(World par1World, Random par2Random, int par3, int par4,
+-                    par1World.setBlock(var8, var9, var10, Block.chest.blockID, 0, 2);
++                    par1World.setBlock(var8, var9, var10, Block.chest.blockID, 2, 2);
