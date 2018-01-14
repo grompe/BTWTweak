@@ -1029,3 +1029,110 @@ function(cn)
   ));
   cn.methods.add(mn);
 });
+tweak("ayl", "GuiContainer", CLIENT, "a(CI)V", 0x80F11C55, "Adding a hook for taking all slots to containers",
+function(mn)
+{
+  return CodeInserter(
+    BeginningFinder(),
+    [
+      VarInsnNode(ALOAD, 0),
+      VarInsnNode(ILOAD, 2),
+      MethodInsnNode(INVOKEVIRTUAL, "ayl", "checkLootAll", "(I)V"),
+    ],
+    INSERT_BEFORE
+  ).process(mn);
+});
+add("ayl", "GuiContainer", CLIENT, "Adding a key for taking all slots to containers",
+function(cn)
+{
+  var l0 = LabelNode();
+  var l1 = LabelNode();
+  var l2 = LabelNode();
+  var l3 = LabelNode();
+  var l4 = LabelNode();
+  var l5 = LabelNode();
+  var mn = MethodNode(ACC_PROTECTED, "checkLootAll", "(I)V", null, null);
+  mn.instructions.add(toInsnList(
+    [
+      VarInsnNode(ILOAD, 1),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "ayl", "g", "Lnet/minecraft/client/Minecraft;"),
+      FieldInsnNode(GETFIELD, "net/minecraft/client/Minecraft", "z", "Lavy;"),
+      FieldInsnNode(GETFIELD, "avy", "M", "Lava;"),
+      FieldInsnNode(GETFIELD, "ava", "d", "I"),
+      JumpInsnNode(IF_ICMPNE, l0),
+      InsnNode(ICONST_0),
+      VarInsnNode(ISTORE, 2),
+      l1,
+      FrameNode(F_APPEND, 1, [INTEGER], 0, null),
+      VarInsnNode(ILOAD, 2),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "ayl", "d", "Ltj;"),
+      FieldInsnNode(GETFIELD, "tj", "c", "Ljava/util/List;"),
+      MethodInsnNode(INVOKEINTERFACE, "java/util/List", "size", "()I"),
+      IntInsnNode(BIPUSH, 36),
+      InsnNode(ISUB),
+      JumpInsnNode(IF_ICMPGE, l0),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "ayl", "d", "Ltj;"),
+      FieldInsnNode(GETFIELD, "tj", "c", "Ljava/util/List;"),
+      VarInsnNode(ILOAD, 2),
+      MethodInsnNode(INVOKEINTERFACE, "java/util/List", "get", "(I)Ljava/lang/Object;"),
+      TypeInsnNode(CHECKCAST, "ul"),
+      VarInsnNode(ASTORE, 3),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "ayl", "d", "Ltj;"),
+      TypeInsnNode(INSTANCEOF, "FCContainerHopper"),
+      JumpInsnNode(IFEQ, l2),
+      VarInsnNode(ALOAD, 3),
+      FieldInsnNode(GETFIELD, "ul", "g", "I"),
+      IntInsnNode(BIPUSH, 18),
+      JumpInsnNode(IF_ICMPNE, l2),
+      JumpInsnNode(GOTO, l3),
+      l2,
+      FrameNode(F_APPEND, 1, ["ul"], 0, null),
+      VarInsnNode(ALOAD, 3),
+      MethodInsnNode(INVOKEVIRTUAL, "java/lang/Object", "getClass", "()Ljava/lang/Class;"),
+      LdcInsnNode(asm.Type.getType("Lul;")),
+      MethodInsnNode(INVOKEVIRTUAL, "java/lang/Object", "equals", "(Ljava/lang/Object;)Z"),
+      VarInsnNode(ISTORE, 4),
+      VarInsnNode(ALOAD, 3),
+      FieldInsnNode(GETFIELD, "ul", "f", "Llt;"),
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "ayl", "g", "Lnet/minecraft/client/Minecraft;"),
+      FieldInsnNode(GETFIELD, "net/minecraft/client/Minecraft", "g", "Lbdv;"),
+      FieldInsnNode(GETFIELD, "bdv", "bK", "Lso;"),
+      JumpInsnNode(IF_ACMPNE, l4),
+      InsnNode(ICONST_1),
+      JumpInsnNode(GOTO, l5),
+      l4,
+      FrameNode(F_APPEND, 1, [INTEGER], 0, null),
+      InsnNode(ICONST_0),
+      l5,
+      FrameNode(F_SAME1, 0, null, 1, [INTEGER]),
+      VarInsnNode(ISTORE, 5),
+      VarInsnNode(ALOAD, 3),
+      MethodInsnNode(INVOKEVIRTUAL, "ul", "d", "()Z"),
+      JumpInsnNode(IFEQ, l3),
+      VarInsnNode(ILOAD, 4),
+      JumpInsnNode(IFEQ, l3),
+      VarInsnNode(ILOAD, 5),
+      JumpInsnNode(IFNE, l3),
+      VarInsnNode(ALOAD, 0),
+      VarInsnNode(ALOAD, 3),
+      VarInsnNode(ALOAD, 3),
+      FieldInsnNode(GETFIELD, "ul", "g", "I"),
+      InsnNode(ICONST_0),
+      InsnNode(ICONST_1),
+      MethodInsnNode(INVOKEVIRTUAL, "ayl", "a", "(Lul;III)V"),
+      l3,
+      FrameNode(F_CHOP, 2, null, 0, null),
+      IincInsnNode(2, 1),
+      JumpInsnNode(GOTO, l1),
+      l0,
+      FrameNode(F_CHOP, 1, null, 0, null),
+      InsnNode(RETURN),
+    ]
+  ));
+  cn.methods.add(mn);
+});

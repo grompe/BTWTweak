@@ -1,0 +1,30 @@
+diff --git a/src/minecraft/net/minecraft/src/GuiContainer.java b/src/minecraft/net/minecraft/src/GuiContainer.java
+index 9def75d..7006868 100644
+--- a/src/minecraft/net/minecraft/src/GuiContainer.java
++++ b/src/minecraft/net/minecraft/src/GuiContainer.java
+@@ -806,0 +807 @@ protected void keyTyped(char par1, int par2)
++        this.checkLootAll(par2);
+@@ -820,0 +822,23 @@ else if (par2 == this.mc.gameSettings.keyBindDrop.keyCode)
++    protected void checkLootAll(int keyCode)
++    {
++        if (keyCode == this.mc.gameSettings.keyBindJump.keyCode)
++        {
++            for (int i = 0; i < this.inventorySlots.inventorySlots.size() - 36; i++)
++            {
++                Slot slot = (Slot)this.inventorySlots.inventorySlots.get(i);
++
++                // Exception for the Hopper: its filter appears to be a regular slot 18
++                if ((inventorySlots instanceof FCContainerHopper) && (slot.slotNumber == 18)) continue;
++
++                // Non-crafting slots
++                boolean regular = slot.getClass().equals(Slot.class);
++                boolean plr = slot.inventory == this.mc.thePlayer.inventory;
++
++                if (slot.getHasStack() && regular && !plr)
++                {
++                    this.handleMouseClick(slot, slot.slotNumber, 0, 1);
++                }
++            }
++        }
++    }
++

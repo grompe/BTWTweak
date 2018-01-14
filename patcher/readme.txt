@@ -71,6 +71,9 @@ v0.9l (unreleased)
 - Disabled GUI auto-closing when inside portal. Looks like it served no
   other purpose than to annoy people and help trap them inside the portal.
 
+- Added an ability to take all items from a container GUI by pressing Space
+  (jump key). This will only take items from simple and non-crafting slots.
+
 v0.9k
 
 - Fixed creative tab display for Dung block and Packed Earth.
