@@ -12,7 +12,8 @@ v0.9l
 
 - Fixed not all stumps being hard enough.
 
-- Fixed compatibility with BTW version "4.A3 Headed Beastie".
+- Fixed compatibility with BTW version "4.A3 Headed Beastie" and
+  "4.A4 Kiloblock Boon".
   Unfortunately, due to ID clash, old BTWTweak spider heads will turn into
   infused skulls. Get rid of spider heads before upgrading to avoid this.
 
