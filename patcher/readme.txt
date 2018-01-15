@@ -3,7 +3,7 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.9l
 
 [********** Change Log ************]
 
-v0.9l (unreleased)
+v0.9l
 
 - Fixed extraneous attempts to integrate with Deco addon.
 

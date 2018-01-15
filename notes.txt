@@ -129,24 +129,15 @@ Complex
 Incomplete
 ==========
 
-- Slimes absorb all kind of dust/piles, get smaller from that + some effect
-
 - Gearboxes crafted with 6 axles -> gearboxes that can be used in compact designs
 
 - Dirt turning to mud near water or in rain?
-
-- Make skeletons drop bones only when killed by players, and
-  bone shards (grindable to 1 bone meal) otherwise, to make glue less easy
-  with mob traps.
 
 - Enchant that makes armor level ingot lighter, but leaves at minimum 1 ingot of weight
   - maybe floating sheep could drop it?
   - even crazier: zombie that ate a floating sheep would have a chance to drop that scroll instead of smite
     
 - Make endermen conspire against player if he killed too many
-
-- Slimes absorb all kind of dust/piles, get smaller from that + some effect
-  - Slimes can merge together to bigger slime
 
 
 Insignificant
