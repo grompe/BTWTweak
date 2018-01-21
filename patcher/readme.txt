@@ -1,7 +1,16 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.9l
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.9m
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
+
+v0.9m (unreleased)
+
+- Fixed occasional severe hunger loss while climbing ladders and ropes
+  as sometimes server thought it was continuous jumping.
+  Coincidentally, fixed sprint-jumping not exhausting player more than
+  regular jumping, which made bunny hopping more efficient on food than
+  simply sprinting. The hopping tactic to quickly and safely traverse the
+  desert is much more costly now.
 
 v0.9l
 

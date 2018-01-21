@@ -1,5 +1,5 @@
 diff --git a/src/minecraft/net/minecraft/src/NetServerHandler.java b/src/minecraft/net/minecraft/src/NetServerHandler.java
-index 1a2c49d..f6cf478 100644
+index 1a2c49d..b517e85 100644
 --- a/src/minecraft/net/minecraft/src/NetServerHandler.java
 +++ b/src/minecraft/net/minecraft/src/NetServerHandler.java
 @@ -27,0 +28 @@
@@ -22,6 +22,9 @@ index 1a2c49d..f6cf478 100644
 +        }
 +    }
 +
+@@ -272 +289 @@ public void handleFlying(Packet10Flying par1Packet10Flying)
+-                    this.playerEntity.addExhaustion(0.2F);
++                    this.playerEntity.jump();
 @@ -532,6 +549 @@ public void handleErrorMessage(String par1Str, Object[] par2ArrayOfObj)
 -        this.mcServer.getLogAgent().logInfo(this.playerEntity.username + " lost connection: " + par1Str);
 -        this.mcServer.getConfigurationManager().sendPacketToAllPlayers(new Packet3Chat(EnumChatFormatting.YELLOW + this.playerEntity.getTranslatedEntityName() + " left the game."));

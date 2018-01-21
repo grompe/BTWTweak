@@ -83,3 +83,10 @@ Known bugs/exploits/oversights
 - Glass panes don't break like glass blocks if you land on them
 
 - Rarely, phantom creeper hiss plays in BTWTweak v0.9l?
+
+- Microblock merging sometimes lets player be put inside the block
+
+- Jumping out from vehicles should make them ignore collision with player for a short time,
+  or else boats keep floating away or breaking.
+
+- Add time played to the world selection

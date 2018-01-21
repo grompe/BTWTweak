@@ -1,5 +1,5 @@
 diff --git a/src/minecraft/net/minecraft/src/EntityPlayer.java b/src/minecraft/net/minecraft/src/EntityPlayer.java
-index dc30dad..42fa487 100644
+index dc30dad..fb89113 100644
 --- a/src/minecraft/net/minecraft/src/EntityPlayer.java
 +++ b/src/minecraft/net/minecraft/src/EntityPlayer.java
 @@ -258 +258 @@ else if (this.worldObj.isDaytime())
@@ -71,10 +71,23 @@ index dc30dad..42fa487 100644
 @@ -1484 +1538 @@ public boolean isPlayerFullyAsleep()
 -        return this.sleeping && this.sleepTimer >= 100;
 +        return false;
-@@ -2249 +2303 @@ public boolean isOnLadder()
+@@ -1564 +1618 @@ public void addStat(StatBase par1StatBase, int par2) {}
+-    protected void jump()
++    public void jump()
+@@ -1566,3 +1620,6 @@ protected void jump()
+-        super.jump();
+-        this.addStat(StatList.jumpStat, 1);
+-
++        if (this.worldObj.isRemote)
++        {
++            super.jump();
++            this.addStat(StatList.jumpStat, 1);
++        }
++        if (this.isOnLadder()) return;
+@@ -2249 +2306 @@ public boolean isOnLadder()
 -        if (var1 >= 4)
 +        if (var1 >= 4 || getFlag(4)) // isEating()
-@@ -2406 +2460,6 @@ protected float GetLandMovementModifier()
+@@ -2406 +2463,6 @@ protected float GetLandMovementModifier()
 -        return this.GetHealthAndExhaustionModifierWithSightlessModifier();
 +        float f = this.GetHealthAndExhaustionModifierWithSightlessModifier();
 +        if (this.inventory.armorInventory[0] != null)

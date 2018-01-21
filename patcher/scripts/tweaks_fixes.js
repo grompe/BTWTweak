@@ -300,6 +300,58 @@ function(cn)
   ));
   cn.methods.add(mn);
 });
+tweak("jh", "NetServerHandler", BOTH, "a(Lee;)V", 0x338E4716, "Adding a server-side jump() call for the player",
+function(mn)
+{
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("jc") && n.name.equals("j") && n.desc.equals("(F)V"))
+    {
+      var n2 = n.getPrevious(); // LdcInsnNode(Float("0.2"))
+      mn.instructions.remove(n2);
+      n.name = "bl"; // jump
+      n.desc = "()V";
+      return true;
+    }
+  }
+});
+tweak("sq", "EntityPlayer", BOTH, "bl()V", 0x3A2D06D8, "Making player's jump() public and handling server-side calls",
+function(mn)
+{
+  var label_new1 = LabelNode();
+  var label_new2 = LabelNode();
+  mn.access = ACC_PUBLIC;
+  var beginning = mn.instructions.get(0);
+  mn.instructions.insertBefore(beginning, toInsnList(
+    [
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "sq", "q", "Laab;"),
+      FieldInsnNode(GETFIELD, "aab", "I", "Z"),
+      JumpInsnNode(IFEQ, label_new1),
+    ]
+  ));
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("sq") && n.name.equals("a") && n.desc.equals("(Lka;I)V"))
+    {
+      mn.instructions.insert(n, toInsnList(
+        [
+          label_new1,
+          FrameNode(F_SAME, 0, null, 0, null),
+          VarInsnNode(ALOAD, 0),
+          MethodInsnNode(INVOKEVIRTUAL, "sq", "g_", "()Z"),
+          JumpInsnNode(IFEQ, label_new2),
+          InsnNode(RETURN),
+          label_new2,
+          FrameNode(F_SAME, 0, null, 0, null),
+        ]
+      ));
+      return true;
+    }
+  }
+});
 // Fix achievements to be achievable
 tweak("jv", "AchievementList", BOTH, "<clinit>()V", 0x562B905E, "(1/4) Making achievements achievable",
 function(mn)
