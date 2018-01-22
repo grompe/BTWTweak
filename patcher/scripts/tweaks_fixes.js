@@ -76,7 +76,7 @@ function(mn)
 {
   return fixMobToBurnOnSlabs(mn);
 });
-tweak("sj", "EntityZombie", BOTH, "c()V", 0x4F1922DE, "Fixing mob not burning on slabs",
+tweak("sj", "EntityZombie", BOTH, "c()V", [0x4F1922DE, 0x45652A3D], "Fixing mob not burning on slabs",
 function(mn)
 {
   return fixMobToBurnOnSlabs(mn);
@@ -629,6 +629,7 @@ function(mn)
 tweak("bp", "StringTranslate", CLIENT, "a(Ljava/util/Properties;Ljava/lang/String;)V", 0xF2A01ED4, "Fix crash on unknown language",
 function(mn)
 {
+  // Not required since BTW 4.A5, but is a cleaner bugfix; no harm in leaving it
   var label = LabelNode();
   for (var i = 0; i < mn.instructions.size(); i++)
   {

@@ -63,7 +63,7 @@ function(mn)
     }
   }
 });
-tweak("net/minecraft/client/Minecraft", null, CLIENT, "a()V", [0xA79A9DCF, 0x5E5FA51F], "Adding readyForInput hook",
+tweak("net/minecraft/client/Minecraft", null, CLIENT, "a()V", [0xA79A9DCF, 0x5E5FA51F, 0xD413A5A5, 0x3267ACF5], "Adding readyForInput hook",
 function(mn)
 {
   for (var i = mn.instructions.size() - 1; i >= 0; i--)
