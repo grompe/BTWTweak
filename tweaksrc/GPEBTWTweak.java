@@ -41,6 +41,7 @@ public class GPEBTWTweak extends FCAddOn
   public static int hotbarCycling = 1;
   public static int hcSpawnRadius = 2000;
   public static int hcSpawnRadiusAdjSq = 2250*2250;
+  public static int hcSpawnRadiusAdjPSq = 2500*2500;
   public static int hcSpawnRadiusAdj2Sq = 3000*3000;
   public static int minFogDistance = 128;
   public static boolean spawnWolvesInForests = isBTWVersionOrNewer("4.99999A0F");
@@ -148,6 +149,7 @@ public class GPEBTWTweak extends FCAddOn
         + "\r\n"
         + "// Hardcore Spawn radius, in blocks. Increasing it will make structures affected at further radius as well.\r\n"
         + "// Decreasing it won't make populated villages or anything of the sort closer to the spawn.\r\n"
+        + "// Maximum value: 46340\r\n"
         + "\r\n"
         + "hcSpawnRadius=2000\r\n"
         + "\r\n"
@@ -243,6 +245,7 @@ public class GPEBTWTweak extends FCAddOn
     if (!isDecoPresent && !isBTWVersionOrNewer("4.A4 Kiloblock Boon")) extendBlockIDs();
 
     hcSpawnRadiusAdjSq = Math.max((int)(hcSpawnRadius*hcSpawnRadius*1.265625F), 2250*2250);
+    hcSpawnRadiusAdjPSq = Math.max((int)(hcSpawnRadius*hcSpawnRadius*1.5625F), 2500*2500);
     if (isBTWVersionOrNewer("4.99999A0C Marsupial?!"))
     {
       hcSpawnRadiusAdj2Sq = Math.max((int)(hcSpawnRadius*hcSpawnRadius*2.25F), 3000*3000);
@@ -261,8 +264,8 @@ public class GPEBTWTweak extends FCAddOn
     Block.blocksList[65] = null; new GPEBlockLadder(65);
     Block.blocksList[79] = null; new GPEBlockIce(79);
     Block.blocksList[80] = null; new GPEBlockSnowBlock(80);
-    Block.blocksList[91] = null;
-    ItemAxe.SetAllAxesToBeEffectiveVsBlock((new FCBlockPumpkin(91, true)).setHardness(1.0F).setStepSound(Block.soundWoodFootstep).setLightValue(1.0F).setUnlocalizedName("litpumpkin"));
+    //Block.blocksList[91] = null;
+    //ItemAxe.SetAllAxesToBeEffectiveVsBlock((new FCBlockPumpkin(91, true)).setHardness(1.0F).setStepSound(Block.soundWoodFootstep).setLightValue(1.0F).setUnlocalizedName("litpumpkin"));
     //Block.blocksList[compatAxleBlock.blockID] = null; compatAxleBlock = new GPEBlockAxle(compatAxleBlock.blockID);
 
     Item.m_bSuppressConflictWarnings = true;
@@ -623,7 +626,11 @@ public class GPEBTWTweak extends FCAddOn
 
   public static Block Itemize(Block block)
   {
-    FCBetterThanWolves.m_instance.CreateAssociatedItemForBlock(block);
+    int id = block.blockID;
+    if (Block.blocksList[id] != null && Item.itemsList[id] == null)
+    {
+      Item.itemsList[id] = new ItemBlock(id - 256);
+    }
     return block;
   }
 

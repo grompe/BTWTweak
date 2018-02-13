@@ -589,7 +589,7 @@ execJS("tweaks_hooks.js");
 execJS("tweaks_language.js");
 execJS("tweaks_moreslabs.js");
 execJS("tweaks_old.js");
-execJS("tweaks_pumpkin.js");
+//execJS("tweaks_pumpkin.js");
 execJS("tweaks_rocks.js");
 execJS("tweaks_sound.js");
 execJS("tweaks_visual.js");

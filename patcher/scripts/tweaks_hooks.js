@@ -399,25 +399,74 @@ function(mn)
 function constants2configHCS(mn)
 {
   var changed = false;
-  for (var i = 0; i < mn.instructions.size(); i++)
+  if (isBTWVersionOrNewer("4.A7 Squid A Swimming"))
   {
-    var n = mn.instructions.get(i);
-    if (isInstance(n, "org.objectweb.asm.tree.LdcInsnNode") && (n.cst == 5062500))
+    for (var i = 0; i < mn.instructions.size(); i++)
     {
-      changed = true;
-      mn.instructions.set(n, FieldInsnNode(GETSTATIC, "GPEBTWTweak", "hcSpawnRadiusAdjSq", "I"));
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.LdcInsnNode"))
+      {
+        if (n.cst == 5062500.0)
+        {
+          changed = true;
+          mn.instructions.set(n, FieldInsnNode(GETSTATIC, "GPEBTWTweak", "hcSpawnRadiusAdjSq", "I"));
+          mn.instructions.insert(mn.instructions.get(i), toInsnList(
+            [
+              InsnNode(I2D),
+            ]
+          ));
+        }
+        else if (n.cst == 9000000.0)
+        {
+          changed = true;
+          mn.instructions.set(n, FieldInsnNode(GETSTATIC, "GPEBTWTweak", "hcSpawnRadiusAdj2Sq", "I"));
+          mn.instructions.insert(mn.instructions.get(i), toInsnList(
+            [
+              InsnNode(I2D),
+            ]
+          ));
+        }
+        else if (n.cst == 6250000.0)
+        {
+          changed = true;
+          mn.instructions.set(n, FieldInsnNode(GETSTATIC, "GPEBTWTweak", "hcSpawnRadiusAdjPSq", "I"));
+          mn.instructions.insert(mn.instructions.get(i), toInsnList(
+            [
+              InsnNode(I2D),
+            ]
+          ));
+        }
+      }
     }
-    else if (isInstance(n, "org.objectweb.asm.tree.LdcInsnNode") && ((n.cst == 7562500) || (n.cst == 9000000)))
+  } else {
+    for (var i = 0; i < mn.instructions.size(); i++)
     {
-      changed = true;
-      mn.instructions.set(n, FieldInsnNode(GETSTATIC, "GPEBTWTweak", "hcSpawnRadiusAdj2Sq", "I"));
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.LdcInsnNode"))
+      {
+        if (n.cst == 5062500)
+        {
+          changed = true;
+          mn.instructions.set(n, FieldInsnNode(GETSTATIC, "GPEBTWTweak", "hcSpawnRadiusAdjSq", "I"));
+        }
+        else if ((n.cst == 7562500) || (n.cst == 9000000))
+        {
+          changed = true;
+          mn.instructions.set(n, FieldInsnNode(GETSTATIC, "GPEBTWTweak", "hcSpawnRadiusAdj2Sq", "I"));
+        }
+      }
     }
   }
   return changed;
 }
-tweak("afq", "ComponentScatteredFeatureDesertPyramid", BOTH, "a(Laab;Ljava/util/Random;Laek;)Z", 0xBAE32112, "(1/3) Making Hardcore Spawn radius affect structures", constants2configHCS);
-tweak("afr", "ComponentScatteredFeatureJunglePyramid", BOTH, "CheckIfLooted(Laab;Laek;)Z", 0xE0440AE6, "(2/3) Making Hardcore Spawn radius affect structures", constants2configHCS);
-tweak("ahm", "ComponentVillageStartPiece", BOTH, "InitializeModSpecificData(Laab;)V", 0x87D022CC, "(3/3) Making Hardcore Spawn radius affect structures", constants2configHCS);
+var hcspatches = isBTWVersionOrNewer("4.A7 Squid A Swimming") ? 4 : 3;
+tweak("afq", "ComponentScatteredFeatureDesertPyramid", BOTH, "a(Laab;Ljava/util/Random;Laek;)Z", [0xBAE32112, 0x99E322D3], "(1/" + hcspatches + ") Making Hardcore Spawn radius affect structures", constants2configHCS);
+tweak("afr", "ComponentScatteredFeatureJunglePyramid", BOTH, "CheckIfLooted(Laab;Laek;)Z", [0xE0440AE6, 0x10E90CA7], "(2/" + hcspatches + ") Making Hardcore Spawn radius affect structures", constants2configHCS);
+tweak("ahm", "ComponentVillageStartPiece", BOTH, "InitializeModSpecificData(Laab;)V", [0x87D022CC, 0x3A242522], "(3/" + hcspatches + ") Making Hardcore Spawn radius affect structures", constants2configHCS);
+if (isBTWVersionOrNewer("4.A7 Squid A Swimming"))
+{
+  tweak("adx", "WorldGenPumpkin", BOTH, "CheckIfFresh(Laab;II)Z", 0xC0270A9E, "(4/4) Making Hardcore Spawn radius affect pumpkins", constants2configHCS);
+}
 
 tweak("jc", "EntityPlayerMP", BOTH, "DropMysteryMeat(I)V", 0x5B1D190E, "Adding player hardcore death hook",
 function(mn)

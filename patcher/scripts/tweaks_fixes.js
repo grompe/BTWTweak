@@ -50,27 +50,30 @@ function fixAxeCheckingForStump(mn)
 }
 
 // className, deobfName, side, method, checksums, description
-tweak("rf", "EntityBoat", BOTH, "l_()V", [0x8C1045A2, 0x20734BFD, 0xDE72592A], "Making boat safe from falling damage bug",
-function(mn)
+if (!isBTWVersionOrNewer("4.A7 Squid A Swimming"))
 {
-  var label = LabelNode();
-  return CodeInserter(
-    InsnFinder(RETURN),
-    [
-      VarInsnNode(ALOAD, 0),
-      FieldInsnNode(GETFIELD, "rf", "y", "D"),
-      InsnNode(DCONST_0),
-      InsnNode(DCMPL),
-      JumpInsnNode(IFLE, label),
-      VarInsnNode(ALOAD, 0),
-      InsnNode(FCONST_0),
-      FieldInsnNode(PUTFIELD, "rf", "T", "F"),
-      label,
-      FrameNode(F_SAME, 0, null, 0, null),
-    ],
-    INSERT_BEFORE
-  ).process(mn);
-});
+  tweak("rf", "EntityBoat", BOTH, "l_()V", [0x8C1045A2, 0x20734BFD, 0xDE72592A], "Making boat safe from falling damage bug",
+  function(mn)
+  {
+    var label = LabelNode();
+    return CodeInserter(
+      InsnFinder(RETURN),
+      [
+        VarInsnNode(ALOAD, 0),
+        FieldInsnNode(GETFIELD, "rf", "y", "D"),
+        InsnNode(DCONST_0),
+        InsnNode(DCMPL),
+        JumpInsnNode(IFLE, label),
+        VarInsnNode(ALOAD, 0),
+        InsnNode(FCONST_0),
+        FieldInsnNode(PUTFIELD, "rf", "T", "F"),
+        label,
+        FrameNode(F_SAME, 0, null, 0, null),
+      ],
+      INSERT_BEFORE
+    ).process(mn);
+  });
+}
 tweak("sf", "EntitySkeleton", BOTH, "c()V", 0x30572525, "Fixing mob not burning on slabs",
 function(mn)
 {
@@ -300,58 +303,79 @@ function(cn)
   ));
   cn.methods.add(mn);
 });
-tweak("jh", "NetServerHandler", BOTH, "a(Lee;)V", 0x338E4716, "Adding a server-side jump() call for the player",
-function(mn)
+if (isBTWVersionOrNewer("4.A7 Squid A Swimming"))
 {
-  for (var i = 0; i < mn.instructions.size(); i++)
+  tweak("sq", "EntityPlayer", BOTH, "AddExhaustionForJump()V", 0x18F5047D, "Not exhausting player for climbing on ladder",
+  function(mn)
   {
-    var n = mn.instructions.get(i);
-    if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("jc") && n.name.equals("j") && n.desc.equals("(F)V"))
-    {
-      var n2 = n.getPrevious(); // LdcInsnNode(Float("0.2"))
-      mn.instructions.remove(n2);
-      n.name = "bl"; // jump
-      n.desc = "()V";
-      return true;
-    }
-  }
-});
-tweak("sq", "EntityPlayer", BOTH, "bl()V", 0x3A2D06D8, "Making player's jump() public and handling server-side calls",
-function(mn)
-{
-  var label_new1 = LabelNode();
-  var label_new2 = LabelNode();
-  mn.access = ACC_PUBLIC;
-  var beginning = mn.instructions.get(0);
-  mn.instructions.insertBefore(beginning, toInsnList(
-    [
-      VarInsnNode(ALOAD, 0),
-      FieldInsnNode(GETFIELD, "sq", "q", "Laab;"),
-      FieldInsnNode(GETFIELD, "aab", "I", "Z"),
-      JumpInsnNode(IFEQ, label_new1),
-    ]
-  ));
-  for (var i = 0; i < mn.instructions.size(); i++)
+    var label = LabelNode();
+    return CodeInserter(
+      BeginningFinder(),
+      [
+        VarInsnNode(ALOAD, 0),
+        MethodInsnNode(INVOKEVIRTUAL, "sq", "g_", "()Z"),
+        JumpInsnNode(IFEQ, label),
+        InsnNode(RETURN),
+        label,
+        FrameNode(F_SAME, 0, null, 0, null),
+      ],
+      INSERT_BEFORE
+    ).process(mn);
+  });
+} else {
+  tweak("jh", "NetServerHandler", BOTH, "a(Lee;)V", 0x338E4716, "Adding a server-side jump() call for the player",
+  function(mn)
   {
-    var n = mn.instructions.get(i);
-    if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("sq") && n.name.equals("a") && n.desc.equals("(Lka;I)V"))
+    for (var i = 0; i < mn.instructions.size(); i++)
     {
-      mn.instructions.insert(n, toInsnList(
-        [
-          label_new1,
-          FrameNode(F_SAME, 0, null, 0, null),
-          VarInsnNode(ALOAD, 0),
-          MethodInsnNode(INVOKEVIRTUAL, "sq", "g_", "()Z"),
-          JumpInsnNode(IFEQ, label_new2),
-          InsnNode(RETURN),
-          label_new2,
-          FrameNode(F_SAME, 0, null, 0, null),
-        ]
-      ));
-      return true;
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("jc") && n.name.equals("j") && n.desc.equals("(F)V"))
+      {
+        var n2 = n.getPrevious(); // LdcInsnNode(Float("0.2"))
+        mn.instructions.remove(n2);
+        n.name = "bl"; // jump
+        n.desc = "()V";
+        return true;
+      }
     }
-  }
-});
+  });
+  tweak("sq", "EntityPlayer", BOTH, "bl()V", 0x3A2D06D8, "Making player's jump() public and handling server-side calls",
+  function(mn)
+  {
+    var label_new1 = LabelNode();
+    var label_new2 = LabelNode();
+    mn.access = ACC_PUBLIC;
+    var beginning = mn.instructions.get(0);
+    mn.instructions.insertBefore(beginning, toInsnList(
+      [
+        VarInsnNode(ALOAD, 0),
+        FieldInsnNode(GETFIELD, "sq", "q", "Laab;"),
+        FieldInsnNode(GETFIELD, "aab", "I", "Z"),
+        JumpInsnNode(IFEQ, label_new1),
+      ]
+    ));
+    for (var i = 0; i < mn.instructions.size(); i++)
+    {
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("sq") && n.name.equals("a") && n.desc.equals("(Lka;I)V"))
+      {
+        mn.instructions.insert(n, toInsnList(
+          [
+            label_new1,
+            FrameNode(F_SAME, 0, null, 0, null),
+            VarInsnNode(ALOAD, 0),
+            MethodInsnNode(INVOKEVIRTUAL, "sq", "g_", "()Z"),
+            JumpInsnNode(IFEQ, label_new2),
+            InsnNode(RETURN),
+            label_new2,
+            FrameNode(F_SAME, 0, null, 0, null),
+          ]
+        ));
+        return true;
+      }
+    }
+  });
+}
 // Fix achievements to be achievable
 tweak("jv", "AchievementList", BOTH, "<clinit>()V", 0x562B905E, "(1/4) Making achievements achievable",
 function(mn)
@@ -527,31 +551,34 @@ function(mn)
     }
   }
 });
-tweak("pk", "EntityAISit", BOTH, "a()Z", 0xC59E0D23, "Preventing wolves/cats from teleporting to player on growing up",
-function(mn)
+if (!isBTWVersionOrNewer("4.A7 Squid A Swimming"))
 {
-  for (var i = 0; i < mn.instructions.size(); i++)
+  tweak("pk", "EntityAISit", BOTH, "a()Z", 0xC59E0D23, "Preventing wolves/cats from teleporting to player on growing up",
+  function(mn)
   {
-    var n = mn.instructions.get(i);
-    if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner.equals("nu") && n.name.equals("F") && n.desc.equals("Z"))
+    for (var i = 0; i < mn.instructions.size(); i++)
     {
-      var n2 = n.getNext();
-      if (isInstance(n2, "org.objectweb.asm.tree.JumpInsnNode") && (n2.opcode == IFNE))
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner.equals("nu") && n.name.equals("F") && n.desc.equals("Z"))
       {
-        n2.opcode = IFLE;
-        mn.instructions.insert(n, toInsnList(
-          [
-            FieldInsnNode(GETFIELD, "nu", "T", "F"),
-            LdcInsnNode(Float("0.5")),
-            InsnNode(FCMPL),
-          ]
-        ));
-        mn.instructions.remove(n);
-        return true;
+        var n2 = n.getNext();
+        if (isInstance(n2, "org.objectweb.asm.tree.JumpInsnNode") && (n2.opcode == IFNE))
+        {
+          n2.opcode = IFLE;
+          mn.instructions.insert(n, toInsnList(
+            [
+              FieldInsnNode(GETFIELD, "nu", "T", "F"),
+              LdcInsnNode(Float("0.5")),
+              InsnNode(FCMPL),
+            ]
+          ));
+          mn.instructions.remove(n);
+          return true;
+        }
       }
     }
-  }
-});
+  });
+}
 tweak("mp", "Entity", BOTH, "x()V", 0x1C8882FF, "Kill players that went through the roof of the Nether",
 function(mn)
 {

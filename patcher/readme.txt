@@ -7,10 +7,16 @@ v0.9m (unreleased)
 
 - Fixed occasional severe hunger loss while climbing ladders and ropes
   as sometimes server thought it was continuous jumping.
+  For BTW versions before 4.A7 Squid A Swimming:
   Coincidentally, fixed sprint-jumping not exhausting player more than
   regular jumping, which made bunny hopping more efficient on food than
   simply sprinting. The hopping tactic to quickly and safely traverse the
   desert is much more costly now.
+
+- Skipped boat fall damage fix as it is now implemented in BTW.
+
+- Skipped pet growing up teleportation fix as it is now implemented in BTW.
+
 
 v0.9l
 
