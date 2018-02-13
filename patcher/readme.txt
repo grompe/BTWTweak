@@ -17,6 +17,8 @@ v0.9m (unreleased)
 
 - Skipped pet growing up teleportation fix as it is now implemented in BTW.
 
+- Made it so ladder prefers to be placed in the same orientation as a piece
+  above it or below, when aiming at a side that cannot support ladder.
 
 v0.9l
 

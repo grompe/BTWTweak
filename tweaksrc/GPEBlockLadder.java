@@ -23,6 +23,21 @@ public class GPEBlockLadder extends FCBlockLadder
   public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta)
   {
     int tryside = meta;
+    if (tryside == 0)
+    {
+      if (world.getBlockId(x, y + 1, z) == this.blockID)
+      {
+        tryside = world.getBlockMetadata(x, y + 1, z);
+      }
+      else if (world.getBlockId(x, y - 1, z) == this.blockID)
+      {
+        tryside = world.getBlockMetadata(x, y - 1, z);
+      }
+      if ((tryside == 2) && !FCUtilsWorld.DoesBlockHaveLargeCenterHardpointToFacing(world, x, y, z + 1, 2)) tryside = 0;
+      if ((tryside == 3) && !FCUtilsWorld.DoesBlockHaveLargeCenterHardpointToFacing(world, x, y, z - 1, 3)) tryside = 0;
+      if ((tryside == 4) && !FCUtilsWorld.DoesBlockHaveLargeCenterHardpointToFacing(world, x + 1, y, z, 4)) tryside = 0;
+      if ((tryside == 5) && !FCUtilsWorld.DoesBlockHaveLargeCenterHardpointToFacing(world, x - 1, y, z, 5)) tryside = 0;
+    }
     if ((tryside == 0 || side == 2) && FCUtilsWorld.DoesBlockHaveLargeCenterHardpointToFacing(world, x, y, z + 1, 2)) tryside = 2;
     if ((tryside == 0 || side == 3) && FCUtilsWorld.DoesBlockHaveLargeCenterHardpointToFacing(world, x, y, z - 1, 3)) tryside = 3;
     if ((tryside == 0 || side == 4) && FCUtilsWorld.DoesBlockHaveLargeCenterHardpointToFacing(world, x + 1, y, z, 4)) tryside = 4;
