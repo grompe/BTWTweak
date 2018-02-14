@@ -1,0 +1,10 @@
+diff --git a/src/minecraft/net/minecraft/src/EntityFishHook.java b/src/minecraft/net/minecraft/src/EntityFishHook.java
+index 9b49bc6..aae5a9c 100644
+--- a/src/minecraft/net/minecraft/src/EntityFishHook.java
++++ b/src/minecraft/net/minecraft/src/EntityFishHook.java
+@@ -262 +262 @@ public void onUpdate()
+-                if (var11.canBeCollidedWith() && (var11 != this.angler || this.ticksInAir >= 5))
++                if (var11 instanceof EntityItem || var11.canBeCollidedWith() && (var11 != this.angler || this.ticksInAir >= 5))
+@@ -290 +290 @@ public void onUpdate()
+-                    if (var24.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.angler), 0))
++                    if (var24.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.angler), 0) || true)

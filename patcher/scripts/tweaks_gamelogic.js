@@ -1029,6 +1029,49 @@ function(cn)
   ));
   cn.methods.add(mn);
 });
+tweak("sw", "EntityFishHook", BOTH, "l_()V", 0xDE67A24A, "Allowing to hook items by a fishing rod",
+function(mn)
+{
+  var changes = 0;
+  var i;
+  for (i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("mp") && n.name.equals("K") && n.desc.equals("()Z"))
+    {
+      mn.instructions.insertBefore(n, toInsnList(
+        [
+          InsnNode(DUP),
+        ]
+      ));
+      mn.instructions.insert(n, toInsnList(
+        [
+          InsnNode(SWAP),
+          TypeInsnNode(INSTANCEOF, "rh"),
+          InsnNode(IOR),
+        ]
+      ));
+      changes++;
+      break;
+    }
+  }
+  for (i += 1; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("mp") && n.name.equals("a") && n.desc.equals("(Lmg;I)Z"))
+    {
+      mn.instructions.insert(n, toInsnList(
+        [
+          InsnNode(POP),
+          InsnNode(ICONST_1),
+        ]
+      ));
+      changes++;
+      break;
+    }
+  }
+  return (changes == 2);
+});
 tweak("ayl", "GuiContainer", CLIENT, "a(CI)V", 0x80F11C55, "Adding a hook for taking all slots to containers",
 function(mn)
 {

@@ -27,6 +27,9 @@ v0.9m (unreleased)
 - Made carved pumpkins fall just like the regular ones and Jack-o-lanterns,
   and also Jack-o-lanterns to extinguish when facing water.
 
+- Made it possible to hook items and non-damageable entities with a fishing
+  hook. This should make fishing rods more interesting and useful.
+
 v0.9l
 
 - Fixed extraneous attempts to integrate with Deco addon.
