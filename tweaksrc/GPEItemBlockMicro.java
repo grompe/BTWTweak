@@ -792,7 +792,7 @@ public abstract class GPEItemBlockMicro extends FCItemBlockCustom
   {
     if (id == FCBetterThanWolves.fcBlockSidingAndCornerBlackStone.blockID)  return 156;
     if (id == FCBetterThanWolves.fcBlockSandstoneSidingAndCorner.blockID)   return 128;
-    if (id == FCBetterThanWolves.fcBlockSmoothStoneSidingAndCorner.blockID) return -1;
+    if (id == FCBetterThanWolves.fcBlockSmoothStoneSidingAndCorner.blockID) return GPEBTWTweak.btwSmoothstoneStairs ? 1003 : -1;
     if (id == FCBetterThanWolves.fcBlockBrickSidingAndCorner.blockID)       return 108;
     if (id == FCBetterThanWolves.fcBlockNetherBrickSidingAndCorner.blockID) return 114;
     if (id == FCBetterThanWolves.fcBlockWhiteStoneSidingAndCorner.blockID)  return FCBetterThanWolves.fcBlockWhiteStoneStairs.blockID;

@@ -14,11 +14,15 @@ v0.9m (unreleased)
   desert is much more costly now.
 
 - Skipped boat fall damage fix as it is now implemented in BTW.
+  Previous versions of BTW still get the fix.
 
 - Skipped pet growing up teleportation fix as it is now implemented in BTW.
+  Previous versions of BTW still get the fix.
 
 - Made it so ladder prefers to be placed in the same orientation as a piece
   above it or below, when aiming at a side that cannot support ladder.
+
+- Added smoothstone stairs to microblock merging.
 
 v0.9l
 
