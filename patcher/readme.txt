@@ -24,6 +24,9 @@ v0.9m (unreleased)
 
 - Added smoothstone stairs to microblock merging.
 
+- Made carved pumpkins fall just like the regular ones and Jack-o-lanterns,
+  and also Jack-o-lanterns to extinguish when facing water.
+
 v0.9l
 
 - Fixed extraneous attempts to integrate with Deco addon.
