@@ -32,6 +32,7 @@ public class BTWTweaker
   public static int failures = 0;
 
   public static String btwVersion = "unknown";
+  private static String tweakVersion;
 
   public static void log(String s)
   {
@@ -141,6 +142,7 @@ public class BTWTweaker
 
   public static void tweak(String jarname, int jartype) throws Exception
   {
+    log("BTWTweak version: " + BTWTweaker.getTweakVersion());
     onServer = (jartype == STATUS_BTWSERVER);
     try
     {
@@ -272,6 +274,36 @@ public class BTWTweaker
     } else {
       log("%d ERRORS during the patching - review the log, test and take care!", failures);
     }
+  }
+
+  public static String getTweakVersion() throws IOException
+  {
+    if (tweakVersion != null) return tweakVersion;
+    InputStream instream = MAIN_CLASS.getResourceAsStream("GPEBTWTweak_files.zip");
+    ZipInputStream zis = new ZipInputStream(instream);
+    ZipEntry entry;
+    while ((entry = zis.getNextEntry()) != null)
+    {
+      if (entry.getName().equals("GPEBTWTweak.class"))
+      {
+        ClassReader cr = new ClassReader(zis);
+        ClassNode cn = new ClassNode();
+        cr.accept(cn, 0);
+        Iterator<FieldNode> fields = cn.fields.iterator();
+        while (fields.hasNext())
+        {
+          FieldNode field = fields.next();
+          if (field.name.equals("tweakVersion"))
+          {
+            tweakVersion = (String)field.value;
+            break;
+          }
+        }
+        break;
+      }
+    }
+    zis.close();
+    return tweakVersion;
   }
 
 }

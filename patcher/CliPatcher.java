@@ -37,7 +37,8 @@ public class CliPatcher
     }
 
     System.out.println("== Grom PE's BTWTweak patcher ==");
-    System.out.println("Built on: 10 Nov 2015");
+    System.out.println("Patcher built on: 15 Feb 2018");
+    System.out.println("BTWTweak version: " + BTWTweaker.getTweakVersion());
     System.out.println("Current directory: " + System.getProperty("user.dir"));
 
     ArrayList<String> btwVersions = new ArrayList<String>();

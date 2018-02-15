@@ -7,6 +7,8 @@ v0.9m
 
 - Fixed compatibility with BTW version "4.A7 Squid A Swimming".
 
+- Patcher now reports BTWTweak version at startup and patching.
+
 - Fixed occasional severe hunger loss while climbing ladders and ropes
   as sometimes server thought it was continuous jumping.
   For BTW versions before 4.A7 Squid A Swimming:
