@@ -3,7 +3,9 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.9m
 
 [********** Change Log ************]
 
-v0.9m (unreleased)
+v0.9m
+
+- Fixed compatibility with BTW version "4.A7 Squid A Swimming".
 
 - Fixed occasional severe hunger loss while climbing ladders and ropes
   as sometimes server thought it was continuous jumping.
