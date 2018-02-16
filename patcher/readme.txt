@@ -1,7 +1,11 @@
-Grom PE's Better Than Wolves Total Conversion tweak mod v0.9m
+Grom PE's Better Than Wolves Total Conversion tweak mod v0.9n
 (Compatible with Better Than Wolves V4.8911+)
 
 [********** Change Log ************]
+
+v0.9n
+
+- Fixed axes not harvesting logs properly due to incomplete BTW refactoring.
 
 v0.9m
 
