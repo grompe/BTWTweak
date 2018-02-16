@@ -157,7 +157,37 @@ function(mn)
 if (isBTWVersionOrNewer("4.A2 Timing Rodent"))
 {
   tweak("wi", "ItemAxe", BOTH, "getStrVsBlock(Lwm;Laab;Lapa;III)F", 0xF8E30EFB, "(1/3) Making axe check for tree stump block ID rather than block", fixAxeCheckingForStump);
-  tweak("wi", "ItemAxe", BOTH, "canHarvestBlock(Laab;Lapa;III)Z", 0xB5DB0C08, "(2/3) Making axe check for tree stump block ID rather than block", fixAxeCheckingForStump);
+  tweak("wi", "ItemAxe", BOTH, "canHarvestBlock(Laab;Lapa;III)Z", 0xB5DB0C08, "(2/3) Making axe check for tree stump block ID rather than block",
+  function(mn)
+  {
+    if (isBTWVersionOrNewer("4.A7 Squid A Swimming"))
+    {
+      var changes = 0;
+      for (var i = 0; i < mn.instructions.size(); i++)
+      {
+        var n = mn.instructions.get(i);
+        if (isInstance(n, "org.objectweb.asm.tree.FrameNode"))
+        {
+          var label = LabelNode();
+          mn.instructions.insert(n, toInsnList(
+            [
+              VarInsnNode(ALOAD, 2),
+              MethodInsnNode(INVOKEVIRTUAL, "apa", "AreAxesEffectiveOn", "()Z"),
+              JumpInsnNode(IFEQ, label),
+              InsnNode(ICONST_1),
+              InsnNode(IRETURN),
+              label,
+              FrameNode(F_SAME, 0, null, 0, null),
+            ]
+          ));
+          changes++;
+          break;
+        }
+      }
+      if (changes != 1) return false;
+    }
+    return fixAxeCheckingForStump(mn);
+  });
   tweak("wi", "ItemAxe", BOTH, "IsEffecientVsBlock(Laab;Lapa;III)Z", 0x84A511D2, "(3/3) Making axe check for tree stump block ID rather than block", fixAxeCheckingForStump);
 }
 // Fix logging in and out repeatedly to abuse initial invulnerability to avoid dying
