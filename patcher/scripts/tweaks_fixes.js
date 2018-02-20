@@ -79,7 +79,7 @@ function(mn)
 {
   return fixMobToBurnOnSlabs(mn);
 });
-tweak("sj", "EntityZombie", BOTH, "c()V", [0x4F1922DE, 0x45652A3D], "Fixing mob not burning on slabs",
+tweak("sj", "EntityZombie", BOTH, "c()V", [0x4F1922DE, 0x45652A3D, 0xB4E223AF], "Fixing mob not burning on slabs",
 function(mn)
 {
   return fixMobToBurnOnSlabs(mn);

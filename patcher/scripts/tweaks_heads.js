@@ -17,7 +17,7 @@ function dropHeadCode(classname, index)
 }
 
 // className, deobfName, side, method, checksums, description
-tweak("bjb", "TileEntitySkullRenderer", CLIENT, "a(FFFIFILjava/lang/String;)V", [0x991332F, 0x6EAA383B], "Adding skulls to render",
+tweak("bjb", "TileEntitySkullRenderer", CLIENT, "a(FFFIFILjava/lang/String;)V", [0x991332F, 0x6EAA383B, 0xC4EA38DB], "Adding skulls to render",
 function(mn)
 {
   var changes = 0;
