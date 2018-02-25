@@ -3,7 +3,7 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.9o
 
 [********** Change Log ************]
 
-v0.9o (unreleased)
+v0.9o
 
 - Fixed compatibility with BTW version "4.A9 Pustules Lancing".
 
