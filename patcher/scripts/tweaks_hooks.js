@@ -297,7 +297,7 @@ function(mn)
   }
   return changes == 2;
 });
-tweak("FCBlockSaw", null, BOTH, "HandleSawingExceptionCases(Laab;IIIIIIILjava/util/Random;)Z", 0xB82C6297, "Inserting onBlockSawed() hook",
+tweak("FCBlockSaw", null, BOTH, "HandleSawingExceptionCases(Laab;IIIIIIILjava/util/Random;)Z", [0xB82C6297, 0x73165BA4], "Inserting onBlockSawed() hook",
 function(mn)
 {
   var changes = 0;
@@ -382,24 +382,43 @@ function(mn)
   mn.access = ACC_PUBLIC | ACC_STATIC;
   return true;
 });
-tweak("gu", "ServerConfigurationManager", BOTH, "AssignNewHardcoreSpawnLocation(Laab;Ljc;)Z", [0x21D136B5, 0x8CE23774, 0xE88A3F80], "Making Hardcore Spawn radius configurable",
-function(mn)
-{
-  return CodeInserter(
-    InsnFinder(DMUL),
-    [
-      InsnNode(POP2),
-      FieldInsnNode(GETSTATIC, "GPEBTWTweak", "hcSpawnRadius", "I"),
-      InsnNode(I2D),
-    ],
-    INSERT_BEFORE
-  ).process(mn);
-});
-
 function constants2configHCS(mn)
 {
   var changed = false;
-  if (isBTWVersionOrNewer("4.A7 Squid A Swimming"))
+  if (isBTWVersionOrNewer("4.A9 Pustules Lancing"))
+  {
+    for (var i = 0; i < mn.instructions.size(); i++)
+    {
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.LdcInsnNode"))
+      {
+        if ((n.cst >= 1000.0) && (n.cst <= 3000.0))
+        {
+          var scale = n.cst / 2000.0;
+          changed = true;
+          mn.instructions.set(n, FieldInsnNode(GETSTATIC, "GPEBTWTweak", "hcSpawnRadius", "I"));
+          mn.instructions.insert(mn.instructions.get(i), toInsnList(
+            [
+              InsnNode(I2D),
+              LdcInsnNode(Double(scale)),
+              InsnNode(DMUL),
+            ]
+          ));
+        }
+        else if (n.cst == 6250000.0) // pumpkins
+        {
+          changed = true;
+          mn.instructions.set(n, FieldInsnNode(GETSTATIC, "GPEBTWTweak", "hcSpawnRadiusAdjPSq", "I"));
+          mn.instructions.insert(mn.instructions.get(i), toInsnList(
+            [
+              InsnNode(I2D),
+            ]
+          ));
+        }
+      }
+    }
+  }
+  else if (isBTWVersionOrNewer("4.A7 Squid A Swimming"))
   {
     for (var i = 0; i < mn.instructions.size(); i++)
     {
@@ -459,13 +478,34 @@ function constants2configHCS(mn)
   }
   return changed;
 }
-var hcspatches = isBTWVersionOrNewer("4.A7 Squid A Swimming") ? 4 : 3;
-tweak("afq", "ComponentScatteredFeatureDesertPyramid", BOTH, "a(Laab;Ljava/util/Random;Laek;)Z", [0xBAE32112, 0x99E322D3], "(1/" + hcspatches + ") Making Hardcore Spawn radius affect structures", constants2configHCS);
-tweak("afr", "ComponentScatteredFeatureJunglePyramid", BOTH, "CheckIfLooted(Laab;Laek;)Z", [0xE0440AE6, 0x10E90CA7], "(2/" + hcspatches + ") Making Hardcore Spawn radius affect structures", constants2configHCS);
-tweak("ahm", "ComponentVillageStartPiece", BOTH, "InitializeModSpecificData(Laab;)V", [0x87D022CC, 0x3A242522], "(3/" + hcspatches + ") Making Hardcore Spawn radius affect structures", constants2configHCS);
+if (isBTWVersionOrNewer("4.A9 Pustules Lancing"))
+{
+  tweak("FCUtilsHardcoreSpawn", null, BOTH, "GetPlayerSpawnRadius()D", 0x9630308, "(1/2) Making Hardcore Spawn radius configurable", constants2configHCS);
+  tweak("FCUtilsHardcoreSpawn", null, BOTH, "GetPlayerSpawnExclusionRadius()D", 0x9630308, "(2/2) Making Hardcore Spawn radius configurable", constants2configHCS);
+  tweak("FCUtilsHardcoreSpawn", null, BOTH, "GetAbandonedVillageRadius()D", 0x3F901E5, "(1/2) Making configurable Hardcore Spawn radius affect villages", constants2configHCS);
+  tweak("FCUtilsHardcoreSpawn", null, BOTH, "GetPartiallyAbandonedVillageRadius()D", 0x3F901E5, "(2/2) Making configurable Hardcore Spawn radius affect villages", constants2configHCS);
+  tweak("FCUtilsHardcoreSpawn", null, BOTH, "GetLootedTempleRadius()D", 0x3F901E5, "Making configurable Hardcore Spawn radius affect temples", constants2configHCS);
+} else {
+  tweak("gu", "ServerConfigurationManager", BOTH, "AssignNewHardcoreSpawnLocation(Laab;Ljc;)Z", [0x21D136B5, 0x8CE23774, 0xE88A3F80], "Making Hardcore Spawn radius configurable",
+  function(mn)
+  {
+    return CodeInserter(
+      InsnFinder(DMUL),
+      [
+        InsnNode(POP2),
+        FieldInsnNode(GETSTATIC, "GPEBTWTweak", "hcSpawnRadius", "I"),
+        InsnNode(I2D),
+      ],
+      INSERT_BEFORE
+    ).process(mn);
+  });
+  tweak("afq", "ComponentScatteredFeatureDesertPyramid", BOTH, "a(Laab;Ljava/util/Random;Laek;)Z", [0xBAE32112, 0x99E322D3], "Making Hardcore Spawn radius affect desert temples", constants2configHCS);
+  tweak("afr", "ComponentScatteredFeatureJunglePyramid", BOTH, "CheckIfLooted(Laab;Laek;)Z", [0xE0440AE6, 0x10E90CA7], "Making Hardcore Spawn radius affect jungle temples", constants2configHCS);
+  tweak("ahm", "ComponentVillageStartPiece", BOTH, "InitializeModSpecificData(Laab;)V", [0x87D022CC, 0x3A242522], "Making Hardcore Spawn radius affect villages", constants2configHCS);
+}
 if (isBTWVersionOrNewer("4.A7 Squid A Swimming"))
 {
-  tweak("adx", "WorldGenPumpkin", BOTH, "CheckIfFresh(Laab;II)Z", 0xC0270A9E, "(4/4) Making Hardcore Spawn radius affect pumpkins", constants2configHCS);
+  tweak("adx", "WorldGenPumpkin", BOTH, "CheckIfFresh(Laab;II)Z", 0xC0270A9E, "Making Hardcore Spawn radius affect pumpkins", constants2configHCS);
 }
 
 tweak("jc", "EntityPlayerMP", BOTH, "DropMysteryMeat(I)V", 0x5B1D190E, "Adding player hardcore death hook",

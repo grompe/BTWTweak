@@ -608,27 +608,30 @@ function(mn)
     }
   }
 });
-tweak("FCBlockKiln", null, BOTH, "a(Laab;IIILjava/util/Random;)V", 0x2DAB2AE1, "(1/3) Improving the crack",
-function(mn)
+if (!isBTWVersionOrNewer("4.A9 Pustules Lancing"))
 {
-  return replaceAllMethodCalls(mn,
-    [INVOKEVIRTUAL, "aab", "f", "(IIIII)V"],
-    [INVOKESTATIC, "GPEBTWTweak", "addKilnCrackEffect", "(Laab;IIIII)V"]);
-});
-tweak("FCBlockKiln", null, BOTH, "a(Laab;IIIII)V", 0x358204FD, "(2/3) Improving the crack",
-function(mn)
-{
-  return replaceAllMethodCalls(mn,
-    [INVOKEVIRTUAL, "aab", "f", "(IIIII)V"],
-    [INVOKESTATIC, "GPEBTWTweak", "addKilnCrackEffect", "(Laab;IIIII)V"]);
-});
-tweak("FCBlockKiln", null, BOTH, "a(Laab;IIII)V", 0x6D780E50, "(3/3) Improving the crack",
-function(mn)
-{
-  return replaceAllMethodCalls(mn,
-    [INVOKEVIRTUAL, "aab", "f", "(IIIII)V"],
-    [INVOKESTATIC, "GPEBTWTweak", "addKilnCrackEffect", "(Laab;IIIII)V"]);
-});
+  tweak("FCBlockKiln", null, BOTH, "a(Laab;IIILjava/util/Random;)V", 0x2DAB2AE1, "(1/3) Improving the crack",
+  function(mn)
+  {
+    return replaceAllMethodCalls(mn,
+      [INVOKEVIRTUAL, "aab", "f", "(IIIII)V"],
+      [INVOKESTATIC, "GPEBTWTweak", "addKilnCrackEffect", "(Laab;IIIII)V"]);
+  });
+  tweak("FCBlockKiln", null, BOTH, "a(Laab;IIIII)V", 0x358204FD, "(2/3) Improving the crack",
+  function(mn)
+  {
+    return replaceAllMethodCalls(mn,
+      [INVOKEVIRTUAL, "aab", "f", "(IIIII)V"],
+      [INVOKESTATIC, "GPEBTWTweak", "addKilnCrackEffect", "(Laab;IIIII)V"]);
+  });
+  tweak("FCBlockKiln", null, BOTH, "a(Laab;IIII)V", 0x6D780E50, "(3/3) Improving the crack",
+  function(mn)
+  {
+    return replaceAllMethodCalls(mn,
+      [INVOKEVIRTUAL, "aab", "f", "(IIIII)V"],
+      [INVOKESTATIC, "GPEBTWTweak", "addKilnCrackEffect", "(Laab;IIIII)V"]);
+  });
+}
 tweak("FCTileEntityTurntable", null, BOTH, "<init>()V", 0x41CA0676, "Adding visual spin init",
 function(mn)
 {

@@ -157,10 +157,10 @@ function(mn)
 if (isBTWVersionOrNewer("4.A2 Timing Rodent"))
 {
   tweak("wi", "ItemAxe", BOTH, "getStrVsBlock(Lwm;Laab;Lapa;III)F", 0xF8E30EFB, "(1/3) Making axe check for tree stump block ID rather than block", fixAxeCheckingForStump);
-  tweak("wi", "ItemAxe", BOTH, "canHarvestBlock(Laab;Lapa;III)Z", 0xB5DB0C08, "(2/3) Making axe check for tree stump block ID rather than block",
+  tweak("wi", "ItemAxe", BOTH, "canHarvestBlock(Laab;Lapa;III)Z", [0xB5DB0C08, 0x76F4089E], "(2/3) Making axe check for tree stump block ID rather than block",
   function(mn)
   {
-    if (isBTWVersionOrNewer("4.A7 Squid A Swimming"))
+    if (isBTWVersionOrNewer("4.A7 Squid A Swimming") && !isBTWVersionOrNewer("4.A9 Pustules Lancing"))
     {
       var changes = 0;
       for (var i = 0; i < mn.instructions.size(); i++)
