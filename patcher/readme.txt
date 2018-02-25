@@ -3,9 +3,12 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v0.9o
 
 [********** Change Log ************]
 
-v0.9o
+v0.9o (unreleased)
 
 - Fixed compatibility with BTW version "4.A9 Pustules Lancing".
+
+- Skipped kiln crack fix as it is now implemented in BTW.
+  Previous versions of BTW still get the fix.
 
 - Changed configurable Hardcore Spawn radius so it can only be increased from
   default value of 2000 blocks.
