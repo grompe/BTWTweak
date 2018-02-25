@@ -1,5 +1,5 @@
 diff --git a/src/minecraft/net/minecraft/src/FCBlockWoodSidingAndCornerAndDecorative.java b/src/minecraft/net/minecraft/src/FCBlockWoodSidingAndCornerAndDecorative.java
-index 1a6c7dd..a86b749 100644
+index 1a6c7dd..686f830 100644
 --- a/src/minecraft/net/minecraft/src/FCBlockWoodSidingAndCornerAndDecorative.java
 +++ b/src/minecraft/net/minecraft/src/FCBlockWoodSidingAndCornerAndDecorative.java
 @@ -67 +67 @@ public int GetItemIDDroppedOnSaw(World var1, int var2, int var3, int var4)
@@ -21,7 +21,7 @@ index 1a6c7dd..a86b749 100644
 +        l.add(new ItemStack(id, 1, 2));
 +        l.add(new ItemStack(id, 1, 3));
 +        if (id == FCBetterThanWolves.fcBlockWoodBirchMouldingAndDecorative.blockID)
-@@ -127,3 +131,8 @@ public void getSubBlocks(int var1, CreativeTabs var2, List var3)
+@@ -127,3 +131,14 @@ public void getSubBlocks(int var1, CreativeTabs var2, List var3)
 -            var3.add(new ItemStack(var1, 1, 12));
 -            var3.add(new ItemStack(var1, 1, 0));
 -            var3.add(new ItemStack(var1, 1, 1));
@@ -33,24 +33,39 @@ index 1a6c7dd..a86b749 100644
 +          l.add(new ItemStack(id, 1, 9));
 +          l.add(new ItemStack(id, 1, 10));
 +          l.add(new ItemStack(id, 1, 11));
-@@ -131 +140 @@ public void getSubBlocks(int var1, CreativeTabs var2, List var3)
++          if (GPEBTWTweak.btwBloodPlanks)
++          {
++            l.add(new ItemStack(id, 1, 16));
++            l.add(new ItemStack(id, 1, 20));
++            l.add(new ItemStack(id, 1, 24));
++          }
+@@ -131 +146 @@ public void getSubBlocks(int var1, CreativeTabs var2, List var3)
 -        else
 +        if (id == FCBetterThanWolves.fcBlockWoodJungleSidingAndCorner.blockID)
-@@ -133 +142,3 @@ public void getSubBlocks(int var1, CreativeTabs var2, List var3)
+@@ -133 +148,8 @@ public void getSubBlocks(int var1, CreativeTabs var2, List var3)
 -            super.getSubBlocks(var1, var2, var3);
 +          l.add(new ItemStack(id, 1, 5));
 +          l.add(new ItemStack(id, 1, 6));
 +          l.add(new ItemStack(id, 1, 7));
-@@ -135,0 +147,12 @@ public void getSubBlocks(int var1, CreativeTabs var2, List var3)
++          if (GPEBTWTweak.btwBloodPlanks)
++          {
++            l.add(new ItemStack(id, 1, 16));
++            l.add(new ItemStack(id, 1, 20));
++          }
+@@ -135,0 +158,16 @@ public void getSubBlocks(int var1, CreativeTabs var2, List var3)
 +
 +    public int getDamageValue(World world, int x, int y, int z)
 +    {
 +      int id = world.getBlockId(x, y, z);
-+      if (id == FCBetterThanWolves.fcBlockWoodSpruceMouldingAndDecorative.blockID) return 1;
-+      if (id == FCBetterThanWolves.fcBlockWoodSpruceSidingAndCorner.blockID)       return 1;
-+      if (id == FCBetterThanWolves.fcBlockWoodBirchMouldingAndDecorative.blockID)  return 2;
-+      if (id == FCBetterThanWolves.fcBlockWoodBirchSidingAndCorner.blockID)        return 2;
-+      if (id == FCBetterThanWolves.fcBlockWoodJungleMouldingAndDecorative.blockID) return 3;
-+      if (id == FCBetterThanWolves.fcBlockWoodJungleSidingAndCorner.blockID)       return 3;
++      int meta = world.getBlockMetadata(x, y, z);
++      if (id == FCBetterThanWolves.fcBlockWoodOakMouldingAndDecorative.blockID)    return meta == 15 ? 8  : meta >= 13 ? 4 : 0;
++      if (id == FCBetterThanWolves.fcBlockWoodSpruceMouldingAndDecorative.blockID) return meta == 15 ? 9  : meta >= 13 ? 5 : 1;
++      if (id == FCBetterThanWolves.fcBlockWoodSpruceSidingAndCorner.blockID)       return meta == 14 ? 5  : 1;
++      if (id == FCBetterThanWolves.fcBlockWoodBirchMouldingAndDecorative.blockID)  return meta == 15 ? 10 : meta >= 13 ? 6 : 2;
++      if (id == FCBetterThanWolves.fcBlockWoodBirchSidingAndCorner.blockID)        return meta == 14 ? 6  : 2;
++      if (id == FCBetterThanWolves.fcBlockWoodJungleMouldingAndDecorative.blockID) return meta == 15 ? 11 : meta >= 13 ? 7 : 3;
++      if (id == FCBetterThanWolves.fcBlockWoodJungleSidingAndCorner.blockID)       return meta == 14 ? 7  : 3;
++      if (id == 1008) return meta == 15 ? 24 : meta >= 13 ? 20 : meta == 12 ? 16 : 4;
++      if (id == 1007) return meta == 14 ? 20 : meta == 12 ? 16 : 4;
 +      return 0;
 +    }

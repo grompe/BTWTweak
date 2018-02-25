@@ -15,6 +15,11 @@ v0.9o (unreleased)
 
 - Added blood wood planks and stairs to microblock merging.
 
+- Fixed middle-click block picking for wooden microblocks, again, also
+  including blood wood.
+
+- Added blood wood blocks to creative tabs.
+
 v0.9n
 
 - Fixed axes not harvesting logs properly due to incomplete BTW refactoring.
