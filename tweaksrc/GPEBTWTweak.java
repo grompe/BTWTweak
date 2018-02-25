@@ -11,7 +11,7 @@ public class GPEBTWTweak extends FCAddOn
 {
   public static GPEBTWTweak instance;
   private static GPEBTWTweakProxy proxy;
-  public static final String tweakVersion = "0.9n";
+  public static final String tweakVersion = "0.9o";
 
   private static boolean postPostInitialized = false;
   public static boolean isDecoPresent;
@@ -49,6 +49,7 @@ public class GPEBTWTweak extends FCAddOn
   public static boolean btwBone = isBTWVersionOrNewer("4.A3 Headed Beastie");
   public static boolean btwFlesh = isBTWVersionOrNewer("4.A4 Kiloblock Boon");
   public static boolean btwSmoothstoneStairs = isBTWVersionOrNewer("4.A7 Squid A Swimming");
+  public static boolean btwBloodPlanks = isBTWVersionOrNewer("4.A9 Pustules Lancing");
 
   public static int gpeLooseRockID = 17000;
   public static int gpeSilkID = 17001;
@@ -149,8 +150,8 @@ public class GPEBTWTweak extends FCAddOn
         + "hotbarCycling=1\r\n"
         + "\r\n"
         + "// Hardcore Spawn radius, in blocks. Increasing it will make structures affected at further radius as well.\r\n"
-        + "// Decreasing it won't make populated villages or anything of the sort closer to the spawn.\r\n"
-        + "// Maximum value: 46340\r\n"
+        + "// Large Biomes worlds will use 4x this value.\r\n"
+        + "// Minimum value: 2000; maximum value: 46340\r\n"
         + "\r\n"
         + "hcSpawnRadius=2000\r\n"
         + "\r\n"
@@ -245,13 +246,14 @@ public class GPEBTWTweak extends FCAddOn
     isDecoPresent = classExists("AddonManager");
     if (!isDecoPresent && !isBTWVersionOrNewer("4.A4 Kiloblock Boon")) extendBlockIDs();
 
-    hcSpawnRadiusAdjSq = Math.max((int)(hcSpawnRadius*hcSpawnRadius*1.265625F), 2250*2250);
-    hcSpawnRadiusAdjPSq = Math.max((int)(hcSpawnRadius*hcSpawnRadius*1.5625F), 2500*2500);
+    hcSpawnRadius = Math.min(Math.max(hcSpawnRadius, 2000), 46340);
+    hcSpawnRadiusAdjSq = (int)(hcSpawnRadius*hcSpawnRadius*1.265625F);
+    hcSpawnRadiusAdjPSq = (int)(hcSpawnRadius*hcSpawnRadius*1.5625F);
     if (isBTWVersionOrNewer("4.99999A0C Marsupial?!"))
     {
-      hcSpawnRadiusAdj2Sq = Math.max((int)(hcSpawnRadius*hcSpawnRadius*2.25F), 3000*3000);
+      hcSpawnRadiusAdj2Sq = (int)(hcSpawnRadius*hcSpawnRadius*2.25F);
     } else {
-      hcSpawnRadiusAdj2Sq = Math.max((int)(hcSpawnRadius*hcSpawnRadius*1.890625F), 2750*2750);
+      hcSpawnRadiusAdj2Sq = (int)(hcSpawnRadius*hcSpawnRadius*1.890625F);
     }
 
     Block.blocksList[1] = null;  gpeBlockStone = new GPEBlockStone(1);
@@ -749,7 +751,7 @@ public class GPEBTWTweak extends FCAddOn
       if (meta != 12) return false;
       EjectSawProducts(world, x, y, z, FCBetterThanWolves.fcBlockWoodCornerItemStubID, 3, 2);
     }
-    // Columns (metaata = 12), pedestals (13, 14), tables (15)
+    // Columns (metadata = 12), pedestals (13, 14), tables (15)
     else if (id == FCBetterThanWolves.fcBlockWoodOakMouldingAndDecorative.blockID)
     {
       if (meta < 12) return false;
@@ -785,7 +787,23 @@ public class GPEBTWTweak extends FCAddOn
     }
     else
     {
-      return false;
+      if (!GPEBTWTweak.btwBloodPlanks) return false;
+      if (id == 1007)
+      {
+        if (meta != 12) return false;
+        EjectSawProducts(world, x, y, z, FCBetterThanWolves.fcBlockWoodCornerItemStubID, 4, 2);
+      }
+      else if (id == 1008)
+      {
+        if (meta < 12) return false;
+        EjectSawProducts(world, x, y, z,
+          meta == 15 ? FCBetterThanWolves.fcBlockWoodCornerItemStubID : FCBetterThanWolves.fcBlockWoodMouldingItemStubID,
+          4, meta == 12 ? 2 : 3);
+      }
+      else
+      {
+        return false;
+      }
     }
     return true;
   }

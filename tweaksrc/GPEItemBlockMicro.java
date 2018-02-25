@@ -776,6 +776,10 @@ public abstract class GPEItemBlockMicro extends FCItemBlockCustom
     if (id == FCBetterThanWolves.fcBlockWoodSpruceSidingAndCorner.blockID)  return 5;
     if (id == FCBetterThanWolves.fcBlockWoodBirchSidingAndCorner.blockID)   return 5;
     if (id == FCBetterThanWolves.fcBlockWoodJungleSidingAndCorner.blockID)  return 5;
+    if (GPEBTWTweak.btwBloodPlanks)
+    {
+      if (id == 1007)  return 5;
+    }
     return -1; // impossible to guess otherwise
   }
 
@@ -785,6 +789,10 @@ public abstract class GPEItemBlockMicro extends FCItemBlockCustom
     if (id == FCBetterThanWolves.fcBlockWoodSpruceSidingAndCorner.blockID)  return 1;
     if (id == FCBetterThanWolves.fcBlockWoodBirchSidingAndCorner.blockID)   return 2;
     if (id == FCBetterThanWolves.fcBlockWoodJungleSidingAndCorner.blockID)  return 3;
+    if (GPEBTWTweak.btwBloodPlanks)
+    {
+      if (id == 1007)  return 4;
+    }
     return 0;
   }
 
@@ -801,6 +809,10 @@ public abstract class GPEItemBlockMicro extends FCItemBlockCustom
     if (id == FCBetterThanWolves.fcBlockWoodSpruceSidingAndCorner.blockID)  return 134;
     if (id == FCBetterThanWolves.fcBlockWoodBirchSidingAndCorner.blockID)   return 135;
     if (id == FCBetterThanWolves.fcBlockWoodJungleSidingAndCorner.blockID)  return 136;
+    if (GPEBTWTweak.btwBloodPlanks)
+    {
+      if (id == 1007)  return 1009;
+    }
     return -1; // impossible to guess otherwise
   }
 

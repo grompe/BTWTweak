@@ -7,6 +7,11 @@ v0.9o
 
 - Fixed compatibility with BTW version "4.A9 Pustules Lancing".
 
+- Changed configurable Hardcore Spawn radius so it can only be increased from
+  default value of 2000 blocks.
+
+- Added blood wood planks and stairs to microblock merging.
+
 v0.9n
 
 - Fixed axes not harvesting logs properly due to incomplete BTW refactoring.
