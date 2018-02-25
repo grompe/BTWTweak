@@ -2,8 +2,8 @@
 
 [BTWTweak](http://grompe.org.ru/btwtweak/) is a mod that is intended to improve Better Than Wolves mod experience.
 
-Assuming BTWTweak v0.9k and Better Than Wolves 4.A2 Timing Rodent b,
-(as of 07 Jan 2017) here is the list of changes.
+Assuming BTWTweak v0.9o and Better Than Wolves 4.A9,
+(as of 25 Feb 2018) here is the list of changes.
 
 
 # When launching Minecraft:
@@ -43,7 +43,8 @@ Assuming BTWTweak v0.9k and Better Than Wolves 4.A2 Timing Rodent b,
   from loose rocks instead of cobblestone. This makes stone tools a bit cheaper,
   and the first furnace a bit more expensive to craft.
 
-- The furnace now shows whether it is full. Since ores take forever to smelt,
+- (Feature now in BTW)
+  The furnace now shows whether it is full. Since ores take forever to smelt,
   you probably want lots of furnaces, and now you don't have to click every
   single one to figure out which one has contents.
 
@@ -80,9 +81,9 @@ Assuming BTWTweak v0.9k and Better Than Wolves 4.A2 Timing Rodent b,
   cobblestone/stonebrick slabs to full blocks, book from cut tanned leather,
   grinding sandstone back to sand and concentrated hellfire back to dust.
 
-- A bunch of bugfixes. For example, you will no longer die from fall damage when
-  docking on a slab in a boat after a long travel. For a complete list of bug
-  fixes, check the changelog.
+- A bunch of bugfixes. For example, you will no longer experience severe hunger
+  loss while climbing a ladder. For a complete list of bug fixes, check the
+  changelog.
 
 
 # A bit further to the game:
@@ -95,15 +96,15 @@ Assuming BTWTweak v0.9k and Better Than Wolves 4.A2 Timing Rodent b,
   (and the lag caused) when you decide to breed them for arrows.
 
 - Jack-o-lantern is now placed and dropped just like pumpkins, and if destroyed,
-  attempts to place a torch. This is useful for lighting up ravines. Also note
-  this replaces any new Jack-o-lantern behavior, such as going off underwater.
+  attempts to place a torch. This is useful for lighting up ravines.
+  Jack-o-lantern will go off underwater if facing water.
   
 - Ladder, wooden door, sign and sugar cane no longer stops lava, so do not
   attempt this if you were abusing this before.
 
 - It's now possible to jump out of boats and minecarts (and off pigs) without
-  silly and unpredictable teleportation. This also could lead to interesting
-  contraptions with jumping out of a speeding minecart.
+  silly and somewhat unpredictable teleportation. This also could lead to
+  interesting contraptions with jumping out of a speeding minecart.
 
 - If you are lucky and manage to find a witch hut (and loot it without dying),
   you can use the cistern you find in it to craft a cauldron. Just add a bucket
@@ -115,6 +116,9 @@ Assuming BTWTweak v0.9k and Better Than Wolves 4.A2 Timing Rodent b,
   the cauldron/crucible periodically with axle-supplied mechanical power.
 
 - Creepers are now hurt when deoystered. Not so stoic anymore!
+
+- Creeper hiss is now stopped immediately with killing or deoystering. Much more
+  satisfying.
 
 - Hand crank bounding box has been lowered to avoid accidental clicking and to
   conform to the shape better.
@@ -134,7 +138,13 @@ Assuming BTWTweak v0.9k and Better Than Wolves 4.A2 Timing Rodent b,
   Ink and Quill, crafted with glass bottle, feather and ink sac; paper,
   and 1 experience level to rename stuff / make name tags.
 
+- Name tags can also rename chests, furnaces, dispensers, brewing stands.
+
 - Written Book recipe was also changed to require Ink and Quill.
+
+- Ink and Quill can also be used to edit sign posts.
+
+- Fishing hook can now catch items and other entities it couldn't before.
 
 - Block of Padding now reduces fall damage, like a proper soft block.
 
@@ -161,9 +171,20 @@ Assuming BTWTweak v0.9k and Better Than Wolves 4.A2 Timing Rodent b,
   This is mainly done to support long term servers, where no animals and wolves
   left for kilometers around. This can be disabled in BTWTweak.cfg.
 
-- Sitting wolf cubs no longer teleport to player as they grow up.
+- (Feature now in BTW)
+  Sitting wolf cubs no longer teleport to player as they grow up.
 
 - The void fog is gone. It was annoying.
+
+- Dynamite is now lit with hold and thrown with release of a button. This makes
+  throwing dynamite more precise and much more fun! This feature is dedicated to
+  the good old Blood 3D game.
+
+- Thrown rocks now destroy vases, and vases with blasting oil cause chain
+  explosions.
+
+- Note blocks that stand on top of companion cubes will make bark sound. It is
+  now possible to recreate Dogsong in Minecraft.
 
 
 # When you progress to the saw and tanned leather:
@@ -187,8 +208,12 @@ Assuming BTWTweak v0.9k and Better Than Wolves 4.A2 Timing Rodent b,
 - The saw won't break anymore when facing a wool block but will produce wool
   slabs.
 
-- Ladders are now placeable on vertically put sidings, or any suitable surface
+- (Feature now in BTW)
+  Ladders are now placeable on vertically put sidings, or any suitable surface
   for that matter, not just full blocks.
+
+- Ladders try to place in the same orientation as a piece above it or below, if
+  aiming at a side that cannot support ladder.
 
 - Torches, buttons, ladders are now placeable on backsides of stairs.
 
@@ -223,7 +248,8 @@ Assuming BTWTweak v0.9k and Better Than Wolves 4.A2 Timing Rodent b,
   All of them can be retrieved by crafting back to items.
   Block of Bone can be only crafted by Hardcore Packing.
 
-- Block of Flesh, squishy block made of 9 Rotten Flesh by Hardcore Packing and
+- (Feature now in BTW)
+  Block of Flesh, squishy block made of 9 Rotten Flesh by Hardcore Packing and
   uncrafted by hand.
 
 - Block of Sawdust, made of 16 Sawdust by Hardcore Packing and uncrafted by saw.
@@ -239,7 +265,7 @@ Assuming BTWTweak v0.9k and Better Than Wolves 4.A2 Timing Rodent b,
   show swirling True Sight particles, even though mobs cannot spawn on them.
   
 
-# For when you get access to stoked fire:
+# When you get access to stoked fire:
 
 - Rails in abandoned mineshafts are rusted and won't give as much of iron
   anymore. If you need lots of iron, you need a mob trap.
@@ -264,21 +290,26 @@ Assuming BTWTweak v0.9k and Better Than Wolves 4.A2 Timing Rodent b,
 
 # When you find a village:
 
-- Villagers now display newest offers in the beginning of the list rather than
+- (Similar feature now in BTW)
+  Villagers now display newest offers in the beginning of the list rather than
   the end, to put an end to constant scrolling through offers.
 
 
 # Late game:
 
-- Dynamite is now lit with hold and thrown with release of a button. This makes
-  throwing dynamite more precise and much more fun! This feature is dedicated to
-  the good old Blood 3D game.
-
 - Cobblestone and stone drop in cobblestone blocks if destroyed by a soulforged
   tool. Like in good old times.
 
+- The effect of swiftness potion is restored. How to obtain it is left for the
+  player to discover.
+
 
 # And finally, some general goodness:
+
+- Scoreboard sidebar is now shown only when player list (Tab) key is held.
+
+- Pressing Space (jump key) takes all items from a container. Complex slots such
+  as crafting ones are untouched.
 
 - Pressing the hotbar key of already selected slot will cycle items in the
   corresponding inventory column. This is configurable in BTWTweak.cfg.
