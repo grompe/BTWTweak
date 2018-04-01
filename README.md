@@ -393,8 +393,9 @@ https://libraries.minecraft.net/org/lwjgl/lwjgl/lwjgl-platform/2.9.1/lwjgl-platf
 10. Decompile with MCP again
 11. Apply MCP fix again
 12. put back the saved ./temp/client.md5 file
-13. Copy ./tweakres/\*.\* directory contents to your ./bin/minecraft/ directory
-14. Copy ./tweaksrc/\*.java files to your ./src/minecraft/net/minecraft/src/ directory
+13. If working with BTW version BTW v4.AAAAAAAAAAHHHH or newer, delete dummy ./tweakres/FC\*.\* files
+14. Copy ./tweakres/\*.\* directory contents to your ./bin/minecraft/ directory
+15. Copy ./tweaksrc/\*.java files to your ./src/minecraft/net/minecraft/src/ directory
 
 Now you can modify source, MCP recompile and play using MCP startclient!
 
