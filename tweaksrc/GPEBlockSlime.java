@@ -9,7 +9,7 @@ public class GPEBlockSlime extends Block
     setStepSound(FCBetterThanWolves.fcSoundSquishFootstep);
     setUnlocalizedName("gpeBlockSlime");
     setCreativeTab(CreativeTabs.tabBlock);
-    ItemAxe.SetAllAxesToBeEffectiveVsBlock(this);
+    GPEBTWTweak.setAxesEffective(this);
   }
 
   public int getRenderBlockPass()

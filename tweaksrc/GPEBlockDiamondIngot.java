@@ -10,6 +10,6 @@ public class GPEBlockDiamondIngot extends Block
     setStepSound(soundMetalFootstep);
     setUnlocalizedName("gpeBlockDiamondIngot");
     setCreativeTab(CreativeTabs.tabBlock);
-    ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
+    GPEBTWTweak.setPicksEffective(this);
   }
 }

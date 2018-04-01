@@ -10,7 +10,7 @@ public class GPEBlockGravel extends FCBlockGravel
     setHardness(0.6F);
     setStepSound(soundGravelFootstep);
     setUnlocalizedName("gravel");
-    ItemSpade.SetAllShovelsToBeEffectiveVsBlock(this);
+    GPEBTWTweak.setShovelsEffective(this);
   }
 
   public int idDropped(int meta, Random random, int fortune)

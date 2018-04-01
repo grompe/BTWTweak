@@ -12,6 +12,6 @@ public class GPEBlockFlesh extends Block
     {
       setCreativeTab(CreativeTabs.tabBlock);
     }
-    ItemAxe.SetAllAxesToBeEffectiveVsBlock(this);
+    GPEBTWTweak.setAxesEffective(this);
   }
 }

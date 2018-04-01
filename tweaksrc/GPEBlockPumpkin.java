@@ -23,7 +23,7 @@ public class GPEBlockPumpkin extends BlockSand
     } else {
       setUnlocalizedName("pumpkin");
     }
-    ItemAxe.SetAllAxesToBeEffectiveVsBlock(this);
+    GPEBTWTweak.setAxesEffective(this);
   }
 
   public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entity, ItemStack stack)

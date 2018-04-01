@@ -1,0 +1,10 @@
+diff --git a/src/minecraft/net/minecraft/src/FCUtilsItem.java b/src/minecraft/net/minecraft/src/FCUtilsItem.java
+index dd88ba8..7cc5f7c 100644
+--- a/src/minecraft/net/minecraft/src/FCUtilsItem.java
++++ b/src/minecraft/net/minecraft/src/FCUtilsItem.java
+@@ -51,0 +52,5 @@ public static void DropSingleItemAsIfBlockHarvested(World var0, int var1, int va
++
++    // dummy method for BTW 4.AA+
++    public static void EjectStackFromBlockTowardsFacing(World world, int x, int y, int z, ItemStack stack, int side)
++    {
++    }

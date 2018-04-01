@@ -1,3 +1,81 @@
+function retainHeat(mn, furnaceClass)
+{
+  var i;
+  var changes = 0;
+  for (i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && (n.opcode == GETFIELD) && n.owner.equals(furnaceClass) && n.name.equals("c") && n.desc.equals("I"))
+    {
+      var n2 = mn.instructions.get(i - 5); // fakeinst
+      if (isInstance(n2, "org.objectweb.asm.tree.JumpInsnNode") && (n2.opcode == IFEQ))
+      {
+        mn.instructions.insertBefore(n.getPrevious(), toInsnList(
+          [
+            MethodInsnNode(INVOKEVIRTUAL, "aqg", "checkForChange", "()Z"),
+            InsnNode(POP),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, furnaceClass, "g", "[Lwm;"),
+            InsnNode(ICONST_0),
+            InsnNode(AALOAD),
+            FieldInsnNode(GETFIELD, "wm", "c", "I"),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, furnaceClass, "currentItemID", "I"),
+            JumpInsnNode(IF_ICMPNE, n2.label),
+            VarInsnNode(ALOAD, 0),
+          ]
+        ));
+        changes++;
+        break;
+      }
+    }
+  }
+  for (i += 10; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && (n.opcode == PUTFIELD) && n.owner.equals(furnaceClass) && n.name.equals("c") && n.desc.equals("I"))
+    {
+      //var n2 = n.getNext();
+      //if (isInstance(n2, "org.objectweb.asm.tree.LabelNode"))
+      var n2 = mn.instructions.get(i - 6); // fakeinst
+      if (isInstance(n2, "org.objectweb.asm.tree.JumpInsnNode") && (n2.opcode == GOTO))
+      {
+        var label_old = n2.label;
+        var label_new = LabelNode();
+        mn.instructions.insertBefore(n.getPrevious(), toInsnList(
+          [
+            MethodInsnNode(INVOKESPECIAL, furnaceClass, "u", "()Z"),
+            JumpInsnNode(IFEQ, label_new),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, furnaceClass, "g", "[Lwm;"),
+            InsnNode(ICONST_0),
+            InsnNode(AALOAD),
+            FieldInsnNode(GETFIELD, "wm", "c", "I"),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, furnaceClass, "currentItemID", "I"),
+            JumpInsnNode(IF_ICMPNE, label_new),
+            VarInsnNode(ALOAD, 0),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, furnaceClass, "c", "I"),
+            InsnNode(ICONST_1),
+            InsnNode(ISUB),
+            InsnNode(ICONST_0),
+            MethodInsnNode(INVOKESTATIC, "java/lang/Math", "max", "(II)I"),
+            FieldInsnNode(PUTFIELD, furnaceClass, "c", "I"),
+            JumpInsnNode(GOTO, label_old),
+            label_new,
+            FrameNode(F_SAME, 0, null, 0, null),
+            VarInsnNode(ALOAD, 0),
+            MethodInsnNode(INVOKESPECIAL, furnaceClass, "setCurrentItemID", "()V"),
+            VarInsnNode(ALOAD, 0),
+          ]
+        ));
+        changes++;
+        return changes == 2;
+      }
+    }
+  }
+}
 // className, deobfName, side, method, checksums, description
 if (!isBTWVersionOrNewer("4.A3 Headed Beastie"))
 {
@@ -281,53 +359,18 @@ if (!isBTWVersionOrNewer("4.A3 Headed Beastie"))
     return changes == 5;
   });
 } else {
-  tweak("aqg", "TileEntityFurnace", BOTH, "h()V", 0xF75745E0, "Updating furnace TE's updateEntity() to retain heat",
+  tweak("aqg", "TileEntityFurnace", BOTH, "h()V", [0xF75745E0, 0x264C4B7E], "Updating furnace TE's updateEntity() to retain heat",
   function(mn)
   {
-    for (var i = 0; i < mn.instructions.size(); i++)
-    {
-      var n = mn.instructions.get(i);
-      if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && (n.opcode == PUTFIELD) && n.owner.equals("aqg") && n.name.equals("c") && n.desc.equals("I"))
-      {
-        //var n2 = n.getNext();
-        //if (isInstance(n2, "org.objectweb.asm.tree.LabelNode"))
-        var n2 = mn.instructions.get(i - 6); // fakeinst
-        if (isInstance(n2, "org.objectweb.asm.tree.JumpInsnNode") && (n2.opcode == GOTO))
-        {
-          var label_old = n2.label;
-          var label_new = LabelNode();
-          mn.instructions.insertBefore(n.getPrevious(), toInsnList(
-            [
-              MethodInsnNode(INVOKESPECIAL, "aqg", "u", "()Z"),
-              JumpInsnNode(IFEQ, label_new),
-              VarInsnNode(ALOAD, 0),
-              FieldInsnNode(GETFIELD, "aqg", "g", "[Lwm;"),
-              InsnNode(ICONST_0),
-              InsnNode(AALOAD),
-              FieldInsnNode(GETFIELD, "wm", "c", "I"),
-              VarInsnNode(ALOAD, 0),
-              FieldInsnNode(GETFIELD, "aqg", "currentItemID", "I"),
-              JumpInsnNode(IF_ICMPNE, label_new),
-              VarInsnNode(ALOAD, 0),
-              VarInsnNode(ALOAD, 0),
-              FieldInsnNode(GETFIELD, "aqg", "c", "I"),
-              InsnNode(ICONST_1),
-              InsnNode(ISUB),
-              InsnNode(ICONST_0),
-              MethodInsnNode(INVOKESTATIC, "java/lang/Math", "max", "(II)I"),
-              FieldInsnNode(PUTFIELD, "aqg", "c", "I"),
-              JumpInsnNode(GOTO, label_old),
-              label_new,
-              FrameNode(F_SAME, 0, null, 0, null),
-              VarInsnNode(ALOAD, 0),
-              MethodInsnNode(INVOKESPECIAL, "aqg", "setCurrentItemID", "()V"),
-              VarInsnNode(ALOAD, 0),
-            ]
-          ));
-          return true;
-        }
-      }
-    }
+    return retainHeat(mn, "aqg");
+  });
+}
+if (isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
+{
+  tweak("FCTileEntityFurnaceBrick", null, BOTH, "h()V", 0xB6284E84, "Updating Brick Oven TE's updateEntity() to retain heat",
+  function(mn)
+  {
+    return retainHeat(mn, "FCTileEntityFurnaceBrick");
   });
 }
 add("aqg", "TileEntityFurnace", BOTH, "Adjusting furnace logic",
@@ -347,7 +390,7 @@ function(cn)
   var label8 = LabelNode();
   var label9 = LabelNode();
   var label10 = LabelNode();
-  mn = MethodNode(ACC_PRIVATE, "checkForChange", "()Z", null, null);
+  mn = MethodNode(ACC_PUBLIC, "checkForChange", "()Z", null, null);
   mn.instructions.add(toInsnList(
     [
       InsnNode(ICONST_0),
@@ -420,7 +463,7 @@ function(cn)
   ));
   cn.methods.add(mn);
 
-  mn = MethodNode(ACC_PRIVATE, "setCurrentItemID", "()V", null, null);
+  mn = MethodNode(ACC_PUBLIC, "setCurrentItemID", "()V", null, null);
   var label = LabelNode();
   mn.instructions.add(toInsnList(
     [

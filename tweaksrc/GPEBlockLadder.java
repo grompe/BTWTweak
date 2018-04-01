@@ -8,7 +8,7 @@ public class GPEBlockLadder extends FCBlockLadder
     setHardness(0.4F);
     setStepSound(soundLadderFootstep);
     setUnlocalizedName("ladder");
-    ItemAxe.SetAllAxesToBeEffectiveVsBlock(this);
+    GPEBTWTweak.setAxesEffective(this);
   }
 
   public boolean canPlaceBlockAt(World world, int x, int y, int z)

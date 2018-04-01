@@ -154,7 +154,7 @@ function(mn)
   ]));
   return true;
 });
-if (isBTWVersionOrNewer("4.A2 Timing Rodent"))
+if (isBTWVersionOrNewer("4.A2 Timing Rodent") && !isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
 {
   tweak("wi", "ItemAxe", BOTH, "getStrVsBlock(Lwm;Laab;Lapa;III)F", 0xF8E30EFB, "(1/3) Making axe check for tree stump block ID rather than block", fixAxeCheckingForStump);
   tweak("wi", "ItemAxe", BOTH, "canHarvestBlock(Laab;Lapa;III)Z", [0xB5DB0C08, 0x76F4089E], "(2/3) Making axe check for tree stump block ID rather than block",

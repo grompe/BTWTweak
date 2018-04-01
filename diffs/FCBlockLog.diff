@@ -1,0 +1,11 @@
+diff --git a/src/minecraft/net/minecraft/src/FCBlockLog.java b/src/minecraft/net/minecraft/src/FCBlockLog.java
+index aefdee9..eadc2a1 100644
+--- a/src/minecraft/net/minecraft/src/FCBlockLog.java
++++ b/src/minecraft/net/minecraft/src/FCBlockLog.java
+@@ -57,0 +58,6 @@ public boolean RenderBlock(RenderBlocks var1, int var2, int var3, int var4)
++
++    // dummy method for BTW 4.AA+
++    public boolean IsWorkStumpItemConversionTool(ItemStack stack, World world, int x, int y, int z)
++    {
++        return false;
++    }

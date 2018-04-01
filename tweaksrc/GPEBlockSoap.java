@@ -13,8 +13,8 @@ public class GPEBlockSoap extends Block
     setStepSound(soundStoneFootstep);
     setUnlocalizedName("gpeBlockSoap");
     setCreativeTab(CreativeTabs.tabBlock);
-    ItemAxe.SetAllAxesToBeEffectiveVsBlock(this);
-    ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
+    GPEBTWTweak.setAxesEffective(this);
+    GPEBTWTweak.setPicksEffective(this);
   }
 
   @ClientOnly

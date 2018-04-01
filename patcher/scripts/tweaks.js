@@ -34,6 +34,7 @@ var tweakClass;
 var INSERT_BEFORE = 1;
 var BOTH = 0;
 var CLIENT = 1;
+var SERVER = 2;
 
 var CHECKSUM_IGNORE = "ignore";
 
@@ -311,6 +312,32 @@ function replaceFirstString(mn, source, destination)
   }
 }
 
+function removeClientOnlyMethods(cn)
+{
+  if (onClient())
+  {
+    log("Warning: tried to remove client-only methods while on client for class " + cn.name);
+    return;
+  }
+  for (var i = 0; i < cn.methods.size(); i++)
+  {
+    mn = cn.methods.get(i);
+    if (mn.visibleAnnotations != null)
+    {
+      for (var j = 0; j < mn.visibleAnnotations.size(); j++)
+      {
+        var an = mn.visibleAnnotations.get(j);
+        if (an.desc.equals("LClientOnly;"))
+        {
+          cn.methods.remove(mn);
+          log("Removed client-only method " + mn.name + mn.desc);
+          break;
+        }
+      }
+    }
+  }
+}
+
 function cloneMethod(mn, access, name, desc, signature, exceptions)
 {
   var mn2 = MethodNode(access, name, desc, signature, exceptions);
@@ -450,6 +477,7 @@ function addDeobfName(className, deobfName)
 function tweak(className, deobfName, side, method, checksums, description, process)
 {
   if ((side == CLIENT) && !onClient()) return;
+  if ((side == SERVER) && onClient()) return;
   addDeobfName(className, deobfName);
   if (!classesToTweak[className]) classesToTweak[className] = {tweakMethods: {}, add: []};
   if (!classesToTweak[className].tweakMethods[method]) classesToTweak[className].tweakMethods[method] = [];
@@ -460,6 +488,7 @@ function tweak(className, deobfName, side, method, checksums, description, proce
 function add(className, deobfName, side, description, process)
 {
   if ((side == CLIENT) && !onClient()) return;
+  if ((side == SERVER) && onClient()) return;
   addDeobfName(className, deobfName);
   if (!classesToTweak[className]) classesToTweak[className] = {tweakMethods: {}, add: []};
   classesToTweak[className].add.push({
@@ -560,7 +589,7 @@ function add(className, deobfName, side, description, process)
     {
       for (var i = 0; i < a.add.length; i++)
       {
-        log("\t* " + a.add[0].description);
+        log("\t* " + a.add[i].description);
         a.add[i].process(cn);
       }
     }
@@ -589,6 +618,7 @@ execJS("tweaks_hooks.js");
 execJS("tweaks_language.js");
 execJS("tweaks_moreslabs.js");
 execJS("tweaks_old.js");
+execJS("tweaks_oldbtwcompat.js");
 execJS("tweaks_rocks.js");
 execJS("tweaks_sound.js");
 execJS("tweaks_visual.js");

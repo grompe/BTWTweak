@@ -15,7 +15,7 @@ public class GPEBlockDirtSlab extends FCBlockDirtSlab
   public GPEBlockDirtSlab(int id)
   {
     super(id);
-    ItemSpade.SetAllShovelsToBeEffectiveVsBlock(this);
+    GPEBTWTweak.setShovelsEffective(this);
     setCreativeTab(CreativeTabs.tabBlock);
   }
 
@@ -55,15 +55,27 @@ public class GPEBlockDirtSlab extends FCBlockDirtSlab
 
   public int onBlockPlaced(World world, int x, int y, int z, int side, float var6, float var7, float var8, int var9)
   {
-    int subtype = GetSubtypeFromMetadata(var9);
-    if (subtype == gravel || subtype == sand) return SetIsUpsideDownInMetadata(var9, false);
+    int subtype = getSubtypeInMetadata(var9);
+    if (subtype == gravel || subtype == sand) return var9 & -2;
     return super.onBlockPlaced(world, x, y, z, side, var6, var7, var8, var9);
   }
 
-  private void DropAsPiles(World world, int x, int y, int z, int meta, float chance)
+  public void onNeighborBlockChange(World world, int x, int y, int z, int id)
+  {
+    byte side = 0;
+    int meta = world.getBlockMetadata(x, y, z);
+    if ((meta & 1) > 0) side = 1;
+    if (!HasValidAnchorToFacing(world, x, y, z, side))
+    {
+      dropAsPiles(world, x, y, z, meta, 1.0F);
+      world.setBlockToAir(x, y, z);
+    }
+  }
+
+  private void dropAsPiles(World world, int x, int y, int z, int meta, float chance)
   {
     Item item = FCBetterThanWolves.fcItemPileDirt;
-    int subtype = GetSubtypeFromMetadata(meta);
+    int subtype = getSubtypeInMetadata(meta);
     int num = (subtype == packedEarth) ? 3 : 1;
     if (subtype == gravel)
     {
@@ -84,7 +96,7 @@ public class GPEBlockDirtSlab extends FCBlockDirtSlab
 
   public boolean AttemptToCombineWithFallingEntity(World world, int x, int y, int z, EntityFallingSand entity)
   {
-    if (entity.blockID == FCBetterThanWolves.fcBlockSlabFalling.blockID)
+    if (entity.blockID == GPEBTWTweak.compatSlabSandAndGravel.blockID)
     {
       int subtype = GetSubtype(world, x, y, z);
       if (subtype == entity.metadata + gravel)
@@ -102,6 +114,11 @@ public class GPEBlockDirtSlab extends FCBlockDirtSlab
     l.add(new ItemStack(id, 1, 3));
   }
 
+  public int getSubtypeInMetadata(int meta)
+  {
+    return (meta & -2) >> 1;
+  }
+
   @ClientOnly
   public void registerIcons(IconRegister r)
   {
@@ -113,7 +130,7 @@ public class GPEBlockDirtSlab extends FCBlockDirtSlab
   @ClientOnly
   public Icon getIcon(int side, int meta)
   {
-    int subtype = GetSubtypeFromMetadata(meta);
+    int subtype = getSubtypeInMetadata(meta);
     if (subtype == gravel) return this.gravelIcon;
     if (subtype == sand) return this.sandIcon;
     return super.getIcon(side, meta);

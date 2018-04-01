@@ -1,0 +1,16 @@
+diff --git a/src/minecraft/net/minecraft/src/FCItemAxe.java b/src/minecraft/net/minecraft/src/FCItemAxe.java
+new file mode 100644
+index 0000000..2691156
+--- /dev/null
++++ b/src/minecraft/net/minecraft/src/FCItemAxe.java
+@@ -0,0 +1,10 @@
++package net.minecraft.src;
++
++// Dummy class for BTW 4.AA+
++public class FCItemAxe extends Item
++{
++  public FCItemAxe(int id)
++  {
++    super(id);
++  }
++}

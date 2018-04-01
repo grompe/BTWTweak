@@ -11,7 +11,7 @@ public class GPEBTWTweak extends FCAddOn
 {
   public static GPEBTWTweak instance;
   private static GPEBTWTweakProxy proxy;
-  public static final String tweakVersion = "0.9o";
+  public static final String tweakVersion = "1.0";
 
   private static boolean postPostInitialized = false;
   public static boolean isDecoPresent;
@@ -19,6 +19,7 @@ public class GPEBTWTweak extends FCAddOn
 
   public static Block gpeBlockStone;
   public static Block compatAxleBlock;
+  public static Block compatSlabSandAndGravel;
   public static Block gpeBlockGravestone;
   public static Block gpeBlockRustedRail;
   public static Block gpeBlockRename;
@@ -28,7 +29,12 @@ public class GPEBTWTweak extends FCAddOn
   public static Block gpeBlockStorage;
   public static Block gpeBlockFlesh;
   public static Block gpeBlockSlime;
+  public static Block gpeBlockLogDamagedSpruce;
+  public static Block gpeBlockLogDamagedBirch;
+  public static Block gpeBlockLogDamagedJungle;
 
+  public static Item compatItemSawDust;
+  public static Item compatItemWickerPane;
   public static Item gpeItemLooseRock;
   public static Item gpeItemSilk;
   public static Item gpeItemAsh;
@@ -67,6 +73,9 @@ public class GPEBTWTweak extends FCAddOn
   public static int gpeBlockStorageID = 1701;
   public static int gpeBlockFleshID = 1702;
   public static int gpeBlockSlimeID = 1703;
+  public static int gpeBlockLogDamagedSpruceID = 1704;
+  public static int gpeBlockLogDamagedBirchID = 1705;
+  public static int gpeBlockLogDamagedJungleID = 1706;
   public static int gpeEntityRockID = 25;
   public static int gpeEnchantmentHaste = 70;
   public static int gpeEntityRockVehicleSpawnType = 120;
@@ -78,6 +87,77 @@ public class GPEBTWTweak extends FCAddOn
   public GPEBTWTweak()
   {
     instance = this;
+  }
+
+  private void initCompatVars()
+  {
+    // GitHub [#1]: fcBlockAxle got changed to fcAxleBlock
+    try
+    {
+      try
+      {
+        compatAxleBlock = (Block)FCBetterThanWolves.class.getField("fcAxleBlock").get(null);
+      }
+      catch (NoSuchFieldException e)
+      {
+        compatAxleBlock = (Block)FCBetterThanWolves.class.getField("fcBlockAxle").get(null);
+      }
+    }
+    catch (Exception e)
+    {
+      FCAddOnHandler.LogMessage("Error while retrieving Axle Block, assuming ID=247");
+      compatAxleBlock = Block.blocksList[247];
+    }
+
+    // BTW 4.AA changed sand/gravel slab, sawdust and wicker variables
+    try
+    {
+      try
+      {
+        compatSlabSandAndGravel = (Block)FCBetterThanWolves.class.getField("fcBlockSlabSandAndGravel").get(null);
+      }
+      catch (NoSuchFieldException e)
+      {
+        compatSlabSandAndGravel = (Block)FCBetterThanWolves.class.getField("fcBlockSlabFalling").get(null);
+      }
+    }
+    catch (Exception e)
+    {
+      FCAddOnHandler.LogMessage("Error while retrieving Sand and Gravel Slab Block, assuming ID=175");
+      compatSlabSandAndGravel = Block.blocksList[175];
+    }
+    try
+    {
+      try
+      {
+        compatItemSawDust = (Item)FCBetterThanWolves.class.getField("fcItemSawDust").get(null);
+      }
+      catch (NoSuchFieldException e)
+      {
+        compatItemSawDust = (Item)FCBetterThanWolves.class.getField("fcSawDust").get(null);
+      }
+    }
+    catch (Exception e)
+    {
+      FCAddOnHandler.LogMessage("Error while retrieving Saw Dust Item, assuming ID=276");
+      compatItemSawDust = Item.itemsList[276];
+    }
+    try
+    {
+      try
+      {
+        compatItemWickerPane = (Item)FCBetterThanWolves.class.getField("fcItemWickerPane").get(null);
+      }
+      catch (NoSuchFieldException e)
+      {
+        compatItemWickerPane = (Item)FCBetterThanWolves.class.getField("fcWicker").get(null);
+      }
+    }
+    catch (Exception e)
+    {
+      FCAddOnHandler.LogMessage("Error while retrieving Wicker Pane Item, assuming ID=241");
+      compatItemWickerPane = Item.itemsList[241];
+    }
   }
 
   public void Initialize()
@@ -129,6 +209,9 @@ public class GPEBTWTweak extends FCAddOn
         if (key.equals("gpeBlockStorageID")) gpeBlockStorageID = Integer.parseInt(value);
         if (key.equals("gpeBlockFleshID")) gpeBlockFleshID = Integer.parseInt(value);
         if (key.equals("gpeBlockSlimeID")) gpeBlockSlimeID = Integer.parseInt(value);
+        if (key.equals("gpeBlockLogDamagedSpruceID")) gpeBlockLogDamagedSpruceID = Integer.parseInt(value);
+        if (key.equals("gpeBlockLogDamagedBirchID")) gpeBlockLogDamagedBirchID = Integer.parseInt(value);
+        if (key.equals("gpeBlockLogDamagedJungleID")) gpeBlockLogDamagedJungleID = Integer.parseInt(value);
         if (key.equals("gpeEntityRockID")) gpeEntityRockID = Integer.parseInt(value);
         if (key.equals("gpeEnchantmentHaste")) gpeEnchantmentHaste = Integer.parseInt(value);
         if (key.equals("gpeEntityRockVehicleSpawnType")) gpeEntityRockVehicleSpawnType = Integer.parseInt(value);
@@ -192,6 +275,9 @@ public class GPEBTWTweak extends FCAddOn
         + "gpeBlockStorageID=1701\r\n"
         + "gpeBlockFleshID=1702\r\n"
         + "gpeBlockSlimeID=1703\r\n"
+        + "gpeBlockLogDamagedSpruceID=1704\r\n"
+        + "gpeBlockLogDamagedBirchID=1705\r\n"
+        + "gpeBlockLogDamagedJungleID=1706\r\n"
         + "\r\n"
         + "// **** Entity IDs ****\r\n"
         + "\r\n"
@@ -225,24 +311,8 @@ public class GPEBTWTweak extends FCAddOn
       FCAddOnHandler.LogMessage("Error while reading BTWTweak.cfg!");
       e.printStackTrace();
     }
-    // GitHub [#1]: fcBlockAxle got changed to fcAxleBlock
-    try
-    {
-      try
-      {
-        compatAxleBlock = (Block)FCBetterThanWolves.class.getField("fcAxleBlock").get(null);
-      }
-      catch (NoSuchFieldException e)
-      {
-        compatAxleBlock = (Block)FCBetterThanWolves.class.getField("fcBlockAxle").get(null);
-      }
-    }
-    catch (Exception e)
-    {
-      FCAddOnHandler.LogMessage("Error while retrieving Axle Block, assuming ID=247");
-      compatAxleBlock = Block.blocksList[247];
-    }
-
+    initCompatVars();
+    
     isDecoPresent = classExists("AddonManager");
     if (!isDecoPresent && !isBTWVersionOrNewer("4.A4 Kiloblock Boon")) extendBlockIDs();
 
@@ -256,11 +326,19 @@ public class GPEBTWTweak extends FCAddOn
       hcSpawnRadiusAdj2Sq = (int)(hcSpawnRadius*hcSpawnRadius*1.890625F);
     }
 
-    Block.blocksList[1] = null;  gpeBlockStone = new GPEBlockStone(1);
-    Block.blocksList[4] = null;  new GPEBlockCobblestone(4);
-    Block.blocksList[13] = null; new GPEBlockGravel(13);
-    Block.blocksList[14] = null; (new GPEBlockOre(14)).setUnlocalizedName("oreGold");
-    Block.blocksList[15] = null; (new GPEBlockOre(15)).setUnlocalizedName("oreIron");
+    if (!isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
+    {
+      Block.blocksList[1] = null;  gpeBlockStone = new GPEBlockStone(1);
+      Block.blocksList[4] = null;  new GPEBlockCobblestone(4);
+      Block.blocksList[13] = null; new GPEBlockGravel(13);
+      Block.blocksList[14] = null; (new GPEBlockOre(14)).setUnlocalizedName("oreGold");
+      Block.blocksList[15] = null; (new GPEBlockOre(15)).setUnlocalizedName("oreIron");
+    } else {
+      Block.blocksList[1010] = null; new GPEBlockLogDamaged(1010, 0);
+      gpeBlockLogDamagedSpruce = new GPEBlockLogDamaged(gpeBlockLogDamagedSpruceID, 1);
+      gpeBlockLogDamagedBirch = new GPEBlockLogDamaged(gpeBlockLogDamagedBirchID, 2);
+      gpeBlockLogDamagedJungle = new GPEBlockLogDamaged(gpeBlockLogDamagedJungleID, 3);
+    }
     Block.blocksList[17] = null; new GPEBlockLog(17);
     Block.blocksList[20] = null; new GPEBlockGlass(20);
     Block.blocksList[54] = null; new GPEBlockChest(54);
@@ -282,8 +360,11 @@ public class GPEBTWTweak extends FCAddOn
     gpeItemSling = new GPEItemSling(gpeSlingID - 256);
     gpeItemHardBoiledEgg = new FCItemFood(gpeHardBoiledEggID - 256, 3, 0.25F, false, "gpeItemHardBoiledEgg");
     Item.coal = new GPEItemCoal(7);
-    Item.pickaxeWood = (new GPEItemPickaxeWeak(14, EnumToolMaterial.WOOD)).setUnlocalizedName("pickaxeWood");
-    Item.pickaxeStone = (new GPEItemPickaxeWeak(18, EnumToolMaterial.STONE)).setUnlocalizedName("pickaxeStone");
+    if (!isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
+    {
+      Item.pickaxeWood = (new GPEItemPickaxeWeak(14, EnumToolMaterial.WOOD)).setUnlocalizedName("pickaxeWood");
+      Item.pickaxeStone = (new GPEItemPickaxeWeak(18, EnumToolMaterial.STONE)).setUnlocalizedName("pickaxeStone");
+    }
     Item.m_bSuppressConflictWarnings = false;
 
     int id = FCBetterThanWolves.fcAestheticOpaque.blockID;
@@ -327,13 +408,19 @@ public class GPEBTWTweak extends FCAddOn
     EntityList.addMapping(GPEEntityRock.class, "gpeEntityRock", gpeEntityRockID);
     proxy.addEntityRenderers();
 
+    if (isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
+    {
+      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemStone, 1), new Object[] {new ItemStack(gpeItemLooseRock)});
+      gpeItemLooseRock = FCBetterThanWolves.fcItemStone;
+    }
+
     if (isBTWVersionOrNewer("4.99999A0D Marsupial??!!"))
     {
-      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileGravel, 2), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockSlabFalling, 1, 0)});
-      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileSand, 2), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockSlabFalling, 1, 1)});
+      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileGravel, 2), new Object[] {new ItemStack(compatSlabSandAndGravel, 1, 0)});
+      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileSand, 2), new Object[] {new ItemStack(compatSlabSandAndGravel, 1, 1)});
       // Old to new item conversion
-      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockSlabFalling, 1, 0), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 6)});
-      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockSlabFalling, 1, 1), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 7)});
+      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(compatSlabSandAndGravel, 1, 0), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 6)});
+      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(compatSlabSandAndGravel, 1, 1), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 7)});
     } else {
       FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 4, 6), new Object[] {"##", '#', new ItemStack(Block.gravel)});
       FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 6), new Object[] {"##", '#', new ItemStack(FCBetterThanWolves.fcItemPileGravel)});
@@ -344,7 +431,10 @@ public class GPEBTWTweak extends FCAddOn
     }
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Block.gravel), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 6), new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 6)});
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Block.sand), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 7), new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 7)});
-    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileDirt, 2), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab)});
+    if (isBTWVersionOrNewer("4.AAAAAAAAAAHHHH d"))
+    {
+      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileDirt, 2), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab)});
+    }
     FCRecipes.AddStokedCauldronRecipe(new ItemStack(FCBetterThanWolves.fcGlue, 1), new ItemStack[] {new ItemStack(Item.dyePowder, 64, 15)});
 
     if (isBTWVersionOrNewer("4.891124"))
@@ -362,21 +452,26 @@ public class GPEBTWTweak extends FCAddOn
       }
     }
 
-    FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.axeStone), new Object[] {"X ", "X#", " #", '#', Item.stick, 'X', Block.cobblestone});
-    FCRecipes.AddVanillaRecipe(new ItemStack(Item.axeStone), new Object[] {"X ", "X#", " #", '#', Item.stick, 'X', gpeItemLooseRock});
-    FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.pickaxeStone), new Object[] {"XXX", " # ", " # ", '#', Item.stick, 'X', Block.cobblestone});
-    FCRecipes.AddVanillaRecipe(new ItemStack(Item.pickaxeStone), new Object[] {"XXX", " # ", " # ", '#', Item.stick, 'X', gpeItemLooseRock});
-    FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.shovelStone), new Object[] {"X", "#", "#", '#', Item.stick, 'X', Block.cobblestone});
-    FCRecipes.AddVanillaRecipe(new ItemStack(Item.shovelStone), new Object[] {"X", "#", "#", '#', Item.stick, 'X', gpeItemLooseRock});
-    FCRecipes.RemoveVanillaRecipe(new ItemStack(Block.lever, 1), new Object[] {"X", "#", "r", '#', Block.cobblestone, 'X', Item.stick, 'r', Item.redstone});
-    FCRecipes.AddVanillaRecipe(new ItemStack(Block.lever, 1), new Object[] {"X", "#", "r", '#', gpeItemLooseRock, 'X', Item.stick, 'r', Item.redstone});
-    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Block.cobblestone), new Object[] {gpeItemLooseRock, gpeItemLooseRock, gpeItemLooseRock, gpeItemLooseRock});
-    FCRecipes.AddVanillaRecipe(new ItemStack(Block.stoneSingleSlab, 1, 3), new Object[] {"XX", 'X', gpeItemLooseRock});
-
+    if (!isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
+    {
+      FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.axeStone), new Object[] {"X ", "X#", " #", '#', Item.stick, 'X', Block.cobblestone});
+      FCRecipes.AddVanillaRecipe(new ItemStack(Item.axeStone), new Object[] {"X ", "X#", " #", '#', Item.stick, 'X', gpeItemLooseRock});
+      FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.pickaxeStone), new Object[] {"XXX", " # ", " # ", '#', Item.stick, 'X', Block.cobblestone});
+      FCRecipes.AddVanillaRecipe(new ItemStack(Item.pickaxeStone), new Object[] {"XXX", " # ", " # ", '#', Item.stick, 'X', gpeItemLooseRock});
+      FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.shovelStone), new Object[] {"X", "#", "#", '#', Item.stick, 'X', Block.cobblestone});
+      FCRecipes.AddVanillaRecipe(new ItemStack(Item.shovelStone), new Object[] {"X", "#", "#", '#', Item.stick, 'X', gpeItemLooseRock});
+      FCRecipes.RemoveVanillaRecipe(new ItemStack(Block.lever, 1), new Object[] {"X", "#", "r", '#', Block.cobblestone, 'X', Item.stick, 'r', Item.redstone});
+      FCRecipes.AddVanillaRecipe(new ItemStack(Block.lever, 1), new Object[] {"X", "#", "r", '#', gpeItemLooseRock, 'X', Item.stick, 'r', Item.redstone});
+      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Block.cobblestone), new Object[] {gpeItemLooseRock, gpeItemLooseRock, gpeItemLooseRock, gpeItemLooseRock});
+      FCRecipes.AddVanillaRecipe(new ItemStack(Block.stoneSingleSlab, 1, 3), new Object[] {"XX", 'X', gpeItemLooseRock});
+    }
     // Slab joining back to full blocks
     if (!isBTWVersionOrNewer("4.A Dingo"))
     {
-      FCRecipes.AddVanillaRecipe(new ItemStack(Block.cobblestone), new Object[] {"X", "X", 'X', new ItemStack(Block.stoneSingleSlab, 1, 3)});
+      if (!isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
+      {
+        FCRecipes.AddVanillaRecipe(new ItemStack(Block.cobblestone), new Object[] {"X", "X", 'X', new ItemStack(Block.stoneSingleSlab, 1, 3)});
+      }
       FCRecipes.AddVanillaRecipe(new ItemStack(Block.brick), new Object[] {"X", "X", 'X', new ItemStack(Block.stoneSingleSlab, 1, 4)});
       FCRecipes.AddVanillaRecipe(new ItemStack(Block.stoneBrick), new Object[] {"X", "X", 'X', new ItemStack(Block.stoneSingleSlab, 1, 5)});
     }
@@ -483,7 +578,7 @@ public class GPEBTWTweak extends FCAddOn
     if (!isBTWVersionOrNewer("4.89666"))
     {
       FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockStorage, 1, 5), new Object[] {"###", "###", "###", '#', Item.bone});
-      FCRecipes.AddAnvilRecipe(new ItemStack(gpeBlockStorage, 1, 6), new Object[] {"####", "####", "####", "####", '#', FCBetterThanWolves.fcSawDust});
+      FCRecipes.AddAnvilRecipe(new ItemStack(gpeBlockStorage, 1, 6), new Object[] {"####", "####", "####", "####", '#', compatItemSawDust});
       FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockFlesh), new Object[] {"###", "###", "###", '#', Item.rottenFlesh});
     }
 
@@ -704,7 +799,7 @@ public class GPEBTWTweak extends FCAddOn
     else if (id == FCBetterThanWolves.fcPlatform.blockID)
     {
       EjectSawProducts(world, x, y, z, FCBetterThanWolves.fcBlockWoodMouldingItemStubID, 0, 3);
-      EjectSawProducts(world, x, y, z, FCBetterThanWolves.fcWicker.itemID, 0, 2);
+      EjectSawProducts(world, x, y, z, compatItemWickerPane.itemID, 0, 2);
     }
     else if (id == FCBetterThanWolves.fcPulley.blockID)
     {
@@ -783,7 +878,7 @@ public class GPEBTWTweak extends FCAddOn
     else if (id == gpeBlockStorage.blockID)
     {
       if (meta != 6) return false;
-      EjectSawProducts(world, x, y, z, FCBetterThanWolves.fcSawDust.itemID, 0, 16);
+      EjectSawProducts(world, x, y, z, compatItemSawDust.itemID, 0, 16);
     }
     else
     {
@@ -890,7 +985,12 @@ public class GPEBTWTweak extends FCAddOn
     t.put("item.skull.enderman.name", "Enderman Head");
     t.put("item.skull.pigzombie.name", "Zombie Pigman Head");
     t.put("item.skull.fire.name", "Blaze Head");
-    t.put(gpeItemLooseRock.getUnlocalizedName() + ".name", "Rock");
+    if (isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
+    {
+      t.put("item.gpeItemLooseRock.name", "Old Rock");
+    } else {
+      t.put("item.gpeItemLooseRock.name", "Rock");
+    }
     t.put("entity.gpeEntityRock.name", "Rock");
     t.put(gpeItemSilk.getUnlocalizedName() + ".name", "Silk");
     t.put(gpeItemAsh.getUnlocalizedName() + ".name", "Ash");
@@ -1308,7 +1408,7 @@ public class GPEBTWTweak extends FCAddOn
     if (id == FCBetterThanWolves.fcNethercoal.itemID) return true;
     if (id == Item.sugar.itemID) return true;
     if (id == Item.bone.itemID) return true;
-    if (id == FCBetterThanWolves.fcSawDust.itemID) return true;
+    if (id == compatItemSawDust.itemID) return true;
     if (id == FCBetterThanWolves.fcItemNitre.itemID) return true;
     if (id == FCBetterThanWolves.fcFlour.itemID) return true;
     if (id == Item.dyePowder.itemID && meta == 4) return true;
@@ -1318,7 +1418,7 @@ public class GPEBTWTweak extends FCAddOn
   public static int getRequiredItemCountToPistonPack(ItemStack stack)
   {
     int id = stack.itemID;
-    if (id == FCBetterThanWolves.fcSawDust.itemID) return 16;
+    if (id == compatItemSawDust.itemID) return 16;
     return 9;
   }
 
@@ -1341,7 +1441,7 @@ public class GPEBTWTweak extends FCAddOn
     {
       return btwBone ? FCBetterThanWolves.fcAestheticOpaque.blockID : gpeBlockStorageID;
     }
-    if (id == FCBetterThanWolves.fcSawDust.itemID) return gpeBlockStorageID;
+    if (id == compatItemSawDust.itemID) return gpeBlockStorageID;
     if (id == FCBetterThanWolves.fcItemNitre.itemID) return gpeBlockStorageID;
     if (id == FCBetterThanWolves.fcFlour.itemID) return gpeBlockStorageID;
     if (id == Item.dyePowder.itemID && meta == 4) return Block.blockLapis.blockID;
@@ -1359,7 +1459,7 @@ public class GPEBTWTweak extends FCAddOn
     {
       return btwBone ? 15 : 5;
     }
-    if (id == FCBetterThanWolves.fcSawDust.itemID) return 6;
+    if (id == compatItemSawDust.itemID) return 6;
     if (id == FCBetterThanWolves.fcItemNitre.itemID) return 7;
     if (id == FCBetterThanWolves.fcFlour.itemID) return 10;
     return 0;
@@ -1543,6 +1643,102 @@ public class GPEBTWTweak extends FCAddOn
     proxy.stopEntitySound(entity);
   }
 
+  public static void setAxesEffective(Block block)
+  {
+    try
+    {
+      try
+      {
+        Method setEff = Block.class.getMethod("SetAxesEffectiveOn", new Class[0]);
+        setEff.invoke(block);
+      }
+      catch (NoSuchMethodException e)
+      {
+        Method setEff = ItemAxe.class.getMethod("SetAllAxesToBeEffectiveVsBlock", new Class[] {Block.class});
+        setEff.invoke(block);
+      }
+    }
+    catch (NoSuchMethodException e)
+    {
+    }
+    catch (IllegalAccessException e)
+    {
+    }
+    catch (InvocationTargetException e)
+    {
+    }
+  }
+  
+  public static void setShovelsEffective(Block block)
+  {
+    try
+    {
+      try
+      {
+        Method setEff = Block.class.getMethod("SetShovelsEffectiveOn", new Class[0]);
+        setEff.invoke(block);
+      }
+      catch (NoSuchMethodException e)
+      {
+        Method setEff = ItemSpade.class.getMethod("SetAllShovelsToBeEffectiveVsBlock", new Class[] {Block.class});
+        setEff.invoke(block);
+      }
+    }
+    catch (NoSuchMethodException e)
+    {
+    }
+    catch (IllegalAccessException e)
+    {
+    }
+    catch (InvocationTargetException e)
+    {
+    }
+  }
+  
+  public static void setPicksEffective(Block block)
+  {
+    try
+    {
+      try
+      {
+        Method setEff = Block.class.getMethod("SetShovelsEffectiveOn", new Class[0]);
+        setEff.invoke(block);
+      }
+      catch (NoSuchMethodException e)
+      {
+        Method setEff = ItemPickaxe.class.getMethod("SetAllPicksToBeEffectiveVsBlock", new Class[] {Block.class});
+        setEff.invoke(block);
+      }
+    }
+    catch (NoSuchMethodException e)
+    {
+    }
+    catch (IllegalAccessException e)
+    {
+    }
+    catch (InvocationTargetException e)
+    {
+    }
+  }
+
+  public static void setChiselsEffective(Block block)
+  {
+    try
+    {
+      Method setEff = Block.class.getMethod("SetChiselsEffectiveOn", new Class[0]);
+      setEff.invoke(block);
+    }
+    catch (NoSuchMethodException e)
+    {
+    }
+    catch (IllegalAccessException e)
+    {
+    }
+    catch (InvocationTargetException e)
+    {
+    }
+  }
+  
   public static boolean classExists(String cn)
   {
     boolean result;

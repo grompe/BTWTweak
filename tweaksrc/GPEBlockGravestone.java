@@ -15,7 +15,7 @@ public class GPEBlockGravestone extends Block
     setHardness(3.5F);
     setResistance(10.0F);
     setStepSound(soundStoneFootstep);
-    ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
+    GPEBTWTweak.setPicksEffective(this);
     setCreativeTab(CreativeTabs.tabDecorations);
   }
 

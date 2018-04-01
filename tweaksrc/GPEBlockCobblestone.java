@@ -12,7 +12,7 @@ public class GPEBlockCobblestone extends Block
     setStepSound(soundStoneFootstep);
     setUnlocalizedName("stonebrick");
     setCreativeTab(CreativeTabs.tabBlock);
-    ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
+    GPEBTWTweak.setPicksEffective(this);
   }
 
   @ClientOnly

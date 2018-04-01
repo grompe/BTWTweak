@@ -26,8 +26,8 @@ public class GPEBlockAestheticOpaque extends FCBlockAestheticOpaque
   public GPEBlockAestheticOpaque(int id)
   {
     super(id);
-    ItemAxe.SetAllAxesToBeEffectiveVsBlock(this);
-    ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
+    GPEBTWTweak.setAxesEffective(this);
+    GPEBTWTweak.setPicksEffective(this);
     setCreativeTab(CreativeTabs.tabBlock);
   }
 

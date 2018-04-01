@@ -16,7 +16,8 @@ public class GPEBlockLog extends FCBlockLog
     super(id);
     setStepSound(soundWoodFootstep);
     setUnlocalizedName("log");
-    ItemAxe.SetAllAxesToBeEffectiveVsBlock(this);
+    GPEBTWTweak.setAxesEffective(this);
+    GPEBTWTweak.setChiselsEffective(this);
     SetCanBeCookedByKiln(true);
     SetItemIndexDroppedWhenCookedByKiln(Item.coal.itemID);
     SetItemDamageDroppedWhenCookedByKiln(1);
@@ -37,6 +38,34 @@ public class GPEBlockLog extends FCBlockLog
     if ((meta & 3) == 1) return 1.3F * multiplier;
     if ((meta & 3) == 3) return 1.0F * multiplier;
     return 1.5F * multiplier;
+  }
+
+  // This method is active in BTW 4.AA+
+  public boolean ConvertBlock(ItemStack stack, World world, int x, int y, int z, int side)
+  {
+    int meta = world.getBlockMetadata(x, y, z);
+    int newmeta = meta & 12;
+    if (newmeta == 12)
+    {
+      if (IsWorkStumpItemConversionTool(stack, world, x, y, z))
+      {
+        world.playAuxSFX(2268, x, y, z, 0);
+        world.setBlockAndMetadataWithNotify(x, y, z, FCBetterThanWolves.fcBlockWorkStump.blockID, meta & 3);
+        return true;
+      }
+    }
+    int id = FCBetterThanWolves.fcBlockLogDamaged.blockID;
+    int typ = meta & 3;
+    if (typ == 1) id = GPEBTWTweak.gpeBlockLogDamagedSpruce.blockID;
+    if (typ == 2) id = GPEBTWTweak.gpeBlockLogDamagedBirch.blockID;
+    if (typ == 3) id = GPEBTWTweak.gpeBlockLogDamagedJungle.blockID;
+    world.setBlockAndMetadataWithNotify(x, y, z, id, newmeta);
+    if (!world.isRemote)
+    {
+      ItemStack bark = new ItemStack(FCBetterThanWolves.fcItemBark, 1, meta & 3);
+      FCUtilsItem.EjectStackFromBlockTowardsFacing(world, x, y, z, bark, side);
+    }
+    return true;
   }
 
   @ClientOnly

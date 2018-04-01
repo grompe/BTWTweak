@@ -8,8 +8,8 @@ public class GPEBlockRustedRail extends BlockRailBase
     setHardness(0.4F);
     setStepSound(soundMetalFootstep);
     setUnlocalizedName("gpeBlockRustedRail");
-    ItemAxe.SetAllAxesToBeEffectiveVsBlock(this);
-    ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
+    GPEBTWTweak.setAxesEffective(this);
+    GPEBTWTweak.setPicksEffective(this);
   }
 
   public boolean canPlaceBlockAt(World world, int x, int y, int z)

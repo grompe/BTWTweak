@@ -285,7 +285,7 @@ function(mn)
     INSERT_BEFORE
   ).process(mn);
 });
-tweak("sq", "EntityPlayer", BOTH, "l_()V", [0xB4066F18, 0x99096FE7], "Player won't mind napping at day",
+tweak("sq", "EntityPlayer", BOTH, "l_()V", [0xB4066F18, 0x99096FE7, 0x723C726B], "Player won't mind napping at day",
 function(mn)
 {
   for (var i = 0; i < mn.instructions.size(); i++)

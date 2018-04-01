@@ -10,7 +10,7 @@ public class GPEBlockAxle extends FCBlockAxle
   {
     super(id);
     this.setCreativeTab(CreativeTabs.tabRedstone);
-    ItemAxe.SetAllAxesToBeEffectiveVsBlock(this);
+    GPEBTWTweak.setAxesEffective(this);
   }
 
   @ClientOnly

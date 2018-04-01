@@ -36,8 +36,8 @@ public class GPEBlockStorage extends Block
     setStepSound(soundStoneFootstep);
     setUnlocalizedName("gpeBlockStorage");
     setCreativeTab(CreativeTabs.tabBlock);
-    ItemAxe.SetAllAxesToBeEffectiveVsBlock(this);
-    ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
+    GPEBTWTweak.setAxesEffective(this);
+    GPEBTWTweak.setPicksEffective(this);
   }
 
   public float getBlockHardness(World world, int x, int y, int z)
@@ -53,7 +53,7 @@ public class GPEBlockStorage extends Block
   public int GetItemIDDroppedOnSaw(World world, int x, int y, int z)
   {
     int meta = world.getBlockMetadata(x, y, z);
-    if (meta == sawdust) return FCBetterThanWolves.fcSawDust.itemID;
+    if (meta == sawdust) return GPEBTWTweak.compatItemSawDust.itemID;
     return -1;
   }
 

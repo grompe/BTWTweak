@@ -11,7 +11,7 @@ public class GPEBlockGlass extends BlockGlass
     setStepSound(soundGlassFootstep);
     setUnlocalizedName("glass");
     setCreativeTab(CreativeTabs.tabBlock);
-    ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
+    GPEBTWTweak.setPicksEffective(this);
   }
 
   public void onFallenUpon(World world, int x, int y, int z, Entity entity, float par6)

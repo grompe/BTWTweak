@@ -8,7 +8,7 @@ public class GPEBlockOre extends FCBlockOre
     setHardness(3.0F);
     setResistance(5.0F);
     setStepSound(soundStoneFootstep);
-    ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
+    GPEBTWTweak.setPicksEffective(this);
     SetCanBeCookedByKiln(true);
 
     // CraftGuide compatibility / crash workaround

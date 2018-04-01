@@ -22,7 +22,7 @@ public class GPEBlockChest extends FCBlockChest
     setHardness(2.5F);
     setStepSound(soundWoodFootstep);
     setUnlocalizedName("chest");
-    ItemAxe.SetAllAxesToBeEffectiveVsBlock(this);
+    GPEBTWTweak.setAxesEffective(this);
   }
 
   public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)

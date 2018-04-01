@@ -13,7 +13,7 @@ public class GPEBlockRename extends BlockContainer
     setHardness(2.0F);
     setStepSound(soundWoodFootstep);
     setUnlocalizedName("gpeBlockRename");
-    ItemAxe.SetAllAxesToBeEffectiveVsBlock(this);
+    GPEBTWTweak.setAxesEffective(this);
     setCreativeTab(CreativeTabs.tabDecorations);
   }
 

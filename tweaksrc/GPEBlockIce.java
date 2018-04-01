@@ -11,7 +11,7 @@ public class GPEBlockIce extends FCBlockIce
     setLightOpacity(3);
     setStepSound(soundGlassFootstep);
     setUnlocalizedName("ice");
-    ItemPickaxe.SetAllPicksToBeEffectiveVsBlock(this);
+    GPEBTWTweak.setPicksEffective(this);
   }
 
   public void updateTick(World world, int x, int y, int z, Random random)
