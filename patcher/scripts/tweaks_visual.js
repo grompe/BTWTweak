@@ -22,6 +22,30 @@ function addRenderBlockDamageEffectMethod(cn)
     ]
   ));
   cn.methods.add(mn);
+  mn = MethodNode(ACC_PUBLIC, "RenderBlockWithTexture", "(Lbgf;IIILlx;)Z", null, null);
+  mn.instructions.add(toInsnList(
+    [
+      VarInsnNode(ALOAD, 1),
+      VarInsnNode(ALOAD, 5),
+      MethodInsnNode(INVOKEVIRTUAL, "bgf", "a", "(Llx;)V"),
+      VarInsnNode(ALOAD, 1),
+      VarInsnNode(ALOAD, 0),
+      MethodInsnNode(INVOKEVIRTUAL, "bgf", "a", "(Lapa;)V"),
+      VarInsnNode(ALOAD, 1),
+      VarInsnNode(ALOAD, 0),
+      VarInsnNode(ILOAD, 2),
+      VarInsnNode(ILOAD, 3),
+      VarInsnNode(ILOAD, 4),
+      MethodInsnNode(INVOKEVIRTUAL, "bgf", "p", "(Lapa;III)Z"),
+      // optimization; as a side note; both jad and cfr fail to retain the execution order while fernflower does fine
+      //VarInsnNode(ISTORE, 6),
+      VarInsnNode(ALOAD, 1),
+      MethodInsnNode(INVOKEVIRTUAL, "bgf", "a", "()V"),
+      //VarInsnNode(ILOAD, 6),
+      InsnNode(IRETURN),
+    ]
+  ));
+  cn.methods.add(mn);
 }
 
 // className, deobfName, side, method, checksums, description

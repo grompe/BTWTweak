@@ -320,4 +320,14 @@ public class GPEBlockChest extends FCBlockChest
     r.renderStandardBlock(this, x, y, z);
     r.clearOverrideBlockTexture();
   }
+
+  @ClientOnly
+  public boolean RenderBlockWithTexture(RenderBlocks r, int x, int y, int z, Icon icon)
+  {
+    r.setOverrideBlockTexture(icon);
+    r.setRenderBoundsFromBlock(this);
+    boolean b = r.renderStandardBlock(this, x, y, z);
+    r.clearOverrideBlockTexture();
+    return b;
+  }
 }

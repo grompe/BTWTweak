@@ -10,6 +10,9 @@ v1.0 (unreleased)
 - Fixed furnace patch that made it retain some heat while without fuel and
   reset cooking when the item is switched. Now also works for brick ovens.
 
+- Fixed render patch for harvesting cracks on chests, ender chests, wall
+  signs, beds, beacons and cocoa beans. This was missing since BTW 4.A9.
+
 v0.9o
 
 - Fixed compatibility with BTW version "4.A9 Pustules Lancing".
