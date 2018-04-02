@@ -19,6 +19,8 @@ v1.0 (unreleased)
 
 - Added F9 key to increase system brightness up to three times; F10 to reset.
 
+- Added an ability to combine burning crude torches in crafting.
+
 v0.9o
 
 - Fixed compatibility with BTW version "4.A9 Pustules Lancing".

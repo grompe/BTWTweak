@@ -1,0 +1,16 @@
+diff --git a/src/minecraft/net/minecraft/src/FCItemBlockTorchFiniteBurning.java b/src/minecraft/net/minecraft/src/FCItemBlockTorchFiniteBurning.java
+new file mode 100644
+index 0000000..24f0d5d
+--- /dev/null
++++ b/src/minecraft/net/minecraft/src/FCItemBlockTorchFiniteBurning.java
+@@ -0,0 +1,10 @@
++package net.minecraft.src;
++
++// Dummy class for BTW 4.AA+
++public class FCItemBlockTorchFiniteBurning extends Item
++{
++  public FCItemBlockTorchFiniteBurning(int id)
++  {
++    super(id);
++  }
++}

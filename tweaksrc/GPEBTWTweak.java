@@ -592,6 +592,11 @@ public class GPEBTWTweak extends FCAddOn
       FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockFlesh), new Object[] {"###", "###", "###", '#', Item.rottenFlesh});
     }
 
+    if (isBTWVersionOrNewer("4.AAAAAAABBB"))
+    {
+      CraftingManager.getInstance().getRecipeList().add(new GPERecipesTorchMerge());
+    }
+
     BlockDispenser.dispenseBehaviorRegistry.putObject(gpeItemLooseRock, new GPEBehaviorRock());
 
     // Balance Hardcore Hunger Wolves by adding wolves spawning in the forest
