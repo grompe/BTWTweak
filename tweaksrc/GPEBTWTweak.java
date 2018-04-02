@@ -20,6 +20,7 @@ public class GPEBTWTweak extends FCAddOn
   public static Block gpeBlockStone;
   public static Block compatAxleBlock;
   public static Block compatSlabSandAndGravel;
+  public static Block compatBlockDirtSlab;
   public static Block gpeBlockGravestone;
   public static Block gpeBlockRustedRail;
   public static Block gpeBlockRename;
@@ -157,6 +158,15 @@ public class GPEBTWTweak extends FCAddOn
     {
       FCAddOnHandler.LogMessage("Error while retrieving Wicker Pane Item, assuming ID=241");
       compatItemWickerPane = Item.itemsList[241];
+    }
+    try
+    {
+      compatBlockDirtSlab = (Block)FCBetterThanWolves.class.getField("fcBlockDirtSlab").get(null);
+    }
+    catch (Exception e)
+    {
+      FCAddOnHandler.LogMessage("Error while retrieving Dirt Slab Block, assuming ID=206");
+      compatBlockDirtSlab = Block.blocksList[206];
     }
   }
 
@@ -371,7 +381,7 @@ public class GPEBTWTweak extends FCAddOn
     Block.blocksList[id] = null;
     new GPEBlockAestheticOpaque(id);
 
-    id = FCBetterThanWolves.fcBlockDirtSlab.blockID;
+    id = compatBlockDirtSlab.blockID;
     Block.blocksList[id] = null;
     new GPEBlockDirtSlab(id);
 
@@ -419,21 +429,21 @@ public class GPEBTWTweak extends FCAddOn
       FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileGravel, 2), new Object[] {new ItemStack(compatSlabSandAndGravel, 1, 0)});
       FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileSand, 2), new Object[] {new ItemStack(compatSlabSandAndGravel, 1, 1)});
       // Old to new item conversion
-      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(compatSlabSandAndGravel, 1, 0), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 6)});
-      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(compatSlabSandAndGravel, 1, 1), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 7)});
+      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(compatSlabSandAndGravel, 1, 0), new Object[] {new ItemStack(compatBlockDirtSlab, 1, 6)});
+      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(compatSlabSandAndGravel, 1, 1), new Object[] {new ItemStack(compatBlockDirtSlab, 1, 7)});
     } else {
-      FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 4, 6), new Object[] {"##", '#', new ItemStack(Block.gravel)});
-      FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 6), new Object[] {"##", '#', new ItemStack(FCBetterThanWolves.fcItemPileGravel)});
-      FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 4, 7), new Object[] {"##", '#', new ItemStack(Block.sand)});
-      FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 7), new Object[] {"##", '#', new ItemStack(FCBetterThanWolves.fcItemPileSand)});
-      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileGravel, 2), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 6)});
-      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileSand, 2), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 7)});
+      FCRecipes.AddVanillaRecipe(new ItemStack(compatBlockDirtSlab, 4, 6), new Object[] {"##", '#', new ItemStack(Block.gravel)});
+      FCRecipes.AddVanillaRecipe(new ItemStack(compatBlockDirtSlab, 1, 6), new Object[] {"##", '#', new ItemStack(FCBetterThanWolves.fcItemPileGravel)});
+      FCRecipes.AddVanillaRecipe(new ItemStack(compatBlockDirtSlab, 4, 7), new Object[] {"##", '#', new ItemStack(Block.sand)});
+      FCRecipes.AddVanillaRecipe(new ItemStack(compatBlockDirtSlab, 1, 7), new Object[] {"##", '#', new ItemStack(FCBetterThanWolves.fcItemPileSand)});
+      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileGravel, 2), new Object[] {new ItemStack(compatBlockDirtSlab, 1, 6)});
+      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileSand, 2), new Object[] {new ItemStack(compatBlockDirtSlab, 1, 7)});
     }
-    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Block.gravel), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 6), new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 6)});
-    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Block.sand), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 7), new ItemStack(FCBetterThanWolves.fcBlockDirtSlab, 1, 7)});
+    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Block.gravel), new Object[] {new ItemStack(compatBlockDirtSlab, 1, 6), new ItemStack(compatBlockDirtSlab, 1, 6)});
+    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Block.sand), new Object[] {new ItemStack(compatBlockDirtSlab, 1, 7), new ItemStack(compatBlockDirtSlab, 1, 7)});
     if (isBTWVersionOrNewer("4.AAAAAAAAAAHHHH d"))
     {
-      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileDirt, 2), new Object[] {new ItemStack(FCBetterThanWolves.fcBlockDirtSlab)});
+      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemPileDirt, 2), new Object[] {new ItemStack(compatBlockDirtSlab)});
     }
     FCRecipes.AddStokedCauldronRecipe(new ItemStack(FCBetterThanWolves.fcGlue, 1), new ItemStack[] {new ItemStack(Item.dyePowder, 64, 15)});
 
@@ -619,8 +629,8 @@ public class GPEBTWTweak extends FCAddOn
       addDesc.invoke(rb, "397#8", "Blaze head is one cool-looking fiery trophy.");
       addDesc.invoke(rb, Integer.toString(gpeLooseRockID), "A rough loose rock. It could be crafted with shafts to make basic tools, one for a shovel, two for an axe or three for a pick. Heavy, but usable as a short ranged thrown weapon. Can be assembled to slabs and blocks.");
       addDesc.invoke(rb, Integer.toString(gpeSilkID), "Fine vowen spider silk. You wonder what could it be used for...");
-      addDesc.invoke(rb, Integer.toString(FCBetterThanWolves.fcBlockDirtSlab.blockID) + "#6", "Gravel makes for a good road material, even in a slab form.");
-      addDesc.invoke(rb, Integer.toString(FCBetterThanWolves.fcBlockDirtSlab.blockID) + "#7", "Running and jumping is a huge drain on energy and cuts into a food supply fast. Slabs could offer a huge help in this, allowing one to walk up slopes without any jumping at all. Needs a solid surface to sit on though.");
+      addDesc.invoke(rb, Integer.toString(compatBlockDirtSlab.blockID) + "#6", "Gravel makes for a good road material, even in a slab form.");
+      addDesc.invoke(rb, Integer.toString(compatBlockDirtSlab.blockID) + "#7", "Running and jumping is a huge drain on energy and cuts into a food supply fast. Slabs could offer a huge help in this, allowing one to walk up slopes without any jumping at all. Needs a solid surface to sit on though.");
       addDesc.invoke(rb, Integer.toString(FCBetterThanWolves.fcPotash.itemID), "Grainy ash substance from rendered down wood. Can fertilize tilled soil. Also has a bleaching quality, so should be able to bleach coloured wool white.");
       addDesc.invoke(rb, Integer.toString(FCBetterThanWolves.fcAestheticOpaque.blockID) + "#4", "Nice, soft and comfy. A handy way to store padding. Or to make a calming padded room. Softens the blow when landed onto.");
       FCAddOnHandler.LogMessage("All good!");
@@ -973,11 +983,11 @@ public class GPEBTWTweak extends FCAddOn
     t.put(FCBetterThanWolves.fcBlockDetectorRailSoulforgedSteel.getUnlocalizedName() + ".name", "Player Detector Rail");
     if (isBTWVersionOrNewer("4.99999A0D Marsupial??!!"))
     {
-      t.put(FCBetterThanWolves.fcBlockDirtSlab.getUnlocalizedName() + ".gravel.name", "Old Gravel Slab");
-      t.put(FCBetterThanWolves.fcBlockDirtSlab.getUnlocalizedName() + ".sand.name", "Old Sand Slab");
+      t.put(compatBlockDirtSlab.getUnlocalizedName() + ".gravel.name", "Old Gravel Slab");
+      t.put(compatBlockDirtSlab.getUnlocalizedName() + ".sand.name", "Old Sand Slab");
     } else {
-      t.put(FCBetterThanWolves.fcBlockDirtSlab.getUnlocalizedName() + ".gravel.name", "Gravel Slab");
-      t.put(FCBetterThanWolves.fcBlockDirtSlab.getUnlocalizedName() + ".sand.name", "Sand Slab");
+      t.put(compatBlockDirtSlab.getUnlocalizedName() + ".gravel.name", "Gravel Slab");
+      t.put(compatBlockDirtSlab.getUnlocalizedName() + ".sand.name", "Sand Slab");
     }
     t.put(FCBetterThanWolves.fcItemRottenArrow.getUnlocalizedName() + ".name", "Rotten Arrow");
     t.put(FCBetterThanWolves.fcItemWindMillVertical.getUnlocalizedName() + ".name", "Vertical Wind Mill");
