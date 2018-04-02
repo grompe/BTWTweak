@@ -796,7 +796,53 @@ function(mn)
     [INVOKEVIRTUAL, "bhi", "b", "(Lawv;Lbge;Lwm;II)V"],
     [INVOKESTATIC, "GPEBTWTweakProxyClient", "safeRenderItemAndEffectIntoGUI", "(Lbhi;Lawv;Lbge;Lwm;II)V"]);
 });
-
+if (isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
+{
+  tweak("uristqwerty/CraftGuide/recipes/BTWRecipes", null, CLIENT, "generateRecipes(Luristqwerty/CraftGuide/api/RecipeGenerator;)V", 0xC06E9E3D, "(1/2) Fixing CraftGuide compatibility with BTW 4.AAAAAAAAAAHHHH+",
+  function(mn)
+  {
+    return replaceFirstString(mn, "fcSawDust", "fcItemSawDust");
+  });
+  tweak("uristqwerty/CraftGuide/recipes/BTWRecipes", null, CLIENT, "addHopperRecipes(Luristqwerty/CraftGuide/api/RecipeGenerator;Lwm;)V", 0x136F3F6C, "(2/2) Fixing CraftGuide compatibility with BTW 4.AAAAAAAAAAHHHH+",
+  function(mn)
+  {
+    return replaceFirstString(mn, "fcWicker", "fcItemWickerPane");
+  });
+  tweak("uristqwerty/CraftGuide/recipes/BTWRecipes", null, CLIENT, "addKilnRecipe(Luristqwerty/CraftGuide/api/RecipeGenerator;Luristqwerty/CraftGuide/api/RecipeTemplate;Lwm;Lapa;)V", 0xF48A3C24, "Prevent CraftGuide from crashing from introspecting kiln recipes",
+  function(mn)
+  {
+    var i;
+    var label_end;
+    for (i = mn.instructions.size() - 2; i >= 0; i--)
+    {
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.LabelNode"))
+      {
+        label_end = n;
+        break;
+      }
+    }
+    for (i = 0; i < mn.instructions.size(); i++)
+    {
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.LdcInsnNode") && (n.cst.toString() == "m_iItemIndexDroppedWhenCookedByKiln"))
+      {
+        var n2 = mn.instructions.get(i + 4);
+        if (isInstance(n2, "org.objectweb.asm.tree.VarInsnNode") && n2.opcode == ISTORE)
+        {
+          mn.instructions.insert(n2, toInsnList(
+            [
+              IntInsnNode(ILOAD, n2["var"]),
+              InsnNode(ICONST_M1),
+              JumpInsnNode(IF_ICMPEQ, label_end),
+            ]
+          ));
+          return true;
+        }
+      }
+    }
+  });
+}
 // Fix Deco add-on
 tweak("Ginger", null, BOTH, "MakeBlocks()V", 0x7B7F833B, "Fixing Deco add-on calling an outdated beacon method name",
 function(mn)
