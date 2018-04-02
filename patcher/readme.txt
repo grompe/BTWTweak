@@ -21,6 +21,8 @@ v1.0 (unreleased)
 
 - Added an ability to combine burning crude torches in crafting.
 
+- Removed very rare zombie spawn with axes for BTW 4.AAAAAAAAAAHHHH and up.
+
 v0.9o
 
 - Fixed compatibility with BTW version "4.A9 Pustules Lancing".

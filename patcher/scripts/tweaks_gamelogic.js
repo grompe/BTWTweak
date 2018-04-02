@@ -872,43 +872,46 @@ function(cn)
   ));
   cn.methods.add(mn);
 });
-tweak("sj", "EntityZombie", BOTH, "bH()V", 0x14C20F2F, "Very rarely giving axes to zombies",
-function(mn)
+if (!isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
 {
-  for (var i = mn.instructions.size() - 1; i >= 0; i--)
+  tweak("sj", "EntityZombie", BOTH, "bH()V", 0x14C20F2F, "Very rarely giving axes to zombies",
+  function(mn)
   {
-    var n = mn.instructions.get(i);
-    if (isInstance(n, "org.objectweb.asm.tree.InsnNode") && (n.getOpcode() == RETURN))
+    for (var i = mn.instructions.size() - 1; i >= 0; i--)
     {
-      var label = LabelNode();
-      mn.instructions.insertBefore(n, toInsnList(
-        [
-          VarInsnNode(ALOAD, 0),
-          FieldInsnNode(GETFIELD, "sj", "ab", "Ljava/util/Random;"),
-          MethodInsnNode(INVOKEVIRTUAL, "java/util/Random", "nextFloat", "()F"),
-          LdcInsnNode(Float("0.005")),
-          InsnNode(FCMPG),
-          JumpInsnNode(IFGE, label),
-          VarInsnNode(ALOAD, 0),
-          InsnNode(ICONST_0),
-          TypeInsnNode(NEW, "wm"),
-          InsnNode(DUP),
-          FieldInsnNode(GETSTATIC, "wk", "i", "Lwk;"),
-          MethodInsnNode(INVOKESPECIAL, "wm", "<init>", "(Lwk;)V"),
-          MethodInsnNode(INVOKEVIRTUAL, "sj", "c", "(ILwm;)V"),
-          VarInsnNode(ALOAD, 0),
-          FieldInsnNode(GETFIELD, "sj", "bq", "[F"),
-          InsnNode(ICONST_0),
-          LdcInsnNode(Float("0.99")),
-          InsnNode(FASTORE),
-          label,
-          FrameNode(F_SAME, 0, null, 0, null),
-        ]
-      ));
-      return true;
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.InsnNode") && (n.getOpcode() == RETURN))
+      {
+        var label = LabelNode();
+        mn.instructions.insertBefore(n, toInsnList(
+          [
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "sj", "ab", "Ljava/util/Random;"),
+            MethodInsnNode(INVOKEVIRTUAL, "java/util/Random", "nextFloat", "()F"),
+            LdcInsnNode(Float("0.005")),
+            InsnNode(FCMPG),
+            JumpInsnNode(IFGE, label),
+            VarInsnNode(ALOAD, 0),
+            InsnNode(ICONST_0),
+            TypeInsnNode(NEW, "wm"),
+            InsnNode(DUP),
+            FieldInsnNode(GETSTATIC, "wk", "i", "Lwk;"),
+            MethodInsnNode(INVOKESPECIAL, "wm", "<init>", "(Lwk;)V"),
+            MethodInsnNode(INVOKEVIRTUAL, "sj", "c", "(ILwm;)V"),
+            VarInsnNode(ALOAD, 0),
+            FieldInsnNode(GETFIELD, "sj", "bq", "[F"),
+            InsnNode(ICONST_0),
+            LdcInsnNode(Float("0.99")),
+            InsnNode(FASTORE),
+            label,
+            FrameNode(F_SAME, 0, null, 0, null),
+          ]
+        ));
+        return true;
+      }
     }
-  }
-});
+  });
+}
 tweak("FCEntityAIZombieBreakBarricades", null, BOTH, "e()V", 0x7353560, "Very quickly breaking doors by axe-wielding zombies",
 function(mn)
 {
