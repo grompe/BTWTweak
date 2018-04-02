@@ -11,6 +11,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
 
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.LWJGLException;
 
 public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
 {
@@ -19,6 +21,7 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
   private Map tileEntitySpecialRendererMap;
 
   public static String lastToldName = "";
+  private int addedBrightness = 0;
 
   public File getConfigDir()
   {
@@ -95,7 +98,7 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
         }
       }
     }
-    if (key == 45) // "X", for debugging!
+    if (key == Keyboard.KEY_X) // for debugging!
     {
       Minecraft mc = Minecraft.getMinecraft();
       if (!mc.thePlayer.capabilities.isCreativeMode) return;
@@ -117,6 +120,42 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
           int meta = world.getBlockMetadata(x, y, z);
           mc.thePlayer.addChatMessage(String.format("Looking at block %d:%d (%d, %d, %d)", id, meta, x, y, z));
         }
+      }
+    }
+    if (key == Keyboard.KEY_F9)
+    {
+      try
+      {
+        if (addedBrightness == 0)
+        {
+          Display.setDisplayConfiguration(1.0F, 0.04F, 1.0F);
+        }
+        if (addedBrightness == 1)
+        {
+          Display.setDisplayConfiguration(1.0F, 0.06F, 1.0F);
+        }
+        if (addedBrightness == 2)
+        {
+          Display.setDisplayConfiguration(1.0F, 0.08F, 1.0F);
+        }
+        if (addedBrightness < 2) addedBrightness++;
+      }
+      catch (LWJGLException e)
+      {
+        e.printStackTrace();
+      }
+    }
+    if (key == Keyboard.KEY_F10)
+    {
+      addedBrightness = 0;
+      try
+      {
+        // inverse gamma, +brightness, contrast
+        Display.setDisplayConfiguration(1.0F, 0.0F, 1.0F);
+      }
+      catch (LWJGLException e)
+      {
+        e.printStackTrace();
       }
     }
     if (sprintKey.pressed)

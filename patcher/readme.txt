@@ -17,6 +17,8 @@ v1.0 (unreleased)
   show BTW recipes again in BTW 4.AAAAAAAAAAHHHH and later. Note that some
   recipes shown in there are outdated as they aren't loaded from BTW itself.
 
+- Added F9 key to increase system brightness up to three times; F10 to reset.
+
 v0.9o
 
 - Fixed compatibility with BTW version "4.A9 Pustules Lancing".
