@@ -65,7 +65,7 @@ function(mn)
   }
   return changes == 2;
 });
-tweak("FCItemBlockDirtSlab", null, BOTH, "canCombineWithBlock(Laab;IIII)Z", 0xAE2D0A64, "(2/3) Adding dirt slab item types",
+tweak("FCItemBlockDirtSlab", null, BOTH, "canCombineWithBlock(Laab;IIII)Z", [0xAE2D0A64, 0x999B09A4], "(2/3) Adding dirt slab item types",
 function(mn)
 {
   var changes = 0;
@@ -86,7 +86,7 @@ function(mn)
   }
   return changes == 2;
 });
-tweak("FCItemBlockDirtSlab", null, BOTH, "convertToFullBlock(Laab;III)Z", 0x49FA1335, "(3/3) Adding dirt slab item types",
+tweak("FCItemBlockDirtSlab", null, BOTH, "convertToFullBlock(Laab;III)Z", [0x49FA1335, 0xF90711B5], "(3/3) Adding dirt slab item types",
 function(mn)
 {
   for (var i = 0; i < mn.instructions.size(); i++)

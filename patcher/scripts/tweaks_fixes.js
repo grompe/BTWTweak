@@ -762,7 +762,7 @@ function fixNewGenChests(mn)
     }
   }
 }
-tweak("add", "WorldGeneratorBonusChest", BOTH, "a(Laab;Ljava/util/Random;III)Z", 0xC02B2446, "(1/3) Fix generated chests' collision", fixNewGenChests);
+tweak("add", "WorldGeneratorBonusChest", BOTH, "a(Laab;Ljava/util/Random;III)Z", [0xC02B2446, 0xB7FE3FD8], "(1/3) Fix generated chests' collision", fixNewGenChests);
 tweak("adu", "WorldGenDungeons", BOTH, "a(Laab;Ljava/util/Random;III)Z", 0x565B870A, "(2/3) Fix generated chests' collision", fixNewGenChests);
 tweak("agw", "StructureComponent", BOTH, "a(Laab;Laek;Ljava/util/Random;III[Llp;I)Z", 0xB59E1064, "(3/3) Fix generated chests' collision", fixNewGenChests);
 

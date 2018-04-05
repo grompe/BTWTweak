@@ -1,5 +1,5 @@
 // className, deobfName, side, method, checksums, description
-tweak("aen", "ComponentMineshaftCorridor", BOTH, "a(Laab;Ljava/util/Random;Laek;)Z", 0x97797998, "Making rails rusted in mineshafts",
+tweak("aen", "ComponentMineshaftCorridor", BOTH, "a(Laab;Ljava/util/Random;Laek;)Z", [0x97797998, 0xAC7F79B2], "Making rails rusted in mineshafts",
 function(mn)
 {
   var i, changes = 0;
