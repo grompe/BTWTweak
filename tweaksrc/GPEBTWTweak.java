@@ -1670,7 +1670,7 @@ public class GPEBTWTweak extends FCAddOn
       catch (NoSuchMethodException e)
       {
         Method setEff = ItemAxe.class.getMethod("SetAllAxesToBeEffectiveVsBlock", new Class[] {Block.class});
-        setEff.invoke(block);
+        setEff.invoke(null, block);
       }
     }
     catch (NoSuchMethodException e)
@@ -1696,7 +1696,7 @@ public class GPEBTWTweak extends FCAddOn
       catch (NoSuchMethodException e)
       {
         Method setEff = ItemSpade.class.getMethod("SetAllShovelsToBeEffectiveVsBlock", new Class[] {Block.class});
-        setEff.invoke(block);
+        setEff.invoke(null, block);
       }
     }
     catch (NoSuchMethodException e)
@@ -1716,13 +1716,13 @@ public class GPEBTWTweak extends FCAddOn
     {
       try
       {
-        Method setEff = Block.class.getMethod("SetShovelsEffectiveOn", new Class[0]);
+        Method setEff = Block.class.getMethod("SetPicksEffectiveOn", new Class[0]);
         setEff.invoke(block);
       }
       catch (NoSuchMethodException e)
       {
         Method setEff = ItemPickaxe.class.getMethod("SetAllPicksToBeEffectiveVsBlock", new Class[] {Block.class});
-        setEff.invoke(block);
+        setEff.invoke(null, block);
       }
     }
     catch (NoSuchMethodException e)
