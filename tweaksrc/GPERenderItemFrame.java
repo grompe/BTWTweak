@@ -125,32 +125,12 @@ public class GPERenderItemFrame extends RenderItemFrame
         renderManager.itemRenderer.mapItemRenderer.renderMap((EntityPlayer)null, renderManager.renderEngine, mapData);
       }
     } else {
-      TextureCompass texCompass;
-
-      if (stack.itemID == Item.compass.itemID)
-      {
-        texCompass = TextureCompass.compassTexture;
-        double savedAngle = texCompass.currentAngle;
-        double savedDelta = texCompass.angleDelta;
-        texCompass.currentAngle = 0;
-        texCompass.angleDelta = 0;
-        texCompass.updateCompass(itemFrame.worldObj, itemFrame.posX, itemFrame.posZ, MathHelper.wrapAngleTo180_float(180 + itemFrame.hangingDirection * 90), false, true);
-        texCompass.currentAngle = savedAngle;
-        texCompass.angleDelta = savedDelta;
-      }
-
       RenderItem.renderInFrame = true;
       if (!isBlock) GL11.glDisable(GL11.GL_LIGHTING);
       //RenderManager.instance.renderEntityWithPosYaw(item, 0, 0, 0, 0F, 0F);
       renderManager.renderEntityWithPosYaw(item, 0, 0, 0, 0F, 0F);
       if (!isBlock) GL11.glEnable(GL11.GL_LIGHTING);
       RenderItem.renderInFrame = false;
-
-      if (stack.itemID == Item.compass.itemID)
-      {
-        texCompass = TextureCompass.compassTexture;
-        texCompass.updateAnimation();
-      }
     }
     GL11.glPopMatrix();
   }

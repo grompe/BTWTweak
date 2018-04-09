@@ -23,6 +23,9 @@ v1.0 (unreleased)
 
 - Removed very rare zombie spawn with axes for BTW 4.AAAAAAAAAAHHHH and up.
 
+- Removed compass-specific render from the item frame for compatibility with
+  BTW 4.AAABBBA and up. This makes compass inactive when inside the frame.
+
 v0.9o
 
 - Fixed compatibility with BTW version "4.A9 Pustules Lancing".
