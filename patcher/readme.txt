@@ -26,6 +26,9 @@ v1.0 (unreleased)
 - Removed compass-specific render from the item frame for compatibility with
   BTW 4.AAABBBA and up. This makes compass inactive when inside the frame.
 
+- Changed chests in BTW 4.AAAAAAAAAAHHHH and up to be harvestable again,
+  when using an iron axe or better.
+
 v0.9o
 
 - Fixed compatibility with BTW version "4.A9 Pustules Lancing".

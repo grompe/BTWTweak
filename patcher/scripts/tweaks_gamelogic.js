@@ -1182,3 +1182,20 @@ function(cn)
   ));
   cn.methods.add(mn);
 });
+if (isBTWVersionOrNewer("4.AAAAAAAAAAHHHH b"))
+{
+  tweak("aln", "BlockChest", BOTH, "<init>(II)V", 0x7B0608D1, "Changing chest to a material that requires a tool to harvest",
+  function(mn)
+  {
+    for (var i = 0; i < mn.instructions.size(); i++)
+    {
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner.equals("aif") && n.name.equals("d") && n.desc.equals("Laif;"))
+      {
+        n.owner = "FCBetterThanWolves";
+        n.name = "fcMaterialPlanks";
+        return true;
+      }
+    }
+  });
+}

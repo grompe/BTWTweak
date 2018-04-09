@@ -312,6 +312,24 @@ public class GPEBlockChest extends FCBlockChest
     return new GPETileEntityChest();
   }
 
+  // BTW 4.AA+
+  public int GetHarvestToolLevel(IBlockAccess a, int x, int y, int z)
+  {
+    return 2;
+  }
+
+  public void dropBlockAsItemWithChance(World world, int x, int y, int z, int meta, float chance, int bonus)
+  {
+    dropBlockAsItem_do(world, x, y, z, new ItemStack(blockID, 1, 0));
+  }
+
+  // active only on BTW 4.AA+ due to material of BlockChest patched to fcMaterialPlanks that requires a tool
+  public void OnBlockDestroyedWithImproperTool(World world, EntityPlayer player, int x, int y, int z, int meta)
+  {
+    dropBlockAsItem_do(world, x, y, z, new ItemStack(GPEBTWTweak.compatItemSawDust, 6, 0));
+    dropBlockAsItem_do(world, x, y, z, new ItemStack(Item.stick, 2, 0));
+  }
+
   @ClientOnly
   public void RenderBlockDamageEffect(RenderBlocks r, int x, int y, int z, Icon icon)
   {
