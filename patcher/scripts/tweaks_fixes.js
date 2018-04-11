@@ -52,7 +52,7 @@ function fixAxeCheckingForStump(mn)
 // className, deobfName, side, method, checksums, description
 if (!isBTWVersionOrNewer("4.A7 Squid A Swimming"))
 {
-  tweak("rf", "EntityBoat", BOTH, "l_()V", [0x8C1045A2, 0x20734BFD, 0xDE72592A], "Making boat safe from falling damage bug",
+  tweak("rf", "EntityBoat", BOTH, "l_()V", [0x2775423C, 0x8C1045A2, 0x20734BFD, 0xDE72592A], "Making boat safe from falling damage bug",
   function(mn)
   {
     var label = LabelNode();
@@ -710,7 +710,7 @@ function(mn)
     }
   }
 });
-tweak("bir", "TextureMap", CLIENT, "b()V", [0x4084A6F9, 0xCB479DDD], "Making writing debug textures optional",
+tweak("bir", "TextureMap", CLIENT, "b()V", [0x5F28A3A3, 0x4084A6F9, 0xCB479DDD], "Making writing debug textures optional",
 function(mn)
 {
   var changes = 0;
@@ -734,7 +734,7 @@ function(mn)
   for (i -= 1; i >= 0; i--)
   {
     var n = mn.instructions.get(i);
-    if (isInstance(n, "org.objectweb.asm.tree.FrameNode"))
+    if (isInstance(n, "org.objectweb.asm.tree.FrameNode") || isInstance(n, "org.objectweb.asm.tree.LabelNode"))
     {
       mn.instructions.insert(n, toInsnList(
         [

@@ -142,7 +142,7 @@ function(mn)
     ]
   ).process(mn);
 });
-tweak("qo", "EntitySheep", BOTH, "aK()V", 0x63E1B55, "Letting sheep heal from eating grass",
+tweak("qo", "EntitySheep", BOTH, "aK()V", [0xE2B00C9A, 0x63E1B55], "Letting sheep heal from eating grass",
 function(mn)
 {
   for (var i = mn.instructions.size() - 1; i >= 0; i--)
@@ -952,7 +952,7 @@ function(mn)
     }
   }
 });
-tweak("ng", "EntityLiving", BOTH, "bE()F", 0xB84C4738, "Restoring the effect of swiftness potions",
+tweak("ng", "EntityLiving", BOTH, "bE()F", [0x2F3E47DF, 0xB84C4738], "Restoring the effect of swiftness potions",
 function(mn)
 {
   var label = LabelNode();

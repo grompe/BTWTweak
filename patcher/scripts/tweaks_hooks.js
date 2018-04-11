@@ -143,107 +143,110 @@ function(mn)
     INSERT_BEFORE
   ).process(mn);
 });
-tweak("aqw", "TileEntityPiston", BOTH, "IsPackableItem(Lwm;)Z", 0x5BD024B, "Hooked piston's IsPackableItem()",
-function(mn)
+if (isBTWVersionOrNewer("4.89666"))
 {
-  mn.instructions.clear();
-  var label = LabelNode();
-  mn.instructions.add(toInsnList(
-    [
-      VarInsnNode(ALOAD, 1),
-      MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "isPistonPackable", "(Lwm;)Z"),
-      JumpInsnNode(IFEQ, label),
-      InsnNode(ICONST_1),
-      InsnNode(IRETURN),
-      label,
-      FrameNode(F_SAME, 0, null, 0, null),
-      VarInsnNode(ALOAD, 1),
-      MethodInsnNode(INVOKEVIRTUAL, "wm", "b", "()Lwk;"),
-      VarInsnNode(ALOAD, 1),
-      MethodInsnNode(INVOKEVIRTUAL, "wk", "IsPistonPackable", "(Lwm;)Z"),
-      InsnNode(IRETURN),
-    ]
-  ));
-  return true;
-});
-tweak("aqw", "TileEntityPiston", BOTH, "GetItemCountToPack(Lwm;)I", 0x5BD024B, "Hooked piston's GetItemCountToPack()",
-function(mn)
-{
-  mn.instructions.clear();
-  var label = LabelNode();
-  mn.instructions.add(toInsnList(
-    [
-      VarInsnNode(ALOAD, 1),
-      MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "isPistonPackable", "(Lwm;)Z"),
-      JumpInsnNode(IFEQ, label),
-      VarInsnNode(ALOAD, 1),
-      MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "getRequiredItemCountToPistonPack", "(Lwm;)I"),
-      InsnNode(IRETURN),
-      label,
-      FrameNode(F_SAME, 0, null, 0, null),
-      VarInsnNode(ALOAD, 1),
-      MethodInsnNode(INVOKEVIRTUAL, "wm", "b", "()Lwk;"),
-      VarInsnNode(ALOAD, 1),
-      MethodInsnNode(INVOKEVIRTUAL, "wk", "GetRequiredItemCountToPistonPack", "(Lwm;)I"),
-      InsnNode(IRETURN),
-    ]
-  ));
-  return true;
-});
-tweak("aqw", "TileEntityPiston", BOTH, "CreateBlockOfTypeAtLocation(Lwm;III)V", 0x7ECF0885, "Hooked piston's CreateBlockOfTypeAtLocation()",
-function(mn)
-{
-  mn.instructions.clear();
-  var label0 = LabelNode();
-  var label1 = LabelNode();
-  mn.instructions.add(toInsnList(
-    [
-      VarInsnNode(ALOAD, 1),
-      MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "isPistonPackable", "(Lwm;)Z"),
-      JumpInsnNode(IFEQ, label0),
-      VarInsnNode(ALOAD, 1),
-      MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "getResultingBlockIDOnPistonPack", "(Lwm;)I"),
-      VarInsnNode(ISTORE, 5),
-      VarInsnNode(ALOAD, 1),
-      MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "getResultingBlockMetadataOnPistonPack", "(Lwm;)I"),
-      VarInsnNode(ISTORE, 6),
-      JumpInsnNode(GOTO, label1),
-      label0,
-      FrameNode(F_SAME, 0, null, 0, null),
-      VarInsnNode(ALOAD, 1),
-      MethodInsnNode(INVOKEVIRTUAL, "wm", "b", "()Lwk;"),
-      VarInsnNode(ALOAD, 1),
-      MethodInsnNode(INVOKEVIRTUAL, "wk", "GetResultingBlockIDOnPistonPack", "(Lwm;)I"),
-      VarInsnNode(ISTORE, 5),
-      VarInsnNode(ALOAD, 1),
-      MethodInsnNode(INVOKEVIRTUAL, "wm", "b", "()Lwk;"),
-      VarInsnNode(ALOAD, 1),
-      MethodInsnNode(INVOKEVIRTUAL, "wk", "GetResultingBlockMetadataOnPistonPack", "(Lwm;)I"),
-      VarInsnNode(ISTORE, 6),
-      label1,
-      FrameNode(F_APPEND, 2, [INTEGER, INTEGER], 0, null),
-      VarInsnNode(ALOAD, 0),
-      FieldInsnNode(GETFIELD, "aqw", "k", "Laab;"),
-      VarInsnNode(ILOAD, 2),
-      VarInsnNode(ILOAD, 3),
-      VarInsnNode(ILOAD, 4),
-      VarInsnNode(ILOAD, 5),
-      VarInsnNode(ILOAD, 6),
-      MethodInsnNode(INVOKEVIRTUAL, "aab", "setBlockAndMetadataWithNotify", "(IIIII)Z"),
-      InsnNode(POP),
-      VarInsnNode(ALOAD, 0),
-      FieldInsnNode(GETFIELD, "aqw", "k", "Laab;"),
-      IntInsnNode(SIPUSH, 2236),
-      VarInsnNode(ILOAD, 2),
-      VarInsnNode(ILOAD, 3),
-      VarInsnNode(ILOAD, 4),
-      VarInsnNode(ILOAD, 5),
-      MethodInsnNode(INVOKEVIRTUAL, "aab", "e", "(IIIII)V"),
-      InsnNode(RETURN),
-    ]
-  ));
-  return true;
-});
+  tweak("aqw", "TileEntityPiston", BOTH, "IsPackableItem(Lwm;)Z", 0x5BD024B, "Hooked piston's IsPackableItem()",
+  function(mn)
+  {
+    mn.instructions.clear();
+    var label = LabelNode();
+    mn.instructions.add(toInsnList(
+      [
+        VarInsnNode(ALOAD, 1),
+        MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "isPistonPackable", "(Lwm;)Z"),
+        JumpInsnNode(IFEQ, label),
+        InsnNode(ICONST_1),
+        InsnNode(IRETURN),
+        label,
+        FrameNode(F_SAME, 0, null, 0, null),
+        VarInsnNode(ALOAD, 1),
+        MethodInsnNode(INVOKEVIRTUAL, "wm", "b", "()Lwk;"),
+        VarInsnNode(ALOAD, 1),
+        MethodInsnNode(INVOKEVIRTUAL, "wk", "IsPistonPackable", "(Lwm;)Z"),
+        InsnNode(IRETURN),
+      ]
+    ));
+    return true;
+  });
+  tweak("aqw", "TileEntityPiston", BOTH, "GetItemCountToPack(Lwm;)I", 0x5BD024B, "Hooked piston's GetItemCountToPack()",
+  function(mn)
+  {
+    mn.instructions.clear();
+    var label = LabelNode();
+    mn.instructions.add(toInsnList(
+      [
+        VarInsnNode(ALOAD, 1),
+        MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "isPistonPackable", "(Lwm;)Z"),
+        JumpInsnNode(IFEQ, label),
+        VarInsnNode(ALOAD, 1),
+        MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "getRequiredItemCountToPistonPack", "(Lwm;)I"),
+        InsnNode(IRETURN),
+        label,
+        FrameNode(F_SAME, 0, null, 0, null),
+        VarInsnNode(ALOAD, 1),
+        MethodInsnNode(INVOKEVIRTUAL, "wm", "b", "()Lwk;"),
+        VarInsnNode(ALOAD, 1),
+        MethodInsnNode(INVOKEVIRTUAL, "wk", "GetRequiredItemCountToPistonPack", "(Lwm;)I"),
+        InsnNode(IRETURN),
+      ]
+    ));
+    return true;
+  });
+  tweak("aqw", "TileEntityPiston", BOTH, "CreateBlockOfTypeAtLocation(Lwm;III)V", 0x7ECF0885, "Hooked piston's CreateBlockOfTypeAtLocation()",
+  function(mn)
+  {
+    mn.instructions.clear();
+    var label0 = LabelNode();
+    var label1 = LabelNode();
+    mn.instructions.add(toInsnList(
+      [
+        VarInsnNode(ALOAD, 1),
+        MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "isPistonPackable", "(Lwm;)Z"),
+        JumpInsnNode(IFEQ, label0),
+        VarInsnNode(ALOAD, 1),
+        MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "getResultingBlockIDOnPistonPack", "(Lwm;)I"),
+        VarInsnNode(ISTORE, 5),
+        VarInsnNode(ALOAD, 1),
+        MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "getResultingBlockMetadataOnPistonPack", "(Lwm;)I"),
+        VarInsnNode(ISTORE, 6),
+        JumpInsnNode(GOTO, label1),
+        label0,
+        FrameNode(F_SAME, 0, null, 0, null),
+        VarInsnNode(ALOAD, 1),
+        MethodInsnNode(INVOKEVIRTUAL, "wm", "b", "()Lwk;"),
+        VarInsnNode(ALOAD, 1),
+        MethodInsnNode(INVOKEVIRTUAL, "wk", "GetResultingBlockIDOnPistonPack", "(Lwm;)I"),
+        VarInsnNode(ISTORE, 5),
+        VarInsnNode(ALOAD, 1),
+        MethodInsnNode(INVOKEVIRTUAL, "wm", "b", "()Lwk;"),
+        VarInsnNode(ALOAD, 1),
+        MethodInsnNode(INVOKEVIRTUAL, "wk", "GetResultingBlockMetadataOnPistonPack", "(Lwm;)I"),
+        VarInsnNode(ISTORE, 6),
+        label1,
+        FrameNode(F_APPEND, 2, [INTEGER, INTEGER], 0, null),
+        VarInsnNode(ALOAD, 0),
+        FieldInsnNode(GETFIELD, "aqw", "k", "Laab;"),
+        VarInsnNode(ILOAD, 2),
+        VarInsnNode(ILOAD, 3),
+        VarInsnNode(ILOAD, 4),
+        VarInsnNode(ILOAD, 5),
+        VarInsnNode(ILOAD, 6),
+        MethodInsnNode(INVOKEVIRTUAL, "aab", "setBlockAndMetadataWithNotify", "(IIIII)Z"),
+        InsnNode(POP),
+        VarInsnNode(ALOAD, 0),
+        FieldInsnNode(GETFIELD, "aqw", "k", "Laab;"),
+        IntInsnNode(SIPUSH, 2236),
+        VarInsnNode(ILOAD, 2),
+        VarInsnNode(ILOAD, 3),
+        VarInsnNode(ILOAD, 4),
+        VarInsnNode(ILOAD, 5),
+        MethodInsnNode(INVOKEVIRTUAL, "aab", "e", "(IIIII)V"),
+        InsnNode(RETURN),
+      ]
+    ));
+    return true;
+  });
+}
 tweak("bdr", "PlayerControllerMP", CLIENT, "a(Lsq;Laab;Lwm;IIIILarc;)Z", 0x5A6E2C5E, "Hooking block placing decision",
 function(mn)
 {
@@ -499,7 +502,7 @@ if (isBTWVersionOrNewer("4.A9 Pustules Lancing"))
       INSERT_BEFORE
     ).process(mn);
   });
-  tweak("afq", "ComponentScatteredFeatureDesertPyramid", BOTH, "a(Laab;Ljava/util/Random;Laek;)Z", [0xBAE32112, 0x99E322D3], "Making Hardcore Spawn radius affect desert temples", constants2configHCS);
+  tweak("afq", "ComponentScatteredFeatureDesertPyramid", BOTH, "a(Laab;Ljava/util/Random;Laek;)Z", [0x5E6D1DDD, 0xBAE32112, 0x99E322D3], "Making Hardcore Spawn radius affect desert temples", constants2configHCS);
   tweak("afr", "ComponentScatteredFeatureJunglePyramid", BOTH, "CheckIfLooted(Laab;Laek;)Z", [0xE0440AE6, 0x10E90CA7], "Making Hardcore Spawn radius affect jungle temples", constants2configHCS);
   tweak("ahm", "ComponentVillageStartPiece", BOTH, "InitializeModSpecificData(Laab;)V", [0x87D022CC, 0x3A242522], "Making Hardcore Spawn radius affect villages", constants2configHCS);
 }
@@ -508,7 +511,7 @@ if (isBTWVersionOrNewer("4.A7 Squid A Swimming"))
   tweak("adx", "WorldGenPumpkin", BOTH, "CheckIfFresh(Laab;II)Z", 0xC0270A9E, "Making Hardcore Spawn radius affect pumpkins", constants2configHCS);
 }
 
-tweak("jc", "EntityPlayerMP", BOTH, "DropMysteryMeat(I)V", 0x5B1D190E, "Adding player hardcore death hook",
+tweak("jc", "EntityPlayerMP", BOTH, "DropMysteryMeat(I)V", [0x7CBE1553, 0x5B1D190E], "Adding player hardcore death hook",
 function(mn)
 {
   return CodeInserter(

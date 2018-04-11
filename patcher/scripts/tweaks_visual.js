@@ -91,7 +91,7 @@ function(mn)
     }
   }
 });
-tweak("aww", "GuiIngame", CLIENT, "<init>(Lnet/minecraft/client/Minecraft;)V", 0x23BA0E5C, "Adding new vars init to ingame GUI",
+tweak("aww", "GuiIngame", CLIENT, "<init>(Lnet/minecraft/client/Minecraft;)V", [0xBBFB0BE1, 0x23BA0E5C], "Adding new vars init to ingame GUI",
 function(mn)
 {
   return CodeInserter(
@@ -124,7 +124,7 @@ function(mn)
     INSERT_BEFORE
   ).process(mn);
 });
-tweak("aww", "GuiIngame", CLIENT, "a(FZII)V", 0x995D1671, "Inserting checkForGloomRender()",
+tweak("aww", "GuiIngame", CLIENT, "a(FZII)V", [0x641C265B, 0x995D1671], "Inserting checkForGloomRender()",
 function(mn)
 {
   return CodeInserter(
