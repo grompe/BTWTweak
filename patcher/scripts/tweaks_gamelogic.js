@@ -49,9 +49,11 @@ function takeMicroblockOwnership(className, checksum)
   });
 }
 // className, deobfName, side, method, checksums, description
-tweak("anf", "BlockFlowing", BOTH, "n(Laab;III)Z", 0xAD981353, "Making lava more unstoppable",
+tweak("anf", "BlockFlowing", BOTH, "n(Laab;III)Z", [0xAD981353, 0x2B8E161E], "Making lava more unstoppable",
 function(mn)
 {
+  // Mess of code, also broken in BTW 4.AABABABA+
+  /*
   var label;
   var boundary = null;
   for (var i = 0; i < mn.instructions.size(); i++)
@@ -73,6 +75,7 @@ function(mn)
       VarInsnNode(ILOAD, 5),
     ]
   ));
+  */
   var label2 = LabelNode();
   mn.instructions.insert(mn.instructions.get(mn.instructions.size() - 4), toInsnList(
     [
@@ -912,7 +915,7 @@ if (!isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
     }
   });
 }
-tweak("FCEntityAIZombieBreakBarricades", null, BOTH, "e()V", 0x7353560, "Very quickly breaking doors by axe-wielding zombies",
+tweak("FCEntityAIZombieBreakBarricades", null, BOTH, "e()V", [0x7353560, 0x7C7D38E6], "Very quickly breaking doors by axe-wielding zombies",
 function(mn)
 {
   for (var i = 0; i < mn.instructions.size(); i++)

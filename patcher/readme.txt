@@ -5,7 +5,7 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v1.0
 
 v1.0 (unreleased)
 
-- Fixed compatibility with BTW version "4.AAAAAAABBB".
+- Fixed compatibility with BTW version "4.AABABABA".
 
 - Fixed furnace patch that made it retain some heat while without fuel and
   reset cooking when the item is switched. Now also works for brick ovens.

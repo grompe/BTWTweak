@@ -760,6 +760,16 @@ function fixNewGenChests(mn)
         return true;
       }
     }
+    // BTW 4.AABABABA+
+    if (isInstance(n, "org.objectweb.asm.tree.FieldInsnNode") && n.owner.equals("FCBetterThanWolves") && n.name.equals("fcBlockChest") && n.desc.equals("Lapa;"))
+    {
+      var n2 = n.getNext().getNext();
+      if (isInstance(n2, "org.objectweb.asm.tree.InsnNode") && (n2.getOpcode() == ICONST_0))
+      {
+        mn.instructions.set(n2, InsnNode(ICONST_2));
+        return true;
+      }
+    }
   }
 }
 tweak("add", "WorldGeneratorBonusChest", BOTH, "a(Laab;Ljava/util/Random;III)Z", [0xC02B2446, 0xB7FE3FD8], "(1/3) Fix generated chests' collision", fixNewGenChests);

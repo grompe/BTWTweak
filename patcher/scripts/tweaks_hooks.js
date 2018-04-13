@@ -365,7 +365,7 @@ function(mn)
   return changes == 3;
 });
 
-tweak("FCUtilsInventory", null, BOTH, "AddItemStackToChest(Lapy;Lwm;)Z", 0xBBAB1C34, "Replacing hopper to chest deposit function",
+tweak("FCUtilsInventory", null, BOTH, "AddItemStackToChest(Lapy;Lwm;)Z", [0xBBAB1C34, 0x65011E99], "Replacing hopper to chest deposit function",
 function(mn)
 {
   mn.instructions.clear();
