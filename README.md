@@ -355,6 +355,7 @@ BTW download link: http://www.minecraftforum.net/forums/mapping-and-modding/mine
 (first MediaFire link in the post)
 
 Minecraft 1.5.2 download link: http://s3.amazonaws.com/Minecraft.Download/versions/1.5.2/1.5.2.jar
+Minecraft 1.5.2 server download link: http://s3.amazonaws.com/Minecraft.Download/versions/1.5.2/minecraft_server_1.5.2.jar
 
 Libraries download links:  
 https://libraries.minecraft.net/net/java/jinput/jinput/2.0.5/jinput-2.0.5.jar  
