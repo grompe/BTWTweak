@@ -354,7 +354,7 @@ MCP 7.51 download link: http://www.mediafire.com/download/95vlzp1a4n4wjqw/mcp751
 BTW download link: http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1272992-btw
 (first MediaFire link in the post)
 
-Minecraft 1.5.2 download link: http://s3.amazonaws.com/Minecraft.Download/versions/1.5.2/1.5.2.jar
+Minecraft 1.5.2 download link: http://s3.amazonaws.com/Minecraft.Download/versions/1.5.2/1.5.2.jar  
 Minecraft 1.5.2 server download link: http://s3.amazonaws.com/Minecraft.Download/versions/1.5.2/minecraft_server.1.5.2.jar
 
 Libraries download links:  
