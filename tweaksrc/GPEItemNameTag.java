@@ -19,7 +19,7 @@ public class GPEItemNameTag extends Item
 
     // Set GUI display name
     int id = world.getBlockId(x, y, z);
-    if (id == Block.chest.blockID)
+    if (id == Block.chest.blockID || id == 1035)
     {
       ((TileEntityChest)te).func_94043_a(stack.getDisplayName());
     }

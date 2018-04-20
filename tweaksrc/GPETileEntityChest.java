@@ -49,33 +49,37 @@ public class GPETileEntityChest extends FCTileEntityChest
   {
     Block block = getBlockType();
     if (block == null) return;
-    if (block.blockID != Block.chest.blockID) return;
+    if (!isChestID(block.blockID)) return;
 
     oldChecked = true;
 
     int meta = getBlockMetadata();
     ((GPEBlockChest)block).mergeChests(worldObj, xCoord, yCoord, zCoord, meta);
 
-    if (worldObj.getBlockId(xCoord - 1, yCoord, zCoord) == Block.chest.blockID)
+    if (isChestID(worldObj.getBlockId(xCoord - 1, yCoord, zCoord)))
     {
       adjacentChestXNeg = (TileEntityChest)worldObj.getBlockTileEntity(xCoord - 1, yCoord, zCoord);
       ((GPETileEntityChest)adjacentChestXNeg).oldChecked = true;
     }
-    else if (worldObj.getBlockId(xCoord + 1, yCoord, zCoord) == Block.chest.blockID)
+    else if (isChestID(worldObj.getBlockId(xCoord + 1, yCoord, zCoord)))
     {
       adjacentChestXPos = (TileEntityChest)worldObj.getBlockTileEntity(xCoord + 1, yCoord, zCoord);
       ((GPETileEntityChest)adjacentChestXPos).oldChecked = true;
     }
-    else if (worldObj.getBlockId(xCoord, yCoord, zCoord - 1) == Block.chest.blockID)
+    else if (isChestID(worldObj.getBlockId(xCoord, yCoord, zCoord - 1)))
     {
       adjacentChestZNeg = (TileEntityChest)worldObj.getBlockTileEntity(xCoord, yCoord, zCoord - 1);
       ((GPETileEntityChest)adjacentChestZNeg).oldChecked = true;
     }
-    else if (worldObj.getBlockId(xCoord, yCoord, zCoord + 1) == Block.chest.blockID)
+    else if (isChestID(worldObj.getBlockId(xCoord, yCoord, zCoord + 1)))
     {
       adjacentChestZPosition = (TileEntityChest)worldObj.getBlockTileEntity(xCoord, yCoord, zCoord + 1);
       ((GPETileEntityChest)adjacentChestZPosition).oldChecked = true;
     }
   }
 
+  private boolean isChestID(int id)
+  {
+    return id == Block.chest.blockID || id == 1035;
+  }
 }

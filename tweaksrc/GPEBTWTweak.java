@@ -775,11 +775,11 @@ public class GPEBTWTweak extends FCAddOn
       EjectSawProducts(world, x, y, z, FCBetterThanWolves.fcBlockWoodSidingItemStubID, 0, 4);
       EjectSawProducts(world, x, y, z, Item.book.itemID, 0, 3);
     }
-    else if (id == Block.chest.blockID)
+    else if (id == Block.chest.blockID || id == 1035)
     {
       EjectSawProducts(world, x, y, z, FCBetterThanWolves.fcBlockWoodSidingItemStubID, 0, 6);
     }
-    else if (id == Block.doorWood.blockID)
+    else if (id == Block.doorWood.blockID || id == 1036)
     {
       if ((meta & 8) != 0) return false;
       EjectSawProducts(world, x, y, z, FCBetterThanWolves.fcBlockWoodSidingItemStubID, 0, 4);
