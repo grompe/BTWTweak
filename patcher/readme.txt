@@ -41,6 +41,8 @@ v1.0 (unreleased)
 
 - Added a millstone recipe to turn zombie and pigmen heads to rotten flesh.
 
+- Changed mob spawner to also convert loose cobblestone into moss stone.
+
 v0.9o
 
 - Fixed compatibility with BTW version "4.A9 Pustules Lancing".

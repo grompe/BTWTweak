@@ -1202,3 +1202,34 @@ if (isBTWVersionOrNewer("4.AAAAAAAAAAHHHH b"))
     }
   });
 }
+if (isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
+{
+  tweak("FCTileEntityMobSpawner", null, BOTH, "h()V", 0x12532440, "Letting mob spawner to spread moss to loose cobble",
+  function(mn)
+  {
+    return CodeInserter(
+      CustomFinder(function(n)
+      {
+        return isInstance(n, "org.objectweb.asm.tree.JumpInsnNode") && n.opcode == IF_ICMPNE;
+      }),
+      [
+        // stack: current_id, cobble_id ->
+        InsnNode(SWAP),
+        InsnNode(DUP_X1),
+        // stack: current_id, cobble_id, current_id ->
+        InsnNode(ISUB),
+        // stack: current_id, eq_cobble_id ->
+        InsnNode(SWAP),
+        // stack: eq_cobble_id, current_id ->
+        FieldInsnNode(GETSTATIC, "FCBetterThanWolves", "fcBlockCobblestoneLoose", "Lapa;"),
+        FieldInsnNode(GETFIELD, "apa", "cz", "I"),
+        // stack: eq_cobble_id, current_id, loose_id ->
+        InsnNode(ISUB),
+        // stack: eq_cobble_id, eq_loose_id ->
+        InsnNode(IMUL),
+        InsnNode(ICONST_0),
+      ],
+      INSERT_BEFORE
+    ).process(mn);
+  });
+}
