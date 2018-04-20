@@ -466,8 +466,12 @@ public class GPEBTWTweak extends FCAddOn
       }
     }
 
-    if (!isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
+    if (isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
     {
+      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockCobblestoneLooseSlab), new Object[] {new ItemStack(FCBetterThanWolves.fcItemStone), new ItemStack(FCBetterThanWolves.fcItemStone), new ItemStack(FCBetterThanWolves.fcItemStone), new ItemStack(FCBetterThanWolves.fcItemStone)});
+      //FCRecipes.AddStokedCrucibleRecipe(new ItemStack(FCBetterThanWolves.fcItemNuggetIron, 2), new ItemStack[] {new ItemStack(FCBetterThanWolves.fcItemChiselIron)});
+      FCRecipes.AddVanillaRecipe(new ItemStack(Block.furnaceIdle), new Object[] {"###", "#X#", "###", '#', Block.stone, 'X', Block.netherrack});
+    } else {
       FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.axeStone), new Object[] {"X ", "X#", " #", '#', Item.stick, 'X', Block.cobblestone});
       FCRecipes.AddVanillaRecipe(new ItemStack(Item.axeStone), new Object[] {"X ", "X#", " #", '#', Item.stick, 'X', gpeItemLooseRock});
       FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.pickaxeStone), new Object[] {"XXX", " # ", " # ", '#', Item.stick, 'X', Block.cobblestone});
@@ -498,8 +502,6 @@ public class GPEBTWTweak extends FCAddOn
     FCRecipes.AddVanillaRecipe(new ItemStack(gpeItemSilk, 1), new Object[] {"###", "###", "###", '#', Item.silk});
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.silk, 9), new Object[] {new ItemStack(gpeItemSilk)});
 
-    FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.book, 1), new Object[] {Item.paper, Item.paper, Item.paper, FCBetterThanWolves.fcItemTannedLeatherCut});
-
     if (isBTWVersionOrNewer("4.A2 Timing Rodent"))
     {
       FCRecipes.AddStokedCrucibleRecipe(new ItemStack[] {new ItemStack(Item.goldNugget, 2), new ItemStack(FCBetterThanWolves.fcItemNuggetIron, 6)}, new ItemStack[] {new ItemStack(Block.pistonBase, 1)});
@@ -528,6 +530,8 @@ public class GPEBTWTweak extends FCAddOn
     } else {
       FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.spiderEye, 2), new Object[] {new ItemStack(Item.skull.itemID, 1, 5)});
     }
+    FCRecipes.AddMillStoneRecipe(new ItemStack(Item.rottenFlesh, 2), new ItemStack(Item.skull.itemID, 1, 2));
+    FCRecipes.AddMillStoneRecipe(new ItemStack(Item.rottenFlesh, 2), new ItemStack(Item.skull.itemID, 1, 7));
 	
     FCRecipes.AddVanillaRecipe(new ItemStack(FCBetterThanWolves.fcCauldron, 1), new Object[] {"Y", "X", "C", 'Y', Item.bone, 'X', Item.bucketWater, 'C', Item.cauldron});
 
@@ -538,14 +542,25 @@ public class GPEBTWTweak extends FCAddOn
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(gpeItemQuill, 1), new Object[] {new ItemStack(Item.glassBottle), new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.feather)});
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.writableBook, 1), new Object[] {new ItemStack(Item.book), new ItemStack(gpeItemQuill)});
 
+    if (isBTWVersionOrNewer("4.AABABABA")) // this version removed craftable books
+    {
+      FCRecipes.RemoveShapelessVanillaRecipe(new ItemStack(Item.writableBook, 1), new Object[] {new ItemStack(Item.paper), new ItemStack(Item.paper), new ItemStack(Item.paper), new ItemStack(Item.leather), new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.feather)});
+      FCRecipes.RemoveShapelessVanillaRecipe(new ItemStack(Item.writableBook, 1), new Object[] {new ItemStack(Item.paper), new ItemStack(Item.paper), new ItemStack(Item.paper), new ItemStack(FCBetterThanWolves.fcItemLeatherCut), new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.feather)});
+      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.writableBook, 1), new Object[] {new ItemStack(Item.paper), new ItemStack(Item.paper), new ItemStack(Item.paper), new ItemStack(Item.leather), new ItemStack(gpeItemQuill)});
+      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.writableBook, 1), new Object[] {new ItemStack(Item.paper), new ItemStack(Item.paper), new ItemStack(Item.paper), new ItemStack(FCBetterThanWolves.fcItemLeatherCut), new ItemStack(gpeItemQuill)});
+      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.writableBook, 1), new Object[] {new ItemStack(Item.paper), new ItemStack(Item.paper), new ItemStack(Item.paper), new ItemStack(FCBetterThanWolves.fcItemTannedLeatherCut), new ItemStack(gpeItemQuill)});
+    } else {
+      FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.book, 1), new Object[] {Item.paper, Item.paper, Item.paper, FCBetterThanWolves.fcItemTannedLeatherCut});
+    }
     FCRecipes.AddVanillaRecipe(new ItemStack(gpeItemSling, 1), new Object[] {"RXR", 'R', FCBetterThanWolves.fcRopeItem, 'X', FCBetterThanWolves.fcItemTannedLeatherCut});
 
     // Allow grinding hellfire back to dust
     FCRecipes.AddMillStoneRecipe(new ItemStack(FCBetterThanWolves.fcHellfireDust, 8), new ItemStack(FCBetterThanWolves.fcConcentratedHellfire));
     // Sandstone is weak enough to grind back to sand
-    FCRecipes.AddMillStoneRecipe(new ItemStack(FCBetterThanWolves.fcItemPileSand, 16), new ItemStack(Block.sandStone, 1, 32767));
-    FCRecipes.AddMillStoneRecipe(new ItemStack(FCBetterThanWolves.fcItemPileSand, 12), new ItemStack(Block.stairsSandStone));
-    FCRecipes.AddMillStoneRecipe(new ItemStack(FCBetterThanWolves.fcItemPileSand, 8), new ItemStack(Block.stoneSingleSlab, 1, 1));
+    int sandMultiplier = isBTWVersionOrNewer("4.AAAAAAAAAAHHHH") ? 1 : 2;
+    FCRecipes.AddMillStoneRecipe(new ItemStack(FCBetterThanWolves.fcItemPileSand, 8 * sandMultiplier), new ItemStack(Block.sandStone, 1, 32767));
+    FCRecipes.AddMillStoneRecipe(new ItemStack(FCBetterThanWolves.fcItemPileSand, 6 * sandMultiplier), new ItemStack(Block.stairsSandStone));
+    FCRecipes.AddMillStoneRecipe(new ItemStack(FCBetterThanWolves.fcItemPileSand, 4 * sandMultiplier), new ItemStack(Block.stoneSingleSlab, 1, 1));
 
     // Rusted rails give 6.75 times less iron when melted
     FCRecipes.AddStokedCrucibleRecipe(new ItemStack(FCBetterThanWolves.fcItemNuggetIron), new ItemStack[] {new ItemStack(gpeBlockRustedRail, 2)});

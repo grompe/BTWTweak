@@ -29,6 +29,18 @@ v1.0 (unreleased)
 - Changed chests in BTW 4.AAAAAAAAAAHHHH and up to be harvestable again,
   when using an iron axe or better.
 
+- Allowed crafting loose cobblestone slab from 4 stones
+  for BTW 4.AAAAAAAAAAHHHH and up.
+
+- Allowed crafting regular furnaces again for BTW 4.AAAAAAAAAAHHHH and up,
+  with netherrack surrounded by stone.
+
+- Adjusted written book recipes for BTW 4.AABABABA and up.
+
+- Adjusted sand yield from milling sandstone for BTW 4.AAAAAAAAAAHHHH and up.
+
+- Added a millstone recipe to turn zombie and pigmen heads to rotten flesh.
+
 v0.9o
 
 - Fixed compatibility with BTW version "4.A9 Pustules Lancing".
