@@ -352,6 +352,10 @@ public class GPEBTWTweak extends FCAddOn
     Block.blocksList[17] = null; new GPEBlockLog(17);
     Block.blocksList[20] = null; new GPEBlockGlass(20);
     Block.blocksList[54] = null; new GPEBlockChest(54);
+    if (isBTWVersionOrNewer("4.AABABABA"))
+    {
+      Block.blocksList[1035] = null; new GPEBlockChest(1035);
+    }
     Block.blocksList[65] = null; new GPEBlockLadder(65);
     Block.blocksList[79] = null; new GPEBlockIce(79);
     Block.blocksList[80] = null; new GPEBlockSnowBlock(80);
