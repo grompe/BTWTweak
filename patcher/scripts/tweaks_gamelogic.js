@@ -1232,4 +1232,27 @@ if (isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
       INSERT_BEFORE
     ).process(mn);
   });
+  tweak("FCBlockStone", null, BOTH, "ConvertBlock(Lwm;Laab;IIII)Z", 0x2F441B20, "Making stone retain strata when harvested with a chisel",
+  function(mn)
+  {
+    for (var i = 0; i < mn.instructions.size(); i++)
+    {
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("wm") && n.name.equals("<init>") && n.desc.equals("(Lapa;I)V"))
+      {
+        n.desc = "(Lapa;II)V";
+        mn.instructions.insertBefore(n, toInsnList(
+          [
+            VarInsnNode(ALOAD, 0),
+            VarInsnNode(ALOAD, 2),
+            VarInsnNode(ILOAD, 3),
+            VarInsnNode(ILOAD, 4),
+            VarInsnNode(ILOAD, 5),
+            MethodInsnNode(INVOKEVIRTUAL, "FCBlockStone", "GetStrata", "(Laak;III)I"),
+          ]
+        ));
+        return true;
+      }
+    }
+  });
 }

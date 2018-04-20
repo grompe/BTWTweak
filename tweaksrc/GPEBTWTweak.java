@@ -44,6 +44,7 @@ public class GPEBTWTweak extends FCAddOn
   public static Item gpeItemSling;
   public static Item gpeItemHardBoiledEgg;
   public static Item gpeItemBlockStorage;
+  public static Item gpeItemChiselRefined;
 
   public static int hotbarCycling = 1;
   public static int hcSpawnRadius = 2000;
@@ -65,6 +66,7 @@ public class GPEBTWTweak extends FCAddOn
   public static int gpeNameTagID = 17004;
   public static int gpeSlingID = 17005;
   public static int gpeHardBoiledEggID = 17006;
+  public static int gpeItemChiselRefinedID = 17007;
   public static int gpeBlockGravestoneID = 163;
   public static int gpeBlockRustedRailID = 164;
   public static int gpeBlockRenameID = 162;
@@ -82,6 +84,8 @@ public class GPEBTWTweak extends FCAddOn
   public static int gpeEntityRockVehicleSpawnType = 120;
   public static int gpeStrataRegenKey = 0;
   public static String gpeStrataRegenWorldName = null;
+
+  public static boolean hasAdaptiveCrosshair = false;
 
   public static Map<Long, Integer> chunkRegenInfo;
 
@@ -210,6 +214,7 @@ public class GPEBTWTweak extends FCAddOn
         if (key.equals("gpeNameTagID")) gpeNameTagID = Integer.parseInt(value);
         if (key.equals("gpeSlingID")) gpeSlingID = Integer.parseInt(value);
         if (key.equals("gpeHardBoiledEggID")) gpeHardBoiledEggID = Integer.parseInt(value);
+        if (key.equals("gpeItemChiselRefinedID")) gpeItemChiselRefinedID = Integer.parseInt(value);
         if (key.equals("gpeBlockGravestoneID")) gpeBlockGravestoneID = Integer.parseInt(value);
         if (key.equals("gpeBlockRustedRailID")) gpeBlockRustedRailID = Integer.parseInt(value);
         if (key.equals("gpeBlockRenameID")) gpeBlockRenameID = Integer.parseInt(value);
@@ -270,6 +275,7 @@ public class GPEBTWTweak extends FCAddOn
         + "gpeNameTagID=17004\r\n"
         + "gpeSlingID=17005\r\n"
         + "gpeHardBoiledEggID=17006\r\n"
+        + "gpeItemChiselRefinedID=17007\r\n"
         + "\r\n"
         + "// **** Block IDs ****\r\n"
         + "\r\n"
@@ -374,8 +380,10 @@ public class GPEBTWTweak extends FCAddOn
     gpeItemSling = new GPEItemSling(gpeSlingID - 256);
     gpeItemHardBoiledEgg = new FCItemFood(gpeHardBoiledEggID - 256, 3, 0.25F, false, "gpeItemHardBoiledEgg");
     Item.coal = new GPEItemCoal(7);
-    if (!isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
+    if (isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
     {
+      gpeItemChiselRefined = new GPEItemChiselRefined(gpeItemChiselRefinedID - 256);
+    } else {
       Item.pickaxeWood = (new GPEItemPickaxeWeak(14, EnumToolMaterial.WOOD)).setUnlocalizedName("pickaxeWood");
       Item.pickaxeStone = (new GPEItemPickaxeWeak(18, EnumToolMaterial.STONE)).setUnlocalizedName("pickaxeStone");
     }
@@ -471,6 +479,8 @@ public class GPEBTWTweak extends FCAddOn
       FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcBlockCobblestoneLooseSlab), new Object[] {new ItemStack(FCBetterThanWolves.fcItemStone), new ItemStack(FCBetterThanWolves.fcItemStone), new ItemStack(FCBetterThanWolves.fcItemStone), new ItemStack(FCBetterThanWolves.fcItemStone)});
       //FCRecipes.AddStokedCrucibleRecipe(new ItemStack(FCBetterThanWolves.fcItemNuggetIron, 2), new ItemStack[] {new ItemStack(FCBetterThanWolves.fcItemChiselIron)});
       FCRecipes.AddVanillaRecipe(new ItemStack(Block.furnaceIdle), new Object[] {"###", "#X#", "###", '#', Block.stone, 'X', Block.netherrack});
+      FCRecipes.AddVanillaRecipe(new ItemStack(gpeItemChiselRefined), new Object[] {"##", "##", '#', FCBetterThanWolves.fcItemNuggetSteel});
+      FCRecipes.AddStokedCrucibleRecipe(new ItemStack(FCBetterThanWolves.fcItemNuggetSteel, 4), new ItemStack[] {new ItemStack(gpeItemChiselRefined, 1, 32767)});
     } else {
       FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.axeStone), new Object[] {"X ", "X#", " #", '#', Item.stick, 'X', Block.cobblestone});
       FCRecipes.AddVanillaRecipe(new ItemStack(Item.axeStone), new Object[] {"X ", "X#", " #", '#', Item.stick, 'X', gpeItemLooseRock});
@@ -541,7 +551,6 @@ public class GPEBTWTweak extends FCAddOn
     FCRecipes.RemoveShapelessVanillaRecipe(new ItemStack(Item.writableBook, 1), new Object[] {new ItemStack(Item.book), new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.feather)});
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(gpeItemQuill, 1), new Object[] {new ItemStack(Item.glassBottle), new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.feather)});
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.writableBook, 1), new Object[] {new ItemStack(Item.book), new ItemStack(gpeItemQuill)});
-
     if (isBTWVersionOrNewer("4.AABABABA")) // this version removed craftable books
     {
       FCRecipes.RemoveShapelessVanillaRecipe(new ItemStack(Item.writableBook, 1), new Object[] {new ItemStack(Item.paper), new ItemStack(Item.paper), new ItemStack(Item.paper), new ItemStack(Item.leather), new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.feather)});
@@ -1032,6 +1041,7 @@ public class GPEBTWTweak extends FCAddOn
     t.put(gpeItemNameTag.getUnlocalizedName() + ".name", "Name Tag");
     t.put(gpeItemSling.getUnlocalizedName() + ".name", "Sling");
     t.put(gpeItemHardBoiledEgg.getUnlocalizedName() + ".name", "Hard-Boiled Egg");
+    t.put("item.gpeItemChiselRefined.name", "Refined Chisel");
     if (gpeBlockGravestoneID != 0)
     {
       t.put(gpeBlockGravestone.getUnlocalizedName() + ".name", "Gravestone");
@@ -1371,6 +1381,14 @@ public class GPEBTWTweak extends FCAddOn
   public static void readyForInput()
   {
     proxy.addKeyBindings();
+    texturesRefreshed();
+  }
+
+  public static void texturesRefreshed()
+  {
+    hasAdaptiveCrosshair =
+      Minecraft.getMinecraft().texturePackList.getSelectedTexturePack().func_98138_b("/btwtweak_adaptive_crosshair.txt", false);
+    if (hasAdaptiveCrosshair) FCAddOnHandler.LogMessage("Found btwtweak_adaptive_crosshair.txt, enabling adaptive crosshair");
   }
 
   public static boolean addItemStackToChest(TileEntityChest t, ItemStack stack)

@@ -607,3 +607,16 @@ function(cn)
   ));
   cn.methods.add(mn);
 });
+tweak("bge", "RenderEngine", CLIENT, "c()V", 0x329B3AF8, "Adding textures refreshed hook",
+function(mn)
+{
+  for (var i = mn.instructions.size() - 1; i >= 0; i--)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.InsnNode") && (n.getOpcode() == RETURN))
+    {
+      mn.instructions.insertBefore(n, MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "texturesRefreshed", "()V"));
+      return true;
+    }
+  }
+});

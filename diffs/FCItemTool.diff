@@ -1,0 +1,18 @@
+diff --git a/src/minecraft/net/minecraft/src/FCItemTool.java b/src/minecraft/net/minecraft/src/FCItemTool.java
+new file mode 100644
+index 0000000..06f38ac
+--- /dev/null
++++ b/src/minecraft/net/minecraft/src/FCItemTool.java
+@@ -0,0 +1,12 @@
++package net.minecraft.src;
++
++// Dummy class for BTW 4.AA+
++public class FCItemTool extends Item
++{
++  public float efficiencyOnProperMaterial;
++
++  public FCItemTool(int id, int damage, EnumToolMaterial mat)
++  {
++    super(id);
++  }
++}

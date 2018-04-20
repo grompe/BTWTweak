@@ -502,6 +502,7 @@ function add(className, deobfName, side, description, process)
     "font/glyph_00.png",
     "font/glyph_04.png",
     "font/glyph_sizes.bin",
+    "gui/icons.png",
   ];
 
   // unused

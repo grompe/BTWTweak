@@ -43,6 +43,15 @@ v1.0 (unreleased)
 
 - Changed mob spawner to also convert loose cobblestone into moss stone.
 
+- Changed stone to drop without changing strata when harvested with a chisel.
+  Darker stone still acts like regular stone in crafting.
+
+- Added soulforged steel chisel to help harvesting stone at lowest strata.
+
+- Added adaptive crosshair to indicate whether current block is harvestable
+  with current tool, or partially/more efficient with current tool, and to
+  indicate proper weapon ready to hit the enemy, and viable fishing spots.
+
 v0.9o
 
 - Fixed compatibility with BTW version "4.A9 Pustules Lancing".

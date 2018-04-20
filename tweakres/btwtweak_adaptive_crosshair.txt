@@ -1,0 +1,13 @@
+Put this file into your texture pack to enable adaptive crosshair.
+
+/btwtweak_adaptive_crosshair.txt
+
+/gui/icons.png additions:
+0x96-16x16 = crosshair when not pointing at anything, or at a block current tool inefficient on and won't harvest fully
+16x96-16x16 = crosshair when pointing at a block current tool is efficient on, but won't harvest fully
+0x0-16x16 = crosshair when pointing at a block harvestable with current tool
+32x96-16x16 = crosshair when pointing at an attackable entity with a proper weapon
+48x96-16x16 = crosshair when pointing at a proper fishing spot with a fishing rod
+
+
+

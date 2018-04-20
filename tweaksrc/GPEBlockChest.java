@@ -18,7 +18,7 @@ public class GPEBlockChest extends FCBlockChest
 
   protected GPEBlockChest(int id)
   {
-    super(id, 0);
+    super(id, 0); // NOTE: remove the 2nd parameter if it fails to compile in newer BTW version.
     setHardness(2.5F);
     setStepSound(soundWoodFootstep);
     setUnlocalizedName("chest");
