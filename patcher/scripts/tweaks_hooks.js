@@ -607,7 +607,7 @@ function(cn)
   ));
   cn.methods.add(mn);
 });
-tweak("bge", "RenderEngine", CLIENT, "c()V", 0x329B3AF8, "Adding textures refreshed hook",
+tweak("bge", "RenderEngine", CLIENT, "c()V", [0x329B3AF8, 0x48303D3B], "Adding textures refreshed hook",
 function(mn)
 {
   for (var i = mn.instructions.size() - 1; i >= 0; i--)
