@@ -1,5 +1,5 @@
 diff --git a/src/minecraft/net/minecraft/src/GuiIngame.java b/src/minecraft/net/minecraft/src/GuiIngame.java
-index 1e4b83e..69c6468 100644
+index 1e4b83e..0eee5a2 100644
 --- a/src/minecraft/net/minecraft/src/GuiIngame.java
 +++ b/src/minecraft/net/minecraft/src/GuiIngame.java
 @@ -37,0 +38,2 @@
@@ -14,7 +14,7 @@ index 1e4b83e..69c6468 100644
 +            drawCrosshairCustom(var6 / 2 - 7, var7 / 2 - 7);
 @@ -580,0 +586 @@ private void func_96136_a(ScoreObjective par1ScoreObjective, int par2, int par3,
 +        if (!this.mc.gameSettings.keyBindPlayerList.pressed) return;
-@@ -898,0 +905,194 @@ private void renderEnderSpectaclesBlur(int var1, int var2)
+@@ -898,0 +905,210 @@ private void renderEnderSpectaclesBlur(int var1, int var2)
 +    private void checkForGloomRender(int width, int height)
 +    {
 +        if (!this.mc.isGamePaused)
@@ -131,6 +131,22 @@ index 1e4b83e..69c6468 100644
 +                    canHarvest = true;
 +                  }
 +                }
++              }
++            }
++            // Exception: can only harvest webs with chisels or shears
++            if (id == 30 || id == 1037)
++            {
++              ItemStack stack = mc.thePlayer.inventory.getCurrentItem();
++              if (stack == null)
++              {
++                canHarvest = false;
++              } else {
++                int iid = stack.getItem().itemID;
++                canHarvest =
++                  iid == Item.shears.itemID
++                  || iid == 22311+256 // stone chisel (sharp stone)
++                  || iid == 22317+256 // iron chisel
++                  || iid == GPEBTWTweak.gpeItemChiselRefined.itemID;
 +              }
 +            }
 +          }
