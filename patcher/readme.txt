@@ -52,6 +52,9 @@ v1.0 (unreleased)
   with current tool, or partially/more efficient with current tool, and to
   indicate proper weapon ready to hit the enemy, and viable fishing spots.
 
+- For BTW 4.AABBBbbb and up, changed nitre block to be crafted only with
+  piston packing to be consistent with flesh and bones in that version.
+
 v0.9o
 
 - Fixed compatibility with BTW version "4.A9 Pustules Lancing".

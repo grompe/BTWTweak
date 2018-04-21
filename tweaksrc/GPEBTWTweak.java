@@ -601,7 +601,10 @@ public class GPEBTWTweak extends FCAddOn
     FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockStorage, 1, 4), new Object[] {"###", "###", "###", '#', Item.sugar});
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.sugar, 9), new Object[] {new ItemStack(gpeBlockStorage, 1, 4)});
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(Item.bone, 9), new Object[] {new ItemStack(gpeBlockStorage, 1, 5)});
-    FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockStorage, 1, 7), new Object[] {"###", "###", "###", '#', FCBetterThanWolves.fcItemNitre});
+    if (!isBTWVersionOrNewer("4.AABBBbbb")) // to be consistent with other drops packable only with pistons
+    {
+      FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockStorage, 1, 7), new Object[] {"###", "###", "###", '#', FCBetterThanWolves.fcItemNitre});
+    }
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcItemNitre, 9), new Object[] {new ItemStack(gpeBlockStorage, 1, 7)});
     FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockStorage, 1, 8), new Object[] {"###", "###", "###", '#', FCBetterThanWolves.fcPotash});
     FCRecipes.AddShapelessVanillaRecipe(new ItemStack(FCBetterThanWolves.fcPotash, 9), new Object[] {new ItemStack(gpeBlockStorage, 1, 8)});
