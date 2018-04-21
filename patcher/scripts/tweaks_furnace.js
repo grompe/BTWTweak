@@ -365,7 +365,7 @@ if (!isBTWVersionOrNewer("4.A3 Headed Beastie"))
     return retainHeat(mn, "aqg");
   });
 }
-if (isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
+if (isBTWVersionOrNewer("4.AAAAAAAAAAHHHH") && !isBTWVersionOrNewer("4.AABBBbbb"))
 {
   tweak("FCTileEntityFurnaceBrick", null, BOTH, "h()V", 0xB6284E84, "Updating Brick Oven TE's updateEntity() to retain heat",
   function(mn)

@@ -556,7 +556,7 @@ function(mn)
 {
   return bipush2sipush(mn, 100, 256, 1);
 });
-tweak("mp", "Entity", BOTH, "d(DDD)V", 0x8DFC67A0, "Making it impossible to fall from a rope while sneaking",
+tweak("mp", "Entity", BOTH, "d(DDD)V", [0x8DFC67A0, 0xA3EB6600], "Making it impossible to fall from a rope while sneaking",
 function(mn)
 {
   var label_new1 = LabelNode();
@@ -1232,7 +1232,7 @@ if (isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
       INSERT_BEFORE
     ).process(mn);
   });
-  tweak("FCBlockStone", null, BOTH, "ConvertBlock(Lwm;Laab;IIII)Z", 0x2F441B20, "Making stone retain strata when harvested with a chisel",
+  tweak("FCBlockStone", null, BOTH, "ConvertBlock(Lwm;Laab;IIII)Z", [0x2F441B20, 0xFB23261D], "Making stone retain strata when harvested with a chisel",
   function(mn)
   {
     for (var i = 0; i < mn.instructions.size(); i++)
