@@ -29,9 +29,6 @@ v1.0 (unreleased)
 - Changed chests in BTW 4.AAAAAAAAAAHHHH and up to be harvestable again,
   when using an iron axe or better.
 
-- Allowed crafting loose cobblestone slab from 4 stones
-  for BTW 4.AAAAAAAAAAHHHH and up.
-
 - Allowed crafting regular furnaces again for BTW 4.AAAAAAAAAAHHHH and up,
   with netherrack surrounded by stone.
 
