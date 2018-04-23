@@ -621,6 +621,7 @@ execJS("tweaks_moreslabs.js");
 execJS("tweaks_old.js");
 execJS("tweaks_rocks.js");
 execJS("tweaks_sound.js");
+execJS("tweaks_tradedata.js");
 execJS("tweaks_vercompat.js");
 execJS("tweaks_visual.js");
 execJS("tweaks_worldgen.js");

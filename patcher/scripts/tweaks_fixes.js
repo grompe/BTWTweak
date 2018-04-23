@@ -821,6 +821,10 @@ if (isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
   tweak("uristqwerty/CraftGuide/recipes/BTWRecipes", null, CLIENT, "addKilnRecipe(Luristqwerty/CraftGuide/api/RecipeGenerator;Luristqwerty/CraftGuide/api/RecipeTemplate;Lwm;Lapa;)V", 0xF48A3C24, "Prevent CraftGuide from crashing from introspecting kiln recipes",
   function(mn)
   {
+    if (isBTWVersionOrNewer("4.8942"))
+    {
+      if (!replaceFirstString(mn, "fcItemBrimstone", "fcItemEnderSlag")) return false;
+    }
     var i;
     var label_end;
     for (i = mn.instructions.size() - 2; i >= 0; i--)

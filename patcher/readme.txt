@@ -14,8 +14,11 @@ v1.0 (unreleased)
   signs, beds, beacons and cocoa beans. This was missing since BTW 4.A9.
 
 - If CraftGuide is found in the minecraft.jar, it will be patched so it will
-  show BTW recipes again in BTW 4.AAAAAAAAAAHHHH and later. Note that some
+  show BTW recipes again in BTW 4.AAAAAAAAAAHHHH and later. Note: a couple of
   recipes shown in there are outdated as they aren't loaded from BTW itself.
+
+- Added integration with CraftGuide, which means recipes involving chopping,
+  baiting, knitting, piston packing and villager trading will be displayed.
 
 - Added F9 key to increase system brightness up to three times; F10 to reset.
 

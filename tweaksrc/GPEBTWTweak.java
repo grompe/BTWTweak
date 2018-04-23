@@ -680,6 +680,27 @@ public class GPEBTWTweak extends FCAddOn
       FCAddOnHandler.LogMessage("Error while integrating with BTW Research Add-On!");
       e.printStackTrace();
     }
+
+    FCAddOnHandler.LogMessage("BTWTweak now looks for CraftGuide to integrate with...");
+    try
+    {
+      Class cg = Class.forName("uristqwerty.CraftGuide.ReflectionAPI");
+      Class rp = Class.forName("uristqwerty.CraftGuide.api.RecipeProvider");
+      Method register = cg.getMethod("registerAPIObject", Object.class);
+      GPEInteropCraftGuide icg = new GPEInteropCraftGuide();
+      Object rpproxy = Proxy.newProxyInstance(GPEBTWTweak.class.getClassLoader(), new Class[] {rp}, icg);
+      register.invoke(null, rpproxy);
+      FCAddOnHandler.LogMessage("Real integration will happen later, but so far so good!");
+    }
+    catch (ClassNotFoundException e)
+    {
+      FCAddOnHandler.LogMessage("CraftGuide not found.");
+    }
+    catch (Exception e)
+    {
+      FCAddOnHandler.LogMessage("Error while integrating with CraftGuide!");
+      e.printStackTrace();
+    }
   }
 
   // Because Deco is doing its core work in PostInitialize and we need to get results of that
