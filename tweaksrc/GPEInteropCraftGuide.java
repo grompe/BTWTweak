@@ -1,6 +1,7 @@
 package net.minecraft.src;
 
 import java.lang.reflect.*;
+import java.util.List;
 import java.util.Random;
 
 class GPEInteropCraftGuide implements InvocationHandler
@@ -71,13 +72,13 @@ class GPEInteropCraftGuide implements InvocationHandler
           addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.wood, 1, 1), axeStone, new ItemStack(Item.stick, 2), new ItemStack(FCBetterThanWolves.fcItemBark, 1, 1), new ItemStack(GPEBTWTweak.compatItemSawDust, 4), null, workbench});
           addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.wood, 1, 2), axeStone, new ItemStack(Item.stick, 2), new ItemStack(FCBetterThanWolves.fcItemBark, 1, 2), new ItemStack(GPEBTWTweak.compatItemSawDust, 4), null, workbench});
           addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.wood, 1, 3), axeStone, new ItemStack(Item.stick, 2), new ItemStack(FCBetterThanWolves.fcItemBark, 1, 3), new ItemStack(GPEBTWTweak.compatItemSawDust, 4), null, workbench});
-          addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.wood, 1, 4), axeStone, new ItemStack(Item.stick, 2), new ItemStack(FCBetterThanWolves.fcItemBark, 1, 4), new ItemStack(GPEBTWTweak.compatItemSawDust, 3), new ItemStack(FCBetterThanWolves.fcSoulDust, 1), workbench});
+          addRecipe.invoke(generator, template, new Object[] {new ItemStack(FCBetterThanWolves.fcBloodWood), axeStone, new ItemStack(Item.stick, 2), new ItemStack(FCBetterThanWolves.fcItemBark, 1, 4), new ItemStack(GPEBTWTweak.compatItemSawDust, 3), new ItemStack(FCBetterThanWolves.fcSoulDust, 1), workbench});
         }
         addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.wood), axe2, new ItemStack(Block.planks, 2), new ItemStack(FCBetterThanWolves.fcItemBark), new ItemStack(GPEBTWTweak.compatItemSawDust, 2), null, workbench});
         addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.wood, 1, 1), axe2, new ItemStack(Block.planks, 2, 1), new ItemStack(FCBetterThanWolves.fcItemBark, 1, 1), new ItemStack(GPEBTWTweak.compatItemSawDust, 2), null, workbench});
         addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.wood, 1, 2), axe2, new ItemStack(Block.planks, 2, 2), new ItemStack(FCBetterThanWolves.fcItemBark, 1, 2), new ItemStack(GPEBTWTweak.compatItemSawDust, 2), null, workbench});
         addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.wood, 1, 3), axe2, new ItemStack(Block.planks, 2, 3), new ItemStack(FCBetterThanWolves.fcItemBark, 1, 3), new ItemStack(GPEBTWTweak.compatItemSawDust, 2), null, workbench});
-        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.wood, 1, 4), axe2, new ItemStack(Block.planks, 2, 4), new ItemStack(FCBetterThanWolves.fcItemBark, 1, 4), new ItemStack(GPEBTWTweak.compatItemSawDust, 1), new ItemStack(FCBetterThanWolves.fcSoulDust, 1), workbench});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(FCBetterThanWolves.fcBloodWood), axe2, new ItemStack(Block.planks, 2, 4), new ItemStack(FCBetterThanWolves.fcItemBark, 1, 4), new ItemStack(GPEBTWTweak.compatItemSawDust, 1), new ItemStack(FCBetterThanWolves.fcSoulDust, 1), workbench});
 
         // Baiting
         ItemStack fishingRod = new ItemStack(Item.fishingRod);
@@ -92,6 +93,16 @@ class GPEInteropCraftGuide implements InvocationHandler
         if (GPEBTWTweak.isBTWVersionOrNewer("4.AABBBbbb"))
         {
           addRecipe.invoke(generator, template, new Object[] {new ItemStack(FCBetterThanWolves.fcItemWool, 2, 32767), new ItemStack(22321+256, 1, 0), new ItemStack(22322+256, 1, 0), null, null, null, workbench});
+        }
+        // Pumpkin carving
+        if (GPEBTWTweak.isBTWVersionOrNewer("4.A7 Squid A Swimming"))
+        {
+          addRecipe.invoke(generator, template, new Object[] {new ItemStack(1006, 1, 0), null, new ItemStack(Block.pumpkin), new ItemStack(Item.pumpkinSeeds, 4), null, null, workbench});
+        }
+        // Bow disassembling
+        if (GPEBTWTweak.isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
+        {
+          addRecipe.invoke(generator, template, new Object[] {new ItemStack(Item.bow), null, new ItemStack(Item.stick), new ItemStack(Item.silk), null, null, workbench});
         }
         
         // Piston packing
@@ -180,7 +191,323 @@ class GPEInteropCraftGuide implements InvocationHandler
             }
           }
         }
+
+        // Better and new saw recipes
+        ItemStack saw = new ItemStack(FCBetterThanWolves.fcSaw);
+
+        myslots = Array.newInstance(slot, 6);
+        tmp = itemsslot_ctor.newInstance(3, 21, 16, 16, false); drawownbg.invoke(tmp); Array.set(myslots, 0, tmp);
+        tmp = itemsslot_ctor.newInstance(41, 12, 16, 16, true); setslottype.invoke(tmp, output_slot); drawownbg.invoke(tmp); Array.set(myslots, 1, tmp);
+        tmp = itemsslot_ctor.newInstance(41, 30, 16, 16, true); setslottype.invoke(tmp, output_slot); drawownbg.invoke(tmp); Array.set(myslots, 2, tmp);
+        tmp = itemsslot_ctor.newInstance(59, 12, 16, 16, true); setslottype.invoke(tmp, output_slot); drawownbg.invoke(tmp); Array.set(myslots, 3, tmp);
+        tmp = itemsslot_ctor.newInstance(59, 30, 16, 16, true); setslottype.invoke(tmp, output_slot); drawownbg.invoke(tmp); Array.set(myslots, 4, tmp);
+        tmp = extraslot_ctor.newInstance(22, 21, 16, 16, saw); setclickable.invoke(tmp); setslottype.invoke(tmp, machine_slot); Array.set(myslots, 5, tmp);
+
+        template = createTemplate.invoke(generator, myslots, saw);
+
+        Block siding = FCBetterThanWolves.fcBlockWoodSpruceSidingAndCorner;
+        Block moulding = FCBetterThanWolves.fcBlockWoodSpruceMouldingAndDecorative;
+        Block corner = FCBetterThanWolves.fcBlockWoodBirchSidingAndCorner;
+        Block benchFence = FCBetterThanWolves.fcBlockWoodJungleSidingAndCorner;
+        Block columnPedestalTable = FCBetterThanWolves.fcBlockWoodBirchMouldingAndDecorative;
+
+        // Wood to planks
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.wood), new ItemStack(Block.planks, 4), new ItemStack(FCBetterThanWolves.fcItemBark), new ItemStack(GPEBTWTweak.compatItemSawDust, 2), null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.wood, 1, 1), new ItemStack(Block.planks, 4, 1), new ItemStack(FCBetterThanWolves.fcItemBark, 1, 1), new ItemStack(GPEBTWTweak.compatItemSawDust, 2), null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.wood, 1, 2), new ItemStack(Block.planks, 4, 2), new ItemStack(FCBetterThanWolves.fcItemBark, 1, 2), new ItemStack(GPEBTWTweak.compatItemSawDust, 2), null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.wood, 1, 3), new ItemStack(Block.planks, 4, 3), new ItemStack(FCBetterThanWolves.fcItemBark, 1, 3), new ItemStack(GPEBTWTweak.compatItemSawDust, 2), null, saw});
+        if (GPEBTWTweak.btwBloodPlanks)
+        {
+          addRecipe.invoke(generator, template, new Object[] {new ItemStack(FCBetterThanWolves.fcBloodWood), new ItemStack(Block.planks, 4, 4), new ItemStack(FCBetterThanWolves.fcItemBark, 1, 4), new ItemStack(FCBetterThanWolves.fcSoulDust, 2), null, saw});
+        } else {
+          addRecipe.invoke(generator, template, new Object[] {new ItemStack(FCBetterThanWolves.fcBloodWood), new ItemStack(Block.planks, 4, 3), new ItemStack(FCBetterThanWolves.fcItemBark, 1, 4), new ItemStack(FCBetterThanWolves.fcSoulDust, 2), null, saw});
+        }
+        // Planks to sidings
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.planks), new ItemStack(siding, 2), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.planks, 1, 1), new ItemStack(siding, 2, 1), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.planks, 1, 2), new ItemStack(siding, 2, 2), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.planks, 1, 3), new ItemStack(siding, 2, 3), null, null, null, saw});
+        if (GPEBTWTweak.btwBloodPlanks)
+        {
+          addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.planks, 1, 4), new ItemStack(siding, 2, 4), null, null, null, saw});
+        }
+        // Stairs to sidings + mouldings
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.stairsWoodOak), new ItemStack(siding), new ItemStack(moulding), null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.stairsWoodSpruce), new ItemStack(siding, 1, 1), new ItemStack(moulding, 1, 1), null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.stairsWoodBirch), new ItemStack(siding, 1, 2), new ItemStack(moulding, 1, 2), null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.stairsWoodJungle), new ItemStack(siding, 1, 3), new ItemStack(moulding, 1, 3), null, null, saw});
+        if (GPEBTWTweak.btwBloodPlanks)
+        {
+          addRecipe.invoke(generator, template, new Object[] {new ItemStack(1009, 1, 0), new ItemStack(siding, 1, 4), new ItemStack(moulding, 1, 4), null, null, saw});
+        }
+        // Slabs to mouldings
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.woodSingleSlab), new ItemStack(moulding, 2), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.woodSingleSlab, 1, 1), new ItemStack(moulding, 2, 1), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.woodSingleSlab, 1, 2), new ItemStack(moulding, 2, 2), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.woodSingleSlab, 1, 3), new ItemStack(moulding, 2, 3), null, null, null, saw});
+        if (GPEBTWTweak.btwBloodPlanks)
+        {
+          addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.woodSingleSlab, 1, 4), new ItemStack(moulding, 2, 4), null, null, null, saw});
+        }
+        // Sidings to mouldings
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(siding), new ItemStack(moulding, 2), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(siding, 1, 1), new ItemStack(moulding, 2, 1), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(siding, 1, 2), new ItemStack(moulding, 2, 2), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(siding, 1, 3), new ItemStack(moulding, 2, 3), null, null, null, saw});
+        if (GPEBTWTweak.btwBloodPlanks)
+        {
+          addRecipe.invoke(generator, template, new Object[] {new ItemStack(siding, 1, 4), new ItemStack(moulding, 2, 4), null, null, null, saw});
+        }
+        // Mouldings to corners
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(moulding), new ItemStack(corner, 2), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(moulding, 1, 1), new ItemStack(corner, 2, 1), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(moulding, 1, 2), new ItemStack(corner, 2, 2), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(moulding, 1, 3), new ItemStack(corner, 2, 3), null, null, null, saw});
+        if (GPEBTWTweak.btwBloodPlanks)
+        {
+          addRecipe.invoke(generator, template, new Object[] {new ItemStack(moulding, 1, 4), new ItemStack(corner, 2, 4), null, null, null, saw});
+        }
+        // Corners to gears
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(corner, 1, 32767), new ItemStack(FCBetterThanWolves.fcGear, 2), null, null, null, saw});
+        // Fences
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.fence), new ItemStack(corner, 2), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(benchFence, 1, 5), new ItemStack(corner, 2, 1), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(benchFence, 1, 6), new ItemStack(corner, 2, 2), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(benchFence, 1, 7), new ItemStack(corner, 2, 3), null, null, null, saw});
+        if (GPEBTWTweak.btwBloodPlanks)
+        {
+          addRecipe.invoke(generator, template, new Object[] {new ItemStack(benchFence, 1, 20), new ItemStack(corner, 2, 4), null, null, null, saw});
+        }
+        // Benches
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(benchFence), new ItemStack(corner, 2), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(benchFence, 1, 1), new ItemStack(corner, 2, 1), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(benchFence, 1, 2), new ItemStack(corner, 2, 2), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(benchFence, 1, 3), new ItemStack(corner, 2, 3), null, null, null, saw});
+        if (GPEBTWTweak.btwBloodPlanks)
+        {
+          addRecipe.invoke(generator, template, new Object[] {new ItemStack(benchFence, 1, 16), new ItemStack(corner, 2, 4), null, null, null, saw});
+        }
+        // Columns
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(columnPedestalTable), new ItemStack(moulding, 2), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(columnPedestalTable, 1, 1), new ItemStack(moulding, 2, 1), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(columnPedestalTable, 1, 2), new ItemStack(moulding, 2, 2), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(columnPedestalTable, 1, 3), new ItemStack(moulding, 2, 3), null, null, null, saw});
+        if (GPEBTWTweak.btwBloodPlanks)
+        {
+          addRecipe.invoke(generator, template, new Object[] {new ItemStack(columnPedestalTable, 1, 16), new ItemStack(moulding, 2, 4), null, null, null, saw});
+        }
+        // Pedestals
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(columnPedestalTable, 1, 4), new ItemStack(moulding, 3), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(columnPedestalTable, 1, 5), new ItemStack(moulding, 3, 1), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(columnPedestalTable, 1, 6), new ItemStack(moulding, 3, 2), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(columnPedestalTable, 1, 7), new ItemStack(moulding, 3, 3), null, null, null, saw});
+        if (GPEBTWTweak.btwBloodPlanks)
+        {
+          addRecipe.invoke(generator, template, new Object[] {new ItemStack(columnPedestalTable, 1, 20), new ItemStack(moulding, 3, 4), null, null, null, saw});
+        }
+        // Tables
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(columnPedestalTable, 1, 8), new ItemStack(corner, 3), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(columnPedestalTable, 1, 9), new ItemStack(corner, 3, 1), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(columnPedestalTable, 1, 10), new ItemStack(corner, 3, 2), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(columnPedestalTable, 1, 11), new ItemStack(corner, 3, 3), null, null, null, saw});
+        if (GPEBTWTweak.btwBloodPlanks)
+        {
+          addRecipe.invoke(generator, template, new Object[] {new ItemStack(columnPedestalTable, 1, 24), new ItemStack(corner, 3, 4), null, null, null, saw});
+        }
+        // Compressed sawdust recovery
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(GPEBTWTweak.gpeBlockStorage, 1, 6), new ItemStack(GPEBTWTweak.compatItemSawDust, 16), null, null, null, saw});
+        // Recycling
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.bookShelf), new ItemStack(Item.book, 3), new ItemStack(siding, 4), null, null, saw});
+
+        ItemStack chest = GPEBTWTweak.isBTWVersionOrNewer("4.AABABABA") ? new ItemStack(1035, 1, 0) : new ItemStack(Block.chest);
+        addRecipe.invoke(generator, template, new Object[] {chest, new ItemStack(siding, 6), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Item.doorWood), new ItemStack(siding, 4), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.fenceGate), new ItemStack(moulding, 3), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.jukebox), new ItemStack(siding, 6), new ItemStack(Item.diamond), null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.ladder), new ItemStack(Item.stick, 2), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.music), new ItemStack(siding, 6), new ItemStack(FCBetterThanWolves.fcItemRedstoneLatch), null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.trapdoor), new ItemStack(siding, 2), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(GPEBTWTweak.compatAxleBlock), new ItemStack(corner, 2), new ItemStack(FCBetterThanWolves.fcRopeItem), null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(FCBetterThanWolves.fcBellows), new ItemStack(siding, 2), new ItemStack(FCBetterThanWolves.fcItemTannedLeatherCut, 3), new ItemStack(FCBetterThanWolves.fcGear), new ItemStack(FCBetterThanWolves.fcBelt), saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(FCBetterThanWolves.fcGearBox), new ItemStack(siding, 3), new ItemStack(FCBetterThanWolves.fcGear, 3), new ItemStack(FCBetterThanWolves.fcItemRedstoneLatch), null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(FCBetterThanWolves.fcHopper), new ItemStack(moulding, 3), new ItemStack(FCBetterThanWolves.fcGear), new ItemStack(Block.pressurePlatePlanks), null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(FCBetterThanWolves.fcPlatform), new ItemStack(moulding, 3), new ItemStack(GPEBTWTweak.compatItemWickerPane, 2), null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(FCBetterThanWolves.fcPulley), new ItemStack(siding, 3), new ItemStack(Item.ingotIron, 2), new ItemStack(FCBetterThanWolves.fcGear), new ItemStack(FCBetterThanWolves.fcItemRedstoneLatch), saw});
+        addRecipe.invoke(generator, template, new Object[] {saw, new ItemStack(siding), new ItemStack(Item.ingotIron, 3), new ItemStack(FCBetterThanWolves.fcGear, 2), new ItemStack(FCBetterThanWolves.fcBelt), saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(FCBetterThanWolves.fcBlockScrewPump), new ItemStack(siding, 3), new ItemStack(FCBetterThanWolves.fcItemScrew), new ItemStack(FCBetterThanWolves.fcGrate), null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(FCBetterThanWolves.fcAestheticOpaque, 1), new ItemStack(FCBetterThanWolves.fcAestheticNonOpaque, 2, 5), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(FCBetterThanWolves.fcAestheticOpaque, 1, 11), new ItemStack(moulding, 6), null, null, null, saw});
+        // Special plant harvesting
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.vine), new ItemStack(Block.vine), null, null, null, saw});
+        addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.melon), new ItemStack(Item.melon, 5), null, null, null, saw});
+
+        for (int i = 0; i < 16; i++)
+        {
+          addRecipe.invoke(generator, template, new Object[] {new ItemStack(Block.cloth, 1, i), new ItemStack(FCBetterThanWolves.fcWoolSlab, 2, i), null, null, null, saw});
+        }
+
         FCAddOnHandler.LogMessage("Integration with CraftGuide successful! Added recipes.");
+      }
+      catch (Exception e)
+      {
+        FCAddOnHandler.LogMessage("Error while integrating with CraftGuide!");
+        e.printStackTrace();
+      }
+    }
+    if (method.getName().equals("filterRecipes"))
+    {
+      try
+      {
+        Class slot = Class.forName("uristqwerty.CraftGuide.api.Slot");
+        Class slots = Array.newInstance(slot, 0).getClass();
+        Class renderable = Class.forName("uristqwerty.gui_craftguide.rendering.Renderable");
+        Class recipeClass = Class.forName("uristqwerty.CraftGuide.Recipe");
+        Constructor recipe_ctor = recipeClass.getConstructor(slots, Object[].class, renderable, renderable);
+
+        // I think CraftGuide is missing API for recipe duplication and then setting its items
+        Field slotsField = recipeClass.getDeclaredFields()[0];
+        slotsField.setAccessible(true);
+        Field recipeField = recipeClass.getDeclaredFields()[1];
+        recipeField.setAccessible(true);
+        Field backgroundField = recipeClass.getDeclaredFields()[2];
+        backgroundField.setAccessible(true);
+        Field backgroundSelectedField = recipeClass.getDeclaredFields()[3];
+        backgroundSelectedField.setAccessible(true);
+          
+        List recipeList = (List)args[0];
+        ItemStack recipeType = (ItemStack)args[1];
+        if (recipeType.getItem().itemID == Block.workbench.blockID)
+        {
+          FCAddOnHandler.LogMessage("Adjusting normal recipes");
+          for (int i = recipeList.size() - 1; i >= 0; i--)
+          {
+            Object recipe = recipeList.get(i);
+            Object[] items = (Object[])recipeField.get(recipe);
+            if (items.length == 7) break; // don't match our own
+            ItemStack input = (ItemStack)items[0];
+            if (input == null) continue;
+            if (input.getItem().itemID == 1006)
+            {
+              recipeList.remove(recipe);
+            }
+            if (input.getItem().itemID == Item.bow.itemID && GPEBTWTweak.isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
+            {
+              recipeList.remove(recipe);
+            }
+          }
+        }
+        else if (recipeType.getItem().itemID == FCBetterThanWolves.fcTurntable.blockID && GPEBTWTweak.isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
+        {
+          FCAddOnHandler.LogMessage("Adjusting turntable recipes with more clay");
+          for (int i = recipeList.size() - 1; i >= 0; i--)
+          {
+            Object recipe = recipeList.get(i);
+            Object[] items = (Object[])recipeField.get(recipe);
+            ItemStack input = (ItemStack)items[0];
+            if (input.getItem().itemID == Block.blockClay.blockID)
+            {
+              items[2] = new ItemStack(Item.clay, 2);
+            }
+            else if (input.getItem().itemID == FCBetterThanWolves.fcUnfiredPottery.blockID)
+            {
+              int meta = input.getItemDamage();
+              switch (meta)
+              {
+              case 0:
+              case 1:
+                items[2] = new ItemStack(Item.clay, 2);
+                break;
+              case 2:
+              case 3:
+              case 4:
+                items[2] = new ItemStack(Item.clay);
+                break;
+              }
+            } 
+          }
+        }
+        else if (recipeType.getItem().itemID == FCBetterThanWolves.fcHopper.blockID && GPEBTWTweak.isBTWVersionOrNewer("4.A4 Kiloblock Boon"))
+        {
+          FCAddOnHandler.LogMessage("Adjusting hopper recipes to have glowstone filtering");
+          Object recipe = recipeList.get(0);
+          Object rslots = slotsField.get(recipe);
+          Object bg = backgroundField.get(recipe);
+          Object bg2 = backgroundSelectedField.get(recipe);
+
+          recipeList.add(recipe_ctor.newInstance(rslots, new Object[]
+            {
+              new ItemStack(Item.lightStoneDust, 8),
+              new ItemStack(FCBetterThanWolves.fcUrn),
+              new ItemStack(FCBetterThanWolves.fcItemBrimstone, 8),
+              new ItemStack(FCBetterThanWolves.fcSoulUrn),
+              new ItemStack(Block.slowSand),
+              new ItemStack(FCBetterThanWolves.fcHopper),
+            }, bg, bg2
+          ));
+        }
+        else if (recipeType.getItem().itemID == FCBetterThanWolves.fcKiln.blockID && GPEBTWTweak.isBTWVersionOrNewer("4.89666"))
+        {
+          FCAddOnHandler.LogMessage("Adjusting kiln recipes with more Hardcore Baking");
+          Object recipe = recipeList.get(0);
+          Object rslots = slotsField.get(recipe);
+          Object bg = backgroundField.get(recipe);
+          Object bg2 = backgroundSelectedField.get(recipe);
+          ItemStack kiln = new ItemStack(FCBetterThanWolves.fcKiln);
+          ItemStack hibachi = new ItemStack(FCBetterThanWolves.fcBBQ);
+          ItemStack bellows = new ItemStack(FCBetterThanWolves.fcBellows);
+
+          recipeList.add(recipe_ctor.newInstance(rslots, new Object[]
+            {
+              new ItemStack(Item.clay),
+              new ItemStack(Item.brick),
+              null, kiln, hibachi, bellows
+            }, bg, bg2
+          ));
+          recipeList.add(recipe_ctor.newInstance(rslots, new Object[]
+            {
+              new ItemStack(FCBetterThanWolves.fcNetherSludge),
+              new ItemStack(FCBetterThanWolves.fcNetherBrick),
+              null, kiln, hibachi, bellows
+            }, bg, bg2
+          ));
+          recipeList.add(recipe_ctor.newInstance(rslots, new Object[]
+            {
+              new ItemStack(FCBetterThanWolves.fcItemPastryUncookedCake),
+              new ItemStack(Item.cake),
+              null, kiln, hibachi, bellows
+            }, bg, bg2
+          ));
+          recipeList.add(recipe_ctor.newInstance(rslots, new Object[]
+            {
+              new ItemStack(FCBetterThanWolves.fcItemPastryUncookedCookies),
+              new ItemStack(Item.cookie, 8),
+              null, kiln, hibachi, bellows
+            }, bg, bg2
+          ));
+          recipeList.add(recipe_ctor.newInstance(rslots, new Object[]
+            {
+              new ItemStack(FCBetterThanWolves.fcItemPastryUncookedPumpkinPie),
+              new ItemStack(Item.pumpkinPie),
+              null, kiln, hibachi, bellows
+            }, bg, bg2
+          ));
+          recipeList.add(recipe_ctor.newInstance(rslots, new Object[]
+            {
+              new ItemStack(FCBetterThanWolves.fcFlour),
+              new ItemStack(Item.bread),
+              null, kiln, hibachi, bellows
+            }, bg, bg2
+          ));
+        }
+        else if (recipeType.getItem().itemID == FCBetterThanWolves.fcSaw.blockID)
+        {
+          if (((Object[])recipeField.get(recipeList.get(0))).length == 4)
+          {
+            FCAddOnHandler.LogMessage("Removing old saw recipes");
+            recipeList.clear();
+          }
+        }
+        return recipeList;
       }
       catch (Exception e)
       {

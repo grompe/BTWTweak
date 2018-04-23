@@ -1,5 +1,5 @@
 diff --git a/src/minecraft/net/minecraft/src/FCBetterThanWolves.java b/src/minecraft/net/minecraft/src/FCBetterThanWolves.java
-index 62631d7..7008d2b 100644
+index 62631d7..d59e066 100644
 --- a/src/minecraft/net/minecraft/src/FCBetterThanWolves.java
 +++ b/src/minecraft/net/minecraft/src/FCBetterThanWolves.java
 @@ -17 +17 @@
@@ -13,8 +13,11 @@ index 62631d7..7008d2b 100644
 +    public static Block fcBlockWorkStump;
 +    public static Block fcBlockTorchFiniteBurning;
 +    public static Block fcBlockCobblestoneLooseSlab;
-@@ -242,0 +250,4 @@
+@@ -242,0 +250,7 @@
 +    public static Item fcItemWool;
 +    public static Item fcItemMysteriousGland;
 +    public static Item fcItemStumpRemover;
 +    public static Item fcItemStone;
++    public static Item fcItemPastryUncookedCake;
++    public static Item fcItemPastryUncookedCookies;
++    public static Item fcItemPastryUncookedPumpkinPie;

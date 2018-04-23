@@ -686,9 +686,10 @@ public class GPEBTWTweak extends FCAddOn
     {
       Class cg = Class.forName("uristqwerty.CraftGuide.ReflectionAPI");
       Class rp = Class.forName("uristqwerty.CraftGuide.api.RecipeProvider");
+      Class rf = Class.forName("uristqwerty.CraftGuide.api.RecipeFilter");
       Method register = cg.getMethod("registerAPIObject", Object.class);
       GPEInteropCraftGuide icg = new GPEInteropCraftGuide();
-      Object rpproxy = Proxy.newProxyInstance(GPEBTWTweak.class.getClassLoader(), new Class[] {rp}, icg);
+      Object rpproxy = Proxy.newProxyInstance(GPEBTWTweak.class.getClassLoader(), new Class[] {rp, rf}, icg);
       register.invoke(null, rpproxy);
       FCAddOnHandler.LogMessage("Real integration will happen later, but so far so good!");
     }

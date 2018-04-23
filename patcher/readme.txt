@@ -13,12 +13,14 @@ v1.0 (unreleased)
 - Fixed render patch for harvesting cracks on chests, ender chests, wall
   signs, beds, beacons and cocoa beans. This was missing since BTW 4.A9.
 
-- If CraftGuide is found in the minecraft.jar, it will be patched so it will
-  show BTW recipes again in BTW 4.AAAAAAAAAAHHHH and later. Note: a couple of
-  recipes shown in there are outdated as they aren't loaded from BTW itself.
+- If CraftGuide is found in the minecraft.jar, it will be patched to show
+  BTW recipes again in BTW 4.AAAAAAAAAAHHHH and later.
 
 - Added integration with CraftGuide, which means recipes involving chopping,
   baiting, knitting, piston packing and villager trading will be displayed.
+
+- Furthermore fixed CraftGuide recipes, no more outdated info, revamped
+  saw recipes and adjusted hopper, turntable, kiln recipes.
 
 - Added F9 key to increase system brightness up to three times; F10 to reset.
 
