@@ -165,7 +165,9 @@ function analyzeTrades(mn, villagerType)
         amount = seenints.pop();
         meta = 0;
         if (n.desc.equals("(Lzr;IIFIII)V")) meta = seenints.pop();
-        wants.push([lvl, seenfields.pop().concat(amount, meta), null, 1]);
+        stack1 = seenfields.pop();
+        if (stack1[1] == "fcItemCandle" && meta == 16) meta = 0; // 16 is picked up from random.nextInt(16)
+        wants.push([lvl, stack1.concat(amount, meta), null, 1]);
         seenints = [];
         seenfields = [];
         seenitemstacks = [];
