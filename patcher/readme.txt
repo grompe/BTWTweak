@@ -3,7 +3,7 @@ Grom PE's Better Than Wolves Total Conversion tweak mod v1.0
 
 [********** Change Log ************]
 
-v1.0 (unreleased)
+v1.0
 
 - Fixed compatibility with BTW version "4.AABBBbbb".
 
