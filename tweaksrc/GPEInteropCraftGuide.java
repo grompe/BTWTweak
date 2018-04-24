@@ -445,14 +445,14 @@ class GPEInteropCraftGuide implements InvocationHandler
             }, bg, bg2
           ));
         }
-        else if (recipeType.getItem().itemID == FCBetterThanWolves.fcKiln.blockID && GPEBTWTweak.isBTWVersionOrNewer("4.89666"))
+        else if (recipeType.getItem().itemID == GPEBTWTweak.compatBlockKiln.blockID && GPEBTWTweak.isBTWVersionOrNewer("4.89666"))
         {
           FCAddOnHandler.LogMessage("Adjusting kiln recipes with more Hardcore Baking");
           Object recipe = recipeList.get(0);
           Object rslots = slotsField.get(recipe);
           Object bg = backgroundField.get(recipe);
           Object bg2 = backgroundSelectedField.get(recipe);
-          ItemStack kiln = new ItemStack(FCBetterThanWolves.fcKiln);
+          ItemStack kiln = new ItemStack(GPEBTWTweak.compatBlockKiln);
           ItemStack hibachi = new ItemStack(FCBetterThanWolves.fcBBQ);
           ItemStack bellows = new ItemStack(FCBetterThanWolves.fcBellows);
 

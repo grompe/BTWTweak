@@ -21,6 +21,7 @@ public class GPEBTWTweak extends FCAddOn
   public static Block compatAxleBlock;
   public static Block compatSlabSandAndGravel;
   public static Block compatBlockDirtSlab;
+  public static Block compatBlockKiln;
   public static Block gpeBlockGravestone;
   public static Block gpeBlockRustedRail;
   public static Block gpeBlockRename;
@@ -171,6 +172,15 @@ public class GPEBTWTweak extends FCAddOn
     {
       FCAddOnHandler.LogMessage("Error while retrieving Dirt Slab Block, assuming ID=206");
       compatBlockDirtSlab = Block.blocksList[206];
+    }
+    try
+    {
+      compatBlockKiln = (Block)FCBetterThanWolves.class.getField("fcKiln").get(null);
+    }
+    catch (Exception e)
+    {
+      FCAddOnHandler.LogMessage("Error while retrieving Kiln Block, assuming ID=219");
+      compatBlockKiln = Block.blocksList[219];
     }
   }
 
