@@ -511,7 +511,7 @@ if (isBTWVersionOrNewer("4.A7 Squid A Swimming"))
   tweak("adx", "WorldGenPumpkin", BOTH, "CheckIfFresh(Laab;II)Z", 0xC0270A9E, "Making Hardcore Spawn radius affect pumpkins", constants2configHCS);
 }
 
-tweak("jc", "EntityPlayerMP", BOTH, "DropMysteryMeat(I)V", [0x7CBE1553, 0x5B1D190E], "Adding player hardcore death hook",
+tweak("jc", "EntityPlayerMP", BOTH, "DropMysteryMeat(I)V", [0x7CBE1553, 0x5B1D190E, 0xCE0A16BC], "Adding player hardcore death hook",
 function(mn)
 {
   return CodeInserter(

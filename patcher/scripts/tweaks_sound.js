@@ -39,17 +39,23 @@ function(cn)
   };
   cn.methods.add(mn);
 });
-tweak("ru", "EntityCreeper", BOTH, "a_(Lsq;)Z", [0xC74B29CB, 0xC58F29C5, 0xC7B729D7, 0xC5FB29D1, 0xB4E52E97], "Hurting and shutting up Creeper when sheared",
+var creeperClass = ["ru", "EntityCreeper"];
+if (isBTWVersionOrNewer("4.AACK"))
+{
+  // A couple of methods were moved into a new class.
+  creeperClass = ["FCEntityCreeper", null];
+}
+tweak(creeperClass[0], creeperClass[1], BOTH, "a_(Lsq;)Z", [0xC74B29CB, 0xC58F29C5, 0xC7B729D7, 0xC5FB29D1, 0xB4E52E97], "Hurting and shutting up Creeper when sheared",
 function(mn)
 {
   return CodeInserter(
-    MethodInsnFinder("ru", +1),
+    MethodInsnFinder(creeperClass[0], +1),
     [
       VarInsnNode(ALOAD, 0),
       VarInsnNode(ALOAD, 1),
       MethodInsnNode(INVOKESTATIC, "mg", "a", "(Lsq;)Lmg;"),
       InsnNode(ICONST_2),
-      MethodInsnNode(INVOKEVIRTUAL, "ru", "a", "(Lmg;I)Z"),
+      MethodInsnNode(INVOKEVIRTUAL, creeperClass[0], "a", "(Lmg;I)Z"),
       InsnNode(POP),
 
       VarInsnNode(ALOAD, 1),
@@ -58,7 +64,7 @@ function(mn)
     ]
   ).process(mn);
 });
-tweak("ru", "EntityCreeper", BOTH, "a(Lmg;)V", 0xD7750D7F, "Shutting up Creeper when killed",
+tweak(creeperClass[0], creeperClass[1], BOTH, "a(Lmg;)V", [0xD7750D7F, 0x19740493], "Shutting up Creeper when killed",
 function(mn)
 {
   return CodeInserter(

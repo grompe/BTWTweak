@@ -112,7 +112,7 @@ function(mn)
     INSERT_BEFORE
   ).process(mn);
 });
-tweak("qi", "EntityChicken", BOTH, "a(ZI)V", [0x446910BC, 0xE82F1527], "Adding a feather to chicken",
+tweak("qi", "EntityChicken", BOTH, "a(ZI)V", [0x446910BC, 0xE82F1527, 0x8FEB12D5], "Adding a feather to chicken",
 function(mn)
 {
   var result = CodeInserter(
@@ -465,7 +465,7 @@ if (!isBTWVersionOrNewer("4.A4 Kiloblock Boon"))
 }
 if (isBTWVersionOrNewer("4.89113"))
 {
-  tweak("iz", "WorldServer", BOTH, "b()V", 0xD2243D2B, "Re-allowing easy difficulty and normal - on hardcore",
+  tweak("iz", "WorldServer", BOTH, "b()V", [0xD2243D2B, 0x1AD73BA8], "Re-allowing easy difficulty and normal - on hardcore",
   function(mn)
   {
     var changes = 0;

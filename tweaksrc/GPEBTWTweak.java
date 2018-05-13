@@ -11,7 +11,7 @@ public class GPEBTWTweak extends FCAddOn
 {
   public static GPEBTWTweak instance;
   private static GPEBTWTweakProxy proxy;
-  public static final String tweakVersion = "1.0";
+  public static final String tweakVersion = "1.1";
 
   private static boolean postPostInitialized = false;
   public static boolean isDecoPresent;
