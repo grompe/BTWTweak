@@ -7,6 +7,8 @@ v1.1 (unreleased)
 
 - Fixed compatibility with BTW version "4.AACK".
 
+- Fixed harvest cracks still not showing on wall signs.
+
 v1.0
 
 - Fixed compatibility with BTW version "4.AABBBbbb".

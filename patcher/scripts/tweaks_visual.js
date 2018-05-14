@@ -1,6 +1,22 @@
-function addRenderBlockDamageEffectMethod(cn)
+function addSignSpecificBlockDamageCode(mn)
+{
+  var label = LabelNode();
+  mn.instructions.add(toInsnList(
+    [
+      VarInsnNode(ALOAD, 0),
+      FieldInsnNode(GETFIELD, "FCBlockSign", "cz", "I"),
+      IntInsnNode(BIPUSH, 68),
+      JumpInsnNode(IF_ICMPEQ, label),
+      InsnNode(RETURN),
+      label,
+      FrameNode(F_SAME, 0, null, 0, null),
+    ]
+  ));
+}
+function addRenderBlockDamageEffectMethod(cn, isSign)
 {
   var mn = MethodNode(ACC_PUBLIC, "RenderBlockDamageEffect", "(Lbgf;IIILlx;)V", null, null);
+  if (isSign) addSignSpecificBlockDamageCode(mn);
   mn.instructions.add(toInsnList(
     [
       VarInsnNode(ALOAD, 1),
@@ -23,6 +39,7 @@ function addRenderBlockDamageEffectMethod(cn)
   ));
   cn.methods.add(mn);
   mn = MethodNode(ACC_PUBLIC, "RenderBlockWithTexture", "(Lbgf;IIILlx;)Z", null, null);
+  if (isSign) addSignSpecificBlockDamageCode(mn);
   mn.instructions.add(toInsnList(
     [
       VarInsnNode(ALOAD, 1),
@@ -1089,36 +1106,7 @@ function(cn)
 add("FCBlockSign", null, CLIENT, "Fixed cracks on wall sign",
 function(cn)
 {
-  var label = LabelNode();
-  var mn = MethodNode(ACC_PUBLIC, "RenderBlockDamageEffect", "(Lbgf;IIILlx;)V", null, null);
-  mn.instructions.add(toInsnList(
-    [
-      VarInsnNode(ALOAD, 0),
-      FieldInsnNode(GETFIELD, "FCBlockSign", "cz", "I"),
-      IntInsnNode(BIPUSH, 68),
-      JumpInsnNode(IF_ICMPEQ, label),
-      InsnNode(RETURN),
-      label,
-      FrameNode(F_SAME, 0, null, 0, null),
-      VarInsnNode(ALOAD, 1),
-      VarInsnNode(ALOAD, 5),
-      MethodInsnNode(INVOKEVIRTUAL, "bgf", "a", "(Llx;)V"),
-      VarInsnNode(ALOAD, 1),
-      VarInsnNode(ALOAD, 0),
-      MethodInsnNode(INVOKEVIRTUAL, "bgf", "a", "(Lapa;)V"),
-      VarInsnNode(ALOAD, 1),
-      VarInsnNode(ALOAD, 0),
-      VarInsnNode(ILOAD, 2),
-      VarInsnNode(ILOAD, 3),
-      VarInsnNode(ILOAD, 4),
-      MethodInsnNode(INVOKEVIRTUAL, "bgf", "p", "(Lapa;III)Z"),
-      InsnNode(POP),
-      VarInsnNode(ALOAD, 1),
-      MethodInsnNode(INVOKEVIRTUAL, "bgf", "a", "()V"),
-      InsnNode(RETURN),
-    ]
-  ));
-  cn.methods.add(mn);
+  addRenderBlockDamageEffectMethod(cn, true);
 });
 tweak("FCBlockTurntable", null, CLIENT, "RenderBlock(Lbgf;III)Z", 0xBBB81AF0, "Using visual spin",
 function(mn)
