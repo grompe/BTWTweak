@@ -14,6 +14,8 @@ v1.1 (unreleased)
 - Fixed ladders placement while standing in the same block. This was broken
   since BTW 4.A8.
 
+- Changed lily pads so they can be placed in one block deep water.
+
 v1.0
 
 - Fixed compatibility with BTW version "4.AABBBbbb".
