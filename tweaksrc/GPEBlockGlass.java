@@ -28,6 +28,11 @@ public class GPEBlockGlass extends BlockGlass
     return true;
   }
 
+  public boolean HasLargeCenterHardPointToFacing(IBlockAccess b, int x, int y, int z, int side, boolean transp)
+  {
+    return transp;
+  }
+
   public int quantityDroppedWithBonus(int fortune, Random random)
   {
     if (GPEBTWTweak.decoGlassShard == null) return 0;

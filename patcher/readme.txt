@@ -9,6 +9,8 @@ v1.1 (unreleased)
 
 - Fixed harvest cracks still not showing on wall signs.
 
+- Fixed Glass Block not properly supporting falling blocks.
+
 v1.0
 
 - Fixed compatibility with BTW version "4.AABBBbbb".
