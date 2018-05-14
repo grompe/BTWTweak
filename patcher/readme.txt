@@ -16,6 +16,9 @@ v1.1 (unreleased)
 
 - Changed lily pads so they can be placed in one block deep water.
 
+- Changed CraftGuide recipes for baiting and bow disassembly to ignore
+  durability.
+
 v1.0
 
 - Fixed compatibility with BTW version "4.AABBBbbb".

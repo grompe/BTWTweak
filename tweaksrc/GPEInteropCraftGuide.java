@@ -81,8 +81,8 @@ class GPEInteropCraftGuide implements InvocationHandler
         addRecipe.invoke(generator, template, new Object[] {new ItemStack(FCBetterThanWolves.fcBloodWood), axe2, new ItemStack(Block.planks, 2, 4), new ItemStack(FCBetterThanWolves.fcItemBark, 1, 4), new ItemStack(GPEBTWTweak.compatItemSawDust, 1), new ItemStack(FCBetterThanWolves.fcSoulDust, 1), workbench});
 
         // Baiting
-        ItemStack fishingRod = new ItemStack(Item.fishingRod);
-        ItemStack fishingRodBaited = new ItemStack(FCBetterThanWolves.fcItemFishingRodBaited);
+        ItemStack fishingRod = new ItemStack(Item.fishingRod, 1, 32767);
+        ItemStack fishingRodBaited = new ItemStack(FCBetterThanWolves.fcItemFishingRodBaited, 1, 32767);
         addRecipe.invoke(generator, template, new Object[] {new ItemStack(Item.rottenFlesh), fishingRod, fishingRodBaited, null, null, null, workbench});
         addRecipe.invoke(generator, template, new Object[] {new ItemStack(Item.spiderEye), fishingRod, fishingRodBaited, null, null, null, workbench});
         addRecipe.invoke(generator, template, new Object[] {new ItemStack(FCBetterThanWolves.fcItemCreeperOysters), fishingRod, fishingRodBaited, null, null, null, workbench});
@@ -102,7 +102,7 @@ class GPEInteropCraftGuide implements InvocationHandler
         // Bow disassembling
         if (GPEBTWTweak.isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
         {
-          addRecipe.invoke(generator, template, new Object[] {new ItemStack(Item.bow), null, new ItemStack(Item.stick), new ItemStack(Item.silk), null, null, workbench});
+          addRecipe.invoke(generator, template, new Object[] {new ItemStack(Item.bow, 1, 32767), null, new ItemStack(Item.stick), new ItemStack(Item.silk), null, null, workbench});
         }
         
         // Piston packing
