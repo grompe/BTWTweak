@@ -1660,7 +1660,7 @@ public class GPEBTWTweak extends FCAddOn
     int id = ib.getBlockID();
     int meta = ib.getMetadata(stack.getItemDamage());
     Block block = Block.blocksList[id];
-    if (!(block instanceof BlockLadder || block instanceof FCIBlock))
+    if (!(block instanceof GPEBlockLadder || block instanceof FCIBlock))
     {
       return ib.canPlaceItemBlockOnSide(world, x, y, z, side, player, stack);
     }

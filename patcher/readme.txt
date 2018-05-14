@@ -11,6 +11,9 @@ v1.1 (unreleased)
 
 - Fixed Glass Block not properly supporting falling blocks.
 
+- Fixed ladders placement while standing in the same block. This was broken
+  since BTW 4.A8.
+
 v1.0
 
 - Fixed compatibility with BTW version "4.AABBBbbb".
