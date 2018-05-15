@@ -19,6 +19,8 @@ v1.1 (unreleased)
 - Changed CraftGuide recipes for baiting and bow disassembly to ignore
   durability.
 
+- Changed Mycelium to also spread to loose dirt.
+
 v1.0
 
 - Fixed compatibility with BTW version "4.AABBBbbb".

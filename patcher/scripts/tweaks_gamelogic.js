@@ -1204,7 +1204,7 @@ if (isBTWVersionOrNewer("4.AAAAAAAAAAHHHH b"))
 }
 if (isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
 {
-  tweak("FCTileEntityMobSpawner", null, BOTH, "h()V", 0x12532440, "Letting mob spawner to spread moss to loose cobble",
+  tweak("FCTileEntityMobSpawner", null, BOTH, "h()V", 0x12532440, "Letting mob spawner spread moss to loose cobble",
   function(mn)
   {
     return CodeInserter(
@@ -1226,6 +1226,28 @@ if (isBTWVersionOrNewer("4.AAAAAAAAAAHHHH"))
         // stack: eq_cobble_id, current_id, loose_id ->
         InsnNode(ISUB),
         // stack: eq_cobble_id, eq_loose_id ->
+        InsnNode(IMUL),
+        InsnNode(ICONST_0),
+      ],
+      INSERT_BEFORE
+    ).process(mn);
+  });
+  tweak("ann", "BlockMycelium", BOTH, "a(Laab;IIILjava/util/Random;)V", 0xE1CD1FF7, "Letting mycelium spread to loose dirt",
+  function(mn)
+  {
+    return CodeInserter(
+      CustomFinder(function(n)
+      {
+        return isInstance(n, "org.objectweb.asm.tree.JumpInsnNode") && n.opcode == IF_ICMPNE;
+      }),
+      [
+        InsnNode(SWAP),
+        InsnNode(DUP_X1),
+        InsnNode(ISUB),
+        InsnNode(SWAP),
+        FieldInsnNode(GETSTATIC, "FCBetterThanWolves", "fcBlockDirtLoose", "Lapa;"),
+        FieldInsnNode(GETFIELD, "apa", "cz", "I"),
+        InsnNode(ISUB),
         InsnNode(IMUL),
         InsnNode(ICONST_0),
       ],
