@@ -1,4 +1,4 @@
-function addSignSpecificBlockDamageCode(mn)
+function addSignSpecificBlockDamageCode(mn, return_false)
 {
   var label = LabelNode();
   mn.instructions.add(toInsnList(
@@ -7,7 +7,25 @@ function addSignSpecificBlockDamageCode(mn)
       FieldInsnNode(GETFIELD, "FCBlockSign", "cz", "I"),
       IntInsnNode(BIPUSH, 68),
       JumpInsnNode(IF_ICMPEQ, label),
-      InsnNode(RETURN),
+    ]
+  ));
+  if (return_false)
+  {
+    mn.instructions.add(toInsnList(
+      [
+        InsnNode(ICONST_0),
+        InsnNode(IRETURN),
+      ]
+    ));
+  } else {
+    mn.instructions.add(toInsnList(
+      [
+        InsnNode(RETURN),
+      ]
+    ));
+  }
+  mn.instructions.add(toInsnList(
+    [
       label,
       FrameNode(F_SAME, 0, null, 0, null),
     ]
@@ -39,7 +57,7 @@ function addRenderBlockDamageEffectMethod(cn, isSign)
   ));
   cn.methods.add(mn);
   mn = MethodNode(ACC_PUBLIC, "RenderBlockWithTexture", "(Lbgf;IIILlx;)Z", null, null);
-  if (isSign) addSignSpecificBlockDamageCode(mn);
+  if (isSign) addSignSpecificBlockDamageCode(mn, true);
   mn.instructions.add(toInsnList(
     [
       VarInsnNode(ALOAD, 1),
