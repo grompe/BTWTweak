@@ -35,6 +35,11 @@ v1.1 (unreleased)
 - Changed bed recipe for BTW 4.AABBBbbb+ to require 6 knit wool and 3 wooden
   slabs to make it more relevant in early game.
 
+- Added new crosshair to indicate when it's possible to ignite the held item
+  with the block you're pointing at and vice-versa. Also added another three
+  placeholder crosshairs for possible future use. This might be of interest
+  to texture pack creators: don't leave these spots blank.
+
 v1.0
 
 - Fixed compatibility with BTW version "4.AABBBbbb".

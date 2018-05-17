@@ -1,0 +1,21 @@
+diff --git a/src/minecraft/net/minecraft/src/FCItemBlockTorchIdle.java b/src/minecraft/net/minecraft/src/FCItemBlockTorchIdle.java
+new file mode 100644
+index 0000000..e338185
+--- /dev/null
++++ b/src/minecraft/net/minecraft/src/FCItemBlockTorchIdle.java
+@@ -0,0 +1,15 @@
++package net.minecraft.src;
++
++// Dummy class for BTW 4.AA+
++public class FCItemBlockTorchIdle extends Item
++{
++  public FCItemBlockTorchIdle(int id)
++  {
++    super(id);
++  }
++
++  public boolean IsPlayerClickingOnIgniter(ItemStack stack, World world, EntityPlayer player)
++  {
++    return false;
++  }
++}

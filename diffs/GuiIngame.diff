@@ -1,5 +1,5 @@
 diff --git a/src/minecraft/net/minecraft/src/GuiIngame.java b/src/minecraft/net/minecraft/src/GuiIngame.java
-index 1e4b83e..0eee5a2 100644
+index 1e4b83e..edae9fe 100644
 --- a/src/minecraft/net/minecraft/src/GuiIngame.java
 +++ b/src/minecraft/net/minecraft/src/GuiIngame.java
 @@ -37,0 +38,2 @@
@@ -11,10 +11,10 @@ index 1e4b83e..0eee5a2 100644
 @@ -120 +124,2 @@ else if (this.mc.gameSettings.thirdPersonView == 0 && this.mc.thePlayer.isPotion
 -            this.drawTexturedModalRect(var6 / 2 - 7, var7 / 2 - 7, 0, 0, 16, 16);
 +            //this.drawTexturedModalRect(var6 / 2 - 7, var7 / 2 - 7, 0, 0, 16, 16);
-+            drawCrosshairCustom(var6 / 2 - 7, var7 / 2 - 7);
++            GPEBTWTweakProxyClient.drawCrosshairCustom(this, var6 / 2 - 7, var7 / 2 - 7);
 @@ -580,0 +586 @@ private void func_96136_a(ScoreObjective par1ScoreObjective, int par2, int par3,
 +        if (!this.mc.gameSettings.keyBindPlayerList.pressed) return;
-@@ -898,0 +905,210 @@ private void renderEnderSpectaclesBlur(int var1, int var2)
+@@ -898,0 +905,46 @@ private void renderEnderSpectaclesBlur(int var1, int var2)
 +    private void checkForGloomRender(int width, int height)
 +    {
 +        if (!this.mc.isGamePaused)
@@ -59,169 +59,5 @@ index 1e4b83e..0eee5a2 100644
 +        GL11.glEnable(GL11.GL_DEPTH_TEST);
 +        GL11.glEnable(GL11.GL_ALPHA_TEST);
 +        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-+    }
-+
-+    private void drawCrosshairCustom(int dx, int dy)
-+    {
-+      // GPE: new feature: showing efficiency & harvestability in the crosshair; also see "/gui/icons.png"
-+      if (!GPEBTWTweak.hasAdaptiveCrosshair)
-+      {
-+        drawTexturedModalRect(dx, dy, 0, 0, 16, 16);
-+        return;
-+      }
-+      if (mc.objectMouseOver != null)
-+      {
-+        if (mc.objectMouseOver.typeOfHit == EnumMovingObjectType.TILE)
-+        {
-+          boolean efficient = false;
-+          boolean canHarvest = false;
-+          int x = mc.objectMouseOver.blockX;
-+          int y = mc.objectMouseOver.blockY;
-+          int z = mc.objectMouseOver.blockZ;
-+          int id = mc.theWorld.getBlockId(x, y, z);
-+          Block block = Block.blocksList[id];
-+
-+          if (block != null)
-+          { 
-+            if (mc.thePlayer.IsCurrentToolEffectiveOnBlock(block, x, y, z))
-+            {
-+              efficient = true;
-+            }
-+            if (mc.thePlayer.canHarvestBlock(block, x, y, z))
-+            {
-+              canHarvest = true;
-+              // Exception: cannot harvest crafting table, glass or glass pane
-+              if (id == 58 || id == 1034 || id == 20 || id == 102)
-+              {
-+                canHarvest = false;
-+              }
-+              // Exception for blocks harvestable with shears only
-+              if (
-+                  id == 32 // dead bush
-+                  || id == 18 // leaves
-+                  || id == 211 // bloodwood leaves
-+                  || id == 31 // tall grass
-+                  || id == 106 // vine
-+                )
-+              {
-+                ItemStack stack = mc.thePlayer.inventory.getCurrentItem();
-+                if (stack == null || stack.getItem().itemID != Item.shears.itemID)
-+                {
-+                  canHarvest = false;
-+                }
-+              }
-+              // Exception: can only harvest axle with an axe
-+              if (id == GPEBTWTweak.compatAxleBlock.blockID)
-+              {
-+                if (!efficient)
-+                {
-+                  canHarvest = false;
-+                }
-+              }
-+            } else {
-+              // Exception: show chisels good on stumps to hint at workbench creation
-+              if (id == 17)
-+              {
-+                int meta = mc.theWorld.getBlockMetadata(x, y, z);
-+                if ((meta & 12) == 12)
-+                {
-+                  ItemStack stack = mc.thePlayer.inventory.getCurrentItem();
-+                  if (stack != null && (stack.getItem().itemID == 22317+256 || stack.getItem().itemID == GPEBTWTweak.gpeItemChiselRefined.itemID))
-+                  {
-+                    canHarvest = true;
-+                  }
-+                }
-+              }
-+            }
-+            // Exception: can only harvest webs with chisels or shears
-+            if (id == 30 || id == 1037)
-+            {
-+              ItemStack stack = mc.thePlayer.inventory.getCurrentItem();
-+              if (stack == null)
-+              {
-+                canHarvest = false;
-+              } else {
-+                int iid = stack.getItem().itemID;
-+                canHarvest =
-+                  iid == Item.shears.itemID
-+                  || iid == 22311+256 // stone chisel (sharp stone)
-+                  || iid == 22317+256 // iron chisel
-+                  || iid == GPEBTWTweak.gpeItemChiselRefined.itemID;
-+              }
-+            }
-+          }
-+          drawTexturedModalRect(dx, dy, (!canHarvest && efficient) ? 16 : 0, canHarvest ? 0 : 96, 16, 16);
-+          return;
-+        } else {
-+          // entity
-+          if (mc.objectMouseOver.entityHit instanceof EntityLiving)
-+          {
-+            EntityLiving el = (EntityLiving)mc.objectMouseOver.entityHit;
-+            boolean hasKnockback = mc.thePlayer.inventory.getDamageVsEntity(el) > 2;
-+            boolean notResistant = el.hurtResistantTime <= 10;
-+            boolean alive = el.deathTime == 0;
-+            boolean closeEnough = true; // Doesn't hit an entity closer than sq 36.0 anyway
-+            if (!mc.thePlayer.canEntityBeSeen(el))
-+            {
-+              double xx = mc.thePlayer.posX - el.posX;
-+              // Client player entity is 1.62 blocks above the server one
-+              double yy = mc.thePlayer.posY - 1.62 - el.posY;
-+              double zz = mc.thePlayer.posZ - el.posZ;
-+              closeEnough = xx * xx + yy * yy + zz * zz < 9.0;
-+            }
-+            drawTexturedModalRect(dx, dy, (hasKnockback && notResistant && alive && closeEnough) ? 32 : 0, 96, 16, 16);
-+            return;
-+          }
-+        }
-+      } else {
-+        ItemStack stack = mc.thePlayer.inventory.getCurrentItem();
-+        if (stack != null && stack.getItem().itemID == FCBetterThanWolves.fcItemFishingRodBaited.itemID)
-+        {
-+          if (mc.thePlayer.fishEntity == null)
-+          {
-+            MovingObjectPosition mop = FCUtilsMisc.GetMovingObjectPositionFromPlayerHitWaterAndLava(mc.theWorld, mc.thePlayer, true);
-+            if (mop != null && mop.typeOfHit == EnumMovingObjectType.TILE)
-+            {
-+              if (goodFishingSpot(mop.blockX, mop.blockY, mop.blockZ))
-+              {
-+                drawTexturedModalRect(dx, dy, 48, 96, 16, 16);
-+                return;
-+              }
-+            }
-+          } else {
-+            int x = MathHelper.floor_double(mc.thePlayer.fishEntity.posX);
-+            int y = MathHelper.floor_double(mc.thePlayer.fishEntity.posY);
-+            int z = MathHelper.floor_double(mc.thePlayer.fishEntity.posZ);
-+            if (goodFishingSpot(x, y, z))
-+            {
-+              drawTexturedModalRect(dx, dy, 48, 96, 16, 16);
-+              return;
-+            }
-+          }
-+        }
-+      }
-+      // idle cursor
-+      drawTexturedModalRect(dx, dy, 0, 96, 16, 16);
-+    }
-+
-+    private boolean goodFishingSpot(int dx, int dy, int dz)
-+    {
-+      Material mat = mc.theWorld.getBlockMaterial(dx, dy, dz);
-+      if (mat != Material.water) return false;
-+      for (int x = dx - 2; x <= dx + 2; x++)
-+      {
-+        for (int y = dy - 3; y < dy; y++)
-+        {
-+          for (int z = dz - 2; z <= dz + 2; z++)
-+          {
-+            mat = mc.theWorld.getBlockMaterial(x, y, z);
-+            if (mat != Material.water)
-+            {
-+              return false;
-+            }
-+          }
-+        }
-+      }
-+      return true;
 +    }
 +

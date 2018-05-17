@@ -1,0 +1,16 @@
+diff --git a/src/minecraft/net/minecraft/src/FCItemFireStarter.java b/src/minecraft/net/minecraft/src/FCItemFireStarter.java
+new file mode 100644
+index 0000000..d442b3e
+--- /dev/null
++++ b/src/minecraft/net/minecraft/src/FCItemFireStarter.java
+@@ -0,0 +1,10 @@
++package net.minecraft.src;
++
++// Dummy class for BTW 4.AA+
++public class FCItemFireStarter extends Item
++{
++  public FCItemFireStarter(int id)
++  {
++    super(id);
++  }
++}

@@ -59,6 +59,7 @@ public class GPEBTWTweak extends FCAddOn
   public static boolean btwFlesh = isBTWVersionOrNewer("4.A4 Kiloblock Boon");
   public static boolean btwSmoothstoneStairs = isBTWVersionOrNewer("4.A7 Squid A Swimming");
   public static boolean btwBloodPlanks = isBTWVersionOrNewer("4.A9 Pustules Lancing");
+  public static boolean btwFiniteTorches = isBTWVersionOrNewer("4.AAAAAAAAAAHHHH");
   public static boolean btwKnitting = isBTWVersionOrNewer("4.AABBBbbb");
 
   public static int gpeLooseRockID = 17000;

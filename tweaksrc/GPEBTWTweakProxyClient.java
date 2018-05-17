@@ -410,6 +410,227 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
     GL11.glDisable(GL11.GL_BLEND);
   }
 
+  // showing efficiency & harvestability in the crosshair; also see "/gui/icons.png"
+  public static void drawCrosshairCustom(GuiIngame gui, int dx, int dy)
+  {
+    if (!GPEBTWTweak.hasAdaptiveCrosshair)
+    {
+      gui.drawTexturedModalRect(dx, dy, 0, 0, 16, 16);
+      return;
+    }
+    Minecraft mc = Minecraft.getMinecraft();
+    if (mc.objectMouseOver != null)
+    {
+      if (mc.objectMouseOver.typeOfHit == EnumMovingObjectType.TILE)
+      {
+        boolean efficient = false;
+        boolean canHarvest = false;
+        int x = mc.objectMouseOver.blockX;
+        int y = mc.objectMouseOver.blockY;
+        int z = mc.objectMouseOver.blockZ;
+        int id = mc.theWorld.getBlockId(x, y, z);
+        Block block = Block.blocksList[id];
+
+        if (block != null)
+        { 
+          ItemStack stack = mc.thePlayer.inventory.getCurrentItem();
+          if (GPEBTWTweak.btwFiniteTorches && stack != null)
+          {
+            Item item = stack.getItem();
+            if ((item instanceof FCItemFireStarter || item instanceof FCItemBlockTorchBurning))
+            {
+              if (id == 1023) // Idle brick oven, when clicking at a lower part only
+              {
+                float yOffset = (float)mc.objectMouseOver.hitVec.yCoord - y;
+                if (yOffset <= 3/8F)
+                {
+                  gui.drawTexturedModalRect(dx, dy, 64, 96, 16, 16);
+                  return;
+                }
+              } 
+              else if (id == 1013) // Idle campfire, non-burnt
+              {
+                int meta = mc.theWorld.getBlockMetadata(x, y, z);
+                if ((meta & 4) == 0)
+                {
+                  gui.drawTexturedModalRect(dx, dy, 64, 96, 16, 16);
+                  return;
+                }
+              }
+              else if (id == 1025) // Idle finite torch, non-burnt
+              {
+                int meta = mc.theWorld.getBlockMetadata(x, y, z);
+                if ((meta & 8) == 0)
+                {
+                  gui.drawTexturedModalRect(dx, dy, 64, 96, 16, 16);
+                  return;
+                }
+              }
+              else if (id == 1033) // Idle torch
+              {
+                gui.drawTexturedModalRect(dx, dy, 64, 96, 16, 16);
+                return;
+              }
+            }
+            else if (item instanceof FCItemBlockTorchIdle)
+            {
+              if (((FCItemBlockTorchIdle)item).IsPlayerClickingOnIgniter(stack, mc.theWorld, mc.thePlayer))
+              {
+                gui.drawTexturedModalRect(dx, dy, 64, 96, 16, 16);
+                return;
+              }
+            }
+          }
+          if (mc.thePlayer.IsCurrentToolEffectiveOnBlock(block, x, y, z))
+          {
+            efficient = true;
+            // Exception: bedrock, end portal frame
+            if (id == 7 || id == 120)
+            {
+              efficient = false;
+            }
+          }
+          if (mc.thePlayer.canHarvestBlock(block, x, y, z) && block.getBlockHardness(mc.theWorld, x, y, z) >= 0)
+          {
+            canHarvest = true;
+            // Exception: cannot harvest crafting table, glass, glass pane, ice, mob spawner, furnace, brick oven
+            if (id == 58 || id == 1034 || id == 20 || id == 102 || id == 79 || id == 52 || id == 61 || id == 62 || id == 1023 || id == 1024)
+            {
+              canHarvest = false;
+            }
+            // Exception for blocks harvestable with shears only
+            if (
+                id == 32 // dead bush
+                || id == 18 // leaves
+                || id == 211 // bloodwood leaves
+                || id == 31 // tall grass
+                || id == 106 // vine
+              )
+            {
+              if (stack == null || stack.getItem().itemID != Item.shears.itemID)
+              {
+                canHarvest = false;
+              }
+            }
+            // Exception: can only harvest axle with an axe
+            if (id == GPEBTWTweak.compatAxleBlock.blockID)
+            {
+              if (!efficient)
+              {
+                canHarvest = false;
+              }
+            }
+          } else {
+            // Exception: show chisels good on stumps to hint at workbench creation
+            if (id == 17)
+            {
+              int meta = mc.theWorld.getBlockMetadata(x, y, z);
+              if ((meta & 12) == 12)
+              {
+                if (stack != null && (stack.getItem().itemID == 22317+256 || stack.getItem().itemID == GPEBTWTweak.gpeItemChiselRefined.itemID))
+                {
+                  canHarvest = true;
+                }
+              }
+            }
+            // Exception: can always harvest loose stone and bricks
+            else if (id == 1019 || id == 1020 || id == 1021 || id == 1022)
+            {
+              canHarvest = true;
+            }
+          }
+          // Exception: can only harvest webs with chisels or shears
+          if (id == 30 || id == 1037)
+          {
+            if (stack == null)
+            {
+              canHarvest = false;
+            } else {
+              int iid = stack.getItem().itemID;
+              canHarvest =
+                iid == Item.shears.itemID
+                || iid == 22311+256 // stone chisel (sharp stone)
+                || iid == 22317+256 // iron chisel
+                || iid == GPEBTWTweak.gpeItemChiselRefined.itemID;
+            }
+          }
+        }
+        gui.drawTexturedModalRect(dx, dy, (!canHarvest && efficient) ? 16 : 0, canHarvest ? 0 : 96, 16, 16);
+        return;
+      } else {
+        // entity
+        if (mc.objectMouseOver.entityHit instanceof EntityLiving)
+        {
+          EntityLiving el = (EntityLiving)mc.objectMouseOver.entityHit;
+          boolean hasKnockback = mc.thePlayer.inventory.getDamageVsEntity(el) > 2;
+          boolean notResistant = el.hurtResistantTime <= 10;
+          boolean alive = el.deathTime == 0;
+          boolean closeEnough = true; // Doesn't hit an entity closer than sq 36.0 anyway
+          if (!mc.thePlayer.canEntityBeSeen(el))
+          {
+            double xx = mc.thePlayer.posX - el.posX;
+            // Client player entity is 1.62 blocks above the server one
+            double yy = mc.thePlayer.posY - 1.62 - el.posY;
+            double zz = mc.thePlayer.posZ - el.posZ;
+            closeEnough = xx * xx + yy * yy + zz * zz < 9.0;
+          }
+          gui.drawTexturedModalRect(dx, dy, (hasKnockback && notResistant && alive && closeEnough) ? 32 : 0, 96, 16, 16);
+          return;
+        }
+      }
+    } else {
+      ItemStack stack = mc.thePlayer.inventory.getCurrentItem();
+      if (stack != null && stack.getItem().itemID == FCBetterThanWolves.fcItemFishingRodBaited.itemID)
+      {
+        if (mc.thePlayer.fishEntity == null)
+        {
+          MovingObjectPosition mop = FCUtilsMisc.GetMovingObjectPositionFromPlayerHitWaterAndLava(mc.theWorld, mc.thePlayer, true);
+          if (mop != null && mop.typeOfHit == EnumMovingObjectType.TILE)
+          {
+            if (goodFishingSpot(mop.blockX, mop.blockY, mop.blockZ))
+            {
+              gui.drawTexturedModalRect(dx, dy, 48, 96, 16, 16);
+              return;
+            }
+          }
+        } else {
+          int x = MathHelper.floor_double(mc.thePlayer.fishEntity.posX);
+          int y = MathHelper.floor_double(mc.thePlayer.fishEntity.posY);
+          int z = MathHelper.floor_double(mc.thePlayer.fishEntity.posZ);
+          if (goodFishingSpot(x, y, z))
+          {
+            gui.drawTexturedModalRect(dx, dy, 48, 96, 16, 16);
+            return;
+          }
+        }
+      }
+    }
+    // idle crosshair
+    gui.drawTexturedModalRect(dx, dy, 0, 96, 16, 16);
+  }
+
+  private static boolean goodFishingSpot(int dx, int dy, int dz)
+  {
+    Minecraft mc = Minecraft.getMinecraft();
+    Material mat = mc.theWorld.getBlockMaterial(dx, dy, dz);
+    if (mat != Material.water) return false;
+    for (int x = dx - 2; x <= dx + 2; x++)
+    {
+      for (int y = dy - 3; y < dy; y++)
+      {
+        for (int z = dz - 2; z <= dz + 2; z++)
+        {
+          mat = mc.theWorld.getBlockMaterial(x, y, z);
+          if (mat != Material.water)
+          {
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  }
+
   public static void safeRenderItemAndEffectIntoGUI(RenderItem ri, FontRenderer fr, RenderEngine re, ItemStack stack, int par4, int par5)
   {
     int id = stack.itemID;
