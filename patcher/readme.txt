@@ -25,6 +25,8 @@ v1.1 (unreleased)
 
 - Added a stoked crucible recipe to turn mossy cobble to regular cobblestone.
 
+- Fixed minecart with chest being uncraftable since BTW 4.AABABABA.
+
 v1.0
 
 - Fixed compatibility with BTW version "4.AABBBbbb".

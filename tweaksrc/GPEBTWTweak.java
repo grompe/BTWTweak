@@ -636,6 +636,13 @@ public class GPEBTWTweak extends FCAddOn
       FCRecipes.AddVanillaRecipe(new ItemStack(gpeBlockFlesh), new Object[] {"###", "###", "###", '#', Item.rottenFlesh});
     }
 
+    if (isBTWVersionOrNewer("4.AABABABA"))
+    {
+      // Fix minecart with chest being uncraftable
+      FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.minecartCrate, 1), new Object[] {"A", "B", 'A', Block.chest, 'B', Item.minecartEmpty});
+      FCRecipes.AddVanillaRecipe(new ItemStack(Item.minecartCrate, 1), new Object[] {"A", "B", 'A', Block.blocksList[1035] /*FCBetterThanWolves.fcBlockChest*/, 'B', Item.minecartEmpty});
+    }
+
     if (isBTWVersionOrNewer("4.AAAAAAABBB"))
     {
       CraftingManager.getInstance().getRecipeList().add(new GPERecipesTorchMerge());
