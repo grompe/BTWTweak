@@ -493,6 +493,7 @@ public class GPEBTWTweak extends FCAddOn
       FCRecipes.AddVanillaRecipe(new ItemStack(Block.furnaceIdle), new Object[] {"###", "#X#", "###", '#', Block.stone, 'X', Block.netherrack});
       FCRecipes.AddVanillaRecipe(new ItemStack(gpeItemChiselRefined), new Object[] {"##", "##", '#', FCBetterThanWolves.fcItemNuggetSteel});
       FCRecipes.AddStokedCrucibleRecipe(new ItemStack(FCBetterThanWolves.fcItemNuggetSteel, 4), new ItemStack[] {new ItemStack(gpeItemChiselRefined, 1, 32767)});
+      FCRecipes.AddStokedCrucibleRecipe(new ItemStack(Block.cobblestone), new ItemStack[] {new ItemStack(Block.cobblestoneMossy)});
     } else {
       FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.axeStone), new Object[] {"X ", "X#", " #", '#', Item.stick, 'X', Block.cobblestone});
       FCRecipes.AddVanillaRecipe(new ItemStack(Item.axeStone), new Object[] {"X ", "X#", " #", '#', Item.stick, 'X', gpeItemLooseRock});

@@ -23,6 +23,8 @@ v1.1 (unreleased)
 
 - Changed chisels to be effective on sandstone.
 
+- Added a stoked crucible recipe to turn mossy cobble to regular cobblestone.
+
 v1.0
 
 - Fixed compatibility with BTW version "4.AABBBbbb".
