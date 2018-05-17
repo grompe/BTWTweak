@@ -40,6 +40,10 @@ v1.1 (unreleased)
   placeholder crosshairs for possible future use. This might be of interest
   to texture pack creators: don't leave these spots blank.
 
+- Fixed resource loading in accordance with the path new Minecraft Launcher
+  provides, as well as the new download location. This fixes the problem of
+  missing sound and music.
+
 v1.0
 
 - Fixed compatibility with BTW version "4.AABBBbbb".

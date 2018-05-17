@@ -1,14 +1,19 @@
 diff --git a/src/minecraft/net/minecraft/client/Minecraft.java b/src/minecraft/net/minecraft/client/Minecraft.java
-index 60d1a40..51fea38 100644
+index 60d1a40..67d65c1 100644
 --- a/src/minecraft/net/minecraft/client/Minecraft.java
 +++ b/src/minecraft/net/minecraft/client/Minecraft.java
 @@ -54,0 +55,2 @@
 +import net.minecraft.src.GPEBTWTweak;
 +import net.minecraft.src.GPEBTWTweakProxyClient;
-@@ -471,0 +474,2 @@ else if (this.fullscreen)
+@@ -112,0 +115 @@
++import net.minecraft.src.GPEThreadDownloadResources;
+@@ -446 +449 @@ else if (this.fullscreen)
+-            this.downloadResourcesThread = new ThreadDownloadResources(this.mcDataDir, this);
++            this.downloadResourcesThread = new GPEThreadDownloadResources(this.mcDataDir, this);
+@@ -471,0 +475,2 @@ else if (this.fullscreen)
 +
 +        GPEBTWTweak.readyForInput();
-@@ -1622,0 +1627 @@ else if (Keyboard.isKeyDown(46) && Keyboard.isKeyDown(61))
+@@ -1622,0 +1628 @@ else if (Keyboard.isKeyDown(46) && Keyboard.isKeyDown(61))
 +                            GPEBTWTweak.onKeyPress(Keyboard.getEventKey());
-@@ -2261,0 +2267 @@ else if (var10.equals("--password") && var11 != null)
+@@ -2261,0 +2268 @@ else if (var10.equals("--password") && var11 != null)
 +        GPEBTWTweakProxyClient.setAppIcon(var17);

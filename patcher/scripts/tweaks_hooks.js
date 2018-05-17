@@ -63,18 +63,42 @@ function(mn)
     }
   }
 });
-tweak("net/minecraft/client/Minecraft", null, CLIENT, "a()V", [0xA79A9DCF, 0x5E5FA51F, 0xD413A5A5, 0x3267ACF5], "Adding readyForInput hook",
+tweak("net/minecraft/client/Minecraft", null, CLIENT, "a()V", [0xA79A9DCF, 0x5E5FA51F, 0xD413A5A5, 0x3267ACF5], "Adding readyForInput hook and replacing download resources thread",
 function(mn)
 {
-  for (var i = mn.instructions.size() - 1; i >= 0; i--)
+  var changes = 0;
+  var i;
+  for (i = mn.instructions.size() - 1; i >= 0; i--)
   {
     var n = mn.instructions.get(i);
     if (isInstance(n, "org.objectweb.asm.tree.InsnNode") && (n.getOpcode() == RETURN))
     {
       mn.instructions.insertBefore(n, MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "readyForInput", "()V"));
-      return true;
+      changes++;
+      break;
     }
   }
+  for (i--; i >= 0; i--)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("aus") && n.name.equals("<init>") && n.desc.equals("(Ljava/io/File;Lnet/minecraft/client/Minecraft;)V"))
+    {
+      n.owner = "GPEThreadDownloadResources";
+      changes++;
+      break;
+    }
+  }
+  for (i--; i >= 0; i--)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.TypeInsnNode") && n.desc.equals("aus"))
+    {
+      n.desc = "GPEThreadDownloadResources";
+      changes++;
+      break;
+    }
+  }
+  return changes == 3;
 });
 tweak("net/minecraft/client/Minecraft", null, CLIENT, "l()V", 0x6F5697A8, "Adding keyboard hook",
 function(mn)
