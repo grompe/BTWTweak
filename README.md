@@ -390,7 +390,7 @@ https://libraries.minecraft.net/org/lwjgl/lwjgl/lwjgl-platform/2.9.1/lwjgl-platf
 6. Run MCP updatemd5
 7. backup the ./temp/client.md5 file
 8. Run MCP cleanup
-9. Install BTWTweak into minecraft.jar with BTW
+9. Run BTWTweak.jar to patch minecraft.jar with BTW
 10. Decompile with MCP again
 11. Apply MCP fix again
 12. put back the saved ./temp/client.md5 file
