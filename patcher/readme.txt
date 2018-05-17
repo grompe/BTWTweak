@@ -32,6 +32,9 @@ v1.1 (unreleased)
 
 - Added CraftGuide recipes for torch merging and armor repair.
 
+- Changed bed recipe for BTW 4.AABBBbbb+ to require 6 knit wool and 3 wooden
+  slabs to make it more relevant in early game.
+
 v1.0
 
 - Fixed compatibility with BTW version "4.AABBBbbb".

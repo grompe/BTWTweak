@@ -560,7 +560,12 @@ public class GPEBTWTweak extends FCAddOn
 
     FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.bed, 1), new Object[] {"###", "XXX", '#', Block.cloth, 'X', Block.planks});
     FCRecipes.RemoveVanillaRecipe(new ItemStack(Item.bed, 1), new Object[] {"###", "XXX", '#', FCBetterThanWolves.fcPadding, 'X', Block.planks});
-    FCRecipes.AddVanillaRecipe(new ItemStack(Item.bed, 1), new Object[] {"sss", "ppp", "www", 's', gpeItemSilk, 'p', FCBetterThanWolves.fcPadding, 'w', Block.woodSingleSlab});
+    if (btwKnitting)
+    {
+      FCRecipes.AddVanillaRecipe(new ItemStack(Item.bed, 1), new Object[] {"###", "###", "www", '#', new ItemStack(FCBetterThanWolves.fcItemWoolKnit, 1, 32767), 'w', Block.woodSingleSlab});
+    } else {
+      FCRecipes.AddVanillaRecipe(new ItemStack(Item.bed, 1), new Object[] {"sss", "ppp", "www", 's', gpeItemSilk, 'p', FCBetterThanWolves.fcPadding, 'w', Block.woodSingleSlab});
+    }
 
     if (isBTWVersionOrNewer("4.A3 Headed Beastie"))
     {
