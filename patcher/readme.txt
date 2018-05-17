@@ -21,6 +21,8 @@ v1.1 (unreleased)
 
 - Changed Mycelium to also spread to loose dirt.
 
+- Changed chisels to be effective on sandstone.
+
 v1.0
 
 - Fixed compatibility with BTW version "4.AABBBbbb".

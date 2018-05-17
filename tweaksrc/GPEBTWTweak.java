@@ -364,6 +364,7 @@ public class GPEBTWTweak extends FCAddOn
       gpeBlockLogDamagedSpruce = new GPEBlockLogDamaged(gpeBlockLogDamagedSpruceID, 1);
       gpeBlockLogDamagedBirch = new GPEBlockLogDamaged(gpeBlockLogDamagedBirchID, 2);
       gpeBlockLogDamagedJungle = new GPEBlockLogDamaged(gpeBlockLogDamagedJungleID, 3);
+      setChiselsEffective(Block.sandStone);
     }
     Block.blocksList[17] = null; new GPEBlockLog(17);
     Block.blocksList[20] = null; new GPEBlockGlass(20);
