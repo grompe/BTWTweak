@@ -27,6 +27,9 @@ v1.1 (unreleased)
 
 - Fixed minecart with chest being uncraftable since BTW 4.AABABABA.
 
+- Added ability to repair armor by crafting a wool, padding, leather, or
+  tanned leather armor piece together with material used to craft it.
+
 v1.0
 
 - Fixed compatibility with BTW version "4.AABBBbbb".

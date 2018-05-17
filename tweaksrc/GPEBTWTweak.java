@@ -59,6 +59,7 @@ public class GPEBTWTweak extends FCAddOn
   public static boolean btwFlesh = isBTWVersionOrNewer("4.A4 Kiloblock Boon");
   public static boolean btwSmoothstoneStairs = isBTWVersionOrNewer("4.A7 Squid A Swimming");
   public static boolean btwBloodPlanks = isBTWVersionOrNewer("4.A9 Pustules Lancing");
+  public static boolean btwKnitting = isBTWVersionOrNewer("4.AABBBbbb");
 
   public static int gpeLooseRockID = 17000;
   public static int gpeSilkID = 17001;
@@ -85,6 +86,7 @@ public class GPEBTWTweak extends FCAddOn
   public static int gpeEntityRockVehicleSpawnType = 120;
   public static int gpeStrataRegenKey = 0;
   public static String gpeStrataRegenWorldName = null;
+  public static int woolArmorIngredientID;
 
   public static boolean hasAdaptiveCrosshair = false;
 
@@ -401,6 +403,19 @@ public class GPEBTWTweak extends FCAddOn
     Item.itemsList[Block.waterlily.blockID] = new GPEItemBlockLilyPad(Block.waterlily.blockID - 256);
     Item.m_bSuppressConflictWarnings = false;
 
+    if (btwKnitting)
+    {
+      woolArmorIngredientID = FCBetterThanWolves.fcItemWoolKnit.itemID;
+    }
+    else if (isBTWVersionOrNewer("4.891124"))
+    {
+      woolArmorIngredientID = FCBetterThanWolves.fcItemWool.itemID;
+    }
+    else 
+    {
+      woolArmorIngredientID = Block.cloth.blockID;
+    }
+
     int id = FCBetterThanWolves.fcAestheticOpaque.blockID;
     Block.blocksList[id] = null;
     new GPEBlockAestheticOpaque(id);
@@ -647,6 +662,7 @@ public class GPEBTWTweak extends FCAddOn
     {
       CraftingManager.getInstance().getRecipeList().add(new GPERecipesTorchMerge());
     }
+    CraftingManager.getInstance().getRecipeList().add(new GPERecipesArmorRepair());
 
     BlockDispenser.dispenseBehaviorRegistry.putObject(gpeItemLooseRock, new GPEBehaviorRock());
 
