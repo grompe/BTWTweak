@@ -32,6 +32,7 @@ public class GPEBTWTweakProxyClient extends GPEBTWTweakProxy
   {
     RenderManager.AddEntityRenderer(GPEEntityRock.class, new RenderSnowball(GPEBTWTweak.gpeItemLooseRock));
     RenderManager.AddEntityRenderer(EntityItemFrame.class, new GPERenderItemFrame());
+    RenderManager.AddEntityRenderer(EntityPlayer.class, new GPERenderPlayer());
 
     try
     {

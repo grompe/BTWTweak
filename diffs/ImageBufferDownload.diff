@@ -1,0 +1,12 @@
+diff --git a/src/minecraft/net/minecraft/src/ImageBufferDownload.java b/src/minecraft/net/minecraft/src/ImageBufferDownload.java
+index d29c09a..48af623 100644
+--- a/src/minecraft/net/minecraft/src/ImageBufferDownload.java
++++ b/src/minecraft/net/minecraft/src/ImageBufferDownload.java
+@@ -29 +29,6 @@ public BufferedImage parseUserSkin(BufferedImage par1BufferedImage)
+-            this.setAreaOpaque(0, 0, 32, 16);
++            //this.setAreaOpaque(0, 0, 32, 16);
++            // make area more granular to leave space for transparent extras
++            this.setAreaOpaque(0, 0, 24, 8);
++            this.setAreaOpaque(0, 8, 32, 16);
++            this.setAreaTransparent(24, 0, 32, 8);
++

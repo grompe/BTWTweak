@@ -1616,3 +1616,39 @@ function(mn)
     }
   }
 });
+tweak("bga", "ImageBufferDownload", CLIENT, "a(Ljava/awt/image/BufferedImage;)Ljava/awt/image/BufferedImage;", 0x49523E8, "Making forced opaque areas on skins more granular",
+function(mn)
+{
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("bga") && n.name.equals("b") && n.desc.equals("(IIII)V"))
+    {
+      mn.instructions.insertBefore(n, toInsnList(
+        [
+          InsnNode(POP),
+          InsnNode(POP),
+          IntInsnNode(BIPUSH, 24),
+          IntInsnNode(BIPUSH, 8),
+        ]
+      ));
+      mn.instructions.insert(n, toInsnList(
+        [
+          VarInsnNode(ALOAD, 0),
+          InsnNode(ICONST_0),
+          IntInsnNode(BIPUSH, 8),
+          IntInsnNode(BIPUSH, 32),
+          IntInsnNode(BIPUSH, 16),
+          MethodInsnNode(INVOKESPECIAL, "bga", "b", "(IIII)V"),
+          VarInsnNode(ALOAD, 0),
+          IntInsnNode(BIPUSH, 24),
+          InsnNode(ICONST_0),
+          IntInsnNode(BIPUSH, 32),
+          IntInsnNode(BIPUSH, 8),
+          MethodInsnNode(INVOKESPECIAL, "bga", "a", "(IIII)V"),
+        ]
+      ));
+      return true;
+    }
+  }
+});
