@@ -30,6 +30,8 @@ v1.1 (unreleased)
 - Added ability to repair armor by crafting a wool, padding, leather, or
   tanned leather armor piece together with material used to craft it.
 
+- Added CraftGuide recipes for torch merging and armor repair.
+
 v1.0
 
 - Fixed compatibility with BTW version "4.AABBBbbb".

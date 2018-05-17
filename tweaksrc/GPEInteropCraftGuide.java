@@ -104,7 +104,59 @@ class GPEInteropCraftGuide implements InvocationHandler
         {
           addRecipe.invoke(generator, template, new Object[] {new ItemStack(Item.bow, 1, 32767), null, new ItemStack(Item.stick), new ItemStack(Item.silk), null, null, workbench});
         }
-        
+        // Torch merging
+        if (GPEBTWTweak.isBTWVersionOrNewer("4.AAAAAAABBB"))
+        {
+          ItemStack torch = new ItemStack(FCBetterThanWolves.fcBlockTorchFiniteBurning, 1, 32767);
+          addRecipe.invoke(generator, template, new Object[] {torch, torch, torch, null, null, null, workbench});
+        }
+        // Armor repair
+        ItemStack piece = new ItemStack(GPEBTWTweak.woolArmorIngredientID, 1, 32767);
+        ItemStack armor = new ItemStack(FCBetterThanWolves.fcItemArmorWoolHelm, 1, 32767);
+        addRecipe.invoke(generator, template, new Object[] {armor, piece, armor, null, null, null, workbench});
+        armor = new ItemStack(FCBetterThanWolves.fcItemArmorWoolChest, 1, 32767);
+        addRecipe.invoke(generator, template, new Object[] {armor, piece, armor, null, null, null, workbench});
+        armor = new ItemStack(FCBetterThanWolves.fcItemArmorWoolLeggings, 1, 32767);
+        addRecipe.invoke(generator, template, new Object[] {armor, piece, armor, null, null, null, workbench});
+
+        piece = new ItemStack(FCBetterThanWolves.fcPadding, 1, 32767);
+        armor = new ItemStack(FCBetterThanWolves.fcItemArmorPaddedHelm, 1, 32767);
+        addRecipe.invoke(generator, template, new Object[] {armor, piece, armor, null, null, null, workbench});
+        armor = new ItemStack(FCBetterThanWolves.fcItemArmorPaddedChest, 1, 32767);
+        addRecipe.invoke(generator, template, new Object[] {armor, piece, armor, null, null, null, workbench});
+        armor = new ItemStack(FCBetterThanWolves.fcItemArmorPaddedLeggings, 1, 32767);
+        addRecipe.invoke(generator, template, new Object[] {armor, piece, armor, null, null, null, workbench});
+
+        ItemStack piece2 = new ItemStack(FCBetterThanWolves.fcItemLeatherCut, 1, 32767);
+        piece = new ItemStack(Item.leather, 1, 32767);
+        armor = new ItemStack(Item.helmetLeather, 1, 32767);
+        addRecipe.invoke(generator, template, new Object[] {armor, piece, armor, null, null, null, workbench});
+        addRecipe.invoke(generator, template, new Object[] {armor, piece2, armor, null, null, null, workbench});
+        armor = new ItemStack(Item.plateLeather, 1, 32767);
+        addRecipe.invoke(generator, template, new Object[] {armor, piece, armor, null, null, null, workbench});
+        addRecipe.invoke(generator, template, new Object[] {armor, piece2, armor, null, null, null, workbench});
+        armor = new ItemStack(Item.legsLeather, 1, 32767);
+        addRecipe.invoke(generator, template, new Object[] {armor, piece, armor, null, null, null, workbench});
+        addRecipe.invoke(generator, template, new Object[] {armor, piece2, armor, null, null, null, workbench});
+        armor = new ItemStack(Item.bootsLeather, 1, 32767);
+        addRecipe.invoke(generator, template, new Object[] {armor, piece, armor, null, null, null, workbench});
+        addRecipe.invoke(generator, template, new Object[] {armor, piece2, armor, null, null, null, workbench});
+
+        piece2 = new ItemStack(FCBetterThanWolves.fcItemTannedLeatherCut, 1, 32767);
+        piece = new ItemStack(FCBetterThanWolves.fcTannedLeather, 1, 32767);
+        armor = new ItemStack(FCBetterThanWolves.fcItemArmorTannedHelm, 1, 32767);
+        addRecipe.invoke(generator, template, new Object[] {armor, piece, armor, null, null, null, workbench});
+        addRecipe.invoke(generator, template, new Object[] {armor, piece2, armor, null, null, null, workbench});
+        armor = new ItemStack(FCBetterThanWolves.fcItemArmorTannedChest, 1, 32767);
+        addRecipe.invoke(generator, template, new Object[] {armor, piece, armor, null, null, null, workbench});
+        addRecipe.invoke(generator, template, new Object[] {armor, piece2, armor, null, null, null, workbench});
+        armor = new ItemStack(FCBetterThanWolves.fcItemArmorTannedLeggings, 1, 32767);
+        addRecipe.invoke(generator, template, new Object[] {armor, piece, armor, null, null, null, workbench});
+        addRecipe.invoke(generator, template, new Object[] {armor, piece2, armor, null, null, null, workbench});
+        armor = new ItemStack(FCBetterThanWolves.fcItemArmorTannedBoots, 1, 32767);
+        addRecipe.invoke(generator, template, new Object[] {armor, piece, armor, null, null, null, workbench});
+        addRecipe.invoke(generator, template, new Object[] {armor, piece2, armor, null, null, null, workbench});
+
         // Piston packing
         if (GPEBTWTweak.isBTWVersionOrNewer("4.89666"))
         {
