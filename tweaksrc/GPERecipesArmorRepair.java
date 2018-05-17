@@ -83,22 +83,6 @@ public class GPERecipesArmorRepair implements IRecipe
             continue;
           }
         }
-        else if (item instanceof ItemArmor && ((ItemArmor)item).getArmorMaterial() == EnumArmorMaterial.CLOTH)
-        {
-          if (armor == null && (material == 0 || material == 3))
-          {
-            armor = stack;
-            material = 3;
-            switch (((ItemArmor)item).armorType)
-            {
-              case 0: armorCraftPieces = 5; break;
-              case 1: armorCraftPieces = 8; break;
-              case 2: armorCraftPieces = 7; break;
-              case 3: armorCraftPieces = 4; break;
-            }
-            continue;
-          }
-        }
         else if (item instanceof FCItemArmorTanned)
         {
           if (armor == null && (material == 0 || material == 4))
@@ -115,8 +99,24 @@ public class GPERecipesArmorRepair implements IRecipe
             continue;
           }
         }
+        else if (item instanceof ItemArmor && ((ItemArmor)item).getArmorMaterial() == EnumArmorMaterial.CLOTH)
+        {
+          if (armor == null && (material == 0 || material == 3))
+          {
+            armor = stack;
+            material = 3;
+            switch (((ItemArmor)item).armorType)
+            {
+              case 0: armorCraftPieces = 5; break;
+              case 1: armorCraftPieces = 8; break;
+              case 2: armorCraftPieces = 7; break;
+              case 3: armorCraftPieces = 4; break;
+            }
+            continue;
+          }
+        }
       }
-      else if (item.itemID == GPEBTWTweak.woolArmorIngredientID)
+      if (item.itemID == GPEBTWTweak.woolArmorIngredientID)
       {
         if (material == 0 || material == 1)
         {
