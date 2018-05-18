@@ -44,6 +44,12 @@ v1.1 (unreleased)
   provides, as well as the new download location. This fixes the problem of
   missing sound and music.
 
+- Fixed skin loading by replacing the old download location with the use of
+  proper Mojang API. The skin files are now saved in "skins" directory, and
+  capes are saved in "capes" directory. Skins are loaded once per program
+  launch. If the saved skin is 1 hour old or less (or marked as read-only),
+  it won't be loaded from the web service.
+
 v1.0
 
 - Fixed compatibility with BTW version "4.AABBBbbb".

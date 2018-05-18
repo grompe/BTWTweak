@@ -1016,3 +1016,23 @@ function(mn)
     }
   }
 });
+tweak("bfu", "ThreadDownloadImageData", CLIENT, "<init>(Ljava/lang/String;Lbfw;)V", 0x3AD206C1, "Replacing skin download thread",
+function(mn)
+{
+  var changes = 0;
+  for (var i = 0; i < mn.instructions.size(); i++)
+  {
+    var n = mn.instructions.get(i);
+    if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("bfv"))
+    {
+      n.owner = "GPEThreadDownloadImage";
+      changes++;
+    }
+    if (isInstance(n, "org.objectweb.asm.tree.TypeInsnNode") && n.desc.equals("bfv"))
+    {
+      n.desc = "GPEThreadDownloadImage";
+      changes++;
+    }
+    if (changes == 3) return true;
+  }
+});
