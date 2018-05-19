@@ -701,7 +701,7 @@ if (!isBTWVersionOrNewer("4.A9 Pustules Lancing"))
       [INVOKESTATIC, "GPEBTWTweak", "addKilnCrackEffect", "(Laab;IIIII)V"]);
   });
 }
-tweak("FCTileEntityTurntable", null, BOTH, "<init>()V", 0x41CA0676, "Adding visual spin init",
+tweak("FCTileEntityTurntable", null, BOTH, "<init>()V", [0x41CA0676, 0x30780598], "Adding visual spin init",
 function(mn)
 {
   return CodeInserter(
