@@ -38,8 +38,6 @@ Known bugs/exploits/oversights
 
 - mobs sinking into ground clientside
 
-- mycelium not spreading on dirt slabs (FC may be working on it)
-
 - input lag on slower computers when it's raining (not FPS lag, input lag is the issue)
 
 - baby cow when transforming can suffocate

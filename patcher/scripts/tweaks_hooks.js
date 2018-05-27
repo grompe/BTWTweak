@@ -271,7 +271,7 @@ if (isBTWVersionOrNewer("4.89666"))
     return true;
   });
 }
-tweak("bdr", "PlayerControllerMP", CLIENT, "a(Lsq;Laab;Lwm;IIIILarc;)Z", 0x5A6E2C5E, "Hooking block placing decision",
+tweak("bdr", "PlayerControllerMP", CLIENT, "a(Lsq;Laab;Lwm;IIIILarc;)Z", [0x5A6E2C5E, 0x48DE3024], "Hooking block placing decision",
 function(mn)
 {
   for (var i = 0; i < mn.instructions.size(); i++)

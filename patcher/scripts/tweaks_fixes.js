@@ -74,16 +74,11 @@ if (!isBTWVersionOrNewer("4.A7 Squid A Swimming"))
     ).process(mn);
   });
 }
-tweak("sf", "EntitySkeleton", BOTH, "c()V", 0x30572525, "Fixing mob not burning on slabs",
-function(mn)
+if (!isBTWVersionOrNewer("4.AB4 Bonnets"))
 {
-  return fixMobToBurnOnSlabs(mn);
-});
-tweak("sj", "EntityZombie", BOTH, "c()V", [0x4F1922DE, 0x45652A3D, 0xB4E223AF, 0xE11E214E], "Fixing mob not burning on slabs",
-function(mn)
-{
-  return fixMobToBurnOnSlabs(mn);
-});
+  tweak("sf", "EntitySkeleton", BOTH, "c()V", 0x30572525, "Fixing mob not burning on slabs", fixMobToBurnOnSlabs);
+  tweak("sj", "EntityZombie", BOTH, "c()V", [0x4F1922DE, 0x45652A3D, 0xB4E223AF, 0xE11E214E], "Fixing mob not burning on slabs", fixMobToBurnOnSlabs);
+}
 if (!isBTWVersionOrNewer("4.A4 Kiloblock Boon"))
 {
   tweak("wo", "ItemMap", BOTH, "a(Laab;Lmp;Lajl;)V", 0x420DA13F, "Extending BlockIDs for ItemMap",
