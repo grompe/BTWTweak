@@ -11,7 +11,7 @@ public class GPEBTWTweak extends FCAddOn
 {
   public static GPEBTWTweak instance;
   private static GPEBTWTweakProxy proxy;
-  public static final String tweakVersion = "1.1";
+  public static final String tweakVersion = "1.1a";
 
   private static boolean postPostInitialized = false;
   public static boolean isDecoPresent;
@@ -1681,37 +1681,41 @@ public class GPEBTWTweak extends FCAddOn
     FCTileEntityBeacon.InitializeEffectsByBlockID();
   }
 
-  public static boolean canPlaceItemBlock(ItemBlock ib, World world, int x, int y, int z, int side, EntityPlayer player, ItemStack stack, float hitX, float hitY, float hitZ)
+  public static boolean canPlaceItemBlock(Item item, World world, int x, int y, int z, int side, EntityPlayer player, ItemStack stack, float hitX, float hitY, float hitZ)
   {
-    if (ib instanceof GPEItemBlockMicro)
+    if (item instanceof ItemBlock)
     {
-      GPEItemBlockMicro mi = (GPEItemBlockMicro)ib;
-      if (mi.attemptToCombineWithBlock(stack, world, x, y, z, side, hitX, hitY, hitZ, false, true))
-        return true;
+      ItemBlock ib = (ItemBlock)item;
+      if (ib instanceof GPEItemBlockMicro)
+      {
+        GPEItemBlockMicro mi = (GPEItemBlockMicro)ib;
+        if (mi.attemptToCombineWithBlock(stack, world, x, y, z, side, hitX, hitY, hitZ, false, true))
+          return true;
+      }
+      int id = ib.getBlockID();
+      int meta = ib.getMetadata(stack.getItemDamage());
+      Block block = Block.blocksList[id];
+      if (block instanceof GPEBlockLadder || block instanceof FCIBlock)
+      {
+        switch (side)
+        {
+          case 0: --y; break;
+          case 1: ++y; break;
+          case 2: --z; break;
+          case 3: ++z; break;
+          case 4: --x; break;
+          case 5: ++x; break;
+        }
+        int newMeta = block.onBlockPlaced(world, x, y, z, side, hitX, hitY, hitZ, meta);
+        GPEWorldProxy4BB wp = new GPEWorldProxy4BB(world, x, y, z, id, newMeta);
+        block.setBlockBoundsBasedOnState(wp, x, y, z);
+        AxisAlignedBB bb = AxisAlignedBB.getAABBPool().getAABB(
+          (double)x + block.minX, (double)y + block.minY, (double)z + block.minZ,
+          (double)x + block.maxX, (double)y + block.maxY, (double)z + block.maxZ);
+        return world.checkNoEntityCollision(bb);
+      }
     }
-    int id = ib.getBlockID();
-    int meta = ib.getMetadata(stack.getItemDamage());
-    Block block = Block.blocksList[id];
-    if (!(block instanceof GPEBlockLadder || block instanceof FCIBlock))
-    {
-      return ib.canPlaceItemBlockOnSide(world, x, y, z, side, player, stack);
-    }
-    switch (side)
-    {
-      case 0: --y; break;
-      case 1: ++y; break;
-      case 2: --z; break;
-      case 3: ++z; break;
-      case 4: --x; break;
-      case 5: ++x; break;
-    }
-    int newMeta = block.onBlockPlaced(world, x, y, z, side, hitX, hitY, hitZ, meta);
-    GPEWorldProxy4BB wp = new GPEWorldProxy4BB(world, x, y, z, id, newMeta);
-    block.setBlockBoundsBasedOnState(wp, x, y, z);
-    AxisAlignedBB bb = AxisAlignedBB.getAABBPool().getAABB(
-      (double)x + block.minX, (double)y + block.minY, (double)z + block.minZ,
-      (double)x + block.maxX, (double)y + block.maxY, (double)z + block.maxZ);
-    return world.checkNoEntityCollision(bb);
+    return item.CanItemBeUsedByPlayer(world, x, y, z, side, player, stack);
   }
 
   public static int getMinimumDifficulty()

@@ -750,9 +750,9 @@ function(cn)
 });
 takeMicroblockOwnership("FCItemBlockMoulding", 0x411E0779);
 takeMicroblockOwnership("FCItemBlockSidingAndCorner", 0x411E0779);
-takeMicroblockOwnership("FCItemBlockWoodCornerStub", 0x2C60197);
-takeMicroblockOwnership("FCItemBlockWoodMouldingStub", 0x2C60197);
-takeMicroblockOwnership("FCItemBlockWoodSidingStub", 0x2C60197);
+takeMicroblockOwnership("FCItemBlockWoodCornerStub", [0x2C60197, 0x9BB02C1]);
+takeMicroblockOwnership("FCItemBlockWoodMouldingStub", [0x2C60197, 0x9BB02C1]);
+takeMicroblockOwnership("FCItemBlockWoodSidingStub", [0x2C60197, 0x9BB02C1]);
 add("Addon_Glass$BlockStainedGlass", null, BOTH, "Making Deco stained glass inherit from GPEBlockGlass",
 function(cn)
 {
@@ -955,7 +955,7 @@ function(mn)
     }
   }
 });
-tweak("ng", "EntityLiving", BOTH, "bE()F", [0x2F3E47DF, 0xB84C4738], "Restoring the effect of swiftness potions",
+tweak("ng", "EntityLiving", BOTH, "bE()F", [0x2F3E47DF, 0xB84C4738, 0x56554569], "Restoring the effect of swiftness potions",
 function(mn)
 {
   var label = LabelNode();

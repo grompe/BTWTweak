@@ -1,0 +1,7 @@
+diff --git a/src/minecraft/net/minecraft/src/ThreadDownloadImageData.java b/src/minecraft/net/minecraft/src/ThreadDownloadImageData.java
+index 40d8470..a9f32b5 100644
+--- a/src/minecraft/net/minecraft/src/ThreadDownloadImageData.java
++++ b/src/minecraft/net/minecraft/src/ThreadDownloadImageData.java
+@@ -26 +26 @@ public ThreadDownloadImageData(String par1, IImageBuffer par2IImageBuffer)
+-        (new ThreadDownloadImage(this, par1, par2IImageBuffer)).start();
++        (new GPEThreadDownloadImage(this, par1, par2IImageBuffer)).start();

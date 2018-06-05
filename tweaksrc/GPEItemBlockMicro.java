@@ -1,6 +1,6 @@
 package net.minecraft.src;
 
-public abstract class GPEItemBlockMicro extends FCItemBlockCustom
+public abstract class GPEItemBlockMicro extends FCItemBlockCustom // NOTE: change to ItemBlock if it fails to compile in newer BTW version.
 {
   public GPEItemBlockMicro(int id)
   {

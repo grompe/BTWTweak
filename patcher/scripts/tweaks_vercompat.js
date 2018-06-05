@@ -48,3 +48,29 @@ if (isBTWVersionOrNewer("4.AABABABA"))
   // tweaking overrides adapting, so have to call it manually
   add("GPEBlockChest", null, SERVER, "Removing client-only methods", removeClientOnlyMethods);
 }
+if (isBTWVersionOrNewer("4.ABBBBURNBABYBURNAHAHAHAHAHA"))
+{
+  function changeOwner(mn)
+  {
+    for (var i = 0; i < mn.instructions.size(); i++)
+    {
+      var n = mn.instructions.get(i);
+      if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("FCItemBlockCustom"))
+      {
+        n.owner = "xn";
+        return true;
+      }
+    }
+  }
+  tweak("GPEItemBlockMicro", null, BOTH, "<init>(I)V", CHECKSUM_IGNORE, "(1/2) Changing inheritance from removed class",
+    changeOwner);
+  tweak("GPEItemBlockMicro", null, BOTH, "a(Lwm;Lsq;Laab;IIIIFFF)Z", CHECKSUM_IGNORE, "(1/3) Changing inheritance from removed class",
+    changeOwner);
+  add("GPEItemBlockMicro", null, BOTH, "(3/3) Changing inheritance from removed class",
+  function(cn)
+  {
+    cn.superName = "xn";
+  });
+  // tweaking overrides adapting, so have to call it manually
+  add("GPEItemBlockMicro", null, SERVER, "Removing client-only methods", removeClientOnlyMethods);
+}

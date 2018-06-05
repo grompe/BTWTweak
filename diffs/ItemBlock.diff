@@ -1,0 +1,10 @@
+diff --git a/src/minecraft/net/minecraft/src/ItemBlock.java b/src/minecraft/net/minecraft/src/ItemBlock.java
+index 8f64000..0254e30 100644
+--- a/src/minecraft/net/minecraft/src/ItemBlock.java
++++ b/src/minecraft/net/minecraft/src/ItemBlock.java
+@@ -212,0 +213,5 @@ public void registerIcons(IconRegister par1IconRegister)
++
++    public boolean CanItemBeUsedByPlayer(World world, int x, int y, int z, int side, EntityPlayer player, ItemStack stack)
++    {
++        return canPlaceItemBlockOnSide(world, x, y, z, side, player, stack);
++    }

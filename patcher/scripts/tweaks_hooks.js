@@ -271,20 +271,20 @@ if (isBTWVersionOrNewer("4.89666"))
     return true;
   });
 }
-tweak("bdr", "PlayerControllerMP", CLIENT, "a(Lsq;Laab;Lwm;IIIILarc;)Z", [0x5A6E2C5E, 0x48DE3024], "Hooking block placing decision",
+tweak("bdr", "PlayerControllerMP", CLIENT, "a(Lsq;Laab;Lwm;IIIILarc;)Z", [0x5A6E2C5E, 0x48DE3024, 0xCA582922], "Hooking block placing decision",
 function(mn)
 {
   for (var i = 0; i < mn.instructions.size(); i++)
   {
     var n = mn.instructions.get(i);
-    if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && n.owner.equals("xn") && n.name.equals("a") && n.desc.equals("(Laab;IIIILsq;Lwm;)Z"))
+    if (isInstance(n, "org.objectweb.asm.tree.MethodInsnNode") && /*n.owner.equals("xn") && n.name.equals("a") &&*/ n.desc.equals("(Laab;IIIILsq;Lwm;)Z"))
     {
       mn.instructions.insert(n, toInsnList(
         [
           VarInsnNode(FLOAD, 9),
           VarInsnNode(FLOAD, 10),
           VarInsnNode(FLOAD, 11),
-          MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "canPlaceItemBlock", "(Lxn;Laab;IIIILsq;Lwm;FFF)Z"),
+          MethodInsnNode(INVOKESTATIC, "GPEBTWTweak", "canPlaceItemBlock", "(Lwk;Laab;IIIILsq;Lwm;FFF)Z"),
         ]
       ));
       mn.instructions.remove(n);
