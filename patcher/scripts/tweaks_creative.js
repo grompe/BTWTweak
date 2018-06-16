@@ -716,7 +716,7 @@ function(mn)
     }
   }
 });
-tweak("bdr", "PlayerControllerMP", CLIENT, "b(IIII)V", [0xC6374240, 0x617544C3], "(1/2) Fix swords breaking blocks in creative",
+tweak("bdr", "PlayerControllerMP", CLIENT, "b(IIII)V", [0xC6374240, 0x617544C3, 0xEA3E4844], "(1/2) Fix swords breaking blocks in creative",
 skipIfHoldingSwordInCreative);
-tweak("bdr", "PlayerControllerMP", CLIENT, "c(IIII)V", 0xE96B41E3, "(2/2) Fix swords breaking blocks in creative",
+tweak("bdr", "PlayerControllerMP", CLIENT, "c(IIII)V", [0xE96B41E3, 0x4E104564], "(2/2) Fix swords breaking blocks in creative",
 skipIfHoldingSwordInCreative);
